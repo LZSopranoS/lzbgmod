@@ -1,1 +1,0 @@
-IA的IMOEN10.CRE的Script name是IMOEN，装到EET上会在SOA开局动画结束后卡住，要把Script name改成IMOEN2。IA的IMOEN15.CRE、IMOEN213.CRE倒是没问题。

@@ -1,3 +1,0 @@
-cdtweaks/lib/thieving_to_50.tpa只扩展了skillrng.2da和skillbrd.2da、缺少skillshm.2da，
-且对skillrng.2da的MOVE_SILENTLY数值进行了加强、对skillbrd.2da的PICK_POCKETS数值进行了加强，数值最高都变为200，
-这里采用将根据原版数值扩展好的skillrng.2da、skillbrd.2da、skillshm.2da进行复制的方法实现相同目的。
