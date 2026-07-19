@@ -1,3 +1,11 @@
+**支持语言**：`English | Chinese | Czech | French | German`
+
+**支持游戏**：`BG | BG2 | BGT | BGEE | BG2EE | EET`
+
+
+
+
+
 //V5.5
 1、“LZ战斗强化组件”组件更新
 取消释放召唤乳牛法术时的电影画面，修复效果强化、种族强化可能出现多次触发的问题。
