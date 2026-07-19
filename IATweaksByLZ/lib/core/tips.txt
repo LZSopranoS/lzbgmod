@@ -1,0 +1,20 @@
+stats.ids、spell.ids有替换，splstate.ids是插入，state.ids没修改，所以只需重写ids.tph里的stats.ids、spell.ids部分代码把替换改成插入。stats.ids里SCRIPTINGSTATE1~6原版BG2EE/EET已有，只需增加SCRIPTINGSTATE7~20
+
+2da.tph里可以删除以下
+// prevent double duration Time Stop + Improved Alacrity wish option from appearing
+COPY_EXISTING ~wish.2da~  ~override/wish.2da~
+  REPLACE_TEXTUALLY ~23.+23.+23.+22~ ~23 23 23 21~
+  REPLACE_TEXTUALLY ~35.+35.+35.+21~ ~35 35 35 25~
+  REPLACE_TEXTUALLY ~27.+27.+22~ ~27 27 18~
+  PRETTY_PRINT_2DA
+
+// new table of randomly spawned monsters in the game's areas
+COPY ~ImprovedAnvil/resources/2da/spawngrp.2da~ ~override/spawngrp.2da~
+替换改为写入
+COPY_EXISTING ~spawngrp.2da~  ~override~
+SET_2DA_ENTRY 2 1 62  ~Shadow01~
+
+
+原版STATS.IDS编号156~161有12个状态、每2个共用1个编号，铁砧原来是2合1删掉其中1个，重新调整把每2个拆分成不同编号。
+只对后面BAF编译有效，游戏已有的BCS如果含157 SCRIPTINGSTATE2或157 DEATH_WARD会自动变为157 SCRIPTINGSTATE2，
+后面编译的BAF能识别拆分出的DEATH_WARD，如果采用2合1删掉其中1个则会自动编译为157 SCRIPTINGSTATE2，如果不拆分保持原样则会编译为157 DEATH_WARD。

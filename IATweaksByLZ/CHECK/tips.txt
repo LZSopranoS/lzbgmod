@@ -1,0 +1,5 @@
+IA的2da.tph代码如下，实际只到40级。改用CDTWEAKS相关代码扩展到50级接着让IA修改，不再使用将修改过的CLABRN03.2DA复制到override后让IA修改。
+// remove a spell from gainable abilities for Stalker class
+COPY_EXISTING ~clabrn03.2da~  ~override/clabrn03.2da~
+  REPLACE_TEXTUALLY ~GA_SPRA302~ ~****      ~
+  PRETTY_PRINT_2DA
