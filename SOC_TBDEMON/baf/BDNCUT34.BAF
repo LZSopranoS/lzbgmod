@@ -1,0 +1,25 @@
+IF
+	True()
+THEN
+	RESPONSE #100
+		CutSceneId("BDSZA")  // 三体恶魔·狂妄
+		MoveViewObject("BDSZA",INSTANT)  // 三体恶魔·狂妄
+		SetGlobal("BDNWish","GLOBAL",9)
+		IncrementGlobal("BDNSTWish","LOCALS",1)
+		SetGlobal("BDN_REFRESH","LOCALS",1)
+		DisplayStringHead(Myself,100275)  // 摇一个铃
+		ForceSpellRES("BDNWISH",Myself)  // 愿望术
+		Wait(3)
+		DisplayStringHead(Myself,58565)  // 我希望能够重新记忆法术！
+		SetGlobal("BD_CHCntg","LOCALS",0)
+		SetGlobal("BD_Cntg","LOCALS",0)
+		SetGlobal("BD_Seq","LOCALS",0)
+		SetGlobal("BD_MSeq","LOCALS",0)
+		SetGlobal("BD_Trig","LOCALS",0)
+		ApplySpell(Myself,RESTORE_FULL_HEALTH)  // SPIN746.SPL (No such index)
+		Rest()
+		Wait(3)
+		UnhideGUI()
+		EndCutSceneMode()
+END
+

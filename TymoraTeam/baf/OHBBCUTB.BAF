@@ -1,0 +1,13 @@
+IF
+	True()
+THEN
+	RESPONSE #100
+		CutSceneId("OHBOSSB")  // 太摩拉双子·玉女
+		MoveViewObject("OHBOSSB",INSTANT)  // 太摩拉双子·玉女
+		ForceSpellRES("OHBBWISH",Myself)  // 愿望术
+		Wait(3)
+		UnhideGUI()
+		EndCutSceneMode()
+		ActionOverride("OHBOSSB",SetGlobal("OHBOSSWish","LOCALS",0))
+END
+

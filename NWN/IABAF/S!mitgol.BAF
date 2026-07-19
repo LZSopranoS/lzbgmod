@@ -1,0 +1,143 @@
+IF
+	See(NearestEnemyOf(Myself))
+	Global("EnemySeen","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("EnemySeen","LOCALS",1)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	Global("partyfled","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("partyfled","LOCALS",0)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	Range(LastSeenBy(Myself),6)
+	!CheckStatGT(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),SLOW_IMMUNITY)
+	!GlobalTimerNotExpired("Iagolslow","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iagolslow","LOCALS",NINE_MINUTES)
+		ForceSpell(Myself,GOLEM_SLOW)  // SPIN977.SPL (魔像迟缓术)
+END
+
+IF
+	See(SecondNearestEnemyOf(Myself))
+	Range(LastSeenBy(Myself),6)
+	!CheckStatGT(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),SLOW_IMMUNITY)
+	!GlobalTimerNotExpired("Iagolslow","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iagolslow","LOCALS",NINE_MINUTES)
+		ForceSpell(Myself,GOLEM_SLOW)  // SPIN977.SPL (魔像迟缓术)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	See(SecondNearestEnemyOf(Myself))
+	CheckStatLT(LastSeenBy(Myself),90,RESISTCRUSHING)
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	RandomNumGT(6,3)
+	Range(LastSeenBy(Myself),2)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	!GlobalTimerNotExpired("Iaremovepro","LOCALS")
+	See(NearestEnemyOf(Myself))
+	OR(5)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),MANTLE)
+		CheckSpellState(LastSeenBy(Myself),IMPROVED_MANTLE)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iaremovepro","LOCALS",ONE_ROUND)
+		ApplySpellRES("SPINI67",LastSeenBy(Myself))
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(NearestEnemyOf(Myself))
+END
+
+IF
+	See(SecondNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	Range(LastSeenBy(Myself),3)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	See(ThirdNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	Range(LastSeenBy(Myself),3)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	See(SecondNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		AttackOneRound(NearestEnemyOf(Myself))
+END
+
+IF
+	Global("EnemySeen","LOCALS",1)
+	Global("partyfled","LOCALS",0)
+	!See([GOODCUTOFF])
+	!See([PC])
+THEN
+	RESPONSE #100
+		SetGlobalTimer("chase","LOCALS",EIGHTEEN_MINUTES)
+		SetGlobal("partyfled","LOCALS",1)
+END
+
+IF
+	!See([PC])
+	!See([GOODCUTOFF])
+	Global("partyfled","LOCALS",1)
+	GlobalTimerNotExpired("chase","LOCALS")
+	InMyArea(Player1)
+	Global("EnemySeen","LOCALS",1)
+THEN
+	RESPONSE #100
+		MoveToObject(Player1)
+END
+
+IF
+	!Detect([PC])
+	!Detect([GOODCUTOFF])
+	Global("EnemySeen","LOCALS",1)
+	GlobalTimerExpired("chase","LOCALS")
+	Global("partyfled","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("EnemySeen","LOCALS",0)
+		ReallyForceSpellRES("SPWII07",Myself)
+END
+

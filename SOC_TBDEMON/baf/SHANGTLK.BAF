@@ -1,0 +1,24 @@
+IF
+	Allegiance(Myself,NEUTRAL)
+	NumberOfTimesTalkedTo(0)
+	Global("Iapcastts","GLOBAL",0)
+	Detect([PC])
+THEN
+	RESPONSE #100
+		Wait(1)
+		StartDialogueNoSet([PC])
+END
+
+IF
+	OR(2)
+		AttackedBy([GOODCUTOFF],DEFAULT)
+		TookDamage()
+	Allegiance(Myself,NEUTRAL)
+	InMyArea(Player1)
+THEN
+	RESPONSE #100
+		Enemy()
+		ActionOverride("BDSZA",Enemy())
+		ActionOverride("BDLAYEN",Enemy())
+END
+

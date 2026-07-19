@@ -1,0 +1,2784 @@
+IF
+	!GlobalTimerNotExpired("OHABTHRRest","LOCALS")
+	Allegiance(Myself,ENEMY)
+	See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OHABTHRRest","LOCALS",FOUR_HOURS)
+		SetGlobal("OH_Cntg","LOCALS",0)
+		SetGlobal("OH_Trig","LOCALS",0)
+		SetGlobal("OH_Seq","LOCALS",0)
+		SetGlobal("OH_MSeq","LOCALS",0)
+		SetGlobal("OHABTHRBB","LOCALS",0)
+		SetGlobal("OHABONEPFMW","LOCALS",0)
+		SetGlobal("OHABTHRSEQI","LOCALS",0)
+		SetGlobal("OHABTHRSEQII","LOCALS",0)
+		SetGlobal("OHABTHRSEQIII","LOCALS",0)
+		SetGlobal("OHABTHRSCIG","LOCALS",0)
+		SetGlobal("OHABTHROS","LOCALS",0)
+		SetGlobal("OHABTHRDS","LOCALS",0)
+		ApplySpell(Myself,RESTORE_FULL_HEALTH)  // SPIN746.SPL (No such index)
+		Rest()
+END
+
+IF
+	OR(5)
+		See([NEUTRAL])
+		See([ALLY])
+		See([FAMILIAR])
+		See([CONTROLLED])
+		See([CHARMED])
+	InWeaponRange(LastSeenBy(Myself))
+	TookDamage()
+	!InWeaponRange(LastHitter(Myself))
+	WeaponEffectiveVs(LastHitter(Myself),MAINHAND)
+	WeaponCanDamage(LastHitter(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		ReallyForceSpell(LastHitter(Myself),WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		AttackOneRound(LastHitter(Myself))
+END
+
+IF
+	OR(2)
+		!Detect([PC])
+		!Detect([GOODCUTOFF])
+	ActionListEmpty()
+	InMyArea(Player1)
+	Allegiance(Myself,ENEMY)
+	!StateCheck(Myself,STATE_BLIND)
+	!StateCheck(Myself,STATE_HELPLESS)
+	!StateCheck(Myself,STATE_CONFUSED)
+	!StateCheck(Myself,STATE_STUNNED)
+	!StateCheck(Myself,STATE_PANIC)
+	!StateCheck(Myself,STATE_CHARMED)
+	CheckStatLT(Player1,1,SANCTUARY)
+	!StateCheck(Player1,STATE_REALLY_DEAD)
+	!StateCheck(Player1,STATE_NOT_APPROACHABLE)
+	!GlobalTimerNotExpired("MO_TeleToPlayer","LOCALS")
+THEN
+	RESPONSE #100
+		MoveToObject(Player1)
+	RESPONSE #100
+		SetGlobalTimer("MO_TeleToPlayer","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player1,WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		Continue()
+END
+
+IF
+	OR(2)
+		!Detect([PC])
+		!Detect([GOODCUTOFF])
+	ActionListEmpty()
+	Allegiance(Myself,ENEMY)
+	!StateCheck(Myself,STATE_BLIND)
+	!StateCheck(Myself,STATE_HELPLESS)
+	!StateCheck(Myself,STATE_CONFUSED)
+	!StateCheck(Myself,STATE_STUNNED)
+	!StateCheck(Myself,STATE_PANIC)
+	!StateCheck(Myself,STATE_CHARMED)
+	OR(3)
+		CheckStatGT(Player1,0,SANCTUARY)
+		StateCheck(Player1,STATE_REALLY_DEAD)
+		StateCheck(Player1,STATE_NOT_APPROACHABLE)
+	!GlobalTimerNotExpired("MO_TeleToPlayer","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("MO_TeleToPlayer","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player2,WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		Continue()
+	RESPONSE #100
+		SetGlobalTimer("MO_TeleToPlayer","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player3,WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		Continue()
+	RESPONSE #100
+		SetGlobalTimer("MO_TeleToPlayer","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player4,WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		Continue()
+	RESPONSE #100
+		SetGlobalTimer("MO_TeleToPlayer","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player5,WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		Continue()
+	RESPONSE #100
+		SetGlobalTimer("MO_TeleToPlayer","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player6,WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		Continue()
+END
+
+IF
+	OR(3)
+		StateCheck(Myself,STATE_SLEEPING)
+		StateCheck(Myself,STATE_HELPLESS)
+		StateCheck(Myself,STATE_BLIND)
+THEN
+	RESPONSE #100
+		ReallyForceSpell(Myself,WIZARD_TRUE_DISPEL_MAGIC)  // SPWI326.SPL (解除魔法)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	OR(3)
+		SpellCastPriest([ANYONE],CLERIC_SUMMON_INSECTS)  // SPPR319.SPL (召唤昆虫)
+		SpellCastPriest([ANYONE],CLERIC_INSECT_PLAGUE)  // SPPR517.SPL (疫病虫群)
+		SpellCastPriest([ANYONE],CLERIC_CREEPING_DOOM)  // SPPR717.SPL (漫天虫蚀)
+	CheckStatGT(Myself,49,SPELLFAILUREMAGE)
+	CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+THEN
+	RESPONSE #100
+		ReallyForceSpell(Myself,WIZARD_TRUE_DISPEL_MAGIC)  // SPWI326.SPL (解除魔法)
+END
+
+IF
+	SpellCastPriest(Player1,CLERIC_HARM)  // SPPR608.SPL (伤害术)
+	HasItem("HARM",Player1)  // 伤害术
+THEN
+	RESPONSE #100
+		ReallyForceSpell(Player1,WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	SpellCastPriest(Player2,CLERIC_HARM)  // SPPR608.SPL (伤害术)
+	HasItem("HARM",Player2)  // 伤害术
+THEN
+	RESPONSE #100
+		ReallyForceSpell(Player2,WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	SpellCastPriest(Player3,CLERIC_HARM)  // SPPR608.SPL (伤害术)
+	HasItem("HARM",Player3)  // 伤害术
+THEN
+	RESPONSE #100
+		ReallyForceSpell(Player3,WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	SpellCastPriest(Player4,CLERIC_HARM)  // SPPR608.SPL (伤害术)
+	HasItem("HARM",Player4)  // 伤害术
+THEN
+	RESPONSE #100
+		ReallyForceSpell(Player4,WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	SpellCastPriest(Player5,CLERIC_HARM)  // SPPR608.SPL (伤害术)
+	HasItem("HARM",Player5)  // 伤害术
+THEN
+	RESPONSE #100
+		ReallyForceSpell(Player5,WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	SpellCastPriest(Player6,CLERIC_HARM)  // SPPR608.SPL (伤害术)
+	HasItem("HARM",Player6)  // 伤害术
+THEN
+	RESPONSE #100
+		ReallyForceSpell(Player6,WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	ActionListEmpty()
+	Allegiance(Myself,ENEMY)
+	Class(Myself,BARD_ALL)
+	!ModalState(BATTLESONG)
+	OR(2)
+		See([GOODCUTOFF])
+		CombatCounterGT(0)
+THEN
+	RESPONSE #100
+		BattleSong()
+END
+
+IF
+	Class(Myself,BARD_ALL)
+	ModalState(BATTLESONG)
+	!GlobalTimerNotExpired("AttackDuringSong","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("AttackDuringSong","LOCALS",TWO_ROUNDS)
+		DisplayStringHead(Myself,11798)  // 吟唱歌曲
+END
+
+IF
+	ActionListEmpty()
+	Allegiance(Myself,ENEMY)
+	Class(Myself,BARD_ALL)
+	ModalState(BATTLESONG)
+	!See([GOODCUTOFF])
+	CombatCounter(0)
+	Delay(30)
+THEN
+	RESPONSE #100
+		ClearActions(Myself)
+END
+
+IF
+	!HasItem("BLAKBLAD",Myself)  // 毁灭魔剑
+	!HasItem("CDGOLIRO",Myself)  // 攻击
+	ActionListEmpty()
+	Allegiance(Myself,ENEMY)
+	GlobalLT("OHABTHRBB","LOCALS",3)
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		ForceSpell(Myself,WIZARD_BLACK_BLADE_OF_DISASTER)  // SPWI915.SPL (毁灭魔剑)
+		IncrementGlobal("OHABTHRBB","LOCALS",1)
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		SetInterrupt(TRUE)
+END
+
+IF
+	HasItem("CDGOLIRO",Myself)  // 攻击
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	GlobalLT("OHABONEPFMW","LOCALS",5)
+	Allegiance(Myself,ENEMY)
+	AttackedBy([GOODCUTOFF],DEFAULT)
+	TookDamage()
+	OR(2)
+		!CheckSpellState(Myself,PROTECTION_FROM_MAGICAL_WEAPONS)
+		!CheckSpellState(Myself,ABSOLUTE_IMMUNITY)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		IncrementGlobal("OHABONEPFMW","LOCALS",1)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		ForceSpell(Myself,WIZARD_ABSOLUTE_IMMUNITY)  // SPWI907.SPL (绝对免疫)
+END
+
+IF
+	HasItem("CDGOLIRO",Myself)  // 攻击
+	Allegiance(Myself,ENEMY)
+	HPPercentLT(Myself,50)
+	!CheckStatGT(Myself,0,AURACLEANSING)
+	!StateCheck(Myself,STATE_SILENCED)
+	!CheckStatGT(Myself,0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+	Global("OHABTHRSEQI","LOCALS",0)
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobal("OHABTHRSEQI","LOCALS",1)
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		DisplayString(Myself,26328)  // 连锁意外术
+		ReallyForceSpell(Myself,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)  // SPWI611.SPL (防护魔法武器)
+		ReallyForceSpell(Myself,WIZARD_IMPROVED_HASTE)  // SPWI613.SPL (高等加速术)
+		ReallyForceSpell(Myself,WIZARD_SPELL_DEFLECTION)  // SPWI618.SPL (四级召唤怪物术)
+END
+
+IF
+	HasItem("CDGOLIRO",Myself)  // 攻击
+	Allegiance(Myself,ENEMY)
+	!CheckStatGT(Myself,0,AURACLEANSING)
+	!StateCheck(Myself,STATE_SILENCED)
+	!CheckStatGT(Myself,0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+	Global("OHABTHRSEQII","LOCALS",0)
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobal("OHABTHRSEQII","LOCALS",1)
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		DisplayString(Myself,26243)  // 法术启动
+		ReallyForceSpell(Myself,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)  // SPWI611.SPL (防护魔法武器)
+		ReallyForceSpell(Myself,WIZARD_IMPROVED_HASTE)  // SPWI613.SPL (高等加速术)
+		ReallyForceSpell(Myself,WIZARD_TENSERS_TRANSFORMATION)  // SPWI603.SPL (谭森变形术)
+END
+
+IF
+	HasItem("CDGOLIRO",Myself)  // 攻击
+	Allegiance(Myself,ENEMY)
+	!CheckStatGT(Myself,0,AURACLEANSING)
+	CheckStatLT(Myself,1,STONESKINS)
+	!CheckStatGT(Myself,0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+	!StateCheck(Myself,STATE_SILENCED)
+	Global("OHABTHRSEQIII","LOCALS",0)
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobal("OHABTHRSEQIII","LOCALS",1)
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		DisplayString(Myself,39969)  // 法术定序－已用出
+		ReallyForceSpell(Myself,WIZARD_STONE_SKIN)  // SPWI408.SPL (石肤术)
+		ReallyForceSpell(Myself,WIZARD_FIRE_SHIELD_RED)  // SPWI418.SPL (火焰护盾（红）)
+		ReallyForceSpell(Myself,WIZARD_IMPROVED_INVISIBILITY)  // SPWI405.SPL (高等隐形术)
+END
+
+IF
+	HPPercentLT(Myself,70)
+	ActionListEmpty()
+	Global("OHABTHRSCIG","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobal("OHABTHRSCIG","LOCALS",1)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		ForceSpell(Myself,SHAPECHANGE_IRON_GOLEM)  // SPIN153.SPL (变形术：铁魔像)
+		Polymorph(GOLEM_IRON)
+		SetGlobalTimer("IRONGOLEM_TIME","LOCALS",ONE_HOUR)
+		SetInterrupt(TRUE)
+END
+
+IF
+	HPPercentGT(Myself,30)
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	GlobalLT("OHABTHROS","LOCALS",6)
+	HasItem("CDGOLIRO",Myself)  // 攻击
+	!CheckSpellState(Myself,OFFENSIVE_SPIN)
+	!CheckSpellState(Myself,DEFENSIVE_SPIN)
+	CheckStat(Myself,0,IMPROVEDHASTE)
+	!CheckStat(Myself,2,OFFENSIVE_MODIFIER)
+	Range(LastSeenBy(Myself),6)
+THEN
+	RESPONSE #100
+		IncrementGlobal("OHABTHROS","LOCALS",1)
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		ForceSpell(Myself,BLADE_OFFENSIVE_SPIN)  // SPCL521.SPL (回旋攻击)
+END
+
+IF
+	HPPercentLT(Myself,30)
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	GlobalLT("OHABTHRDS","LOCALS",6)
+	HasItem("CDGOLIRO",Myself)  // 攻击
+	!CheckSpellState(Myself,OFFENSIVE_SPIN)
+	!CheckSpellState(Myself,DEFENSIVE_SPIN)
+	CheckStat(Myself,0,IMPROVEDHASTE)
+	!CheckStat(Myself,2,OFFENSIVE_MODIFIER)
+	Range(LastSeenBy(Myself),6)
+THEN
+	RESPONSE #100
+		IncrementGlobal("OHABTHRDS","LOCALS",1)
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		ForceSpell(Myself,BLADE_DEFENSIVE_SPIN)  // SPCL522.SPL (回旋防御)
+END
+
+IF
+	GlobalTimerNotExpired("IRONGOLEM_TIME","LOCALS")
+	!GlobalTimerNotExpired("OHABTHRKILLSUM","LOCALS")
+	HasItem("CDGOLIRO",Myself)  // 攻击
+	ActionListEmpty()
+	See([GOODCUTOFF.0.0.0.0.SUMMONED])
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobalTimer("OHABTHRKILLSUM","LOCALS",THREE_ROUNDS)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		ForceSpell(LastSeenBy(Myself),WIZARD_DEATH_SPELL)  // SPWI605.SPL (死亡术)
+		SetInterrupt(TRUE)
+END
+
+IF
+	GlobalTimerNotExpired("AttackDuringSong","LOCALS")
+	GlobalTimerNotExpired("IRONGOLEM_TIME","LOCALS")
+	HasItem("CDGOLIRO",Myself)  // 攻击
+	See(NearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	GlobalTimerNotExpired("AttackDuringSong","LOCALS")
+	GlobalTimerNotExpired("IRONGOLEM_TIME","LOCALS")
+	HasItem("CDGOLIRO",Myself)  // 攻击
+	See(SecondNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	GlobalTimerNotExpired("AttackDuringSong","LOCALS")
+	GlobalTimerNotExpired("IRONGOLEM_TIME","LOCALS")
+	HasItem("CDGOLIRO",Myself)  // 攻击
+	See(ThirdNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	GlobalTimerNotExpired("AttackDuringSong","LOCALS")
+	GlobalTimerNotExpired("IRONGOLEM_TIME","LOCALS")
+	HasItem("CDGOLIRO",Myself)  // 攻击
+	See(FourthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	GlobalTimerNotExpired("AttackDuringSong","LOCALS")
+	GlobalTimerNotExpired("IRONGOLEM_TIME","LOCALS")
+	HasItem("CDGOLIRO",Myself)  // 攻击
+	See(FifthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	GlobalTimerNotExpired("AttackDuringSong","LOCALS")
+	GlobalTimerNotExpired("IRONGOLEM_TIME","LOCALS")
+	HasItem("CDGOLIRO",Myself)  // 攻击
+	See(SixthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	!GlobalTimerNotExpired("IRONGOLEM_TIME","LOCALS")
+	HasItem("CDGOLIRO",Myself)  // 攻击
+THEN
+	RESPONSE #100
+		ReallyForceSpell(Myself,SHAPESHIFT_NATURAL_FORM_2)  // SPIN151.SPL (变回原来形态)
+		Polymorph(CLERIC_FEMALE_ELF)
+END
+
+IF
+	Global("OH_Cntg","LOCALS",0)
+	ActionListEmpty()
+	Allegiance(Myself,ENEMY)
+	!StateCheck(Myself,STATE_REALLY_DEAD)
+THEN
+	RESPONSE #100
+		SetGlobal("OH_Cntg","LOCALS",1)
+		DisplayString(Myself,8292)  // 意外效果
+		ReallyForceSpell(Myself,WIZARD_STONE_SKIN)  // SPWI408.SPL (石肤术)
+		Continue()
+END
+
+IF
+	Global("OH_Heal","LOCALS",1)
+	OR(2)
+		!HasItem("POTN52",Myself)  // 强力医疗药水
+		HPPercentGT(Myself,84)
+THEN
+	RESPONSE #100
+		SetGlobal("OH_Heal","LOCALS",0)
+END
+
+IF
+	HPPercentLT(Myself,85)
+	!Global("OH_Heal","LOCALS",1)
+	HasItem("POTN52",Myself)  // 强力医疗药水
+THEN
+	RESPONSE #100
+		SetGlobal("OH_Heal","LOCALS",1)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	Global("OH_Heal","LOCALS",1)
+	!StateCheck(Myself,STATE_INVISIBLE)
+	HasItem("POTN10",Myself)  // 隐形药水
+	!CheckStatGT(Player1,0,TRUE_SIGHT)
+	!CheckStatGT(Player2,0,TRUE_SIGHT)
+	!CheckStatGT(Player3,0,TRUE_SIGHT)
+	!CheckStatGT(Player4,0,TRUE_SIGHT)
+	!CheckStatGT(Player5,0,TRUE_SIGHT)
+	!CheckStatGT(Player6,0,TRUE_SIGHT)
+	!CheckStatGT([GOODCUTOFF.0.PLANATAR],0,TRUE_SIGHT)
+	!CheckStatGT([GOODCUTOFF.0.DARKPLANATAR],0,TRUE_SIGHT)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		UseItem("POTN10",Myself)  // 隐形药水
+		DisplayStringHead(Myself,46150)  // 喝下药水
+		SetInterrupt(TRUE)
+END
+
+IF
+	Global("OH_Heal","LOCALS",1)
+	HasItem("POTN55",Myself)  // 超级强效医疗药水
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		UseItem("POTN55",Myself)  // 超级强效医疗药水
+		DisplayStringHead(Myself,46150)  // 喝下药水
+END
+
+IF
+	Global("OH_Heal","LOCALS",1)
+	!HasItem("POTN55",Myself)  // 超级强效医疗药水
+	HasItem("POTN52",Myself)  // 强力医疗药水
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		UseItem("POTN52",Myself)  // 强力医疗药水
+		DisplayStringHead(Myself,46150)  // 喝下药水
+END
+
+IF
+	Global("OH_Heal","LOCALS",0)
+	HPPercentLT(Myself,85)
+	HasItem("POTN55",Myself)  // 超级强效医疗药水
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		UseItem("POTN55",Myself)  // 超级强效医疗药水
+		DisplayStringHead(Myself,46150)  // 喝下药水
+END
+
+IF
+	StateCheck(Myself,STATE_SILENCED)
+	HaveSpell(WIZARD_VOCALIZE)  // SPWI219.SPL (发声术)
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(Myself,WIZARD_VOCALIZE)  // SPWI219.SPL (发声术)
+END
+
+IF
+	!CheckStatGT(Myself,0,AURACLEANSING)
+	Global("OH_Trig","LOCALS",0)
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!StateCheck(Myself,STATE_SILENCED)
+	!CheckStatGT(Myself,0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+	Range([GOODCUTOFF],30)
+THEN
+	RESPONSE #100
+		SetGlobal("OH_Trig","LOCALS",1)
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		DisplayString(Myself,26243)  // 法术启动
+		ReallyForceSpell(Myself,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)  // SPWI611.SPL (防护魔法武器)
+		ReallyForceSpell(Myself,WIZARD_IMPROVED_HASTE)  // SPWI613.SPL (高等加速术)
+		ReallyForceSpell(Myself,WIZARD_SPELL_DEFLECTION)  // SPWI618.SPL (四级召唤怪物术)
+END
+
+IF
+	!CheckStatGT(Myself,0,AURACLEANSING)
+	CheckStatLT(Myself,1,STONESKINS)
+	!CheckStatGT(Myself,0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+	Global("OH_Seq","LOCALS",0)
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobal("OH_Seq","LOCALS",1)
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		DisplayString(Myself,39969)  // 法术定序－已用出
+		ReallyForceSpell(Myself,WIZARD_STONE_SKIN)  // SPWI408.SPL (石肤术)
+		ReallyForceSpell(Myself,WIZARD_FIRE_SHIELD_RED)  // SPWI418.SPL (火焰护盾（红）)
+		ReallyForceSpell(Myself,WIZARD_MINOR_GLOBE_OF_INVULNERABILITY)  // SPWI406.SPL (次级法术无效结界)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!CheckStatGT(Myself,0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+	HaveSpell(WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)  // SPWI611.SPL (防护魔法武器)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+	AttackedBy([ANYONE],DEFAULT)
+	TookDamage()
+	OR(2)
+		!CheckSpellState(Myself,PROTECTION_FROM_MAGICAL_WEAPONS)
+		!CheckSpellState(Myself,ABSOLUTE_IMMUNITY)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(Myself,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)  // SPWI611.SPL (防护魔法武器)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	CheckStatLT(Myself,1,STONESKINS)
+	HaveSpell(WIZARD_STONE_SKIN)  // SPWI408.SPL (石肤术)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(Myself,WIZARD_STONE_SKIN)  // SPWI408.SPL (石肤术)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	Global("OH_MSeq","LOCALS",0)
+	!CheckStatGT(Myself,0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+	!StateCheck(Myself,STATE_MIRRORIMAGE)
+	!StateCheck(Myself,STATE_SILENCED)
+	!CheckStatGT(Player1,0,TRUE_SIGHT)
+	!CheckStatGT(Player2,0,TRUE_SIGHT)
+	!CheckStatGT(Player3,0,TRUE_SIGHT)
+	!CheckStatGT(Player4,0,TRUE_SIGHT)
+	!CheckStatGT(Player5,0,TRUE_SIGHT)
+	!CheckStatGT(Player6,0,TRUE_SIGHT)
+	!CheckStatGT([GOODCUTOFF.0.PLANATAR],0,TRUE_SIGHT)
+	!CheckStatGT([GOODCUTOFF.0.DARKPLANATAR],0,TRUE_SIGHT)
+THEN
+	RESPONSE #100
+		SetGlobal("OH_MSeq","LOCALS",1)
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		SetSequence(SEQ_CAST)
+		DisplayString(Myself,8635)  // 次级定序术启动
+		ReallyForceSpell(Myself,WIZARD_STRENGTH)  // SPWI214.SPL (力量术)
+		ReallyForceSpell(Myself,WIZARD_MIRROR_IMAGE)  // SPWI212.SPL (镜影术)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!StateCheck(Myself,STATE_MIRRORIMAGE)
+	HaveSpell(WIZARD_MIRROR_IMAGE)  // SPWI212.SPL (镜影术)
+	!CheckStatGT(Myself,0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+	!CheckStatGT(Player1,0,TRUE_SIGHT)
+	!CheckStatGT(Player2,0,TRUE_SIGHT)
+	!CheckStatGT(Player3,0,TRUE_SIGHT)
+	!CheckStatGT(Player4,0,TRUE_SIGHT)
+	!CheckStatGT(Player5,0,TRUE_SIGHT)
+	!CheckStatGT(Player6,0,TRUE_SIGHT)
+	!CheckStatGT([GOODCUTOFF.0.PLANATAR],0,TRUE_SIGHT)
+	!CheckStatGT([GOODCUTOFF.0.DARKPLANATAR],0,TRUE_SIGHT)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(Myself,WIZARD_MIRROR_IMAGE)  // SPWI212.SPL (镜影术)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	HaveSpell(WIZARD_PROTECTION_FROM_EVIL)  // SPWI113.SPL (防护邪恶)
+	See([0.0.DEMONIC.0.0.SUMMONED_DEMON])
+	!CheckSpellState(Myself,PROTECTION_FROM_EVIL)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(Myself,WIZARD_PROTECTION_FROM_EVIL)  // SPWI113.SPL (防护邪恶)
+END
+
+IF
+	Global("OH_Heal","LOCALS",0)
+	HasItem("POTN35",Myself)  // 魔法屏障药水
+	CheckStatLT(Myself,50,MAGICDAMAGERESISTANCE)
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		UseItem("POTN35",Myself)  // 魔法屏障药水
+		DisplayStringHead(Myself,46150)  // 喝下药水
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!StateCheck(Myself,STATE_IMPROVEDINVISIBILITY)
+	HaveSpell(WIZARD_SHADOW_DOOR)  // SPWI505.SPL (暗影门)
+	!CheckStatGT(Player1,0,TRUE_SIGHT)
+	!CheckStatGT(Player2,0,TRUE_SIGHT)
+	!CheckStatGT(Player3,0,TRUE_SIGHT)
+	!CheckStatGT(Player4,0,TRUE_SIGHT)
+	!CheckStatGT(Player5,0,TRUE_SIGHT)
+	!CheckStatGT(Player6,0,TRUE_SIGHT)
+	!CheckStatGT([GOODCUTOFF.0.PLANATAR],0,TRUE_SIGHT)
+	!CheckStatGT([GOODCUTOFF.0.DARKPLANATAR],0,TRUE_SIGHT)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(Myself,WIZARD_SHADOW_DOOR)  // SPWI505.SPL (暗影门)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_MINOR_SPELL_DEFLECTION)  // SPWI318.SPL (迷糊术)
+	!CheckStatGT(Myself,0,WIZARD_SPELL_DEFLECTION)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(Myself,WIZARD_MINOR_SPELL_DEFLECTION)  // SPWI318.SPL (迷糊术)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	HaveSpell(WIZARD_PROTECTION_FROM_FIRE)  // SPWI319.SPL (防护火焰)
+	CheckStatLT(Myself,75,RESISTFIRE)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(Myself,WIZARD_PROTECTION_FROM_FIRE)  // SPWI319.SPL (防护火焰)
+END
+
+IF
+	HaveSpell(ROGUE_AVOID_DEATH)  // SPCL917.SPL (九死一生)
+	!StateCheck(Myself,STATE_SILENCED)
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!GlobalTimerNotExpired("OH_AvoidD","LOCALS")
+	OR(2)
+		!HasItem("POTN10",Myself)  // 隐形药水
+		RandomNum(5,1)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		SetGlobalTimer("OH_AvoidD","LOCALS",FIVE_ROUNDS)
+		Spell(Myself,ROGUE_AVOID_DEATH)  // SPCL917.SPL (九死一生)
+		SetInterrupt(TRUE)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!GlobalTimerNotExpired("OH_Displ","LOCALS")
+	HaveSpell(WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+	OR(4)
+		See([GOODCUTOFF.0.0.CLERIC_ALL])
+		See([GOODCUTOFF.0.0.DRUID_ALL])
+		See([GOODCUTOFF.0.0.BARD_ALL])
+		See([GOODCUTOFF.0.0.MAGE_ALL])
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL2)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL3)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	OR(17)
+		CheckStatGT(LastSeenBy(Myself),0,IMPROVEDHASTE)
+		StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+		CheckStatGT(LastSeenBy(Myself),0,TRUE_SIGHT)
+		CheckStatGT(LastSeenBy(Myself),0,STONESKINS)
+		CheckSpellState(LastSeenBy(Myself),RESIST_FEAR)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_DEFENSIVE_HARMONY)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_FIRE_SHIELD)
+		CheckStatGT(LastSeenBy(Myself),0,DEATH_WARD)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),3,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+		HasItemEquiped("BLAKBLAD",LastSeenBy(Myself))  // 毁灭魔剑
+		HasItemEquiped("HARM",LastSeenBy(Myself))  // 伤害术
+		HasItemEquiped("SLAYLIVE",LastSeenBy(Myself))  // 杀生术
+		HasItemEquiped("MELFMET",LastSeenBy(Myself))  // 马友夫微流星
+	!StateCheck(NearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SecondNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(ThirdNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FourthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FifthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SixthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SeventhNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(EighthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(NinthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(TenthNearestEnemyOf(Myself),STATE_DISABLED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		SetGlobalTimer("OH_Displ","LOCALS",THREE_ROUNDS)
+		Spell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!GlobalTimerNotExpired("OH_Displ","LOCALS")
+	HaveSpell(WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+	OR(4)
+		See(SecondNearest([GOODCUTOFF.0.0.CLERIC_ALL]))
+		See(SecondNearest([GOODCUTOFF.0.0.DRUID_ALL]))
+		See(SecondNearest([GOODCUTOFF.0.0.BARD_ALL]))
+		See(SecondNearest([GOODCUTOFF.0.0.MAGE_ALL]))
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL2)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL3)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	OR(17)
+		CheckStatGT(LastSeenBy(Myself),0,IMPROVEDHASTE)
+		StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+		CheckStatGT(LastSeenBy(Myself),0,TRUE_SIGHT)
+		CheckStatGT(LastSeenBy(Myself),0,STONESKINS)
+		CheckSpellState(LastSeenBy(Myself),RESIST_FEAR)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_DEFENSIVE_HARMONY)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_FIRE_SHIELD)
+		CheckStatGT(LastSeenBy(Myself),0,DEATH_WARD)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),3,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+		HasItemEquiped("BLAKBLAD",LastSeenBy(Myself))  // 毁灭魔剑
+		HasItemEquiped("HARM",LastSeenBy(Myself))  // 伤害术
+		HasItemEquiped("SLAYLIVE",LastSeenBy(Myself))  // 杀生术
+		HasItemEquiped("MELFMET",LastSeenBy(Myself))  // 马友夫微流星
+	!StateCheck(NearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SecondNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(ThirdNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FourthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FifthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SixthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SeventhNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(EighthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(NinthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(TenthNearestEnemyOf(Myself),STATE_DISABLED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		SetGlobalTimer("OH_Displ","LOCALS",THREE_ROUNDS)
+		Spell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!GlobalTimerNotExpired("OH_Displ","LOCALS")
+	HaveSpell(WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+	OR(4)
+		See(ThirdNearest([GOODCUTOFF.0.0.CLERIC_ALL]))
+		See(ThirdNearest([GOODCUTOFF.0.0.DRUID_ALL]))
+		See(ThirdNearest([GOODCUTOFF.0.0.BARD_ALL]))
+		See(ThirdNearest([GOODCUTOFF.0.0.MAGE_ALL]))
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL2)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL3)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	OR(17)
+		CheckStatGT(LastSeenBy(Myself),0,IMPROVEDHASTE)
+		StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+		CheckStatGT(LastSeenBy(Myself),0,TRUE_SIGHT)
+		CheckStatGT(LastSeenBy(Myself),0,STONESKINS)
+		CheckSpellState(LastSeenBy(Myself),RESIST_FEAR)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_DEFENSIVE_HARMONY)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_FIRE_SHIELD)
+		CheckStatGT(LastSeenBy(Myself),0,DEATH_WARD)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),3,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+		HasItemEquiped("BLAKBLAD",LastSeenBy(Myself))  // 毁灭魔剑
+		HasItemEquiped("HARM",LastSeenBy(Myself))  // 伤害术
+		HasItemEquiped("SLAYLIVE",LastSeenBy(Myself))  // 杀生术
+		HasItemEquiped("MELFMET",LastSeenBy(Myself))  // 马友夫微流星
+	!StateCheck(NearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SecondNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(ThirdNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FourthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FifthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SixthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SeventhNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(EighthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(NinthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(TenthNearestEnemyOf(Myself),STATE_DISABLED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		SetGlobalTimer("OH_Displ","LOCALS",THREE_ROUNDS)
+		Spell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!GlobalTimerNotExpired("OH_Displ","LOCALS")
+	HaveSpell(WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+	See(NearestEnemyOf(Myself))
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL2)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL3)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	OR(17)
+		CheckStatGT(LastSeenBy(Myself),0,IMPROVEDHASTE)
+		StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+		CheckStatGT(LastSeenBy(Myself),0,TRUE_SIGHT)
+		CheckStatGT(LastSeenBy(Myself),0,STONESKINS)
+		CheckSpellState(LastSeenBy(Myself),RESIST_FEAR)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_DEFENSIVE_HARMONY)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_FIRE_SHIELD)
+		CheckStatGT(LastSeenBy(Myself),0,DEATH_WARD)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),3,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+		HasItemEquiped("BLAKBLAD",LastSeenBy(Myself))  // 毁灭魔剑
+		HasItemEquiped("HARM",LastSeenBy(Myself))  // 伤害术
+		HasItemEquiped("SLAYLIVE",LastSeenBy(Myself))  // 杀生术
+		HasItemEquiped("MELFMET",LastSeenBy(Myself))  // 马友夫微流星
+	!StateCheck(NearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SecondNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(ThirdNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FourthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FifthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SixthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SeventhNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(EighthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(NinthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(TenthNearestEnemyOf(Myself),STATE_DISABLED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		SetGlobalTimer("OH_Displ","LOCALS",THREE_ROUNDS)
+		Spell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!GlobalTimerNotExpired("OH_Displ","LOCALS")
+	HaveSpell(WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+	See(SecondNearestEnemyOf(Myself))
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL2)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL3)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	OR(17)
+		CheckStatGT(LastSeenBy(Myself),0,IMPROVEDHASTE)
+		StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+		CheckStatGT(LastSeenBy(Myself),0,TRUE_SIGHT)
+		CheckStatGT(LastSeenBy(Myself),0,STONESKINS)
+		CheckSpellState(LastSeenBy(Myself),RESIST_FEAR)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_DEFENSIVE_HARMONY)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_FIRE_SHIELD)
+		CheckStatGT(LastSeenBy(Myself),0,DEATH_WARD)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),3,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+		HasItemEquiped("BLAKBLAD",LastSeenBy(Myself))  // 毁灭魔剑
+		HasItemEquiped("HARM",LastSeenBy(Myself))  // 伤害术
+		HasItemEquiped("SLAYLIVE",LastSeenBy(Myself))  // 杀生术
+		HasItemEquiped("MELFMET",LastSeenBy(Myself))  // 马友夫微流星
+	!StateCheck(NearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SecondNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(ThirdNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FourthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FifthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SixthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SeventhNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(EighthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(NinthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(TenthNearestEnemyOf(Myself),STATE_DISABLED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		SetGlobalTimer("OH_Displ","LOCALS",THREE_ROUNDS)
+		Spell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!GlobalTimerNotExpired("OH_Displ","LOCALS")
+	HaveSpell(WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+	See(ThirdNearestEnemyOf(Myself))
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL2)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL3)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	OR(17)
+		CheckStatGT(LastSeenBy(Myself),0,IMPROVEDHASTE)
+		StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+		CheckStatGT(LastSeenBy(Myself),0,TRUE_SIGHT)
+		CheckStatGT(LastSeenBy(Myself),0,STONESKINS)
+		CheckSpellState(LastSeenBy(Myself),RESIST_FEAR)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_DEFENSIVE_HARMONY)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_FIRE_SHIELD)
+		CheckStatGT(LastSeenBy(Myself),0,DEATH_WARD)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),3,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+		HasItemEquiped("BLAKBLAD",LastSeenBy(Myself))  // 毁灭魔剑
+		HasItemEquiped("HARM",LastSeenBy(Myself))  // 伤害术
+		HasItemEquiped("SLAYLIVE",LastSeenBy(Myself))  // 杀生术
+		HasItemEquiped("MELFMET",LastSeenBy(Myself))  // 马友夫微流星
+	!StateCheck(NearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SecondNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(ThirdNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FourthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FifthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SixthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SeventhNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(EighthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(NinthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(TenthNearestEnemyOf(Myself),STATE_DISABLED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		SetGlobalTimer("OH_Displ","LOCALS",THREE_ROUNDS)
+		Spell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!GlobalTimerNotExpired("OH_Displ","LOCALS")
+	HaveSpell(WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+	See(FourthNearestEnemyOf(Myself))
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL2)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL3)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	OR(17)
+		CheckStatGT(LastSeenBy(Myself),0,IMPROVEDHASTE)
+		StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+		CheckStatGT(LastSeenBy(Myself),0,TRUE_SIGHT)
+		CheckStatGT(LastSeenBy(Myself),0,STONESKINS)
+		CheckSpellState(LastSeenBy(Myself),RESIST_FEAR)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_DEFENSIVE_HARMONY)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_FIRE_SHIELD)
+		CheckStatGT(LastSeenBy(Myself),0,DEATH_WARD)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),3,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+		HasItemEquiped("BLAKBLAD",LastSeenBy(Myself))  // 毁灭魔剑
+		HasItemEquiped("HARM",LastSeenBy(Myself))  // 伤害术
+		HasItemEquiped("SLAYLIVE",LastSeenBy(Myself))  // 杀生术
+		HasItemEquiped("MELFMET",LastSeenBy(Myself))  // 马友夫微流星
+	!StateCheck(NearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SecondNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(ThirdNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FourthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FifthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SixthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SeventhNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(EighthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(NinthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(TenthNearestEnemyOf(Myself),STATE_DISABLED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		SetGlobalTimer("OH_Displ","LOCALS",THREE_ROUNDS)
+		Spell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!GlobalTimerNotExpired("OH_Displ","LOCALS")
+	HaveSpell(WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+	See(FifthNearestEnemyOf(Myself))
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL2)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL3)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	OR(17)
+		CheckStatGT(LastSeenBy(Myself),0,IMPROVEDHASTE)
+		StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+		CheckStatGT(LastSeenBy(Myself),0,TRUE_SIGHT)
+		CheckStatGT(LastSeenBy(Myself),0,STONESKINS)
+		CheckSpellState(LastSeenBy(Myself),RESIST_FEAR)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_DEFENSIVE_HARMONY)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_FIRE_SHIELD)
+		CheckStatGT(LastSeenBy(Myself),0,DEATH_WARD)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),3,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+		HasItemEquiped("BLAKBLAD",LastSeenBy(Myself))  // 毁灭魔剑
+		HasItemEquiped("HARM",LastSeenBy(Myself))  // 伤害术
+		HasItemEquiped("SLAYLIVE",LastSeenBy(Myself))  // 杀生术
+		HasItemEquiped("MELFMET",LastSeenBy(Myself))  // 马友夫微流星
+	!StateCheck(NearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SecondNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(ThirdNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FourthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FifthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SixthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SeventhNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(EighthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(NinthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(TenthNearestEnemyOf(Myself),STATE_DISABLED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		SetGlobalTimer("OH_Displ","LOCALS",THREE_ROUNDS)
+		Spell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!GlobalTimerNotExpired("OH_Displ","LOCALS")
+	HaveSpell(WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+	See(SixthNearestEnemyOf(Myself))
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL2)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL3)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	OR(17)
+		CheckStatGT(LastSeenBy(Myself),0,IMPROVEDHASTE)
+		StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+		CheckStatGT(LastSeenBy(Myself),0,TRUE_SIGHT)
+		CheckStatGT(LastSeenBy(Myself),0,STONESKINS)
+		CheckSpellState(LastSeenBy(Myself),RESIST_FEAR)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_DEFENSIVE_HARMONY)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_FIRE_SHIELD)
+		CheckStatGT(LastSeenBy(Myself),0,DEATH_WARD)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),3,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+		HasItemEquiped("BLAKBLAD",LastSeenBy(Myself))  // 毁灭魔剑
+		HasItemEquiped("HARM",LastSeenBy(Myself))  // 伤害术
+		HasItemEquiped("SLAYLIVE",LastSeenBy(Myself))  // 杀生术
+		HasItemEquiped("MELFMET",LastSeenBy(Myself))  // 马友夫微流星
+	!StateCheck(NearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SecondNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(ThirdNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FourthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FifthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SixthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SeventhNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(EighthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(NinthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(TenthNearestEnemyOf(Myself),STATE_DISABLED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		SetGlobalTimer("OH_Displ","LOCALS",THREE_ROUNDS)
+		Spell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!GlobalTimerNotExpired("OH_Displ","LOCALS")
+	HaveSpell(WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+	See(SeventhNearestEnemyOf(Myself))
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL2)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL3)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	OR(17)
+		CheckStatGT(LastSeenBy(Myself),0,IMPROVEDHASTE)
+		StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+		CheckStatGT(LastSeenBy(Myself),0,TRUE_SIGHT)
+		CheckStatGT(LastSeenBy(Myself),0,STONESKINS)
+		CheckSpellState(LastSeenBy(Myself),RESIST_FEAR)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_DEFENSIVE_HARMONY)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_FIRE_SHIELD)
+		CheckStatGT(LastSeenBy(Myself),0,DEATH_WARD)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),3,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+		HasItemEquiped("BLAKBLAD",LastSeenBy(Myself))  // 毁灭魔剑
+		HasItemEquiped("HARM",LastSeenBy(Myself))  // 伤害术
+		HasItemEquiped("SLAYLIVE",LastSeenBy(Myself))  // 杀生术
+		HasItemEquiped("MELFMET",LastSeenBy(Myself))  // 马友夫微流星
+	!StateCheck(NearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SecondNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(ThirdNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FourthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FifthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SixthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SeventhNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(EighthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(NinthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(TenthNearestEnemyOf(Myself),STATE_DISABLED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		SetGlobalTimer("OH_Displ","LOCALS",THREE_ROUNDS)
+		Spell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!GlobalTimerNotExpired("OH_Displ","LOCALS")
+	HaveSpell(WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+	See(EighthNearestEnemyOf(Myself))
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL2)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL3)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	OR(17)
+		CheckStatGT(LastSeenBy(Myself),0,IMPROVEDHASTE)
+		StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+		CheckStatGT(LastSeenBy(Myself),0,TRUE_SIGHT)
+		CheckStatGT(LastSeenBy(Myself),0,STONESKINS)
+		CheckSpellState(LastSeenBy(Myself),RESIST_FEAR)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_DEFENSIVE_HARMONY)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_FIRE_SHIELD)
+		CheckStatGT(LastSeenBy(Myself),0,DEATH_WARD)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),3,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+		HasItemEquiped("BLAKBLAD",LastSeenBy(Myself))  // 毁灭魔剑
+		HasItemEquiped("HARM",LastSeenBy(Myself))  // 伤害术
+		HasItemEquiped("SLAYLIVE",LastSeenBy(Myself))  // 杀生术
+		HasItemEquiped("MELFMET",LastSeenBy(Myself))  // 马友夫微流星
+	!StateCheck(NearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SecondNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(ThirdNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FourthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FifthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SixthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SeventhNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(EighthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(NinthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(TenthNearestEnemyOf(Myself),STATE_DISABLED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		SetGlobalTimer("OH_Displ","LOCALS",THREE_ROUNDS)
+		Spell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!GlobalTimerNotExpired("OH_Displ","LOCALS")
+	HaveSpell(WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+	See(NinthNearestEnemyOf(Myself))
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL2)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL3)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	OR(17)
+		CheckStatGT(LastSeenBy(Myself),0,IMPROVEDHASTE)
+		StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+		CheckStatGT(LastSeenBy(Myself),0,TRUE_SIGHT)
+		CheckStatGT(LastSeenBy(Myself),0,STONESKINS)
+		CheckSpellState(LastSeenBy(Myself),RESIST_FEAR)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_DEFENSIVE_HARMONY)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_FIRE_SHIELD)
+		CheckStatGT(LastSeenBy(Myself),0,DEATH_WARD)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),3,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+		HasItemEquiped("BLAKBLAD",LastSeenBy(Myself))  // 毁灭魔剑
+		HasItemEquiped("HARM",LastSeenBy(Myself))  // 伤害术
+		HasItemEquiped("SLAYLIVE",LastSeenBy(Myself))  // 杀生术
+		HasItemEquiped("MELFMET",LastSeenBy(Myself))  // 马友夫微流星
+	!StateCheck(NearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SecondNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(ThirdNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FourthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FifthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SixthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SeventhNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(EighthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(NinthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(TenthNearestEnemyOf(Myself),STATE_DISABLED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		SetGlobalTimer("OH_Displ","LOCALS",THREE_ROUNDS)
+		Spell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!GlobalTimerNotExpired("OH_Displ","LOCALS")
+	HaveSpell(WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+	See(TenthNearestEnemyOf(Myself))
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL2)
+	CheckStatLT(LastSeenBy(Myself),49,LEVEL3)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	OR(17)
+		CheckStatGT(LastSeenBy(Myself),0,IMPROVEDHASTE)
+		StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+		CheckStatGT(LastSeenBy(Myself),0,TRUE_SIGHT)
+		CheckStatGT(LastSeenBy(Myself),0,STONESKINS)
+		CheckSpellState(LastSeenBy(Myself),RESIST_FEAR)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_DEFENSIVE_HARMONY)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_FIRE_SHIELD)
+		CheckStatGT(LastSeenBy(Myself),0,DEATH_WARD)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),3,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+		HasItemEquiped("BLAKBLAD",LastSeenBy(Myself))  // 毁灭魔剑
+		HasItemEquiped("HARM",LastSeenBy(Myself))  // 伤害术
+		HasItemEquiped("SLAYLIVE",LastSeenBy(Myself))  // 杀生术
+		HasItemEquiped("MELFMET",LastSeenBy(Myself))  // 马友夫微流星
+	!StateCheck(NearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SecondNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(ThirdNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FourthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(FifthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SixthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(SeventhNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(EighthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(NinthNearestEnemyOf(Myself),STATE_DISABLED)
+	!StateCheck(TenthNearestEnemyOf(Myself),STATE_DISABLED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		SetGlobalTimer("OH_Displ","LOCALS",THREE_ROUNDS)
+		Spell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	Global("OH_Heal","LOCALS",0)
+	HaveSpell(BLADE_OFFENSIVE_SPIN)  // SPCL521.SPL (回旋攻击)
+	!CheckSpellState(Myself,OFFENSIVE_SPIN)
+	!CheckSpellState(Myself,DEFENSIVE_SPIN)
+	CheckStat(Myself,0,IMPROVEDHASTE)
+	!CheckStat(Myself,2,OFFENSIVE_MODIFIER)
+	Range(NearestEnemyOf(Myself),6)
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!GlobalTimerNotExpired("OH_OSpin","LOCALS")
+THEN
+	RESPONSE #80
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		SetGlobalTimer("OH_OSpin","LOCALS",FOUR_ROUNDS)
+		Spell(Myself,BLADE_OFFENSIVE_SPIN)  // SPCL521.SPL (回旋攻击)
+	RESPONSE #20
+		SetGlobalTimer("OH_OSpin","LOCALS",FOUR_ROUNDS)
+		Continue()
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_CHAOS)  // SPWI508.SPL (混乱术)
+	See([GOODCUTOFF])
+	!General(LastSeenBy(Myself),UNDEAD)
+	!Race(LastSeenBy(Myself),DEMONIC)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),-4,SAVEVSSPELL)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStat(LastSeenBy(Myself),4,WIZARD_SPELL_IMMUNITY)
+	!HasItemEquiped("LEAT20",LastSeenBy(Myself))  // 艾格之皮+3
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SW2H14",LastSeenBy(Myself))  // 利拉寇尔
+	!HasItemEquipedReal("SW1H54",LastSeenBy(Myself))  // 平衡者
+	!HasItemEquipedReal("SW2H21",LastSeenBy(Myself))  // 灵能刃+5
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_CHAOS)  // SPWI508.SPL (混乱术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_CHAOS)  // SPWI508.SPL (混乱术)
+	See(SecondNearest([GOODCUTOFF]))
+	!General(LastSeenBy(Myself),UNDEAD)
+	!Race(LastSeenBy(Myself),DEMONIC)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),-4,SAVEVSSPELL)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStat(LastSeenBy(Myself),4,WIZARD_SPELL_IMMUNITY)
+	!HasItemEquiped("LEAT20",LastSeenBy(Myself))  // 艾格之皮+3
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SW2H14",LastSeenBy(Myself))  // 利拉寇尔
+	!HasItemEquipedReal("SW1H54",LastSeenBy(Myself))  // 平衡者
+	!HasItemEquipedReal("SW2H21",LastSeenBy(Myself))  // 灵能刃+5
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_CHAOS)  // SPWI508.SPL (混乱术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_CHAOS)  // SPWI508.SPL (混乱术)
+	See(ThirdNearest([GOODCUTOFF]))
+	!General(LastSeenBy(Myself),UNDEAD)
+	!Race(LastSeenBy(Myself),DEMONIC)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),-4,SAVEVSSPELL)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStat(LastSeenBy(Myself),4,WIZARD_SPELL_IMMUNITY)
+	!HasItemEquiped("LEAT20",LastSeenBy(Myself))  // 艾格之皮+3
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SW2H14",LastSeenBy(Myself))  // 利拉寇尔
+	!HasItemEquipedReal("SW1H54",LastSeenBy(Myself))  // 平衡者
+	!HasItemEquipedReal("SW2H21",LastSeenBy(Myself))  // 灵能刃+5
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_CHAOS)  // SPWI508.SPL (混乱术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_CHAOS)  // SPWI508.SPL (混乱术)
+	See(FourthNearest([GOODCUTOFF]))
+	!General(LastSeenBy(Myself),UNDEAD)
+	!Race(LastSeenBy(Myself),DEMONIC)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),-4,SAVEVSSPELL)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStat(LastSeenBy(Myself),4,WIZARD_SPELL_IMMUNITY)
+	!HasItemEquiped("LEAT20",LastSeenBy(Myself))  // 艾格之皮+3
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SW2H14",LastSeenBy(Myself))  // 利拉寇尔
+	!HasItemEquipedReal("SW1H54",LastSeenBy(Myself))  // 平衡者
+	!HasItemEquipedReal("SW2H21",LastSeenBy(Myself))  // 灵能刃+5
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_CHAOS)  // SPWI508.SPL (混乱术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_CHAOS)  // SPWI508.SPL (混乱术)
+	See(FifthNearest([GOODCUTOFF]))
+	!General(LastSeenBy(Myself),UNDEAD)
+	!Race(LastSeenBy(Myself),DEMONIC)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),-4,SAVEVSSPELL)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStat(LastSeenBy(Myself),4,WIZARD_SPELL_IMMUNITY)
+	!HasItemEquiped("LEAT20",LastSeenBy(Myself))  // 艾格之皮+3
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SW2H14",LastSeenBy(Myself))  // 利拉寇尔
+	!HasItemEquipedReal("SW1H54",LastSeenBy(Myself))  // 平衡者
+	!HasItemEquipedReal("SW2H21",LastSeenBy(Myself))  // 灵能刃+5
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_CHAOS)  // SPWI508.SPL (混乱术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_CHAOS)  // SPWI508.SPL (混乱术)
+	See(SixthNearest([GOODCUTOFF]))
+	!General(LastSeenBy(Myself),UNDEAD)
+	!Race(LastSeenBy(Myself),DEMONIC)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),-4,SAVEVSSPELL)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStat(LastSeenBy(Myself),4,WIZARD_SPELL_IMMUNITY)
+	!HasItemEquiped("LEAT20",LastSeenBy(Myself))  // 艾格之皮+3
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SW2H14",LastSeenBy(Myself))  // 利拉寇尔
+	!HasItemEquipedReal("SW1H54",LastSeenBy(Myself))  // 平衡者
+	!HasItemEquipedReal("SW2H21",LastSeenBy(Myself))  // 灵能刃+5
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_CHAOS)  // SPWI508.SPL (混乱术)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	HaveSpell(WIZARD_DOMINATION)  // SPWI506.SPL (控制术)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!StateCheck(Myself,STATE_SILENCED)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!Difficulty(EASIEST)
+	See([PC.0.0.FIGHTER_ALL])
+	!Race(LastSeenBy(Myself),ELF)
+	!Class(LastSeenBy(Myself),MONK)
+	!StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),-2,SAVEVSSPELL)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStat(LastSeenBy(Myself),4,WIZARD_SPELL_IMMUNITY)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+	!HasItemEquiped("HELM06",LastSeenBy(Myself))  // 防魅惑头盔
+	!HasItemEquiped("NPCHAN",LastSeenBy(Myself))  // 寇萨拉传家之甲
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SW2H14",LastSeenBy(Myself))  // 利拉寇尔
+	!HasItemEquipedReal("SW1H54",LastSeenBy(Myself))  // 平衡者
+	!HasItemEquipedReal("SPER07",LastSeenBy(Myself))  // 独角兽之矛+2
+	!HasItemEquipedReal("SW1H35",LastSeenBy(Myself))  // 亚德加萨吸血剑+2
+	!HasItemEquipedReal("STAF11",LastSeenBy(Myself))  // 大法师之杖
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_DOMINATION)  // SPWI506.SPL (控制术)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	HaveSpell(WIZARD_DOMINATION)  // SPWI506.SPL (控制术)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!StateCheck(Myself,STATE_SILENCED)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!Difficulty(EASIEST)
+	See(SecondNearest([PC.0.0.FIGHTER_ALL]))
+	!Race(LastSeenBy(Myself),ELF)
+	!Class(LastSeenBy(Myself),MONK)
+	!StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),-2,SAVEVSSPELL)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStat(LastSeenBy(Myself),4,WIZARD_SPELL_IMMUNITY)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+	!HasItemEquiped("HELM06",LastSeenBy(Myself))  // 防魅惑头盔
+	!HasItemEquiped("NPCHAN",LastSeenBy(Myself))  // 寇萨拉传家之甲
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SW2H14",LastSeenBy(Myself))  // 利拉寇尔
+	!HasItemEquipedReal("SW1H54",LastSeenBy(Myself))  // 平衡者
+	!HasItemEquipedReal("SPER07",LastSeenBy(Myself))  // 独角兽之矛+2
+	!HasItemEquipedReal("SW1H35",LastSeenBy(Myself))  // 亚德加萨吸血剑+2
+	!HasItemEquipedReal("STAF11",LastSeenBy(Myself))  // 大法师之杖
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_DOMINATION)  // SPWI506.SPL (控制术)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	HaveSpell(WIZARD_DOMINATION)  // SPWI506.SPL (控制术)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!StateCheck(Myself,STATE_SILENCED)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!Difficulty(EASIEST)
+	See(ThirdNearest([PC.0.0.FIGHTER_ALL]))
+	!Race(LastSeenBy(Myself),ELF)
+	!Class(LastSeenBy(Myself),MONK)
+	!StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),-2,SAVEVSSPELL)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStat(LastSeenBy(Myself),4,WIZARD_SPELL_IMMUNITY)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+	!HasItemEquiped("HELM06",LastSeenBy(Myself))  // 防魅惑头盔
+	!HasItemEquiped("NPCHAN",LastSeenBy(Myself))  // 寇萨拉传家之甲
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SW2H14",LastSeenBy(Myself))  // 利拉寇尔
+	!HasItemEquipedReal("SW1H54",LastSeenBy(Myself))  // 平衡者
+	!HasItemEquipedReal("SPER07",LastSeenBy(Myself))  // 独角兽之矛+2
+	!HasItemEquipedReal("SW1H35",LastSeenBy(Myself))  // 亚德加萨吸血剑+2
+	!HasItemEquipedReal("STAF11",LastSeenBy(Myself))  // 大法师之杖
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_DOMINATION)  // SPWI506.SPL (控制术)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	HaveSpell(WIZARD_DOMINATION)  // SPWI506.SPL (控制术)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!StateCheck(Myself,STATE_SILENCED)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!Difficulty(EASIEST)
+	See([PC.0.0.RANGER_ALL])
+	!Race(LastSeenBy(Myself),ELF)
+	!StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),-2,SAVEVSSPELL)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+	!HasItemEquiped("HELM06",LastSeenBy(Myself))  // 防魅惑头盔
+	!HasItemEquiped("NPCHAN",LastSeenBy(Myself))  // 寇萨拉传家之甲
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SW2H14",LastSeenBy(Myself))  // 利拉寇尔
+	!HasItemEquipedReal("SW1H54",LastSeenBy(Myself))  // 平衡者
+	!HasItemEquipedReal("SPER07",LastSeenBy(Myself))  // 独角兽之矛+2
+	!HasItemEquipedReal("SW1H35",LastSeenBy(Myself))  // 亚德加萨吸血剑+2
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_DOMINATION)  // SPWI506.SPL (控制术)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	HaveSpell(WIZARD_DOMINATION)  // SPWI506.SPL (控制术)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!StateCheck(Myself,STATE_SILENCED)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!Difficulty(EASIEST)
+	See(SecondNearest([PC.0.0.RANGER_ALL]))
+	!Race(LastSeenBy(Myself),ELF)
+	!StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),-2,SAVEVSSPELL)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+	!HasItemEquiped("HELM06",LastSeenBy(Myself))  // 防魅惑头盔
+	!HasItemEquiped("NPCHAN",LastSeenBy(Myself))  // 寇萨拉传家之甲
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SW2H14",LastSeenBy(Myself))  // 利拉寇尔
+	!HasItemEquipedReal("SW1H54",LastSeenBy(Myself))  // 平衡者
+	!HasItemEquipedReal("SPER07",LastSeenBy(Myself))  // 独角兽之矛+2
+	!HasItemEquipedReal("SW1H35",LastSeenBy(Myself))  // 亚德加萨吸血剑+2
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_DOMINATION)  // SPWI506.SPL (控制术)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	HaveSpell(WIZARD_DOMINATION)  // SPWI506.SPL (控制术)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!StateCheck(Myself,STATE_SILENCED)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!Difficulty(EASIEST)
+	See(ThirdNearest([PC.0.0.RANGER_ALL]))
+	!Race(LastSeenBy(Myself),ELF)
+	!StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),-2,SAVEVSSPELL)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+	!HasItemEquiped("HELM06",LastSeenBy(Myself))  // 防魅惑头盔
+	!HasItemEquiped("NPCHAN",LastSeenBy(Myself))  // 寇萨拉传家之甲
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SW2H14",LastSeenBy(Myself))  // 利拉寇尔
+	!HasItemEquipedReal("SW1H54",LastSeenBy(Myself))  // 平衡者
+	!HasItemEquipedReal("SPER07",LastSeenBy(Myself))  // 独角兽之矛+2
+	!HasItemEquipedReal("SW1H35",LastSeenBy(Myself))  // 亚德加萨吸血剑+2
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_DOMINATION)  // SPWI506.SPL (控制术)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	HaveSpell(WIZARD_DOMINATION)  // SPWI506.SPL (控制术)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!StateCheck(Myself,STATE_SILENCED)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!Difficulty(EASIEST)
+	See([PC.0.0.PALADIN_ALL])
+	!Kit(LastSeenBy(Myself),INQUISITOR)
+	!Kit(LastSeenBy(Myself),CAVALIER)
+	!StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),-2,SAVEVSSPELL)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+	!HasItemEquiped("HELM06",LastSeenBy(Myself))  // 防魅惑头盔
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SW2H14",LastSeenBy(Myself))  // 利拉寇尔
+	!HasItemEquipedReal("SW1H54",LastSeenBy(Myself))  // 平衡者
+	!HasItemEquipedReal("SPER07",LastSeenBy(Myself))  // 独角兽之矛+2
+	!HasItemEquipedReal("SW1H35",LastSeenBy(Myself))  // 亚德加萨吸血剑+2
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_DOMINATION)  // SPWI506.SPL (控制术)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	HaveSpell(WIZARD_DOMINATION)  // SPWI506.SPL (控制术)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!StateCheck(Myself,STATE_SILENCED)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!Difficulty(EASIEST)
+	See(SecondNearest([PC.0.0.PALADIN_ALL]))
+	!Kit(LastSeenBy(Myself),INQUISITOR)
+	!Kit(LastSeenBy(Myself),CAVALIER)
+	!StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),-2,SAVEVSSPELL)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+	!HasItemEquiped("HELM06",LastSeenBy(Myself))  // 防魅惑头盔
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SW2H14",LastSeenBy(Myself))  // 利拉寇尔
+	!HasItemEquipedReal("SW1H54",LastSeenBy(Myself))  // 平衡者
+	!HasItemEquipedReal("SPER07",LastSeenBy(Myself))  // 独角兽之矛+2
+	!HasItemEquipedReal("SW1H35",LastSeenBy(Myself))  // 亚德加萨吸血剑+2
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_DOMINATION)  // SPWI506.SPL (控制术)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	HaveSpell(WIZARD_DOMINATION)  // SPWI506.SPL (控制术)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!StateCheck(Myself,STATE_SILENCED)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!Difficulty(EASIEST)
+	See(ThirdNearest([PC.0.0.PALADIN_ALL]))
+	!Kit(LastSeenBy(Myself),INQUISITOR)
+	!Kit(LastSeenBy(Myself),CAVALIER)
+	!StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),-2,SAVEVSSPELL)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+	!HasItemEquiped("HELM06",LastSeenBy(Myself))  // 防魅惑头盔
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SW2H14",LastSeenBy(Myself))  // 利拉寇尔
+	!HasItemEquipedReal("SW1H54",LastSeenBy(Myself))  // 平衡者
+	!HasItemEquipedReal("SPER07",LastSeenBy(Myself))  // 独角兽之矛+2
+	!HasItemEquipedReal("SW1H35",LastSeenBy(Myself))  // 亚德加萨吸血剑+2
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_DOMINATION)  // SPWI506.SPL (控制术)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	HasItem("WAND04",Myself)  // 麻痹法杖
+	!Difficulty(EASIEST)
+	See([PC.0.0.FIGHTER])
+	!StateCheck(LastSeenBy(Myself),STATE_REALLY_DEAD)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	!CheckStatGT(LastSeenBy(Myself),0,SANCTUARY)
+	CheckStatGT(LastSeenBy(Myself),9,SAVEVSWANDS)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!HasItemEquipedReal("SW1H27",LastSeenBy(Myself))  // 亚班的敏捷之刃+2
+	!HasItemEquipedReal("NPSW01",LastSeenBy(Myself))  // 阿尔孚琳之剑+2
+	!HasItemEquiped("RING09",LastSeenBy(Myself))  // 艾德凡塔的礼物
+	!HasItemEquiped("NPPLAT",LastSeenBy(Myself))  // 费尔康全身板甲
+	!HasItemEquipedReal("SW2H06",LastSeenBy(Myself))  // 双手剑+2
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SPER07",LastSeenBy(Myself))  // 独角兽之矛+2
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		UseItem("WAND04",LastSeenBy(Myself))  // 麻痹法杖
+		DisplayStringHead(Myself,31971)  // 使用一柄法杖
+		SetInterrupt(TRUE)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	HasItem("WAND04",Myself)  // 麻痹法杖
+	!Difficulty(EASIEST)
+	See(SecondNearest([PC.0.0.FIGHTER]))
+	!StateCheck(LastSeenBy(Myself),STATE_REALLY_DEAD)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	!CheckStatGT(LastSeenBy(Myself),0,SANCTUARY)
+	CheckStatGT(LastSeenBy(Myself),9,SAVEVSWANDS)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!HasItemEquipedReal("SW1H27",LastSeenBy(Myself))  // 亚班的敏捷之刃+2
+	!HasItemEquipedReal("NPSW01",LastSeenBy(Myself))  // 阿尔孚琳之剑+2
+	!HasItemEquiped("RING09",LastSeenBy(Myself))  // 艾德凡塔的礼物
+	!HasItemEquiped("NPPLAT",LastSeenBy(Myself))  // 费尔康全身板甲
+	!HasItemEquipedReal("SW2H06",LastSeenBy(Myself))  // 双手剑+2
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SPER07",LastSeenBy(Myself))  // 独角兽之矛+2
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		UseItem("WAND04",LastSeenBy(Myself))  // 麻痹法杖
+		DisplayStringHead(Myself,31971)  // 使用一柄法杖
+		SetInterrupt(TRUE)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	HasItem("WAND04",Myself)  // 麻痹法杖
+	!Difficulty(EASIEST)
+	See([PC.0.0.RANGER])
+	!StateCheck(LastSeenBy(Myself),STATE_REALLY_DEAD)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	!CheckStatGT(LastSeenBy(Myself),0,SANCTUARY)
+	CheckStatGT(LastSeenBy(Myself),9,SAVEVSWANDS)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!HasItemEquipedReal("SW1H27",LastSeenBy(Myself))  // 亚班的敏捷之刃+2
+	!HasItemEquipedReal("NPSW01",LastSeenBy(Myself))  // 阿尔孚琳之剑+2
+	!HasItemEquiped("RING09",LastSeenBy(Myself))  // 艾德凡塔的礼物
+	!HasItemEquiped("NPPLAT",LastSeenBy(Myself))  // 费尔康全身板甲
+	!HasItemEquipedReal("SW2H06",LastSeenBy(Myself))  // 双手剑+2
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SPER07",LastSeenBy(Myself))  // 独角兽之矛+2
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		UseItem("WAND04",LastSeenBy(Myself))  // 麻痹法杖
+		DisplayStringHead(Myself,31971)  // 使用一柄法杖
+		SetInterrupt(TRUE)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	HasItem("WAND04",Myself)  // 麻痹法杖
+	!Difficulty(EASIEST)
+	See(SecondNearest([PC.0.0.RANGER]))
+	!StateCheck(LastSeenBy(Myself),STATE_REALLY_DEAD)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	!CheckStatGT(LastSeenBy(Myself),0,SANCTUARY)
+	CheckStatGT(LastSeenBy(Myself),9,SAVEVSWANDS)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!HasItemEquipedReal("SW1H27",LastSeenBy(Myself))  // 亚班的敏捷之刃+2
+	!HasItemEquipedReal("NPSW01",LastSeenBy(Myself))  // 阿尔孚琳之剑+2
+	!HasItemEquiped("RING09",LastSeenBy(Myself))  // 艾德凡塔的礼物
+	!HasItemEquiped("NPPLAT",LastSeenBy(Myself))  // 费尔康全身板甲
+	!HasItemEquipedReal("SW2H06",LastSeenBy(Myself))  // 双手剑+2
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SPER07",LastSeenBy(Myself))  // 独角兽之矛+2
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		UseItem("WAND04",LastSeenBy(Myself))  // 麻痹法杖
+		DisplayStringHead(Myself,31971)  // 使用一柄法杖
+		SetInterrupt(TRUE)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	HasItem("WAND04",Myself)  // 麻痹法杖
+	!Difficulty(EASIEST)
+	See([PC.0.0.PALADIN])
+	!StateCheck(LastSeenBy(Myself),STATE_REALLY_DEAD)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	!CheckStatGT(LastSeenBy(Myself),0,SANCTUARY)
+	CheckStatGT(LastSeenBy(Myself),9,SAVEVSWANDS)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!HasItemEquipedReal("SW1H27",LastSeenBy(Myself))  // 亚班的敏捷之刃+2
+	!HasItemEquipedReal("NPSW01",LastSeenBy(Myself))  // 阿尔孚琳之剑+2
+	!HasItemEquiped("RING09",LastSeenBy(Myself))  // 艾德凡塔的礼物
+	!HasItemEquiped("NPPLAT",LastSeenBy(Myself))  // 费尔康全身板甲
+	!HasItemEquipedReal("SW2H06",LastSeenBy(Myself))  // 双手剑+2
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SPER07",LastSeenBy(Myself))  // 独角兽之矛+2
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		UseItem("WAND04",LastSeenBy(Myself))  // 麻痹法杖
+		DisplayStringHead(Myself,31971)  // 使用一柄法杖
+		SetInterrupt(TRUE)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	HasItem("WAND04",Myself)  // 麻痹法杖
+	!Difficulty(EASIEST)
+	See(SecondNearest([PC.0.0.PALADIN]))
+	!StateCheck(LastSeenBy(Myself),STATE_REALLY_DEAD)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	!CheckStatGT(LastSeenBy(Myself),0,SANCTUARY)
+	CheckStatGT(LastSeenBy(Myself),9,SAVEVSWANDS)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!HasItemEquipedReal("SW1H27",LastSeenBy(Myself))  // 亚班的敏捷之刃+2
+	!HasItemEquipedReal("NPSW01",LastSeenBy(Myself))  // 阿尔孚琳之剑+2
+	!HasItemEquiped("RING09",LastSeenBy(Myself))  // 艾德凡塔的礼物
+	!HasItemEquiped("NPPLAT",LastSeenBy(Myself))  // 费尔康全身板甲
+	!HasItemEquipedReal("SW2H06",LastSeenBy(Myself))  // 双手剑+2
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SPER07",LastSeenBy(Myself))  // 独角兽之矛+2
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		UseItem("WAND04",LastSeenBy(Myself))  // 麻痹法杖
+		DisplayStringHead(Myself,31971)  // 使用一柄法杖
+		SetInterrupt(TRUE)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	HasItem("WAND04",Myself)  // 麻痹法杖
+	!Difficulty(EASIEST)
+	See([PC.0.0.CLERIC])
+	!StateCheck(LastSeenBy(Myself),STATE_REALLY_DEAD)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	!CheckStatGT(LastSeenBy(Myself),0,SANCTUARY)
+	CheckStatGT(LastSeenBy(Myself),9,SAVEVSWANDS)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!HasItemEquipedReal("SW1H27",LastSeenBy(Myself))  // 亚班的敏捷之刃+2
+	!HasItemEquipedReal("NPSW01",LastSeenBy(Myself))  // 阿尔孚琳之剑+2
+	!HasItemEquiped("RING09",LastSeenBy(Myself))  // 艾德凡塔的礼物
+	!HasItemEquiped("NPPLAT",LastSeenBy(Myself))  // 费尔康全身板甲
+	!HasItemEquipedReal("SW2H06",LastSeenBy(Myself))  // 双手剑+2
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SPER07",LastSeenBy(Myself))  // 独角兽之矛+2
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		UseItem("WAND04",LastSeenBy(Myself))  // 麻痹法杖
+		DisplayStringHead(Myself,31971)  // 使用一柄法杖
+		SetInterrupt(TRUE)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	HasItem("WAND04",Myself)  // 麻痹法杖
+	!Difficulty(EASIEST)
+	See(SecondNearest([PC.0.0.CLERIC]))
+	!StateCheck(LastSeenBy(Myself),STATE_REALLY_DEAD)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	!CheckStatGT(LastSeenBy(Myself),0,SANCTUARY)
+	CheckStatGT(LastSeenBy(Myself),9,SAVEVSWANDS)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!HasItemEquipedReal("SW1H27",LastSeenBy(Myself))  // 亚班的敏捷之刃+2
+	!HasItemEquipedReal("NPSW01",LastSeenBy(Myself))  // 阿尔孚琳之剑+2
+	!HasItemEquiped("RING09",LastSeenBy(Myself))  // 艾德凡塔的礼物
+	!HasItemEquiped("NPPLAT",LastSeenBy(Myself))  // 费尔康全身板甲
+	!HasItemEquipedReal("SW2H06",LastSeenBy(Myself))  // 双手剑+2
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SPER07",LastSeenBy(Myself))  // 独角兽之矛+2
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		UseItem("WAND04",LastSeenBy(Myself))  // 麻痹法杖
+		DisplayStringHead(Myself,31971)  // 使用一柄法杖
+		SetInterrupt(TRUE)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	HasItem("WAND04",Myself)  // 麻痹法杖
+	!Difficulty(EASIEST)
+	See([PC.0.0.DRUID])
+	!StateCheck(LastSeenBy(Myself),STATE_REALLY_DEAD)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	!CheckStatGT(LastSeenBy(Myself),0,SANCTUARY)
+	CheckStatGT(LastSeenBy(Myself),9,SAVEVSWANDS)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!HasItemEquipedReal("SW1H27",LastSeenBy(Myself))  // 亚班的敏捷之刃+2
+	!HasItemEquipedReal("NPSW01",LastSeenBy(Myself))  // 阿尔孚琳之剑+2
+	!HasItemEquiped("RING09",LastSeenBy(Myself))  // 艾德凡塔的礼物
+	!HasItemEquiped("NPPLAT",LastSeenBy(Myself))  // 费尔康全身板甲
+	!HasItemEquipedReal("SW2H06",LastSeenBy(Myself))  // 双手剑+2
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SPER07",LastSeenBy(Myself))  // 独角兽之矛+2
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		UseItem("WAND04",LastSeenBy(Myself))  // 麻痹法杖
+		DisplayStringHead(Myself,31971)  // 使用一柄法杖
+		SetInterrupt(TRUE)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	HasItem("WAND04",Myself)  // 麻痹法杖
+	!Difficulty(EASIEST)
+	See(SecondNearest([PC.0.0.DRUID]))
+	!StateCheck(LastSeenBy(Myself),STATE_REALLY_DEAD)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	!CheckStatGT(LastSeenBy(Myself),0,SANCTUARY)
+	CheckStatGT(LastSeenBy(Myself),9,SAVEVSWANDS)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!HasItemEquipedReal("SW1H27",LastSeenBy(Myself))  // 亚班的敏捷之刃+2
+	!HasItemEquipedReal("NPSW01",LastSeenBy(Myself))  // 阿尔孚琳之剑+2
+	!HasItemEquiped("RING09",LastSeenBy(Myself))  // 艾德凡塔的礼物
+	!HasItemEquiped("NPPLAT",LastSeenBy(Myself))  // 费尔康全身板甲
+	!HasItemEquipedReal("SW2H06",LastSeenBy(Myself))  // 双手剑+2
+	!HasItemEquiped("SHLD25",LastSeenBy(Myself))  // 和谐之盾+2
+	!HasItemEquipedReal("SPER07",LastSeenBy(Myself))  // 独角兽之矛+2
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		UseItem("WAND04",LastSeenBy(Myself))  // 麻痹法杖
+		DisplayStringHead(Myself,31971)  // 使用一柄法杖
+		SetInterrupt(TRUE)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_SLOW)  // SPWI312.SPL (缓慢术)
+	See([GOODCUTOFF])
+	!Class(LastSeenBy(Myself),MONK)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	!StateCheck(LastSeenBy(Myself),STATE_SLOWED)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!HasItemEquipedReal("NPSW01",LastSeenBy(Myself))  // 阿尔孚琳之剑+2
+	!HasItemEquiped("RING09",LastSeenBy(Myself))  // 艾德凡塔的礼物
+	!HasItemEquiped("NPPLAT",LastSeenBy(Myself))  // 费尔康全身板甲
+	!HasItemEquipedReal("SW2H06",LastSeenBy(Myself))  // 双手剑+2
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+	CheckStatGT(LastSeenBy(Myself),-4,SAVEVSSPELL)
+	!CheckStat(LastSeenBy(Myself),8,WIZARD_SPELL_IMMUNITY)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_SLOW)  // SPWI312.SPL (缓慢术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_SLOW)  // SPWI312.SPL (缓慢术)
+	See(SecondNearest([GOODCUTOFF]))
+	!Class(LastSeenBy(Myself),MONK)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	!StateCheck(LastSeenBy(Myself),STATE_SLOWED)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!HasItemEquipedReal("NPSW01",LastSeenBy(Myself))  // 阿尔孚琳之剑+2
+	!HasItemEquiped("RING09",LastSeenBy(Myself))  // 艾德凡塔的礼物
+	!HasItemEquiped("NPPLAT",LastSeenBy(Myself))  // 费尔康全身板甲
+	!HasItemEquipedReal("SW2H06",LastSeenBy(Myself))  // 双手剑+2
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+	CheckStatGT(LastSeenBy(Myself),-4,SAVEVSSPELL)
+	!CheckStat(LastSeenBy(Myself),8,WIZARD_SPELL_IMMUNITY)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_SLOW)  // SPWI312.SPL (缓慢术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_SLOW)  // SPWI312.SPL (缓慢术)
+	See(ThirdNearest([GOODCUTOFF]))
+	!Class(LastSeenBy(Myself),MONK)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	!StateCheck(LastSeenBy(Myself),STATE_SLOWED)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!HasItemEquipedReal("NPSW01",LastSeenBy(Myself))  // 阿尔孚琳之剑+2
+	!HasItemEquiped("RING09",LastSeenBy(Myself))  // 艾德凡塔的礼物
+	!HasItemEquiped("NPPLAT",LastSeenBy(Myself))  // 费尔康全身板甲
+	!HasItemEquipedReal("SW2H06",LastSeenBy(Myself))  // 双手剑+2
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+	CheckStatGT(LastSeenBy(Myself),-4,SAVEVSSPELL)
+	!CheckStat(LastSeenBy(Myself),8,WIZARD_SPELL_IMMUNITY)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_SLOW)  // SPWI312.SPL (缓慢术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_SLOW)  // SPWI312.SPL (缓慢术)
+	See(FourthNearest([GOODCUTOFF]))
+	!Class(LastSeenBy(Myself),MONK)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	!StateCheck(LastSeenBy(Myself),STATE_SLOWED)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!HasItemEquipedReal("NPSW01",LastSeenBy(Myself))  // 阿尔孚琳之剑+2
+	!HasItemEquiped("RING09",LastSeenBy(Myself))  // 艾德凡塔的礼物
+	!HasItemEquiped("NPPLAT",LastSeenBy(Myself))  // 费尔康全身板甲
+	!HasItemEquipedReal("SW2H06",LastSeenBy(Myself))  // 双手剑+2
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+	CheckStatGT(LastSeenBy(Myself),-4,SAVEVSSPELL)
+	!CheckStat(LastSeenBy(Myself),8,WIZARD_SPELL_IMMUNITY)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_SLOW)  // SPWI312.SPL (缓慢术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_SLOW)  // SPWI312.SPL (缓慢术)
+	See(FifthNearest([GOODCUTOFF]))
+	!Class(LastSeenBy(Myself),MONK)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	!StateCheck(LastSeenBy(Myself),STATE_SLOWED)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!HasItemEquipedReal("NPSW01",LastSeenBy(Myself))  // 阿尔孚琳之剑+2
+	!HasItemEquiped("RING09",LastSeenBy(Myself))  // 艾德凡塔的礼物
+	!HasItemEquiped("NPPLAT",LastSeenBy(Myself))  // 费尔康全身板甲
+	!HasItemEquipedReal("SW2H06",LastSeenBy(Myself))  // 双手剑+2
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+	CheckStatGT(LastSeenBy(Myself),-4,SAVEVSSPELL)
+	!CheckStat(LastSeenBy(Myself),8,WIZARD_SPELL_IMMUNITY)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_SLOW)  // SPWI312.SPL (缓慢术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_SLOW)  // SPWI312.SPL (缓慢术)
+	See(SixthNearest([GOODCUTOFF]))
+	!Class(LastSeenBy(Myself),MONK)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	!StateCheck(LastSeenBy(Myself),STATE_SLOWED)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!HasItemEquipedReal("NPSW01",LastSeenBy(Myself))  // 阿尔孚琳之剑+2
+	!HasItemEquiped("RING09",LastSeenBy(Myself))  // 艾德凡塔的礼物
+	!HasItemEquiped("NPPLAT",LastSeenBy(Myself))  // 费尔康全身板甲
+	!HasItemEquipedReal("SW2H06",LastSeenBy(Myself))  // 双手剑+2
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_FREE_ACTION)
+	CheckStatGT(LastSeenBy(Myself),-4,SAVEVSSPELL)
+	!CheckStat(LastSeenBy(Myself),8,WIZARD_SPELL_IMMUNITY)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_SLOW)  // SPWI312.SPL (缓慢术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_FEEBLEMIND)  // SPWI509.SPL (弱智术)
+	See([PC])
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),-2,SAVEVSSPELL)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+	!CheckStat(LastSeenBy(Myself),4,WIZARD_SPELL_IMMUNITY)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_FEEBLEMIND)  // SPWI509.SPL (弱智术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_FEEBLEMIND)  // SPWI509.SPL (弱智术)
+	See(SecondNearest([PC]))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),-2,SAVEVSSPELL)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+	!CheckStat(LastSeenBy(Myself),4,WIZARD_SPELL_IMMUNITY)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_FEEBLEMIND)  // SPWI509.SPL (弱智术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	See(ThirdNearest([PC]))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),-2,SAVEVSSPELL)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+	!CheckStat(LastSeenBy(Myself),4,WIZARD_SPELL_IMMUNITY)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_FEEBLEMIND)  // SPWI509.SPL (弱智术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_FEEBLEMIND)  // SPWI509.SPL (弱智术)
+	See(FourthNearest([PC]))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),-2,SAVEVSSPELL)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+	!CheckStat(LastSeenBy(Myself),4,WIZARD_SPELL_IMMUNITY)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_FEEBLEMIND)  // SPWI509.SPL (弱智术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_FEEBLEMIND)  // SPWI509.SPL (弱智术)
+	See(FifthNearest([PC]))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),-2,SAVEVSSPELL)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+	!CheckStat(LastSeenBy(Myself),4,WIZARD_SPELL_IMMUNITY)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_FEEBLEMIND)  // SPWI509.SPL (弱智术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_FEEBLEMIND)  // SPWI509.SPL (弱智术)
+	See(SixthNearest([PC]))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),-2,SAVEVSSPELL)
+	!CheckStatGT(LastSeenBy(Myself),0,CLERIC_CHAOTIC_COMMANDS)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+	!CheckStat(LastSeenBy(Myself),4,WIZARD_SPELL_IMMUNITY)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_FEEBLEMIND)  // SPWI509.SPL (弱智术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_SPOOK)  // SPWI125.SPL (恐吓术)
+	See([GOODCUTOFF])
+	!General(LastSeenBy(Myself),UNDEAD)
+	!Race(LastSeenBy(Myself),DEMONIC)
+	!Kit(LastSeenBy(Myself),CAVALIER)
+	!Kit(LastSeenBy(Myself),Blackguard)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),RESIST_FEAR)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+	!HasItemEquiped("CLCK30",LastSeenBy(Myself))  // 勇气斗篷
+	!HasItemEquipedReal("SW1H32",LastSeenBy(Myself))  // 普立丹+3
+	!HasItemEquipedReal("MISCBC",LastSeenBy(Myself))  // 黑刃 +2
+	!HasItemEquipedReal("HAMM11",LastSeenBy(Myself))  // 符文之锤+5
+	!CheckStat(LastSeenBy(Myself),5,WIZARD_SPELL_IMMUNITY)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_SPOOK)  // SPWI125.SPL (恐吓术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_SPOOK)  // SPWI125.SPL (恐吓术)
+	See(SecondNearest([GOODCUTOFF]))
+	!General(LastSeenBy(Myself),UNDEAD)
+	!Race(LastSeenBy(Myself),DEMONIC)
+	!Kit(LastSeenBy(Myself),CAVALIER)
+	!Kit(LastSeenBy(Myself),Blackguard)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),RESIST_FEAR)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+	!HasItemEquiped("CLCK30",LastSeenBy(Myself))  // 勇气斗篷
+	!HasItemEquipedReal("SW1H32",LastSeenBy(Myself))  // 普立丹+3
+	!HasItemEquipedReal("MISCBC",LastSeenBy(Myself))  // 黑刃 +2
+	!HasItemEquipedReal("HAMM11",LastSeenBy(Myself))  // 符文之锤+5
+	!CheckStat(LastSeenBy(Myself),5,WIZARD_SPELL_IMMUNITY)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_SPOOK)  // SPWI125.SPL (恐吓术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_SPOOK)  // SPWI125.SPL (恐吓术)
+	See(ThirdNearest([GOODCUTOFF]))
+	!General(LastSeenBy(Myself),UNDEAD)
+	!Race(LastSeenBy(Myself),DEMONIC)
+	!Kit(LastSeenBy(Myself),CAVALIER)
+	!Kit(LastSeenBy(Myself),Blackguard)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),RESIST_FEAR)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+	!HasItemEquiped("CLCK30",LastSeenBy(Myself))  // 勇气斗篷
+	!HasItemEquipedReal("SW1H32",LastSeenBy(Myself))  // 普立丹+3
+	!HasItemEquipedReal("MISCBC",LastSeenBy(Myself))  // 黑刃 +2
+	!HasItemEquipedReal("HAMM11",LastSeenBy(Myself))  // 符文之锤+5
+	!CheckStat(LastSeenBy(Myself),5,WIZARD_SPELL_IMMUNITY)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_SPOOK)  // SPWI125.SPL (恐吓术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_SPOOK)  // SPWI125.SPL (恐吓术)
+	See(FourthNearest([GOODCUTOFF]))
+	!General(LastSeenBy(Myself),UNDEAD)
+	!Race(LastSeenBy(Myself),DEMONIC)
+	!Kit(LastSeenBy(Myself),CAVALIER)
+	!Kit(LastSeenBy(Myself),Blackguard)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),RESIST_FEAR)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+	!HasItemEquiped("CLCK30",LastSeenBy(Myself))  // 勇气斗篷
+	!HasItemEquipedReal("SW1H32",LastSeenBy(Myself))  // 普立丹+3
+	!HasItemEquipedReal("MISCBC",LastSeenBy(Myself))  // 黑刃 +2
+	!HasItemEquipedReal("HAMM11",LastSeenBy(Myself))  // 符文之锤+5
+	!CheckStat(LastSeenBy(Myself),5,WIZARD_SPELL_IMMUNITY)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_SPOOK)  // SPWI125.SPL (恐吓术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_SPOOK)  // SPWI125.SPL (恐吓术)
+	See(FifthNearest([GOODCUTOFF]))
+	!General(LastSeenBy(Myself),UNDEAD)
+	!Race(LastSeenBy(Myself),DEMONIC)
+	!Kit(LastSeenBy(Myself),CAVALIER)
+	!Kit(LastSeenBy(Myself),Blackguard)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),RESIST_FEAR)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+	!HasItemEquiped("CLCK30",LastSeenBy(Myself))  // 勇气斗篷
+	!HasItemEquipedReal("SW1H32",LastSeenBy(Myself))  // 普立丹+3
+	!HasItemEquipedReal("MISCBC",LastSeenBy(Myself))  // 黑刃 +2
+	!HasItemEquipedReal("HAMM11",LastSeenBy(Myself))  // 符文之锤+5
+	!CheckStat(LastSeenBy(Myself),5,WIZARD_SPELL_IMMUNITY)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_SPOOK)  // SPWI125.SPL (恐吓术)
+END
+
+IF
+	OR(2)
+		!GlobalTimerNotExpired("OH_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	HaveSpell(WIZARD_SPOOK)  // SPWI125.SPL (恐吓术)
+	See(SixthNearest([GOODCUTOFF]))
+	!General(LastSeenBy(Myself),UNDEAD)
+	!Race(LastSeenBy(Myself),DEMONIC)
+	!Kit(LastSeenBy(Myself),CAVALIER)
+	!Kit(LastSeenBy(Myself),Blackguard)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+	!StateCheck(Myself,STATE_SILENCED)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),RESIST_FEAR)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+	!CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+	!CheckStat(LastSeenBy(Myself),1,CLERIC_SHIELD_OF_THE_ARCHONS)
+	!HasItemEquiped("CLCK30",LastSeenBy(Myself))  // 勇气斗篷
+	!HasItemEquipedReal("SW1H32",LastSeenBy(Myself))  // 普立丹+3
+	!HasItemEquipedReal("MISCBC",LastSeenBy(Myself))  // 黑刃 +2
+	!HasItemEquipedReal("HAMM11",LastSeenBy(Myself))  // 符文之锤+5
+	!CheckStat(LastSeenBy(Myself),5,WIZARD_SPELL_IMMUNITY)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(LastSeenBy(Myself),WIZARD_SPOOK)  // SPWI125.SPL (恐吓术)
+END
+
+IF
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!See([GOODCUTOFF])
+	Detect([GOODCUTOFF])
+	CheckStatLT(LastSeenBy(Myself),60,STEALTH)
+	!StateCheck(LastSeenBy(Myself),STATE_NONDETECTION)
+	!StateCheck(LastSeenBy(Myself),STATE_SILENCED)
+	HaveSpell(WIZARD_DETECT_INVISIBILITY)  // SPWI203.SPL (侦测隐形)
+	CheckStat(Myself,0,TRUE_SIGHT)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!StateCheck(Myself,STATE_SILENCED)
+	!CheckStatGT(Myself,0,CLERIC_INSECT_PLAGUE)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		Spell(Myself,WIZARD_DETECT_INVISIBILITY)  // SPWI203.SPL (侦测隐形)
+END
+
+IF
+	Global("OH_Heal","LOCALS",0)
+	HaveSpell(BLADE_OFFENSIVE_SPIN)  // SPCL521.SPL (回旋攻击)
+	!CheckSpellState(Myself,OFFENSIVE_SPIN)
+	!CheckSpellState(Myself,DEFENSIVE_SPIN)
+	CheckStat(Myself,0,IMPROVEDHASTE)
+	!CheckStat(Myself,2,OFFENSIVE_MODIFIER)
+	Range(NearestEnemyOf(Myself),6)
+	!GlobalTimerNotExpired("OH_Cast","LOCALS")
+	!GlobalTimerNotExpired("OH_OSpin","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OH_Cast","LOCALS",ONE_ROUND)
+		SetGlobalTimer("OH_OSpin","LOCALS",FOUR_ROUNDS)
+		Spell(Myself,BLADE_OFFENSIVE_SPIN)  // SPCL521.SPL (回旋攻击)
+END
+
+IF
+	GlobalTimerNotExpired("AttackDuringSong","LOCALS")
+	See(NearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	GlobalTimerNotExpired("AttackDuringSong","LOCALS")
+	See(SecondNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	GlobalTimerNotExpired("AttackDuringSong","LOCALS")
+	See(ThirdNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	GlobalTimerNotExpired("AttackDuringSong","LOCALS")
+	See(FourthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	GlobalTimerNotExpired("AttackDuringSong","LOCALS")
+	See(FifthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	GlobalTimerNotExpired("AttackDuringSong","LOCALS")
+	See(SixthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+

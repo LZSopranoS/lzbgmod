@@ -1,0 +1,432 @@
+IF
+	!GlobalTimerNotExpired("OHABFORRest","LOCALS")
+	Allegiance(Myself,ENEMY)
+	See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OHABFORRest","LOCALS",FOUR_HOURS)
+		SetGlobal("OHABFORLunar","LOCALS",0)
+		SetGlobal("OHABFORJFJ","LOCALS",0)
+		SetGlobal("OHABFORJGT","LOCALS",0)
+		SetGlobal("OHABFORHD","LOCALS",0)
+		SetGlobal("SecondWind","LOCALS",0)
+		ApplySpell(Myself,RESTORE_FULL_HEALTH)  // SPIN746.SPL (No such index)
+		Rest()
+END
+
+IF
+	OR(5)
+		See([NEUTRAL])
+		See([ALLY])
+		See([FAMILIAR])
+		See([CONTROLLED])
+		See([CHARMED])
+	InWeaponRange(LastSeenBy(Myself))
+	TookDamage()
+	!InWeaponRange(LastHitter(Myself))
+	WeaponEffectiveVs(LastHitter(Myself),MAINHAND)
+	WeaponCanDamage(LastHitter(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		ReallyForceSpell(LastHitter(Myself),WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		AttackOneRound(LastHitter(Myself))
+END
+
+IF
+	OR(2)
+		!Detect([PC])
+		!Detect([GOODCUTOFF])
+	ActionListEmpty()
+	InMyArea(Player1)
+	Allegiance(Myself,ENEMY)
+	!StateCheck(Myself,STATE_BLIND)
+	!StateCheck(Myself,STATE_HELPLESS)
+	!StateCheck(Myself,STATE_CONFUSED)
+	!StateCheck(Myself,STATE_STUNNED)
+	!StateCheck(Myself,STATE_PANIC)
+	!StateCheck(Myself,STATE_CHARMED)
+	CheckStatLT(Player1,1,SANCTUARY)
+	!StateCheck(Player1,STATE_REALLY_DEAD)
+	!StateCheck(Player1,STATE_NOT_APPROACHABLE)
+	!GlobalTimerNotExpired("MO_TeleToPlayer","LOCALS")
+THEN
+	RESPONSE #100
+		MoveToObject(Player1)
+	RESPONSE #100
+		SetGlobalTimer("MO_TeleToPlayer","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player1,WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		Continue()
+END
+
+IF
+	OR(2)
+		!Detect([PC])
+		!Detect([GOODCUTOFF])
+	ActionListEmpty()
+	Allegiance(Myself,ENEMY)
+	!StateCheck(Myself,STATE_BLIND)
+	!StateCheck(Myself,STATE_HELPLESS)
+	!StateCheck(Myself,STATE_CONFUSED)
+	!StateCheck(Myself,STATE_STUNNED)
+	!StateCheck(Myself,STATE_PANIC)
+	!StateCheck(Myself,STATE_CHARMED)
+	OR(3)
+		CheckStatGT(Player1,0,SANCTUARY)
+		StateCheck(Player1,STATE_REALLY_DEAD)
+		StateCheck(Player1,STATE_NOT_APPROACHABLE)
+	!GlobalTimerNotExpired("MO_TeleToPlayer","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("MO_TeleToPlayer","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player2,WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		Continue()
+	RESPONSE #100
+		SetGlobalTimer("MO_TeleToPlayer","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player3,WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		Continue()
+	RESPONSE #100
+		SetGlobalTimer("MO_TeleToPlayer","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player4,WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		Continue()
+	RESPONSE #100
+		SetGlobalTimer("MO_TeleToPlayer","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player5,WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		Continue()
+	RESPONSE #100
+		SetGlobalTimer("MO_TeleToPlayer","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player6,WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		Continue()
+END
+
+IF
+	Global("OHABFORLunar","LOCALS",0)
+	!GlobalTimerNotExpired("MonkTimer","LOCALS")
+	OR(5)
+		See(NearestEnemyOfType([0.0.0.DRUID_ALL]))
+		See(NearestEnemyOfType([0.0.0.CLERIC_ALL]))
+		See(NearestEnemyOfType([0.0.0.BARD_ALL]))
+		See(NearestEnemyOfType([0.0.0.MAGE_ALL]))
+		See(NearestEnemyOfType)
+THEN
+	RESPONSE #100
+		SetGlobal("OHABFORLunar","LOCALS",1)
+		SetGlobalTimer("MonkTimer","LOCALS",ONE_ROUND)
+		ReallyForceSpellRES("balth06",LastSeenBy(Myself))  // 魔法飞弹
+END
+
+IF
+	Global("OHABFORLunar","LOCALS",0)
+	!GlobalTimerNotExpired("MonkTimer","LOCALS")
+	!See(NearestEnemyOfType([0.0.0.DRUID_ALL]))
+	!See(NearestEnemyOfType([0.0.0.CLERIC_ALL]))
+	!See(NearestEnemyOfType([0.0.0.BARD_ALL]))
+	!See(NearestEnemyOfType([0.0.0.MAGE_ALL]))
+	!See(NearestEnemyOfType)
+	See(SixthNearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("OHABFORLunar","LOCALS",1)
+		SetGlobalTimer("MonkTimer","LOCALS",ONE_ROUND)
+		ReallyForceSpellRES("balth06",LastSeenBy(Myself))  // 魔法飞弹
+END
+
+IF
+	Global("OHABFORLunar","LOCALS",1)
+	!GlobalTimerNotExpired("MonkTimer","LOCALS")
+	OR(4)
+		See(NearestEnemyOfType([0.0.0.RANGER_ALL]))
+		See(NearestEnemyOfType([0.0.0.PALADIN_ALL]))
+		See(NearestEnemyOfType)
+		See(NearestEnemyOfType([0.0.0.FIGHTER_ALL]))
+THEN
+	RESPONSE #100
+		SetGlobal("OHABFORLunar","LOCALS",2)
+		SetGlobalTimer("MonkTimer","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_BIGBYS_CLENCHED_FIST)  // SPWI818.SPL (比格拜巨力拳)
+		ReallyForceSpellRES("balth07",LastSeenBy(Myself))  // 毒咒
+END
+
+IF
+	Global("OHABFORLunar","LOCALS",1)
+	!GlobalTimerNotExpired("MonkTimer","LOCALS")
+	!See(NearestEnemyOfType([0.0.0.RANGER_ALL]))
+	!See(NearestEnemyOfType([0.0.0.PALADIN_ALL]))
+	!See(NearestEnemyOfType)
+	!See(NearestEnemyOfType([0.0.0.FIGHTER_ALL]))
+	See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("OHABFORLunar","LOCALS",2)
+		SetGlobalTimer("MonkTimer","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_BIGBYS_CLENCHED_FIST)  // SPWI818.SPL (比格拜巨力拳)
+		ReallyForceSpellRES("balth07",LastSeenBy(Myself))  // 毒咒
+END
+
+IF
+	!GlobalTimerNotExpired("MonkTimer","LOCALS")
+	Global("OHABFORLunar","LOCALS",2)
+	GlobalLT("OHABFORJFJ","LOCALS",3)
+	Range(LastSeenBy(Myself),5)
+	!StateCheck(Myself,STATE_HASTED)
+	RandomNum(2,1)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("MonkTimer","LOCALS",ONE_ROUND)
+		IncrementGlobal("OHABFORJFJ","LOCALS",1)
+		ForceSpellRES("SPINI88",Myself)  // 疾风击
+		Continue()
+END
+
+IF
+	!GlobalTimerNotExpired("MonkTimer","LOCALS")
+	Global("OHABFORLunar","LOCALS",2)
+	GlobalLT("OHABFORJGT","LOCALS",3)
+	CheckStatLT(Myself,20,RESISTSLASHING)
+	CheckStatLT(Myself,20,RESISTCRUSHING)
+	CheckStatLT(Myself,20,RESISTPIERCING)
+	AttackedBy([GOODCUTOFF],DEFAULT)
+	TookDamage()
+THEN
+	RESPONSE #100
+		SetGlobalTimer("MonkTimer","LOCALS",ONE_ROUND)
+		IncrementGlobal("OHABFORJGT","LOCALS",1)
+		ForceSpellRES("SPINI87",Myself)  // 金刚体
+		Continue()
+END
+
+IF
+	GlobalLT("OHABFORHD","LOCALS",5)
+	!GlobalTimerNotExpired("MonkTimer","LOCALS")
+	CheckStatLT(Myself,40,RESISTSLASHING)
+	CheckStatLT(Myself,40,RESISTCRUSHING)
+	CheckStatLT(Myself,40,RESISTPIERCING)
+	AttackedBy([GOODCUTOFF],DEFAULT)
+	TookDamage()
+THEN
+	RESPONSE #100
+		IncrementGlobal("OHABFORHD","LOCALS",1)
+		SetGlobalTimer("MonkTimer","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Myself,WARRIOR_HARDINESS)  // SPCL907.SPL (强韧)
+END
+
+IF
+	HPPercentLT(Myself,30)
+	Global("SecondWind","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobal("SecondWind","LOCALS",1)
+		DisplayStringHead(Myself,73944)  // 调息！
+		ApplySpell(Myself,CLERIC_HEAL)  // SPPR607.SPL (痊愈术)
+		SetInterrupt(TRUE)
+END
+
+IF
+	HPPercentLT(Myself,80)
+	!GlobalTimerNotExpired("DrankPotionTimer","LOCALS")
+	HasItem("POTN55",Myself)  // 超级强效医疗药水
+THEN
+	RESPONSE #100
+		SetGlobalTimer("DrankPotionTimer","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,46150)  // 喝下药水
+		UseItem("POTN55",Myself)  // 超级强效医疗药水
+END
+
+IF
+	HitBy([ANYONE],CRUSHING)
+	Global("GiantStrengthPotion","LOCALS",0)
+	!GlobalTimerNotExpired("DrankPotionTimer","LOCALS")
+	HasItem("POTN07",Myself)  // 风暴巨人怪力药水
+THEN
+	RESPONSE #100
+		SetGlobalTimer("DrankPotionTimer","LOCALS",ONE_ROUND)
+		SetGlobal("GiantStrengthPotion","LOCALS",1)
+		DisplayStringHead(Myself,46150)  // 喝下药水
+		UseItem("POTN07",Myself)  // 风暴巨人怪力药水
+END
+
+IF
+	HPPercentLT(Myself,60)
+	!Range(NearestEnemyOf(Myself),5)
+	HaveSpell(MONK_LAY_ON_HANDS)  // SPCL815.SPL (圣疗术)
+	!GlobalTimerNotExpired("LayOnHands","LOCALS")
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobalTimer("LayOnHands","LOCALS",ONE_ROUND)
+		Spell(Myself,MONK_LAY_ON_HANDS)  // SPCL815.SPL (圣疗术)
+		SetInterrupt(TRUE)
+END
+
+IF
+	RandomNum(2,1)
+	!GlobalTimerNotExpired("ChangeStance","LOCALS")
+	Range(LastSeenBy(Myself),20)
+	Global("OHABFORLunar","LOCALS",2)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("ChangeStance","LOCALS",8)
+		Shout(SOLAR_STANCE)
+		DisplayStringHead(Myself,72906)  // 炎阳势！
+		ReallyForceSpellRES("balth01",Myself)  // 炎阳势！
+	RESPONSE #100
+		SetGlobalTimer("ChangeStance","LOCALS",8)
+		DisplayStringHead(Myself,72908)  // 月阴势！
+		ReallyForceSpellRES("balth02",Myself)  // 月阴势！
+END
+
+IF
+	RandomNum(3,1)
+	HPPercentLT(Myself,75)
+	Range(LastSeenBy(Myself),10)
+	Global("OHABFORLunar","LOCALS",2)
+	!StateCheck(Myself,STATE_INVISIBLE)
+	!StateCheck(Myself,STATE_NORMAL)
+	!GlobalTimerNotExpired("ShadowStance","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("ShadowStance","LOCALS",FIVE_ROUNDS)
+		DisplayStringHead(Myself,73943)  // 影之姿！
+		ReallyForceSpellRES("balth10",Myself)  // 影之姿！
+END
+
+IF
+	!GlobalTimerNotExpired("MonkTimer","LOCALS")
+	Range(LastSeenBy(Myself),4)
+	RandomNum(3,1)
+	Global("OHABFORLunar","LOCALS",2)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("MonkTimer","LOCALS",3)
+		DisplayStringHead(Myself,73942)  // 无影脚！
+		FaceObject(LastSeenBy(Myself))
+		SwingOnce()
+		PlaySound("BALTHA02")
+		ReallyForceSpellRES("balth09",LastSeenBy(Myself))  // 无影脚！
+END
+
+IF
+	!GlobalTimerNotExpired("MonkTimer","LOCALS")
+	Range(LastSeenBy(Myself),10)
+	RandomNum(2,1)
+	Global("OHABFORLunar","LOCALS",2)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("MonkTimer","LOCALS",TWO_ROUNDS)
+		DisplayStringHead(Myself,72915)  // 升龙拳
+		ForceSpellRES("balth03",Myself)  // 升龙拳
+		Continue()
+END
+
+IF
+	!GlobalTimerNotExpired("MonkTimer","LOCALS")
+	Range(LastSeenBy(Myself),10)
+	RandomNum(2,2)
+	Global("OHABFORLunar","LOCALS",2)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("MonkTimer","LOCALS",TWO_ROUNDS)
+		DisplayStringHead(Myself,72916)  // 猛虎出柙
+		ForceSpellRES("balth04",Myself)  // 猛虎出柙
+		Continue()
+END
+
+IF
+	!GlobalTimerNotExpired("MonkTimer","LOCALS")
+	Range(LastSeenBy(Myself),5)
+	RandomNum(2,1)
+	Global("OHABFORLunar","LOCALS",2)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("MonkTimer","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,71989)  // 谋杀之手
+		ForceSpellRES("balth05",Myself)  // 谋杀之手
+		Continue()
+END
+
+IF
+	!GlobalTimerNotExpired("MonkTimer","LOCALS")
+	HaveSpell(MONK_QUIVERING_PALM)  // SPCL820.SPL (穿震掌)
+	RandomNum(2,2)
+	Global("OHABFORLunar","LOCALS",2)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("MonkTimer","LOCALS",ONE_MINUTE)
+		DisplayStringHead(Myself,72936)  // 喝呀哈！
+		ForceSpell(Myself,MONK_QUIVERING_PALM)  // SPCL820.SPL (穿震掌)
+		Continue()
+END
+
+IF
+	!GlobalTimerNotExpired("MonkTimer","LOCALS")
+	HaveSpell(MONK_STUNNING_BLOW)  // SPCL811.SPL (震眩拳)
+	RandomNum(2,1)
+	Global("OHABFORLunar","LOCALS",2)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("MonkTimer","LOCALS",9)
+		DisplayStringHead(Myself,72937)  // 嘿呀！
+		ForceSpell(Myself,MONK_STUNNING_BLOW)  // SPCL811.SPL (震眩拳)
+		Continue()
+END
+
+IF
+	HPPercentLT(Myself,30)
+	ActionListEmpty()
+	OR(2)
+		HasItem("POTN55",Myself)  // 超级强效医疗药水
+		HaveSpell(MONK_LAY_ON_HANDS)  // SPCL815.SPL (圣疗术)
+	Global("OHABFORLunar","LOCALS",2)
+THEN
+	RESPONSE #100
+		RunAwayFrom(NearestEnemyOf(Myself),45)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	See(SecondNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	See(ThirdNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	See(FourthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	See(FifthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	See(SixthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+

@@ -1,0 +1,55 @@
+IF
+	HPLT(Myself,50)
+	GlobalLT("GasForm","XAG101",3)
+	!GlobalTimerNotExpired("GasFormTimer","XAG101")
+	!StateCheck(Myself,STATE_DEAD)
+THEN
+	RESPONSE #100
+		IncrementGlobal("GasForm","XAG101",1)
+		SetGlobalTimer("GasFormTimer","XAG101",TWENTY_MINUTES)
+		ReallyForceSpellRES("AC#WAL1",Myself)  // No such index
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	!GlobalTimerNotExpired("StinkingCloud","XAG101")
+	!GlobalTimerNotExpired("SpellCastTimer","LOCALS")
+THEN
+	RESPONSE #50
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_STINKING_CLOUD)  // SPWI213.SPL (臭云术)
+		SetGlobalTimer("StinkingCloud","XAG101",ONE_TURN)
+		SetGlobalTimer("SpellCastTimer","LOCALS",ONE_ROUND)
+		Continue()
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	GlobalLT("ConeOfCold","XAG101",3)
+	!GlobalTimerNotExpired("SpellCastTimer","LOCALS")
+THEN
+	RESPONSE #50
+		IncrementGlobal("ConeOfCold","XAG101",1)
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_CONE_OF_COLD)  // SPWI503.SPL (冰锥术)
+		SetGlobalTimer("SpellCastTimer","LOCALS",ONE_ROUND)
+		Continue()
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	!GlobalTimerNotExpired("HoldPerson","XAG101")
+	!GlobalTimerNotExpired("SpellCastTimer","LOCALS")
+THEN
+	RESPONSE #50
+		SpellNoDec(LastSeenBy(Myself),WIZARD_HOLD_PERSON)  // SPWI306.SPL (人类定身术)
+		SetGlobalTimer("HoldPerson","XAG101",TWO_ROUNDS)
+		SetGlobalTimer("SpellCastTimer","LOCALS",ONE_ROUND)
+		Continue()
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		AttackReevaluate(NearestEnemyOf(Myself),6)
+END
+

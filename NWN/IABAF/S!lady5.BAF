@@ -1,0 +1,141 @@
+IF
+	See(NearestEnemyOf(Myself))
+	Global("prep","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("prep","LOCALS",1)
+		SetGlobalTimer("pfmw","LOCALS",FIVE_MINUTES)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Myself,PROTECTION_MAGIC_WEAPON_NOEFF)  // SPIN686.SPL (防护魔法武器)
+		ReallyForceSpell(Myself,DRAGON_STONE_SKIN)  // SPIN694.SPL (石肤术)
+		ReallyForceSpellRES("SPWII02",Myself)
+		ReallyForceSpellRES("SPWII03",Myself)
+		ReallyForceSpellRES("jwglobe",Myself)  // 法术无效结界
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	Global("partyfled","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("partyfled","LOCALS",0)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	CheckStatLT(Myself,1,STONESKINS)
+	Global("onecontin","LOCALS",0)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobal("onecontin","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		DisplayString(Myself,29736)  // 意外术－石肤术
+		ReallyForceSpell(Myself,DRAGON_STONE_SKIN)  // SPIN694.SPL (石肤术)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	!HasBounceEffects(Myself)
+	GlobalLT("Iaturning","LOCALS",2)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+THEN
+	RESPONSE #100
+		IncrementGlobal("Iaturning","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWII24",Myself)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	See(NearestEnemyOf(Myself))
+	OR(3)
+		Range(LastSeenBy(Myself),4)
+		AttackedBy(LastSeenBy(Myself),MELEE)
+		AttackedBy(LastSeenBy(Myself),RANGED)
+	OR(3)
+		!GlobalTimerNotExpired("pfmw","LOCALS")
+		!CheckSpellState(Myself,PROTECTION_FROM_MAGICAL_WEAPONS)
+		!CheckStatGT(Myself,0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	GlobalLT("Iaprotect","LOCALS",3)
+THEN
+	RESPONSE #100
+		IncrementGlobal("Iaprotect","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		SetGlobalTimer("pfmw","LOCALS",FOUR_ROUNDS)
+		ForceSpell(Myself,PROTECTION_MAGIC_WEAPON_NOEFF)  // SPIN686.SPL (防护魔法武器)
+END
+
+IF
+	!Detect([PC])
+	!Detect([GOODCUTOFF])
+	Global("partyfled","LOCALS",0)
+	Allegiance(Myself,ENEMY)
+	Global("prep","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("chase","LOCALS",EIGHTEEN_MINUTES)
+		SetGlobal("partyfled","LOCALS",1)
+END
+
+IF
+	!Detect([PC])
+	!Detect([GOODCUTOFF])
+	Global("partyfled","LOCALS",1)
+	GlobalTimerNotExpired("chase","LOCALS")
+	InMyArea(Player1)
+	Allegiance(Myself,ENEMY)
+	Global("prep","LOCALS",1)
+THEN
+	RESPONSE #100
+		MoveToObject(Player1)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!Detect([PC])
+	!Detect([GOODCUTOFF])
+	GlobalTimerExpired("chase","LOCALS")
+	Global("partyfled","LOCALS",1)
+	Global("prep","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("prep","LOCALS",0)
+		SetGlobal("Iaprotect","LOCALS",0)
+		SetGlobal("Iaturning","LOCALS",0)
+		SetGlobal("onecontin","LOCALS",0)
+		ReallyForceSpellRES("SPWII07",Myself)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(NearestEnemyOf(Myself))
+END
+
+IF
+	See(SecondNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	See(ThirdNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		AttackOneRound(NearestEnemyOf(Myself))
+END
+

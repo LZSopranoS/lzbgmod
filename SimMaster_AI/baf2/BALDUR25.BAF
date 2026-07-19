@@ -1,0 +1,18 @@
+IF
+	Global("LZIMAGAI","GLOBAL",0)
+	OR(6)
+		XPGT(Player1,3000000)
+		XPGT(Player2,3000000)
+		XPGT(Player3,3000000)
+		XPGT(Player4,3000000)
+		XPGT(Player5,3000000)
+		XPGT(Player6,3000000)
+	PartyRested()
+	AreaType(OUTDOOR)
+THEN
+	RESPONSE #100
+		SetGlobal("LZIMAGAI","GLOBAL",4)
+		CreateCreatureObject("LZSIMMAS",Player1,0,0,0)  // 拟像大师
+		Continue()
+END
+

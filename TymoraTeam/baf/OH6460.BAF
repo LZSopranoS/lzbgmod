@@ -1,0 +1,62 @@
+IF
+	Global("LZCreateRing","OH6460",0)
+	OR(6)
+		InMyArea(Player1)
+		InMyArea(Player2)
+		InMyArea(Player3)
+		InMyArea(Player4)
+		InMyArea(Player5)
+		InMyArea(Player6)
+	!Dead("OHBOSSA")  // 太摩拉双子·金童
+	!Dead("OHBOSSB")  // 太摩拉双子·玉女
+	!Dead("OHABONE")  // 神之从刃·战盗
+	!Dead("OHABTWO")  // 神之从刃·游牧
+	!Dead("OHABTHR")  // 神之从刃·舞剑
+	!Dead("OHABFOR")  // 神之从刃·武僧
+	!PartyHasItem("Z0RING81")  // 太摩拉之环
+	InMyArea("OHNMOLZA")  // 太摩拉的莫占
+THEN
+	RESPONSE #100
+		SetGlobal("LZCreateRing","OH6460",1)
+		GiveItemCreate("Z0RING81","OHNMOLZA",1,0,0)
+		Continue()
+END
+
+IF
+	OR(6)
+		InMyArea(Player1)
+		InMyArea(Player2)
+		InMyArea(Player3)
+		InMyArea(Player4)
+		InMyArea(Player5)
+		InMyArea(Player6)
+	!Dead("OHBOSSA")  // 太摩拉双子·金童
+	!Dead("OHBOSSB")  // 太摩拉双子·玉女
+	!Dead("OHABONE")  // 神之从刃·战盗
+	!Dead("OHABTWO")  // 神之从刃·游牧
+	!Dead("OHABTHR")  // 神之从刃·舞剑
+	!Dead("OHABFOR")  // 神之从刃·武僧
+	PartyHasItem("Z0RING81")  // 太摩拉之环
+	InMyArea("OHNMOLZA")  // 太摩拉的莫占
+THEN
+	RESPONSE #100
+		ActionOverride("OHNMOLZA",MoveViewObject(Player1,INSTANT))
+		ActionOverride("OHNMOLZA",FaceObject(Player1))
+		ActionOverride("OHNMOLZA",DisplayStringHead(Myself,@208))  // 太摩拉之环不是谁都可以拥有的
+		ActionOverride("OHNMOLZA",ForceSpellRES("AC#DTTP",Myself))  // 定点传送术
+		Wait(3)
+		CreateVisualEffectObject("SPDIMNDR",Player1)
+		CreateVisualEffectObject("SPDIMNDR",Player2)
+		CreateVisualEffectObject("SPDIMNDR",Player3)
+		CreateVisualEffectObject("SPDIMNDR",Player4)
+		CreateVisualEffectObject("SPDIMNDR",Player5)
+		CreateVisualEffectObject("SPDIMNDR",Player6)
+		Wait(3)
+		ActionOverride(Player1,LeaveAreaLUA("OHSSAB","",[1260.700],NE))
+		ActionOverride(Player2,LeaveAreaLUA("OHSSAB","",[1340.700],NE))
+		ActionOverride(Player3,LeaveAreaLUA("OHSSAB","",[1260.750],NE))
+		ActionOverride(Player4,LeaveAreaLUA("OHSSAB","",[1340.750],NE))
+		ActionOverride(Player5,LeaveAreaLUA("OHSSAB","",[1260.800],NE))
+		ActionOverride(Player6,LeaveAreaLUA("OHSSAB","",[1340.800],NE))
+END
+

@@ -1,0 +1,253 @@
+IF
+	See(NearestEnemyOf(Myself))
+	Global("RemoveMagic","LOCALS",0)
+THEN
+	RESPONSE #100
+		ForceSpell(Myself,DRAGON_STONE_SKIN)  // SPIN694.SPL (石肤术)
+		ForceSpell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+		SetGlobal("StoneSkin","LOCALS",1)
+		SetGlobal("RemoveMagic","LOCALS",1)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	See([PC])
+	Range(LastSeenBy(Myself),11)
+	Global("Nwbcreature","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Nwbcreature","LOCALS",1)
+		SetInterrupt(FALSE)
+		ForceSpell(LastSeenBy(Myself),DRAGON_WING_BUFFET)  // SPIN695.SPL (龙翼拍击)
+		Wait(1)
+		CreateCreatureObject("S!salasu",Myself,0,0,0)
+		CreateCreatureObject("S!salasu",Myself,0,0,0)
+		SetInterrupt(TRUE)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	See([PC])
+	Range(LastSeenBy(Myself),11)
+	HPPercentLT(Myself,40)
+	Global("Nwbcreature","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("Nwbcreature","LOCALS",2)
+		SetInterrupt(FALSE)
+		ForceSpell(Myself,PROTECTION_MAGIC_WEAPON_NOEFF)  // SPIN686.SPL (防护魔法武器)
+		ForceSpell(Myself,DRAGON_STONE_SKIN)  // SPIN694.SPL (石肤术)
+		ForceSpell(LastSeenBy(Myself),DRAGON_WING_BUFFET)  // SPIN695.SPL (龙翼拍击)
+		Wait(1)
+		CreateCreatureObject("S!salasu",Myself,0,0,0)
+		CreateCreatureObject("S!salasu",Myself,0,0,0)
+		ForceSpellRES("SPPRI10",Myself)
+		SetInterrupt(TRUE)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	See([PC])
+	Range(LastSeenBy(Myself),11)
+	HPPercentLT(Myself,40)
+	Global("Nwbcreature","LOCALS",2)
+THEN
+	RESPONSE #100
+		SetGlobal("Nwbcreature","LOCALS",3)
+		SetInterrupt(FALSE)
+		ForceSpell(Myself,PROTECTION_MAGIC_WEAPON_NOEFF)  // SPIN686.SPL (防护魔法武器)
+		ForceSpell(Myself,DRAGON_STONE_SKIN)  // SPIN694.SPL (石肤术)
+		ForceSpell(LastSeenBy(Myself),DRAGON_WING_BUFFET)  // SPIN695.SPL (龙翼拍击)
+		Wait(1)
+		CreateCreatureObject("S!salasu",Myself,0,0,0)
+		CreateCreatureObject("S!salasu",Myself,0,0,0)
+		ForceSpellRES("SPPRI10",Myself)
+		SetInterrupt(TRUE)
+END
+
+IF
+	!Detect([PC])
+	HPLT(Myself,80)
+	CombatCounter(0)
+THEN
+	RESPONSE #100
+		SetGlobal("RemoveMagic","LOCALS",0)
+		SetGlobal("WingBuffet","LOCALS",0)
+		SetGlobal("Haste","LOCALS",0)
+		SetGlobal("DRAGONFEAR","LOCALS",0)
+		ForceSpell(Myself,CLERIC_HEAL)  // SPPR607.SPL (痊愈术)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	Global("DRAGONFEAR","LOCALS",0)
+THEN
+	RESPONSE #100
+		ReallyForceSpell(NearestEnemyOf(Myself),DRAGON_FEAR)  // SPIN895.SPL (龙威)
+		ReallyForceSpell(NearestEnemyOf(Myself),DRAGON_LOWER_ELECTRICAL)  // SPIN532.SPL (降低电抗性)
+		SetGlobal("DRAGONFEAR","LOCALS",1)
+		SetGlobalTimer("BLUEDRAGONBREATH","LOCALS",1)
+		ForceSpell(LastSeenBy(Myself),DRAGON_WING_BUFFET)  // SPIN695.SPL (龙翼拍击)
+END
+
+IF
+	GlobalTimerExpired("BLUEDRAGONBREATH","LOCALS")
+	See(NearestEnemyOf(Myself))
+	Range(LastSeenBy(Myself),11)
+	Global("WingBuffet","LOCALS",0)
+THEN
+	RESPONSE #100
+		ForceSpell(LastSeenBy(Myself),DRAGON_WING_BUFFET)  // SPIN695.SPL (龙翼拍击)
+		Wait(1)
+		SetGlobal("WingBuffet","LOCALS",1)
+	RESPONSE #60
+		Continue()
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	!Range(LastSeenBy(Myself),10)
+	GlobalTimerExpired("BLUEDRAGONBREATH","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobal("WingBuffet","LOCALS",0)
+		ForceSpell(LastSeenBy(Myself),BLUE_DRAGON_BREATH)  // SPIN597.SPL (蓝龙闪电吐息)
+		SetGlobalTimer("BLUEDRAGONBREATH","LOCALS",THREE_ROUNDS)
+END
+
+IF
+	Global("WingBuffet","LOCALS",1)
+	See(NearestEnemyOf(Myself))
+	Range(LastSeenBy(Myself),11)
+THEN
+	RESPONSE #100
+		SetGlobal("WingBuffet","LOCALS",0)
+		SetGlobalTimer("BLUEDRAGONBREATH","LOCALS",THREE_ROUNDS)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	Global("Offense1","LOCALS",0)
+THEN
+	RESPONSE #100
+		ForceSpell(LastSeenBy(Myself),WIZARD_GREATER_MALISON)  // SPWI412.SPL (毒咒)
+		SetGlobal("Offense1","LOCALS",1)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	Global("Haste","LOCALS",0)
+THEN
+	RESPONSE #100
+		ForceSpell(Myself,WIZARD_HASTE)  // SPWI305.SPL (加速术)
+		SetGlobal("Haste","LOCALS",1)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	Global("HoldPerson","LOCALS",0)
+THEN
+	RESPONSE #100
+		ForceSpell(LastSeenBy(Myself),CLERIC_HOLD_PERSON)  // SPPR208.SPL (人类定身术)
+		SetGlobal("HoldPerson","LOCALS",1)
+END
+
+IF
+	Global("Silence","LOCALS",0)
+	OR(2)
+		See(NearestEnemyOfType([0.0.0.MAGE_ALL]))
+		See(NearestEnemyOfType([0.0.0.CLERIC_ALL]))
+THEN
+	RESPONSE #100
+		ForceSpell(LastSeenBy(Myself),DRAGON_SILENCE)  // SPIN692.SPL (十五呎沉默术)
+		SetGlobal("Silence","LOCALS",1)
+		AttackOneRound(LastSeenBy(Myself))
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	Delay(6)
+	GlobalLT("CharmPerson","LOCALS",3)
+THEN
+	RESPONSE #100
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_CHARM_PERSON)  // SPWI104.SPL (魅惑人类)
+		IncrementGlobal("CharmPerson","LOCALS",1)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		EquipMostDamagingMelee()
+		AttackReevaluate(NearestEnemyOf(Myself),35)
+	RESPONSE #10
+		ForceSpell(LastSeenBy(Myself),WIZARD_MELF_ACID_ARROW)  // SPWI211.SPL (马友夫强酸箭)
+END
+
+IF
+	See(SecondNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+	RESPONSE #10
+		ForceSpell(LastSeenBy(Myself),WIZARD_MELF_ACID_ARROW)  // SPWI211.SPL (马友夫强酸箭)
+END
+
+IF
+	See(ThirdNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+	RESPONSE #10
+		ForceSpell(LastSeenBy(Myself),WIZARD_MELF_ACID_ARROW)  // SPWI211.SPL (马友夫强酸箭)
+END
+
+IF
+	See(FourthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+	RESPONSE #10
+		ForceSpell(LastSeenBy(Myself),WIZARD_MELF_ACID_ARROW)  // SPWI211.SPL (马友夫强酸箭)
+END
+
+IF
+	See(FifthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+	RESPONSE #10
+		ForceSpell(LastSeenBy(Myself),WIZARD_MELF_ACID_ARROW)  // SPWI211.SPL (马友夫强酸箭)
+END
+
+IF
+	See(SixthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+	RESPONSE #10
+		ForceSpell(LastSeenBy(Myself),WIZARD_MELF_ACID_ARROW)  // SPWI211.SPL (马友夫强酸箭)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+THEN
+	RESPONSE #100
+		MoveToObject(NearestEnemyOf(Myself))
+END
+
+IF
+	AttackedBy([GOODCUTOFF],DEFAULT)
+	Allegiance(Myself,NEUTRAL)
+THEN
+	RESPONSE #100
+		Enemy()
+END
+

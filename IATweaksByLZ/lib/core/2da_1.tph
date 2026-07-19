@@ -1,0 +1,736 @@
+// overwrite and patch 2da tables //
+
+// new level progression table for characters
+COPY ~ImprovedAnvil/resources/2da/xplevel.2da~ ~override/xplevel.2da~
+
+// new table of HLA frequency for classes
+COPY ~ImprovedAnvil/resources/2da/lunumab.2da~ ~override/lunumab.2da~
+
+// new structure of reputation modifiers
+COPY ~ImprovedAnvil/resources/2da/reputati.2da~ ~override/reputati.2da~
+
+// new spells per level progression tables
+COPY ~ImprovedAnvil/resources/2da/mxsplran.2da~ ~override/mxsplran.2da~ // rangers
+COPY ~ImprovedAnvil/resources/2da/mxsplbrd.2da~ ~override/mxsplbrd.2da~ // bards
+COPY ~ImprovedAnvil/resources/2da/mxspldru.2da~ ~override/mxspldru.2da~ // druids
+COPY ~ImprovedAnvil/resources/2da/mxsplprs.2da~ ~override/mxsplprs.2da~ // priests
+COPY ~ImprovedAnvil/resources/2da/mxsplwiz.2da~ ~override/mxsplwiz.2da~ // wizards
+COPY ~ImprovedAnvil/resources/2da/mxsplsrc.2da~ ~override/mxsplsrc.2da~ // sorcerers
+COPY ~ImprovedAnvil/resources/2da/mxsplshm.2da~ ~override/mxsplshm.2da~ // shamans
+
+// default saving throws for various classes
+COPY ~ImprovedAnvil/resources/2da/saverog.2da~ ~override/saverog.2da~ // thief, bard
+COPY ~ImprovedAnvil/resources/2da/savewiz.2da~ ~override/savewiz.2da~ // wizard, sorcerer
+
+// new XP cap for game's classes
+COPY ~ImprovedAnvil/resources/2da/xpcap.2da~ ~override/xpcap.2da~
+
+// customized HLA tables for certain classes
+COPY ~ImprovedAnvil/resources/2da/lucl0.2da~ ~override/lucl0.2da~
+COPY ~ImprovedAnvil/resources/2da/lucr0.2da~ ~override/lucr0.2da~
+COPY ~ImprovedAnvil/resources/2da/luba0.2da~ ~override/luba0.2da~
+COPY ~ImprovedAnvil/resources/2da/luba1.2da~ ~override/luba1.2da~
+COPY ~ImprovedAnvil/resources/2da/luba2.2da~ ~override/luba2.2da~
+COPY ~ImprovedAnvil/resources/2da/luba3.2da~ ~override/luba3.2da~
+COPY ~ImprovedAnvil/resources/2da/lucm0.2da~ ~override/lucm0.2da~
+COPY ~ImprovedAnvil/resources/2da/ludr0.2da~ ~override/ludr0.2da~
+COPY ~ImprovedAnvil/resources/2da/ludr3.2da~ ~override/ludr3.2da~
+COPY ~ImprovedAnvil/resources/2da/lufi3.2da~ ~override/lufi3.2da~
+COPY ~ImprovedAnvil/resources/2da/luft0.2da~ ~override/luft0.2da~
+COPY ~ImprovedAnvil/resources/2da/lufmt.2da~ ~override/lufmt.2da~
+COPY ~ImprovedAnvil/resources/2da/lumt0.2da~ ~override/lumt0.2da~
+COPY ~ImprovedAnvil/resources/2da/luct0.2da~ ~override/luct0.2da~
+COPY ~ImprovedAnvil/resources/2da/lufc0.2da~ ~override/lufc0.2da~
+COPY ~ImprovedAnvil/resources/2da/lufd0.2da~ ~override/lufd0.2da~
+COPY ~ImprovedAnvil/resources/2da/lufm0.2da~ ~override/lufm0.2da~
+COPY ~ImprovedAnvil/resources/2da/lufmc.2da~ ~override/lufmc.2da~
+COPY ~ImprovedAnvil/resources/2da/luth0.2da~ ~override/luth0.2da~
+COPY ~ImprovedAnvil/resources/2da/luth1.2da~ ~override/luth1.2da~
+COPY ~ImprovedAnvil/resources/2da/luth2.2da~ ~override/luth2.2da~
+COPY ~ImprovedAnvil/resources/2da/luth3.2da~ ~override/luth3.2da~
+COPY ~ImprovedAnvil/resources/2da/luth4.2da~ ~override/luth4.2da~
+COPY ~ImprovedAnvil/resources/2da/luma0.2da~ ~override/luma0.2da~
+COPY ~ImprovedAnvil/resources/2da/lush0.2da~ ~override/lush0.2da~
+
+// a new, custom THAC0 progression table
+COPY ~ImprovedAnvil/resources/2da/thac0.2da~ ~override/thac0.2da~
+
+// updated lists of files that can't be worn together
+COPY ~ImprovedAnvil/resources/2da/itemexcl.2da~ ~override/itemexcl.2da~
+
+// updated structure of randomized treasure for rndmag*.itm items
+COPY ~ImprovedAnvil/resources/2da/rndmagic.2da~ ~override/rndmagic.2da~
+
+// adjusted starting and final XP caps
+COPY ~ImprovedAnvil/resources/2da/startare.2da~ ~override/startare.2da~
+
+// new bonuses for thievery skills and spell learning
+COPY ~ImprovedAnvil/resources/2da/xpbonus.2da~ ~override/xpbonus.2da~
+
+// new table of randomly spawned monsters in the game's areas  //Tweak By LZ
+//COPY ~ImprovedAnvil/resources/2da/spawngrp.2da~ ~override/spawngrp.2da~
+COPY_EXISTING ~spawngrp.2da~  ~override~     // 修改范围1~62列、2~9行
+//RDGnoll
+  SET_2DA_ENTRY 2 1 62  ~Shadow01~           // 第2行第1列改成Shadow01
+  SET_2DA_ENTRY 3 1 62  ~Shadow01~
+  SET_2DA_ENTRY 4 1 62  ~S!wraith~
+  SET_2DA_ENTRY 5 1 62  ~S!wraith~
+  SET_2DA_ENTRY 6 1 62  ~shadfi01~
+  SET_2DA_ENTRY 7 1 62  ~*~
+//RDHobgob
+  SET_2DA_ENTRY 3 2 62  ~S!hobarc~
+  SET_2DA_ENTRY 5 2 62  ~S!hobsha~
+  SET_2DA_ENTRY 6 2 62  ~S!hobeli~
+  SET_2DA_ENTRY 7 2 62  ~S!hobcap~
+//RDKobold
+  SET_2DA_ENTRY 5 3 62  ~S!kobcom~
+//RDTroll
+  SET_2DA_ENTRY 2 6 62  ~S!trolic~
+  SET_2DA_ENTRY 3 6 62  ~S!trolic~
+  SET_2DA_ENTRY 4 6 62  ~S!trolr~
+  SET_2DA_ENTRY 5 6 62  ~S!trolr~
+//RDSahua
+  SET_2DA_ENTRY 2 7 62  ~shadow01~
+  SET_2DA_ENTRY 3 7 62  ~shadow01~
+  SET_2DA_ENTRY 4 7 62  ~shadfi01~
+  SET_2DA_ENTRY 5 7 62  ~shadfi01~
+  SET_2DA_ENTRY 6 7 62  ~shadow01~
+  SET_2DA_ENTRY 7 7 62  ~shadow01~
+//RDUndead
+  SET_2DA_ENTRY 2 9 62  ~S!mummr~
+  SET_2DA_ENTRY 3 9 62  ~S!mummr~
+  SET_2DA_ENTRY 5 9 62  ~S!mummr~
+//RDUndea2
+  SET_2DA_ENTRY 2 10 62  ~S!shador~
+  SET_2DA_ENTRY 3 10 62  ~S!shador~
+  SET_2DA_ENTRY 6 10 62  ~S!shadfi~
+//RDSpider
+  SET_2DA_ENTRY 5 12 62  ~S!spidr1~
+//RDspid2
+  SET_2DA_ENTRY 2 13 62  ~S!spidr1~
+  SET_2DA_ENTRY 3 13 62  ~S!spidr1~
+  SET_2DA_ENTRY 4 13 62  ~S!etter~
+  SET_2DA_ENTRY 5 13 62  ~S!etter~
+//RDSpid3
+  SET_2DA_ENTRY 4 14 62  ~S!spidr1~
+  SET_2DA_ENTRY 5 14 62  ~S!spidr1~
+  SET_2DA_ENTRY 6 14 62  ~S!spidr1~
+  SET_2DA_ENTRY 7 14 62  ~S!spidr1~
+  SET_2DA_ENTRY 8 14 62  ~S!spidr1~
+//RDSpid4
+  SET_2DA_ENTRY 2 15 62  ~S!spidr2~
+  SET_2DA_ENTRY 3 15 62  ~S!spidr2~
+  SET_2DA_ENTRY 4 15 62  ~S!spidr2~
+  SET_2DA_ENTRY 5 15 62  ~S!spidr2~
+  SET_2DA_ENTRY 6 15 62  ~S!spidr2~
+  SET_2DA_ENTRY 7 15 62  ~S!spidr2~
+//RDspid5
+  SET_2DA_ENTRY 5 16 62  ~Etter01~
+  SET_2DA_ENTRY 7 16 62  ~S!SPIDE2~
+  SET_2DA_ENTRY 8 16 62  ~S!SPIDER~
+//RDWere
+  SET_2DA_ENTRY 2 17 62  ~werewo01~
+  SET_2DA_ENTRY 3 17 62  ~werewo01~
+  SET_2DA_ENTRY 4 17 62  ~werewo01~
+  SET_2DA_ENTRY 5 17 62  ~werewo01~
+//RDShad
+  SET_2DA_ENTRY 2 20 62  ~S!shador~
+  SET_2DA_ENTRY 3 20 62  ~S!shador~
+  SET_2DA_ENTRY 4 20 62  ~S!shadfi~
+  SET_2DA_ENTRY 5 20 62  ~S!shadfi~
+  SET_2DA_ENTRY 6 20 62  ~S!shador~
+  SET_2DA_ENTRY 7 20 62  ~S!shador~
+//RDKuotoa
+  SET_2DA_ENTRY 2 21 62  ~S!kuowar~
+  SET_2DA_ENTRY 3 21 62  ~S!kuomag~
+  SET_2DA_ENTRY 4 21 62  ~S!kuowar~
+  SET_2DA_ENTRY 5 21 62  ~S!kuowhi~
+  SET_2DA_ENTRY 6 21 62  ~S!kuomon~
+  SET_2DA_ENTRY 7 21 62  ~S!kuocap~
+//RDKuoto2
+  SET_2DA_ENTRY 2 22 62  ~S!kuocap~
+  SET_2DA_ENTRY 3 22 62  ~S!kuowar~
+  SET_2DA_ENTRY 4 22 62  ~S!kuowhi~
+  SET_2DA_ENTRY 5 22 62  ~S!kuowhi~
+  SET_2DA_ENTRY 6 22 62  ~S!kuopri~
+  SET_2DA_ENTRY 7 22 62  ~S!kuomag~
+//RDYuan
+  SET_2DA_ENTRY 2 26 62  ~S!icyuan~
+  SET_2DA_ENTRY 3 26 62  ~S!icyuan~
+  SET_2DA_ENTRY 4 26 62  ~S!icyuan~
+  SET_2DA_ENTRY 5 26 62  ~S!icyuan~
+  SET_2DA_ENTRY 6 26 62  ~S!icyuan~
+  SET_2DA_ENTRY 7 26 62  ~S!icyuam~
+//RDGob
+  SET_2DA_ENTRY 4 27 62  ~S!icgob~
+  SET_2DA_ENTRY 5 27 62  ~S!icgob~
+  SET_2DA_ENTRY 6 27 62  ~S!icgob~
+  SET_2DA_ENTRY 7 27 62  ~S!icgob~
+//RDPirate
+  SET_2DA_ENTRY 2 28 62  ~Mummy01~
+  SET_2DA_ENTRY 3 28 62  ~Mummy01~
+  SET_2DA_ENTRY 4 28 62  ~S!ghast~
+  SET_2DA_ENTRY 5 28 62  ~Mummy01~
+  SET_2DA_ENTRY 6 28 62  ~S!ghast~
+//RDKeep
+  SET_2DA_ENTRY 2 29 62  ~icyuan01~
+  SET_2DA_ENTRY 3 29 62  ~icyuan01~
+  SET_2DA_ENTRY 4 29 62  ~icyuan01~
+  SET_2DA_ENTRY 5 29 62  ~icyuan01~
+  SET_2DA_ENTRY 6 29 62  ~icyuan01~
+  SET_2DA_ENTRY 7 29 62  ~icyuan03~
+//RDKeep2
+  SET_2DA_ENTRY 2 30 62  ~S!icyuan~
+  SET_2DA_ENTRY 3 30 62  ~S!icyuan~
+  SET_2DA_ENTRY 4 30 62  ~S!icyuan~
+  SET_2DA_ENTRY 5 30 62  ~S!trolr~
+//RDLiz
+  SET_2DA_ENTRY 2 31 62  ~S!icliz~
+  SET_2DA_ENTRY 3 31 62  ~S!icliz~
+  SET_2DA_ENTRY 4 31 62  ~S!icliz~
+  SET_2DA_ENTRY 5 31 62  ~S!icliz~
+//RDGolem
+  SET_2DA_ENTRY 2 32 62  ~S!coinra~
+  SET_2DA_ENTRY 3 32 62  ~S!coinra~
+  SET_2DA_ENTRY 4 32 62  ~S!gemran~
+  SET_2DA_ENTRY 5 32 62  ~S!gemran~
+//RDMist1
+  SET_2DA_ENTRY 2 33 62  ~S!mistva~
+  SET_2DA_ENTRY 3 33 62  ~S!mistva~
+  SET_2DA_ENTRY 5 33 62  ~S!mistva~
+//RDMist2
+  SET_2DA_ENTRY 2 34 62  ~S!mistva~
+  SET_2DA_ENTRY 6 34 62  ~S!misth1~
+//RDOrog
+  SET_2DA_ENTRY 2 35 62  ~orc06~
+  SET_2DA_ENTRY 3 35 62  ~orc06~
+//RDKobSWI
+  SET_2DA_ENTRY 5 38 62  ~S!kobcom~
+//RDFIRE2
+  SET_2DA_ENTRY 2 40 62  ~S!elegra~
+  SET_2DA_ENTRY 3 40 62  ~S!elegra~
+//RDGOLEM2
+  SET_2DA_ENTRY 2 42 62  ~S!gemran~
+  SET_2DA_ENTRY 3 42 62  ~S!gemran~
+  SET_2DA_ENTRY 4 42 62  ~S!icegor~
+  SET_2DA_ENTRY 5 42 62  ~S!coinra~
+  SET_2DA_ENTRY 6 42 62  ~S!elegra~
+//RDGOLEM3
+  SET_2DA_ENTRY 2 43 62  ~S!bonrnd~
+  SET_2DA_ENTRY 3 43 62  ~S!coirnd~
+  SET_2DA_ENTRY 4 43 62  ~S!gemrnd~
+  SET_2DA_ENTRY 5 43 62  ~S!gemrnd~
+  SET_2DA_ENTRY 6 43 62  ~S!coirnd~
+  SET_2DA_ENTRY 7 43 62  ~S!bonrnd~
+//RDMist3
+  SET_2DA_ENTRY 5 47 62  ~S!mistva~
+//RDTroll2
+  SET_2DA_ENTRY 2 49 62  ~S!ntrolr~
+  SET_2DA_ENTRY 3 49 62  ~S!ntrolr~
+  SET_2DA_ENTRY 4 49 62  ~S!ntrolr~
+  SET_2DA_ENTRY 5 49 62  ~S!ntrolr~
+  SET_2DA_ENTRY 6 49 62  ~S!trolr~
+  SET_2DA_ENTRY 7 49 62  ~S!trolr~
+//RDSand1
+  SET_2DA_ENTRY 4 50 62  ~S!rakruh~
+//RDsand2
+  SET_2DA_ENTRY 2 51 62  ~S!icegor~
+  SET_2DA_ENTRY 3 51 62  ~S!icegor~
+  SET_2DA_ENTRY 9 51 62  ~S!icegor~
+//RDWere2
+  SET_2DA_ENTRY 2 52 62  ~weregr01~
+  SET_2DA_ENTRY 3 52 62  ~weregr01~
+  SET_2DA_ENTRY 4 52 62  ~weregr01~
+  SET_2DA_ENTRY 5 52 62  ~weregr01~
+  SET_2DA_ENTRY 6 52 62  ~werewo01~
+  SET_2DA_ENTRY 7 52 62  ~werewo01~
+  SET_2DA_ENTRY 8 52 62  ~werewo01~
+  SET_2DA_ENTRY 9 52 62  ~werewo01~
+//RDShad2
+  SET_2DA_ENTRY 2 56 62  ~S!shadfi~
+  SET_2DA_ENTRY 3 56 62  ~S!shadfi~
+  SET_2DA_ENTRY 4 56 62  ~S!shadfi~
+  SET_2DA_ENTRY 5 56 62  ~S!shadfi~
+  SET_2DA_ENTRY 6 56 62  ~S!shadfi~
+  SET_2DA_ENTRY 9 56 62  ~S!shadfi~
+//RDSend1
+  SET_2DA_ENTRY 2 60 62  ~S!drofod~
+  SET_2DA_ENTRY 3 60 62  ~S!drofod~
+  SET_2DA_ENTRY 6 60 62  ~S!drofod~
+  SET_2DA_ENTRY 7 60 62  ~S!drofod~
+  SET_2DA_ENTRY 8 60 62  ~S!umbhul~
+  SET_2DA_ENTRY 9 60 62  ~S!umbhul~
+//RDSend2
+  SET_2DA_ENTRY 2 61 62  ~S!drofod~
+  SET_2DA_ENTRY 3 61 62  ~S!drofod~
+  SET_2DA_ENTRY 8 61 62  ~S!drofod~
+  SET_2DA_ENTRY 9 61 62  ~S!drofod~
+
+  PRETTY_PRINT_2DA
+BUT_ONLY_IF_IT_CHANGES
+
+// new tables with special abilities per level
+COPY ~ImprovedAnvil/resources/2da/clabdr04.2da~ ~override/clabdr04.2da~ // Avenger
+COPY ~ImprovedAnvil/resources/2da/clabma03.2da~ ~override/clabma03.2da~ // Necromancer
+COPY ~ImprovedAnvil/resources/2da/clabth04.2da~ ~override/clabth04.2da~ // Swashbuckler
+COPY ~ImprovedAnvil/resources/2da/clabsh01.2da~ ~override/clabsh01.2da~ // Shaman
+COPY ~ImprovedAnvil/resources/2da/CLABFI03.2DA~ ~override/CLABFI03.2DA~ // Wizard Slayer
+
+// extra attacks per level, unnerfed table with "true grandmastery"
+COPY ~ImprovedAnvil/resources/2da/wspatck.2da~ ~override/wspatck.2da~
+
+// weapon speed, damage and to-hit bonus, unnerfed table from Ease-of-Use
+COPY ~ImprovedAnvil/resources/2da/wspecial.2da~ ~override/wspecial.2da~
+
+// new level progression for monk's fists
+COPY ~ImprovedAnvil/resources/2da/monkfist.2da~ ~override/monkfist.2da~
+
+// new tables with special abilities per level for monk kits
+COPY ~ImprovedAnvil/resources/2da/clabmo01.2da~ ~override/clabmo01.2da~
+COPY ~ImprovedAnvil/resources/2da/clabmo02.2da~ ~override/clabmo02.2da~
+COPY ~ImprovedAnvil/resources/2da/clabmo03.2da~ ~override/clabmo03.2da~
+
+// set up custom tooltips for certain items with special abilities
+COPY_EXISTING ~tooltip.2da~  ~override/tooltip.2da~
+  REPLACE_TEXTUALLY ~RING27.+3806.+12109.+12074~ ~RING27            12074        12109       -1~
+  REPLACE_TEXTUALLY ~RING28.+3808.+12021.+-1~ ~RING28            29217        12021       -1~
+  REPLACE_TEXTUALLY ~RING29.+3809.+32393.+-1~ ~RING29            32393        -1          -1~
+  REPLACE_TEXTUALLY ~SW1H36.+3155.+12123.+-1~ ~SW1H36            3155         12114       -1~
+  REPLACE_TEXTUALLY ~MISC3A1.+12017.+4731.+-1~ ~MISC3A1           23790        4731        -1~
+  REPLACE_TEXTUALLY ~MISC3A2.+12023.+4731.+-1~ ~MISC3A2           22616        4731        -1~
+  REPLACE_TEXTUALLY ~MISC3A4.+38133.+4731.+-1~ ~MISC3A4           7571         4731        -1~
+  PRETTY_PRINT_2DA
+
+// spell choices for "Pick for me" button at character generation screen
+COPY_EXISTING ~splautop.2da~  ~override/splautop.2da~
+  REPLACE_TEXTUALLY ~SPWI114~ ~tempora~
+  REPLACE_TEXTUALLY ~SPWI118~ ~SPWI114~
+  REPLACE_TEXTUALLY ~tempora~ ~SPWI118~
+  REPLACE_TEXTUALLY ~SPWI105~ ~SPWI119~
+  REPLACE_TEXTUALLY ~SPWI201~ ~SPWI207~
+  REPLACE_TEXTUALLY ~SPWI303~ ~tempora~
+  REPLACE_TEXTUALLY ~SPWI308~ ~SPWI303~
+  REPLACE_TEXTUALLY ~tempora~ ~SPWI308~
+  REPLACE_TEXTUALLY ~SPWI314~ ~tempora~
+  REPLACE_TEXTUALLY ~SPWI302~ ~SPWI314~
+  REPLACE_TEXTUALLY ~tempora~ ~SPWI302~
+  REPLACE_TEXTUALLY ~SPWI413~ ~SPWI421~
+  REPLACE_TEXTUALLY ~SPWI519~ ~SPWI517~
+  REPLACE_TEXTUALLY ~SPWI607~ ~SPWI619~
+  REPLACE_TEXTUALLY ~SPWI703~ ~SPWI702~
+  PRETTY_PRINT_2DA
+
+// customize table for scrolls generated as random treasure
+COPY_EXISTING ~rndscrol.2da~  ~override/rndscrol.2da~
+  REPLACE_TEXTUALLY ~SCRL8M~ ~SCRL79~
+  REPLACE_TEXTUALLY ~SCRL9L~ ~SCRL75~
+  REPLACE_TEXTUALLY ~SCRL8Q~ ~SCRL80~
+  REPLACE_TEXTUALLY ~SCRL9G~ ~SCRL1I~
+  REPLACE_TEXTUALLY ~SCRL8R~ ~SCRL85~
+  REPLACE_TEXTUALLY ~SCRL9E~ ~SCRL1E~
+  REPLACE_TEXTUALLY ~SCRL8T~ ~SCRL8S~
+  REPLACE_TEXTUALLY ~SCRL9D~ ~SCRL1F~
+  REPLACE_TEXTUALLY ~SCRL8U~ ~SCRL86~
+  REPLACE_TEXTUALLY ~SCRL9C~ ~SCRL81~
+  REPLACE_TEXTUALLY ~SCRL9B~ ~SCRL92~
+  REPLACE_TEXTUALLY ~SCRL8W~ ~SCRL76~
+  REPLACE_TEXTUALLY ~SCRL9A~ ~SCRL6E~
+  REPLACE_TEXTUALLY ~SCRL8X~ ~SCRL70~
+  REPLACE_TEXTUALLY ~SCRL8Y~ ~SCRL86~
+  REPLACE_TEXTUALLY ~SCRL8B~ ~SCRL1C~
+  REPLACE_TEXTUALLY ~SCRL8Z~ ~SCRL78~
+  REPLACE_TEXTUALLY ~SCRL8D~ ~SCRL89~
+  REPLACE_TEXTUALLY ~SCRL8E~ ~SCRL85~
+  REPLACE_TEXTUALLY ~SCRL7D~ ~SCRL6Z~
+  REPLACE_TEXTUALLY ~SCRL8G~ ~SCRL67~
+  REPLACE_TEXTUALLY ~SCRL7F~ ~SCRL6D~
+  REPLACE_TEXTUALLY ~SCRL8H~ ~SCRL81~
+  REPLACE_TEXTUALLY ~SCRL7G~ ~SCRL72~
+  REPLACE_TEXTUALLY ~SCRL8I~ ~SCRL67~
+  REPLACE_TEXTUALLY ~SCRL7H~ ~SCRL8C~
+  REPLACE_TEXTUALLY ~SCRL8J~ ~SCRL81~
+  REPLACE_TEXTUALLY ~SCRL7L~ ~SCRL92~
+  REPLACE_TEXTUALLY ~SCRL7I~ ~SCRL76~
+  REPLACE_TEXTUALLY ~SCRL8L~ ~SCRL6E~
+  REPLACE_TEXTUALLY ~SCRL7K~ ~SCRL70~
+  REPLACE_TEXTUALLY ~SCRL7J~ ~SCRL1E~
+  PRETTY_PRINT_2DA
+
+// prevent certain treasures from appearing as random treasure
+COPY_EXISTING ~rndtreas.2da~  ~override/rndtreas.2da~
+  REPLACE_TEXTUALLY ~AMUL05~ ~AMUL09~
+  REPLACE_TEXTUALLY ~AMUL12~ ~AMUL10~
+  REPLACE_TEXTUALLY ~MISC29~ ~MISC22~
+  REPLACE_TEXTUALLY ~MISC26~ ~MISC25~
+  PRETTY_PRINT_2DA
+
+// remove a spell from gainable abilities for Stalker class
+COPY_EXISTING ~clabrn03.2da~  ~override/clabrn03.2da~
+  REPLACE_TEXTUALLY ~GA_SPRA302~ ~****      ~
+  PRETTY_PRINT_2DA
+
+// prevent certain options for dual-classing
+COPY_EXISTING ~dualclas.2da~  ~override/dualclas.2da~
+  REPLACE_TEXTUALLY ~WIZARD_SLAYER.+0.+1.+1.+1.+1.+0~ ~WIZARD_SLAYER           0       0       0       0       0       0~
+  REPLACE_TEXTUALLY ~ABJURER.+1.+1.+0.+1.+0.+0~ ~ABJURER                 0       0       0       0       0       0~
+  REPLACE_TEXTUALLY ~CONJURER.+1.+1.+0.+1.+0.+0~ ~CONJURER                0       0       0       0       0       0~
+  REPLACE_TEXTUALLY ~DIVINER.+1.+1.+0.+1.+0.+0~ ~DIVINER                 0       0       0       0       0       0~
+  REPLACE_TEXTUALLY ~ENCHANTER.+1.+1.+0.+1.+0.+0~ ~ENCHANTER               0       0       0       0       0       0~
+  REPLACE_TEXTUALLY ~ILLUSIONIST.+1.+1.+0.+1.+0.+0~ ~ILLUSIONIST             0       0       0       0       0       0~
+  REPLACE_TEXTUALLY ~INVOKER.+1.+1.+0.+1.+0.+0~ ~INVOKER                 0       0       0       0       0       0~
+  REPLACE_TEXTUALLY ~NECROMANCER.+1.+1.+0.+1.+0.+0~ ~NECROMANCER             0       0       0       0       0       0~
+  REPLACE_TEXTUALLY ~TRANSMUTER.+1.+1.+0.+1.+0.+0~ ~TRANSMUTER              0       0       0       0       0       0~
+  REPLACE_TEXTUALLY ~BEAST_FRIEND.+1.+0.+0.+0.+0.+0~ ~BEAST_FRIEND              0       0       0       0       0       0~
+  PRETTY_PRINT_2DA
+
+// tone down saving throws for Dwarves and Halflings
+COPY_EXISTING ~savecndh.2da~  ~override/savecndh.2da~
+  REPLACE_TEXTUALLY ~DEATH.+0.+0.+0.+1.+1.+1.+2.+2.+2.+2.+3.+3.+3.+4.+4.+4.+4.+5.+5.+5.+5.+5.+5.+5.+5~ ~DEATH       0   0   0   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   3   3   3   3   3~
+  REPLACE_TEXTUALLY ~WANDS.+0.+0.+0.+1.+1.+1.+2.+2.+2.+2.+3.+3.+3.+4.+4.+4.+4.+5.+5.+5.+5.+5.+5.+5.+5~ ~WANDS       0   0   0   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   3   3   3   3   3~
+  REPLACE_TEXTUALLY ~SPELL.+0.+0.+0.+1.+1.+1.+2.+2.+2.+2.+3.+3.+3.+4.+4.+4.+4.+5.+5.+5.+5.+5.+5.+5.+5~ ~SPELL       0   0   0   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   3   3   3   3   3~
+  PRETTY_PRINT_2DA
+
+// tone down saving throws for Gnomes
+COPY_EXISTING ~savecng.2da~  ~override/savecng.2da~
+  REPLACE_TEXTUALLY ~WANDS.+0.+0.+0.+1.+1.+1.+2.+2.+2.+2.+3.+3.+3.+4.+4.+4.+4.+5.+5.+5.+5.+5.+5.+5.+5~ ~WANDS       0   0   0   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   3   3   3   3   3~
+  REPLACE_TEXTUALLY ~SPELL.+0.+0.+0.+1.+1.+1.+2.+2.+2.+2.+3.+3.+3.+4.+4.+4.+4.+5.+5.+5.+5.+5.+5.+5.+5~ ~SPELL       0   0   0   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   2   3   3   3   3   3~
+  PRETTY_PRINT_2DA
+
+// modify stats modifiers for kits
+COPY_EXISTING ~abclsmod.2da~  ~override/abclsmod.2da~
+  REPLACE_TEXTUALLY ~BEAST_FRIEND.+-2.+0.+-2.+0.+0.+0~ ~BEAST_FRIEND              0       0       0       0       0       0~
+  PRETTY_PRINT_2DA
+
+// assign new ludr file to the Avenger kit
+COPY_EXISTING ~luabbr.2da~  ~override/luabbr.2da~
+  REPLACE_TEXTUALLY ~BEAST_FRIEND.+Dr0~ ~BEAST_FRIEND              Dr3~
+  REPLACE_TEXTUALLY ~WIZARD_SLAYER.+Fi0~ ~WIZARD_SLAYER              Fi3~
+  PRETTY_PRINT_2DA
+
+// modify weapon proficiencies for the Avenger kit
+COPY_EXISTING ~weapprof.2da~  ~override/weapprof.2da~
+  COUNT_2DA_COLS ~colcount~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 0 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 1 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 2 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 3 47 ~3~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 4 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 5 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 6 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 7 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 8 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 9 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 10 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 11 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 12 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 13 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 14 47 ~2~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 15 47 ~2~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 16 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 17 47 ~2~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 18 47 ~3~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 19 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 20 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 21 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 22 47 ~3~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 23 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 24 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 25 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 26 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 27 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 28 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 29 47 ~1~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 30 47 ~0~
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 31 47 ~1~
+  SET_2DA_ENTRIES_NOW ~_#_#_#weapprof~ ~colcount~
+  PRETTY_PRINT_2DA
+
+// modify weapon proficiencies for the Wizard Slayer kit
+COPY_EXISTING ~weapprof.2da~  ~override/weapprof.2da~
+  COUNT_2DA_COLS ~colcount~
+  // LARGE_SWORD
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 1 31 ~4~ // SMALL_SWORD
+  // BOW
+  // SPEAR
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 4 31 ~4~ // BLUNT
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 5 31 ~4~ // SPIKED
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 6 31 ~4~ // AXE
+  // MISSILE
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 8 31 ~4~ // BASTARDSWORD
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 9 31 ~4~ // LONGSWORD
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 10 31 ~4~ // SHORTSWORD
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 11 31 ~4~ // AXE
+  // TWOHANDEDSWORD
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 13 31 ~4~ // KATANA
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 14 31 ~4~ // SCIMITARWAKISASHININJAT
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 15 31 ~4~ // DAGGER
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 16 31 ~4~ // WARHAMMER
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 17 31 ~4~ // CLUB
+  // SPEAR
+  // HALBERD
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 20 31 ~4~ // FLAILMORNINGSTAR
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 21 31 ~4~ // MACE
+  // QUARTERSTAFF
+  // CROSSBOW
+  // LONGBOW
+  // SHORTBOW
+  // DART
+  // SLING
+  // 2HANDED
+  // SWORDANDSHIELD
+  // SINGLEWEAPON
+  SET_2DA_ENTRY_LATER ~_#_#_#weapprof~ 31 31 ~1~
+  SET_2DA_ENTRIES_NOW ~_#_#_#weapprof~ ~colcount~
+  PRETTY_PRINT_2DA
+
+// add records for the new portrait icons
+COPY_EXISTING ~statdesc.2da~ ~override/statdesc.2da~
+  COUNT_2DA_COLS ~colcount~
+  COUNT_2DA_ROWS ~colcount~ ~rowcount~
+
+  SET_2DA_ENTRY 125 2 ~colcount~ ~SPINI27D~
+
+  INSERT_2DA_ROW 167 ~colcount~ ~167         0         SPINI90D~
+  SET_2DA_ENTRY 167 1 ~colcount~ RESOLVE_STR_REF (@10230)
+
+  SET_2DA_ENTRY 190 1 ~colcount~ RESOLVE_STR_REF (@10327)
+
+  INSERT_2DA_ROW 204 ~colcount~ ~204         0         SPPR650D~
+  SET_2DA_ENTRY 204 1 ~colcount~ RESOLVE_STR_REF (@10325)
+
+  INSERT_2DA_ROW 205 ~colcount~ ~205         0         SPINI92D~
+  SET_2DA_ENTRY 205 1 ~colcount~ RESOLVE_STR_REF (@10220)
+
+  INSERT_2DA_ROW 206 ~colcount~ ~206         0         SPSHI07D~
+  SET_2DA_ENTRY 206 1 ~colcount~ RESOLVE_STR_REF (@10341)
+
+  INSERT_2DA_ROW 207 ~colcount~ ~207         0         SPPR545D~
+  SET_2DA_ENTRY 207 1 ~colcount~ RESOLVE_STR_REF (@10345)
+
+  INSERT_2DA_ROW 208 ~colcount~ ~208         0         SPPR649D~
+  SET_2DA_ENTRY 208 1 ~colcount~ RESOLVE_STR_REF (@10354)
+
+  INSERT_2DA_ROW 209 ~colcount~ ~209         0         SPNI101D~
+  SET_2DA_ENTRY 209 1 ~colcount~ RESOLVE_STR_REF (@10359)
+
+  INSERT_2DA_ROW 210 ~colcount~ ~210         0         S!CHAN3D~
+  SET_2DA_ENTRY 210 1 ~colcount~ RESOLVE_STR_REF (@12041)
+
+  INSERT_2DA_ROW 211 ~colcount~ ~211         0         SPCLI25D~
+  SET_2DA_ENTRY 211 1 ~colcount~ RESOLVE_STR_REF (@11144)
+
+  INSERT_2DA_ROW 212 ~colcount~ ~212         0         SPPR206D~
+  SET_2DA_ENTRY 212 1 ~colcount~ RESOLVE_STR_REF (#12105)
+
+  INSERT_2DA_ROW 213 ~colcount~ ~213         0         SPPRI26D~
+  SET_2DA_ENTRY 213 1 ~colcount~ RESOLVE_STR_REF (@11147)
+
+  INSERT_2DA_ROW 214 ~colcount~ ~214         0         SPPRI27D~
+  SET_2DA_ENTRY 214 1 ~colcount~ RESOLVE_STR_REF (@11149)
+
+  PRETTY_PRINT_2DA
+
+// allow ZoSA to dispel certain projectiles
+COPY_EXISTING ~clearair.2da~ ~override/clearair.2da~
+  COUNT_2DA_COLS ~colcount~
+  COUNT_2DA_ROWS ~colcount~ ~rowcount~
+  INSERT_2DA_ROW ~rowcount~ ~colcount~ ~Fire_Storm 228~
+  INSERT_2DA_ROW ~rowcount~ ~colcount~ ~Incendiary_Cloud 277~
+  INSERT_2DA_ROW ~rowcount~ ~colcount~ ~Summon_Ice_Salamander 278~
+  INSERT_2DA_ROW ~rowcount~ ~colcount~ ~Golem_Gas_Cloud 223~
+  REPLACE_TEXTUALLY ~Writhing_fog[ %TAB%]+331[ %TAB%%LNL%%MNL%%WNL%]+~ ~~
+  PRETTY_PRINT_2DA
+
+// prevent SI from being used in Chain Contingency
+COPY_EXISTING ~contingx.2da~ ~override/contingx.2da~
+  COUNT_2DA_COLS ~colcount~
+  COUNT_2DA_ROWS ~colcount~ ~rowcount~
+  SET_2DA_ENTRY 0 5 ~colcount~ ~SPWI510~
+  PRETTY_PRINT_2DA
+
+// copy a custom 2da to use in ZoSA opcode for the Soothing Fog spell
+// COPY ~ImprovedAnvil/resources/2da/soothfog.2da~ ~override/soothfog.2da~
+
+// copy a custom 2da to use in 214 opcode for the Entropy Shield spell
+COPY ~ImprovedAnvil/resources/2da/SPPR545.2da~ ~override/SPPR545.2da~
+
+// copy a custom 2da to use in 214 opcode for the Spiritual Weapon spell
+COPY ~ImprovedAnvil/resources/2da/SPPR445.2da~ ~override/SPPR445.2da~
+
+// add custom spells to a list of exclusion from automatically learnable spells
+COPY_EXISTING ~hidespl.2da~ ~override/hidespl.2da~
+  COUNT_2DA_COLS ~colcount~
+  COUNT_2DA_ROWS ~colcount~ ~rowcount~
+  INSERT_2DA_ROW ~rowcount~ ~colcount~ ~SPPR445 1 0 0~
+  INSERT_2DA_ROW ~rowcount~ ~colcount~ ~SPPR446 1 0 0~
+  INSERT_2DA_ROW ~rowcount~ ~colcount~ ~SPPR447 1 0 0~
+  INSERT_2DA_ROW ~rowcount~ ~colcount~ ~SPPR448 1 0 0~
+  INSERT_2DA_ROW ~rowcount~ ~colcount~ ~SPPR449 1 0 0~
+  INSERT_2DA_ROW ~rowcount~ ~colcount~ ~SPPR545 1 0 0~
+  INSERT_2DA_ROW ~rowcount~ ~colcount~ ~SPPR546 1 0 0~
+  INSERT_2DA_ROW ~rowcount~ ~colcount~ ~SPPR547 1 0 0~
+  INSERT_2DA_ROW ~rowcount~ ~colcount~ ~SPPR548 1 0 0~
+  INSERT_2DA_ROW ~rowcount~ ~colcount~ ~SPPR549 1 0 0~
+  INSERT_2DA_ROW ~rowcount~ ~colcount~ ~SPPR649 1 0 0~
+  INSERT_2DA_ROW ~rowcount~ ~colcount~ ~SPPR749 1 0 0~
+  PRETTY_PRINT_2DA
+
+// disable automatic assignment of auto AI to the party
+COPY_EXISTING ~partyai.2da~ ~override~
+  REPLACE_TEXTUALLY ~BD[A-Z]+~ ~DEFAULT~
+  BUT_ONLY
+
+// update kit description strings
+COPY_EXISTING ~clastext.2da~ ~override/clastext.2da~
+  COUNT_2DA_COLS ~colcount~
+  COUNT_2DA_ROWS ~colcount~ ~rowcount~
+
+  SET column_patched = 0
+
+  FOR (i = 0; i < rowcount; i += 1) BEGIN
+    READ_2DA_ENTRY i 1 colcount classid
+
+    // the shaman class
+    PATCH_IF ("%classid%" STRING_COMPARE_CASE "21" = 0) AND (column_patched = 0) BEGIN
+      READ_2DA_ENTRY i 4 colcount descstr
+      SET_2DA_ENTRY i 4 colcount RESOLVE_STR_REF (@11114)
+
+      SET column_patched = 1
+    END
+  END
+
+  PATCH_IF column_patched = 0 BEGIN
+    PATCH_FAIL "Error: row not found in clastext.2da, could not patch the description for the Shaman class"
+  END
+
+  BUT_ONLY
+
+// prevent double duration Time Stop + Improved Alacrity wish option from appearing
+COPY_EXISTING ~wish.2da~  ~override/wish.2da~
+  REPLACE_TEXTUALLY ~23.+23.+23.+22~ ~23 23 23 21~
+  REPLACE_TEXTUALLY ~35.+35.+35.+21~ ~35 35 35 25~
+  REPLACE_TEXTUALLY ~27.+27.+22~ ~27 27 18~
+  PRETTY_PRINT_2DA
+
+// add custom conditions for splprot
+COPY_EXISTING ~splprot.2da~ ~override/splprot.2da~
+  COUNT_2DA_COLS ~colcount~
+  COUNT_2DA_ROWS ~colcount~ ~rowcount~
+
+  // add a condition to check if HP is lower than given value
+  SET hp_lower_than = %rowcount%
+  INSERT_2DA_ROW ~%hp_lower_than%~ ~colcount~ ~%hp_lower_than%_HP<n 0x000 -1 2~
+
+  // add a condition to check if HP is greater than given value
+  SET hp_greater_than = %rowcount% + 1
+  INSERT_2DA_ROW ~%hp_greater_than%~ ~colcount~ ~%hp_greater_than%_HP>n 0x000 -1 3~
+
+  PRETTY_PRINT_2DA
+
+// update the wild surge table
+COPY_EXISTING ~wildmag.2da~ ~override/wildmag.2da~
+  COUNT_2DA_COLS ~colcount~
+  COUNT_2DA_ROWS ~colcount~ ~rowcount~
+
+  SET_2DA_ENTRY 12 1 ~colcount~ ~SPWM103~
+  SET_2DA_ENTRY 12 2 ~colcount~ ~316~
+
+  SET_2DA_ENTRY 13 1 ~colcount~ ~SPWM103~
+  SET_2DA_ENTRY 13 2 ~colcount~ ~316~
+
+  SET_2DA_ENTRY 14 1 ~colcount~ ~SPWISH37~
+  SET_2DA_ENTRY 14 2 ~colcount~ ~25937~
+
+  SET_2DA_ENTRY 15 1 ~colcount~ ~SPWM103~
+  SET_2DA_ENTRY 15 2 ~colcount~ ~316~
+
+  SET_2DA_ENTRY 18 1 ~colcount~ ~SPWI408~
+  SET_2DA_ENTRY 18 2 ~colcount~ ~8300~
+
+  SET_2DA_ENTRY 26 1 ~colcount~ ~SPINI57~
+  SET_2DA_ENTRY 26 2 ~colcount~ ~8313~
+
+  SET_2DA_ENTRY 31 1 ~colcount~ ~SPWISH10~
+  SET_2DA_ENTRY 31 2 ~colcount~ ~7568~
+
+  SET_2DA_ENTRY 46 1 ~colcount~ ~SPWISH10~
+  SET_2DA_ENTRY 46 2 ~colcount~ ~7568~
+
+  SET_2DA_ENTRY 49 1 ~colcount~ ~SPWI712~
+  SET_2DA_ENTRY 49 2 ~colcount~ RESOLVE_STR_REF (@11151)
+
+  SET_2DA_ENTRY 52 2 ~colcount~ ~5293~
+
+  SET_2DA_ENTRY 60 1 ~colcount~ ~SPINI99~
+  SET_2DA_ENTRY 60 2 ~colcount~ ~7468~
+
+  SET_2DA_ENTRY 61 1 ~colcount~ ~SPINI99~
+  SET_2DA_ENTRY 61 2 ~colcount~ ~7468~
+
+  SET_2DA_ENTRY 63 1 ~colcount~ ~SPWI815~
+  SET_2DA_ENTRY 63 2 ~colcount~ RESOLVE_STR_REF (@11151)
+
+  SET_2DA_ENTRY 65 1 ~colcount~ ~SPWI501~
+  SET_2DA_ENTRY 65 2 ~colcount~ ~12073~
+
+  SET_2DA_ENTRY 68 1 ~colcount~ ~SPWI501~
+  SET_2DA_ENTRY 68 2 ~colcount~ ~12073~
+
+  SET_2DA_ENTRY 69 1 ~colcount~ ~SPINI57~
+  SET_2DA_ENTRY 69 2 ~colcount~ ~8313~
+
+  SET_2DA_ENTRY 70 1 ~colcount~ ~SPWI601~
+  SET_2DA_ENTRY 70 2 ~colcount~ RESOLVE_STR_REF (@11151)
+
+  SET_2DA_ENTRY 71 1 ~colcount~ ~SPINI59~
+  SET_2DA_ENTRY 71 2 ~colcount~ ~22904~
+
+  SET_2DA_ENTRY 75 1 ~colcount~ ~SPWI601~
+  SET_2DA_ENTRY 75 2 ~colcount~ RESOLVE_STR_REF (@11151)
+
+  SET_2DA_ENTRY 76 1 ~colcount~ ~SPWI712~
+  SET_2DA_ENTRY 76 2 ~colcount~ RESOLVE_STR_REF (@11151)
+
+  SET_2DA_ENTRY 78 1 ~colcount~ ~SPINI59~
+  SET_2DA_ENTRY 78 2 ~colcount~ ~22904~
+
+  SET_2DA_ENTRY 82 1 ~colcount~ ~SPWI618~
+  SET_2DA_ENTRY 82 2 ~colcount~ RESOLVE_STR_REF (@11151)
+
+  SET_2DA_ENTRY 83 1 ~colcount~ ~SPWI618~
+  SET_2DA_ENTRY 83 2 ~colcount~ RESOLVE_STR_REF (@11151)
+
+  SET_2DA_ENTRY 84 1 ~colcount~ ~SPWI501~
+  SET_2DA_ENTRY 84 2 ~colcount~ ~12073~
+
+  SET_2DA_ENTRY 86 1 ~colcount~ ~SPINI59~
+  SET_2DA_ENTRY 86 2 ~colcount~ ~22904~
+
+  SET_2DA_ENTRY 90 1 ~colcount~ ~SPWI815~
+  SET_2DA_ENTRY 90 2 ~colcount~ RESOLVE_STR_REF (@11151)
+
+  SET_2DA_ENTRY 91 2 ~colcount~ ~5293~
+
+  SET_2DA_ENTRY 92 1 ~colcount~ ~SPWI712~
+  SET_2DA_ENTRY 92 2 ~colcount~ RESOLVE_STR_REF (@11151)
+
+  SET_2DA_ENTRY 93 1 ~colcount~ ~SPWISH37~
+  SET_2DA_ENTRY 93 2 ~colcount~ ~25937~
+
+  SET_2DA_ENTRY 97 1 ~colcount~ ~SPINI99~
+  SET_2DA_ENTRY 97 2 ~colcount~ ~7468~
+
+// update the list of master areas
+APPEND ~mastarea.2da~ ~S!0001     value~
+APPEND ~mastarea.2da~ ~S!0002     value~
+APPEND ~mastarea.2da~ ~S!0005     value~
+APPEND ~mastarea.2da~ ~S!0007     value~
+
+// Add projectiles //
+
+ADD_PROJECTILE ~ImprovedAnvil\resources\projectiles\S!IWD298.PRO~
+ADD_PROJECTILE ~ImprovedAnvil\resources\projectiles\S!SUPER.PRO~
+ADD_PROJECTILE ~ImprovedAnvil\resources\projectiles\S!corrcl.pro~
+
+OUTER_SET corrcl_id = "%S!corrcl%" - 1
+APPEND ~clearair.2da~ ~Corrosive_Cloud %corrcl_id%~

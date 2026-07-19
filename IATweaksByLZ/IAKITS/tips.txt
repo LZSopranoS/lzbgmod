@@ -1,0 +1,14 @@
+ImprovedAnvil\resources\2da
+
+
+ImprovedAnvil\lib\kits里的5个tph使用WEIDU命令ADD_KIT时会在HPCLASS.2DA新增以下5条：
+
+VAGRANT             HPWAR
+
+AURAMASTER          HPPRS
+
+RISKBREAKER         HPWAR
+
+PROTECTOR           HPWAR
+
+ARVOREEN            HPWAR

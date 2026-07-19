@@ -1,0 +1,143 @@
+LOAD_TRA ~lzbgmod/TymoraTeam/lang/schinese/install.tra~
+
+COPY ~lzbgmod/TymoraTeam/copy~ ~override~
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BDPGOOD.CRE~  THEN BEGIN
+    COPY ~lzbgmod/TymoraTeam/copyif/BDPGOOD.CRE~   ~override~
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AC#DTTP.spl~  THEN BEGIN
+    COPY ~lzbgmod/TymoraTeam/copyif/AC#DTTP.spl~   ~override~
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~s#sw1h01.itm~  THEN BEGIN
+    COPY ~lzbgmod/TymoraTeam/copyif/s#sw1h01.itm~   ~override~
+	COPY ~lzbgmod/TymoraTeam/copyif/s#evhit2.eff~   ~override~
+    COPY ~lzbgmod/TymoraTeam/copyif/s#evdam4.eff~   ~override~
+	COPY ~lzbgmod/TymoraTeam/copyif/s#und1d8.eff~   ~override~
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BDSW1H2.ITM~  THEN BEGIN
+    COPY ~lzbgmod/TymoraTeam/copyif/BDSW1H2.ITM~   ~override~
+	COPY ~lzbgmod/TymoraTeam/copyif/BDSW1H2.EFF~   ~override~
+	ACTION_IF NOT FILE_EXISTS_IN_GAME ~ISW1H61.BAM~  THEN BEGIN
+		COPY ~lzbgmod/TymoraTeam/copyif/ISW1H61.BAM~   ~override~
+	    COPY ~lzbgmod/TymoraTeam/copyif/PSW1H60.BAM~   ~override~
+    END 
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BDSHLD2.ITM~  THEN BEGIN
+    COPY ~lzbgmod/TymoraTeam/copyif/BDSHLD2.ITM~   ~override~
+    COPY ~lzbgmod/TymoraTeam/copyif/BDSHLD2A.spl~   ~override~
+	COPY ~lzbgmod/TymoraTeam/copyif/BDSHLD2B.spl~   ~override~
+	ACTION_IF NOT FILE_EXISTS_IN_GAME ~cdunb114.bam~  THEN BEGIN
+		COPY ~lzbgmod/TymoraTeam/copyif/cdunb114.bam~   ~override~
+    END 
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~z0ring81.itm~  THEN BEGIN
+    COPY ~lzbgmod/TymoraTeam/copyif/z0ring81.itm~   ~override~
+		SAY NAME2 @211
+	    SAY IDENTIFIED_DESC @212
+	COPY ~lzbgmod/TymoraTeam/copyif/IRINGH5.BAM~   ~override~
+	COPY ~lzbgmod/TymoraTeam/copyif/CRINGH5.BAM~   ~override~
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~ROBEARM.ITM~  THEN BEGIN
+    COPY ~lzbgmod/TymoraTeam/copyif/ROBEARM.ITM~   ~override~
+	COPY ~lzbgmod/TymoraTeam/copyif/IROBEARM.BAM~   ~override~
+	COPY ~lzbgmod/TymoraTeam/copyif/CROBEARM.BAM~   ~override~
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~mobt09.itm~  THEN BEGIN
+    COPY ~lzbgmod/TymoraTeam/copyif/mobt09.itm~   ~override~
+	COPY ~lzbgmod/TymoraTeam/copyif/mobt09.bam~   ~override~
+	COPY ~lzbgmod/TymoraTeam/copyif/mobt09a.bam~   ~override~
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~s#helm01.itm~  THEN BEGIN
+    COPY ~lzbgmod/TymoraTeam/copyif/s#helm01.itm~   ~override~
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~s#amul02.itm~  THEN BEGIN
+    COPY ~lzbgmod/TymoraTeam/copyif/s#amul02.itm~   ~override~
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~s#chan01.itm~  THEN BEGIN
+    COPY ~lzbgmod/TymoraTeam/copyif/s#chan01.itm~   ~override~
+	COPY ~lzbgmod/TymoraTeam/copyif/s#chan01.bam~   ~override~
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~NWHAMM1.ITM~  THEN BEGIN
+    COPY ~lzbgmod/TymoraTeam/copyif/NWHAMM1.ITM~   ~override~
+	COPY ~lzbgmod/TymoraTeam/copyif/NWHAMM1.BAM~   ~override~
+END
+
+COPY ~lzbgmod/TymoraTeam/copysay/LZGLCHAN.ITM~ ~override~
+	SAY NAME2 @206
+	SAY IDENTIFIED_DESC @207
+
+COPY ~lzbgmod/TymoraTeam/copysay/OHBOSSA.CRE~ ~override~
+    SAY NAME1 @200
+	SAY NAME2 @200
+	
+COPY ~lzbgmod/TymoraTeam/copysay/OHBOSSB.CRE~ ~override~
+    SAY NAME1 @201
+	SAY NAME2 @201
+	
+COPY ~lzbgmod/TymoraTeam/copysay/OHABONE.cre~ ~override~
+    SAY NAME1 @202
+	SAY NAME2 @202
+	
+COPY ~lzbgmod/TymoraTeam/copysay/OHABTWO.CRE~ ~override~
+    SAY NAME1 @203
+	SAY NAME2 @203
+	
+COPY ~lzbgmod/TymoraTeam/copysay/OHABTHR.CRE~ ~override~
+    SAY NAME1 @204
+	SAY NAME2 @204
+	
+COPY ~lzbgmod/TymoraTeam/copysay/OHABFOR.CRE~ ~override~
+    SAY NAME1 @205
+	SAY NAME2 @205
+
+COMPILE ~lzbgmod/TymoraTeam/baf/OHBBCUTA.BAF~
+
+COMPILE ~lzbgmod/TymoraTeam/baf/OHBBCUTB.BAF~
+
+COMPILE ~lzbgmod/TymoraTeam/baf/OHBBWISH.BAF~
+
+COMPILE ~lzbgmod/TymoraTeam/baf/OHSSAB.BAF~
+
+EXTEND_BOTTOM ~OH6460.BCS~ ~lzbgmod/TymoraTeam/baf/OH6460.BAF~
+
+COMPILE ~lzbgmod/TymoraTeam/bafnormal/OHBOSSA.BAF~   //非铁砧
+
+COMPILE ~lzbgmod/TymoraTeam/bafnormal/OHBOSSB.BAF~   //非铁砧
+
+COMPILE ~lzbgmod/TymoraTeam/bafnormal/OHABONE.BAF~   //非铁砧
+
+COMPILE ~lzbgmod/TymoraTeam/bafnormal/OHABTWO.BAF~   //非铁砧
+
+COMPILE ~lzbgmod/TymoraTeam/bafnormal/OHABTHR.BAF~   //非铁砧
+
+COMPILE ~lzbgmod/TymoraTeam/bafnormal/OHABFOR.BAF~   //非铁砧
+
+//非铁砧，已改为在tp2中进行判断
+//ACTION_IF NOT MOD_IS_INSTALLED ~ImprovedAnvil.tp2~ 0  THEN BEGIN
+    COPY ~lzbgmod/TymoraTeam/copyif/S!dracon.itm~   ~override~
+    COPY ~lzbgmod/TymoraTeam/copyif/S!trap.itm~     ~override~
+    COPY ~lzbgmod/TymoraTeam/copyif/S!runef.itm~    ~override~
+    COPY ~lzbgmod/TymoraTeam/copyif/S!cleric.itm~   ~override~
+    COPY ~lzbgmod/TymoraTeam/copyif/SPWII07.spl~    ~override~
+    //COPY ~lzbgmod/TymoraTeam/copyif/SPINI70.spl~    ~override~
+    //COPY ~lzbgmod/TymoraTeam/copyif/SPINI71.spl~    ~override~
+    COPY ~lzbgmod/TymoraTeam/copyif/SPINI87.spl~    ~override~
+    COPY ~lzbgmod/TymoraTeam/copyif/SPINI88.spl~    ~override~
+    COPY ~lzbgmod/TymoraTeam/copyif/SPINI66.spl~    ~override~
+	//EXTEND_TOP ~OHSSAB.BCS~ ~lzbgmod/TymoraTeam/bafnormal/OHSSAB2.BAF~
+//END
+
+ACTION_IF (GAME_IS ~eet~) THEN BEGIN
+	COPY ~lzbgmod/sceetfix/SPIN151.SPL~ ~override~
+END

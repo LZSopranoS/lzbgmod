@@ -1,0 +1,371 @@
+//修改ShineOnCaelar MOD文件
+COPY - ~ShineOnCaelar/ToBD/AunToB.d~ ~.../soc_temp_patch~
+
+    //%LNL%Linux系统的换行符，%MNL%Mac系统的换行符，%WNL%Windows系统的换行符， 表示物理空格，%TAB%表示Tab键(缩进键)。
+    REPLACE_TEXTUALLY ~SetMasterArea("BD4000")[%LNL%%MNL%%WNL% %TAB%]+LeaveAreaLUAPanic("BD4500","",[^)]+[)]~ ~LeaveAreaLUAPanic("XAG101","",[1290.840],SW)~
+
+    //遇到[2123.359]这种[或]无法正确识别，改为[^)]+[)][)]。  ^)排除右括号，+匹配一次或连续多次，[^)]+表示连续匹配多个不是右括号 )的任意字符。 [)][)]连续匹配结尾两个右括号))。
+    REPLACE_TEXTUALLY ~ActionOverride(Player1,LeaveAreaLUA("BD4500","",[^)]+[)][)]~ ~ActionOverride(Player1,LeaveAreaLUA("XAG101","",[1290.840],SW))~
+    REPLACE_TEXTUALLY ~ActionOverride(Player2,LeaveAreaLUA("BD4500","",[^)]+[)][)]~ ~ActionOverride(Player2,LeaveAreaLUA("XAG101","",[1360.880],SW))~
+    REPLACE_TEXTUALLY ~ActionOverride(Player3,LeaveAreaLUA("BD4500","",[^)]+[)][)]~ ~ActionOverride(Player3,LeaveAreaLUA("XAG101","",[1250.870],SW))~
+    REPLACE_TEXTUALLY ~ActionOverride(Player4,LeaveAreaLUA("BD4500","",[^)]+[)][)]~ ~ActionOverride(Player4,LeaveAreaLUA("XAG101","",[1300.910],SW))~
+    REPLACE_TEXTUALLY ~ActionOverride(Player5,LeaveAreaLUA("BD4500","",[^)]+[)][)]~ ~ActionOverride(Player5,LeaveAreaLUA("XAG101","",[1200.900],SW))~
+    REPLACE_TEXTUALLY ~ActionOverride(Player6,LeaveAreaLUA("BD4500","",[^)]+[)][)]~ ~ActionOverride(Player6,LeaveAreaLUA("XAG101","",[1260.950],SW))~
+	
+COPY ~.../soc_temp_patch~ ~ShineOnCaelar/ToBD/AunToB.d~
+
+
+//修改游戏文件
+LOAD_TRA ~lzbgmod/SOC_TBDEMON/lang/schinese/install.tra~
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AC#MFG2.BAM~ THEN BEGIN
+//以下hexadecimal number和animation部分来自MOD失落女神的呼唤
+/**
+ * Converts any decimal number into a hexadecimal number
+ */
+DEFINE_ACTION_FUNCTION TO_HEX_NUMBER
+INT_VAR
+  value     = 0   // the decimal number
+  minDigits = 1   // min. number of digits in return value (not counting sign)
+  prefix    = 0   // whether to return number with "0x" prefix
+  signed    = 1   // whether number is treated as a signed number
+  upperCase = 0   // whether to represent alphabetic digits in upper case
+RET
+  hexNumber       // returned as string without prefix
+BEGIN
+  ACTION_IF (minDigits < 1) BEGIN OUTER_SET minDigits = 1 END
+  ACTION_IF (minDigits > 8) BEGIN OUTER_SET minDigits = 8 END
+  OUTER_TEXT_SPRINT hexNumber ~~
+  ACTION_DEFINE_ARRAY digit BEGIN ~0~ ~1~ ~2~ ~3~ ~4~ ~5~ ~6~ ~7~ ~8~ ~9~ ~a~ ~b~ ~c~ ~d~ ~e~ ~f~ END
+
+  ACTION_IF (signed && value < 0) BEGIN
+    OUTER_SET isSigned = 1
+    OUTER_SET value = 0 - value
+  END ELSE BEGIN
+    OUTER_SET isSigned = 0
+  END
+
+  OUTER_WHILE (value != 0) BEGIN
+    OUTER_SET curDigit = value BAND 0xf
+    OUTER_SET value = value BLSR 4
+    OUTER_TEXT_SPRINT hexDigit $EVAL digit(~%curDigit%~)
+    OUTER_TEXT_SPRINT hexNumber ~%hexDigit%%hexNumber%~
+  END
+
+  OUTER_WHILE (STRING_LENGTH ~%hexNumber%~ < minDigits) BEGIN
+    OUTER_TEXT_SPRINT hexNumber ~0%hexNumber%~
+  END
+
+  ACTION_IF (upperCase) BEGIN
+    ACTION_TO_UPPER ~hexNumber~
+  END
+
+  ACTION_IF (prefix) BEGIN
+    OUTER_TEXT_SPRINT hexNumber ~0x%hexNumber%~
+  END
+
+  ACTION_IF (isSigned) BEGIN
+    OUTER_TEXT_SPRINT hexNumber ~-%hexNumber%~
+  END
+END
+
+DEFINE_PATCH_FUNCTION TO_HEX_NUMBER
+INT_VAR
+  value     = 0
+  minDigits = 1
+  prefix    = 0
+  signed    = 1
+  upperCase = 0
+RET
+  hexNumber
+BEGIN
+  INNER_ACTION BEGIN
+    LAF TO_HEX_NUMBER INT_VAR value minDigits prefix signed upperCase RET hexNumber END
+  END
+END
+
+// Animation slots reserved by vanilla or mod-added game creatures (in hexadecimal format)
+// Supported mods:
+// - Bearwalker + extended Werebear animation
+// - Pack Mule
+<<<<<<<< .../inlined/creature/animation/slots.txt
+"0410" "1000" "1003" "1004" "1100" "1101" "1102" "1103" "1104" "1105" "1200" "1201" "1202" "1203" "1204" "1205" "1206" "1207" "1208" "1300" "2000" "2100" "2200" "2300" "3000" "3001" "4000" "4001" "4002" "4010" "4012" "4100" "4101" "4102" "4110" "4112" "4200" "4300" "4400" "4410" "4500" "4600" "4700" "4710" "4800" "5000" "5001" "5002" "5003" "5010" "5011" "5012" "5013" "5100" "5101" "5102" "5103" "5110" "5111" "5112" "5113" "5200" "5201" "5202" "5210" "5211" "5212" "5300" "5301" "5302" "5303" "5310" "5311" "5312" "5313" "6000" "6001" "6002" "6003" "6004" "6005" "6010" "6011" "6012" "6013" "6014" "6015" "6100" "6101" "6102" "6103" "6104" "6105" "6110" "6111" "6112" "6113" "6114" "6115" "6200" "6201" "6202" "6204" "6205" "6210" "6211" "6212" "6214" "6215" "6300" "6301" "6302" "6303" "6304" "6305" "6310" "6311" "6312" "6313" "6314" "6315" "6400" "6401" "6402" "6403" "6404" "6405" "6406" "6500" "6510" "6621" "7000" "7001" "7100" "7101" "7200" "7201" "7202" "7203" "7300" "7301" "7302" "7310" "7311" "7312" "7313" "7314" "7320" "7321" "7400" "7401" "7402" "7500" "7501" "7600" "7601" "7602" "7603" "7604" "7700" "7701" "7702" "7703" "7800" "7801" "7802" "7900" "7901" "7902" "7903" "7904" "7a00" "7a01" "7a02" "7a03" "7a04" "7b00" "7b01" "7b02" "7b03" "7b04" "7b05" "7b06" "7c00" "7c01" "7d00" "7d01" "7d02" "7d03" "7d04" "7d05" "7d06" "7d07" "7d08" "7e00" "7e01" "7f00" "7f01" "7f02" "7f03" "7f04" "7f05" "7f06" "7f07" "7f08" "7f09" "7f0a" "7f0b" "7f0c" "7f0d" "7f0e" "7f0f" "7f10" "7f11" "7f12" "7f13" "7f14" "7f15" "7f16" "7f17" "7f18" "7f19" "7f20" "7f21" "7f22" "7f23" "7f24" "7f27" "7f28" "7f29" "7f2a" "7f2b" "7f2c" "7f2d" "7f2e" "7f2f" "7f30" "7f31" "7f32" "7f33" "7f34" "7f35" "7f36" "7f37" "7f38" "7f39" "7f3a" "7f3b" "7f3c" "7f3d" "7f3e" "7f3f" "7f40" "7f41" "7f42" "7f43" "7f44" "7f45" "7f46" "7f47" "7f48" "7f49" "7f4a" "7f4b" "7f4c" "7f4d" "7f4e" "7f4f" "7f50" "7f51" "7f52" "7f53" "7f54" "7f55" "7f56" "7f57" "7f58" "7f59" "7f5a" "7f5b" "7f5c" "7f5d" "7f5e" "7f5f" "7f60" "7f61" "7f62" "8000" "8100" "8200" "9000" "a000" "a100" "a200" "a201" "a202" "b000" "b100" "b200" "b210" "b300" "b310" "b400" "b410" "b500" "b510" "b600" "b610" "b700" "c000" "c100" "c200" "c300" "c400" "c500" "c600" "c610" "c700" "c710" "c800" "c810" "c900" "c910" "ca00" "ca10" "cb00" "cc00" "cc01" "cc02" "cc04" "d000" "d100" "d200" "d300" "d400" "e000" "e010" "e020" "e040" "e050" "e060" "e070" "e080" "e090" "e0a0" "e0b0" "e0c0" "e0d0" "e0e0" "e0f0" "e0f1" "e0f2" "e200" "e210" "e220" "e230" "e240" "e241" "e242" "e243" "e244" "e245" "e246" "e247" "e248" "e249" "e24a" "e24b" "e24c" "e24d" "e24e" "e24f" "e250" "e251" "e252" "e253" "e254" "e255" "e256" "e257" "e258" "e259" "e25a" "e25b" "e25c" "e25d" "e25e" "e25f" "e260" "e261" "e262" "e263" "e264" "e265" "e266" "e267" "e26a" "e26b" "e26d" "e26e" "e26f" "e270" "e271" "e272" "e273" "e274" "e276" "e279" "e27d" "e27e" "e27f" "e280" "e281" "e282" "e283" "e288" "e289" "e28a" "e28b" "e28c" "e28d" "e28e" "e28f" "e290" "e291" "e292" "e293" "e294" "e300" "e310" "e320" "e330" "e400" "e410" "e420" "e430" "e440" "e441" "e442" "e443" "e444" "e500" "e510" "e520" "e600" "e610" "e6fe" "e700" "e710" "e720" "e800" "e810" "e820" "e830" "e840" "e900" "e910" "ea00" "ea10" "ea20" "eb00" "eb10" "eb20" "ec00" "ec10" "ec20" "ed00" "ed10" "ed20" "ee00" "ee10" "ef10"
+>>>>>>>>
+OUTER_TEXT_SPRINT animationSlotsPath ".../inlined/creature/animation/slots.txt"
+
+/**
+ * Returns the first free creature animation slot in the range defined by slotMin and slotMax.
+ * INT_VAR slotMin    Lowest available creature animation slot for the animation.
+ * INT_VAR slotMax    Highest available creature animation slot for the animation.
+ * INT_VAR slotSteps  How many slots to skip after each iteration, starting from slotMin.
+ *                    Setting this parameter is useful if compatible animation slots are always 
+ *                    a fixed distance apart (e.g. at a distance of 0x10 each)
+ * RET slot           A free animation slot. Returns -1 if none found.
+ */
+DEFINE_ACTION_FUNCTION FIND_FREE_ANIM_SLOT
+INT_VAR
+  slotMin   = 0
+  slotMax   = (slotMin BAND 0xf000) + 0x1000
+  slotSteps = 1
+RET
+  slot
+BEGIN
+  OUTER_SET slot = "-1"
+  ACTION_IF (slotSteps < 1) BEGIN OUTER_SET slotSteps = 1 END
+  ACTION_IF (slotMin < 0) BEGIN OUTER_SET slotMin = 0 END
+  ACTION_IF (slotMax < 0) BEGIN OUTER_SET slotMax = 0 END
+  ACTION_IF (slotMax < slotMin) BEGIN
+    OUTER_SET tmp = slotMin
+    OUTER_SET slotMin = slotMax
+    OUTER_SET slotMax = tmp
+  END
+
+  // animslots.txt contains reserved creature animation slots
+  COPY - ~%animationSlotsPath%~ ~%animationSlotsPath%~
+    READ_ASCII 0 slotList (SOURCE_SIZE)
+    FOR (idx = slotMin; idx < slotMax; idx += slotSteps) BEGIN
+      LOOKUP_IDS_SYMBOL_OF_INT name ~animate~ idx
+      PATCH_IF (~%name%~ STRING_EQUAL ~%idx%~) BEGIN
+        LPF TO_HEX_NUMBER INT_VAR value = idx minDigits = 4 RET hexNumber END
+        PATCH_IF (NOT FILE_EXISTS_IN_GAME ~%hexNumber%.ini~ AND 
+                  ~%slotList%~ STRING_CONTAINS_REGEXP ~"%hexNumber%"~ != 0) BEGIN
+          SET slot = idx
+          SET idx = slotMax
+        END
+      END
+    END
+END
+
+DEFINE_PATCH_FUNCTION FIND_FREE_ANIM_SLOT
+INT_VAR
+  slotMin   = 0
+  slotMax   = (slotMin BAND 0xf000) + 0x1000
+  slotSteps = 1
+RET
+  slot
+BEGIN
+  INNER_ACTION BEGIN
+    LAF FIND_FREE_ANIM_SLOT INT_VAR slotMin = slotMin slotMax = slotMax slotSteps = slotSteps RET slot END
+  END
+END
+
+// Mefisto 来自MOD失落女神的呼唤
+LAF FIND_FREE_ANIM_SLOT INT_VAR slotMin = 0x7f15 slotMax = slotMin + 0xff RET slot END
+ACTION_IF (slot <= 0) BEGIN
+    FAIL ~No free creature animation slot found.~
+END
+LAF TO_HEX_NUMBER INT_VAR value = slot minDigits = 4 RET hexNumber END
+APPEND ~animate.ids~ ~0x%hexNumber% MEFISTO_ACIFER~ UNLESS ~MEFISTO_ACIFER~
+    CLEAR_IDS_MAP
+COPY ~lzbgmod/SOC_TBDEMON/animation/Mefisto/exxx.ini~ ~override/%hexNumber%.ini~
+ACTION_BASH_FOR ~lzbgmod/SOC_TBDEMON/animation/Mefisto~ ~^.+\.bam$~ BEGIN
+    COPY ~%BASH_FOR_FILESPEC%~ ~override~
+END
+
+// Alkilith 来自MOD失落女神的呼唤
+LAF FIND_FREE_ANIM_SLOT INT_VAR slotMin = 0x7f15 slotMax = slotMin + 0xff RET slot END
+ACTION_IF (slot <= 0) BEGIN
+    FAIL ~No free creature animation slot found.~
+END
+LAF TO_HEX_NUMBER INT_VAR value = slot minDigits = 4 RET hexNumber END
+APPEND ~animate.ids~ ~0x%hexNumber% ALKILITH_ACIFER~ UNLESS ~ALKILITH_ACIFER~
+  CLEAR_IDS_MAP
+COPY ~lzbgmod/SOC_TBDEMON/animation/Alkilith/exxx.ini~ ~override/%hexNumber%.ini~
+ACTION_BASH_FOR ~lzbgmod/SOC_TBDEMON/animation/Alkilith~ ~^.+\.bam$~ BEGIN
+    COPY ~%BASH_FOR_FILESPEC%~ ~override~
+END
+
+END
+
+
+//tables 修复TOB凯拉对话触发问题
+
+APPEND ~interdia.2da~ ~BDCAELAR  NONE  BDCAELAR~ UNLESS ~BDCAELAR~
+
+COPY_EXISTING ~interdia.2da~  ~override~
+    PRETTY_PRINT_2DA
+
+APPEND ~pdialog.2da~ ~BDCAELAR     BDCAELAR     BDCAELAR     BDCAELAR     BDCAELAR     BDCAELAR     BDCAELAR     BDCAELAR~ UNLESS ~BDCAELAR~
+
+COPY_EXISTING ~pdialog.2da~  ~override~
+    PRETTY_PRINT_2DA
+
+//CREATURE
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~BDPGOOD.CRE~ THEN BEGIN
+    COPY ~lzbgmod/SOC_TBDEMON/cre/BDPGOOD.CRE~ ~override~
+END
+
+COPY ~lzbgmod/SOC_TBDEMON/cre/BDNWISH.CRE~ ~override~
+
+COPY ~lzbgmod/SOC_TBDEMON/cre/OHBBRVG2.CRE~ ~override~
+
+COPY ~lzbgmod/SOC_TBDEMON/cre/BDSHANG.CRE~ ~override~
+SAY NAME1 @329
+SAY NAME2 @329
+WRITE_LONG 0x28 (IDS_OF_SYMBOL (~animate~ ~MEFISTO_ACIFER~))
+
+COPY ~lzbgmod/SOC_TBDEMON/cre/BDLAYEN.CRE~ ~override~
+SAY NAME1 @330
+SAY NAME2 @330
+WRITE_LONG 0x28 (IDS_OF_SYMBOL (~animate~ ~MEFISTO_ACIFER~))
+
+COPY ~lzbgmod/SOC_TBDEMON/cre/BDSZA.CRE~ ~override~
+SAY NAME1 @331
+SAY NAME2 @331
+WRITE_LONG 0x28 (IDS_OF_SYMBOL (~animate~ ~MEFISTO_ACIFER~))
+
+//ITEM
+
+COPY ~lzbgmod/SOC_TBDEMON/itm/BDHELMCA.ITM~ ~override~       //北极星头环，恢复凯拉原来配色。把斗篷BDFINCA1.ITM上的配色移到头环上。
+
+COPY ~lzbgmod/SOC_TBDEMON/itm/BDHELM2.ITM~ ~override~
+SAY DESC @322
+
+COPY ~lzbgmod/SOC_TBDEMON/itm/BDSHLD2.ITM~ ~override~
+SAY NAME2 @323
+SAY DESC @324
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~cdunb114.bam~ THEN BEGIN
+    COPY ~lzbgmod/SOC_TBDEMON/itm/cdunb114.bam~ ~override~  //神侍圣盾+5新图片
+END
+
+COPY ~lzbgmod/SOC_TBDEMON/itm/BDSW1H2.ITM~ ~override~
+SAY NAME2 @325
+SAY DESC @326
+COPY ~lzbgmod/SOC_TBDEMON/itm/BDSW1H2.EFF~ ~override~
+
+COPY ~lzbgmod/SOC_TBDEMON/itm/xaring22.itm~ ~override~
+SAY NAME2 @327
+SAY DESC @328
+COPY ~lzbgmod/SOC_TBDEMON/itm/xairing.bam~ ~override~
+COPY ~lzbgmod/SOC_TBDEMON/itm/xaring.bam~ ~override~
+
+//AREA
+COPY ~lzbgmod/SOC_TBDEMON/are~ ~override~
+
+//SPELL
+COPY ~lzbgmod/SOC_TBDEMON/spl~ ~override~
+
+
+COMPILE ~lzbgmod/SOC_TBDEMON/d~
+
+
+COMPILE ~lzbgmod/SOC_TBDEMON/baf/SHANGTLK.BAF~
+COMPILE ~lzbgmod/SOC_TBDEMON/baf/BDNCUT34.BAF~
+COMPILE ~lzbgmod/SOC_TBDEMON/baf/BDNWISH.BAF~
+
+COMPILE ~lzbgmod/SOC_TBDEMON/baf/xag101.BAF~
+
+EXTEND_BOTTOM ~AR5202.BCS~ ~lzbgmod/SOC_TBDEMON/baf/AR5202.BAF~
+
+
+ACTION_IF NOT MOD_IS_INSTALLED ~ImprovedAnvil.tp2~ 0 THEN BEGIN
+
+    COPY ~lzbgmod/SOC_TBDEMON/ccif/S!layene.itm~ ~override~
+    COPY ~lzbgmod/SOC_TBDEMON/ccif/S!layen2.itm~ ~override~
+	COPY ~lzbgmod/SOC_TBDEMON/ccif/DEMABI01.CRE~ ~override~
+	COPY ~lzbgmod/SOC_TBDEMON/ccif/DRAGRING.ITM~ ~override~
+	COPY ~lzbgmod/SOC_TBDEMON/ccif/S!trap.itm~ ~override~
+	COPY ~lzbgmod/SOC_TBDEMON/ccif/S!castt.itm~ ~override~
+    COPY ~lzbgmod/SOC_TBDEMON/ccif/S!immune.itm~ ~override~
+	COPY ~lzbgmod/SOC_TBDEMON/ccif/S!miss6.itm~ ~override~
+	COPY ~lzbgmod/SOC_TBDEMON/ccif/S!grlich.itm~ ~override~
+	COPY ~lzbgmod/SOC_TBDEMON/ccif/S!grvlch.itm~ ~override~
+	COPY ~lzbgmod/SOC_TBDEMON/ccif/SPWII07.spl~ ~override~
+    COPY ~lzbgmod/SOC_TBDEMON/ccif/SPINI39.spl~ ~override~
+	COPY ~lzbgmod/SOC_TBDEMON/ccif/SPWII51.spl~ ~override~
+	COPY ~lzbgmod/SOC_TBDEMON/ccif/SPWII38.spl~ ~override~
+	COPY ~lzbgmod/SOC_TBDEMON/ccif/SPWII26.spl~ ~override~
+	COPY ~lzbgmod/SOC_TBDEMON/ccif/SPWII50.spl~ ~override~
+	COMPILE ~lzbgmod/SOC_TBDEMON/ccif/S!ransm4.BAF~
+	
+	COMPILE ~lzbgmod/SOC_TBDEMON/bafnormal/BDSHANG.BAF~
+    COMPILE ~lzbgmod/SOC_TBDEMON/bafnormal/BDLAYEN.BAF~
+    COMPILE ~lzbgmod/SOC_TBDEMON/bafnormal/BDSZA.BAF~
+	
+END ELSE BEGIN
+
+    COMPILE ~lzbgmod/SOC_TBDEMON/baf/BDSHANG.BAF~
+    COMPILE ~lzbgmod/SOC_TBDEMON/baf/BDLAYEN.BAF~
+    COMPILE ~lzbgmod/SOC_TBDEMON/baf/BDSZA.BAF~	
+	
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~AC#W54AL.cre~ THEN BEGIN
+    COPY ~lzbgmod/SOC_TBDEMON/ccif/AC#W54AL.cre~ ~override~
+	    SAY NAME1 @332 SAY NAME2 @332
+		WRITE_LONG 0x28 (IDS_OF_SYMBOL (~animate~ ~ALKILITH_ACIFER~))
+    COPY ~lzbgmod/SOC_TBDEMON/ccif/AC#WALKI.itm~ ~override~
+	COMPILE ~lzbgmod/SOC_TBDEMON/ccif/AC#WALKI.BAF~
+	COPY ~lzbgmod/SOC_TBDEMON/ccif/AC#WAL1.SPL~ ~override~
+	COPY ~lzbgmod/SOC_TBDEMON/ccif/AC#W52GF.cre~ ~override~
+	COMPILE ~lzbgmod/SOC_TBDEMON/ccif/AC#W52GF.BAF~
+	COPY ~lzbgmod/SOC_TBDEMON/ccif/AC#WAL2.SPL~ ~override~
+	COPY ~lzbgmod/SOC_TBDEMON/ccif/AC#WALC.SPL~ ~override~
+	
+	COPY ~lzbgmod/SOC_TBDEMON/ccif/AC#WALU9.cre~ ~override~
+	COMPILE ~lzbgmod/SOC_TBDEMON/ccif/AC#WALUF.BAF~
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~NWFINGLB.CRE~ THEN BEGIN
+    COPY ~lzbgmod/SOC_TBDEMON/ccif/NWFINGLB.CRE~ ~override~
+    COPY ~lzbgmod/SOC_TBDEMON/ccif/NWFINGLB.ITM~ ~override~
+	COMPILE ~lzbgmod/SOC_TBDEMON/ccif/NWDEMONE.BAF~
+	COMPILE ~lzbgmod/SOC_TBDEMON/ccif/NWFINGLB.BAF~
+	
+	COPY ~lzbgmod/SOC_TBDEMON/ccif/NWABISH1.CRE~ ~override~
+    COPY ~lzbgmod/SOC_TBDEMON/ccif/NWGODMA1.ITM~ ~override~
+	COMPILE ~lzbgmod/SOC_TBDEMON/ccif/NWABISAI.BAF~
+	COMPILE ~lzbgmod/SOC_TBDEMON/ccif/NWTCKSHW.BAF~
+END
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~LZSHOP.CRE~ THEN BEGIN
+    COPY ~lzbgmod/SOC_TBDEMON/LZSHOP/LZMSPLL1.ITM~ ~override~
+        SAY NAME1 @333               SAY NAME2 @333
+        SAY UNIDENTIFIED_DESC @334   SAY DESC @334
+	COPY ~lzbgmod/SOC_TBDEMON/LZSHOP/LZMSPLL2.ITM~ ~override~
+        SAY NAME1 @335               SAY NAME2 @335
+        SAY UNIDENTIFIED_DESC @336   SAY DESC @336
+	COPY ~lzbgmod/SOC_TBDEMON/LZSHOP/LZMSPLL3.ITM~ ~override~
+        SAY NAME1 @337               SAY NAME2 @337
+        SAY UNIDENTIFIED_DESC @338   SAY DESC @338
+	COPY ~lzbgmod/SOC_TBDEMON/LZSHOP/LZMSPLL4.ITM~ ~override~
+        SAY NAME1 @339               SAY NAME2 @339
+        SAY UNIDENTIFIED_DESC @340   SAY DESC @340
+	COPY ~lzbgmod/SOC_TBDEMON/LZSHOP/LZMSPLL5.ITM~ ~override~
+        SAY NAME1 @341               SAY NAME2 @341
+        SAY UNIDENTIFIED_DESC @342   SAY DESC @342
+	COPY ~lzbgmod/SOC_TBDEMON/LZSHOP/LZMSPLL9.ITM~ ~override~
+        SAY NAME1 @343               SAY NAME2 @343
+        SAY UNIDENTIFIED_DESC @344   SAY DESC @344
+	COPY ~lzbgmod/SOC_TBDEMON/LZSHOP/LZCSPLL1.ITM~ ~override~
+        SAY NAME1 @345               SAY NAME2 @345
+        SAY UNIDENTIFIED_DESC @346   SAY DESC @346
+	COPY ~lzbgmod/SOC_TBDEMON/LZSHOP/LZCSPLL2.ITM~ ~override~
+        SAY NAME1 @347               SAY NAME2 @347
+        SAY UNIDENTIFIED_DESC @348   SAY DESC @348
+	COPY ~lzbgmod/SOC_TBDEMON/LZSHOP/LZCSPLL3.ITM~ ~override~
+        SAY NAME1 @349               SAY NAME2 @349
+        SAY UNIDENTIFIED_DESC @350   SAY DESC @350
+	COPY ~lzbgmod/SOC_TBDEMON/LZSHOP/LZCSPLL4.ITM~ ~override~
+        SAY NAME1 @351               SAY NAME2 @351
+        SAY UNIDENTIFIED_DESC @352   SAY DESC @352
+	COPY ~lzbgmod/SOC_TBDEMON/LZSHOP/LZCSPLL5.ITM~ ~override~
+        SAY NAME1 @353               SAY NAME2 @353
+        SAY UNIDENTIFIED_DESC @354   SAY DESC @354
+	COPY ~lzbgmod/SOC_TBDEMON/LZSHOP/LZCSPLL6.ITM~ ~override~
+        SAY NAME1 @355               SAY NAME2 @355
+        SAY UNIDENTIFIED_DESC @356   SAY DESC @356
+	COPY ~lzbgmod/SOC_TBDEMON/LZSHOP/LZCSPLL7.ITM~ ~override~
+        SAY NAME1 @357               SAY NAME2 @357
+        SAY UNIDENTIFIED_DESC @358   SAY DESC @358
+	COPY ~lzbgmod/SOC_TBDEMON/LZSHOP/LZMSPLL6.ITM~ ~override~
+	COPY ~lzbgmod/SOC_TBDEMON/LZSHOP/LZMSPLL7.ITM~ ~override~
+	COPY ~lzbgmod/SOC_TBDEMON/LZSHOP/LZMSPLL8.ITM~ ~override~
+	COPY ~lzbgmod/SOC_TBDEMON/LZSHOP/LZLVLSPL.BAM~ ~override~
+	COPY ~lzbgmod/SOC_TBDEMON/LZSHOP/LZLVLSP2.BAM~ ~override~
+END
+
+ACTION_IF (GAME_IS ~eet~) THEN BEGIN
+	COPY ~lzbgmod/sceetfix/SPIN151.SPL~ ~override~
+END

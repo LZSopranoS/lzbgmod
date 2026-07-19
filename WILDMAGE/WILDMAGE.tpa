@@ -1,0 +1,54 @@
+INCLUDE ~lzbgmod/tpa/replace_multiline.tpa~
+
+COPY_EXISTING ~BGEE.LUA~ ~override~          //修复塑造魔法WM_SHAP崩溃问题
+	LPF REPLACE_MULTILINE
+    INT_VAR
+    strict = 1
+    verbose = 0
+    STR_VAR
+    pattern = ~SPWI420 = {tip = 60420, title = 'MINOR_SEQUENCER_TITLE', action = "ADD_SPELLS_SEQUENCER_LABEL"},~
+    string = ~SPWI420 = {tip = 60420, title = 'MINOR_SEQUENCER_TITLE', action = "ADD_SPELLS_SEQUENCER_LABEL"},
+	WM_SHAP = {tip = 60420, title = 'SPELL_SEQUENCER_TITLE', action = "ADD_SPELLS_SEQUENCER_LABEL"},~
+    END
+
+COPY ~wildmage/shaper_kit/main.tpa~ ~wildmage/shaper_kit/main.tpa~           //修复塑造魔法WM_SHAP崩溃问题
+	LPF REPLACE_MULTILINE
+    INT_VAR
+    strict = 1
+    verbose = 0
+    STR_VAR
+    pattern = "SAY NAME1 @30302"
+    string = "SAY NAME1 @30302
+COPY ~%comp_dir%/spl/WM_SHAPP.spl~  ~override/WM_SHAPP.spl~
+  SAY NAME1 @30302"
+    END
+	REPLACE_TEXTUALLY ~wm_shap.spl~ ~WM_SHAP.spl~
+	REPLACE_TEXTUALLY ~wm_shapd.spl~ ~WM_SHAPD.spl~
+
+COPY ~wildmage/wild_spells/main.tpa~ ~wildmage/wild_spells/main.tpa~         //瑞奥托非凡化身10级法术生成的瑞奥托
+	LPF REPLACE_MULTILINE
+    INT_VAR
+    strict = 1
+    verbose = 0
+    STR_VAR
+    pattern = "COPY ~%comp_dir%/spl/wm_rhia1.spl~"
+    string = "COPY ~%comp_dir%/cre/wm_rhia3.cre~  ~override/wm_rhia3.cre~
+  SAY NAME1 @50101
+  SAY NAME2 @50102
+
+COPY ~%comp_dir%/spl/wm_rhia1.spl~"
+    END
+	
+COPY ~lzbgmod/WILDMAGE/wm_rhia1.baf~ ~wildmage/wild_spells/baf~
+	
+COPY ~lzbgmod/WILDMAGE/wm_rhia1.cre~ ~wildmage/wild_spells/cre~   //强化瑞奥托
+
+COPY ~lzbgmod/WILDMAGE/wm_rhia3.cre~ ~wildmage/wild_spells/cre~   //强化瑞奥托非凡化身10级法术生成的瑞奥托
+
+COPY ~lzbgmod/WILDMAGE/wm_reinc.spl~ ~wildmage/wild_spells/spl~
+
+COPY ~lzbgmod/WILDMAGE/WM_SHAP.spl~ ~wildmage/shaper_kit/spl~     //BGEE.LUA里添加的WM_SHAP必须大写，其它和塑造魔法WM_SHAP相关的也统一改为大写。
+
+COPY ~lzbgmod/WILDMAGE/WM_SHAPD.spl~ ~wildmage/shaper_kit/spl~
+
+COPY ~lzbgmod/WILDMAGE/WM_SHAPP.spl~ ~wildmage/shaper_kit/spl~    //添加针对地点的施法，否则只能对自己施法，选对地点施法的法术会崩溃。

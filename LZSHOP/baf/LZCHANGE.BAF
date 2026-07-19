@@ -1,0 +1,930 @@
+IF
+	Global("LZCHECKPRO89_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(89,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO89_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO90_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(90,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO90_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO91_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(91,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO91_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO92_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(92,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO92_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO93_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(93,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO93_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO94_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(94,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO94_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO95_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(95,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO95_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO96_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(96,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO96_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO97_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(97,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO97_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO115_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(115,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO115_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO98_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(98,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO98_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO99_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(99,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO99_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO100_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(100,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO100_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO101_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(101,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO101_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO102_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(102,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO102_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO103_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(103,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO103_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO104_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(104,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO104_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO105_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(105,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO105_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO106_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(106,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO106_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO107_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(107,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO107_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO111_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(111,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO111_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO112_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(112,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO112_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO113_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(113,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO113_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO114_1","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(114,1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO114_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO89_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(89,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO89_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO90_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(90,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO90_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO91_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(91,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO91_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO92_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(92,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO92_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO93_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(93,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO93_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO94_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(94,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO94_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO95_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(95,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO95_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO96_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(96,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO96_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO97_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(97,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO97_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO115_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(115,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO115_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO98_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(98,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO98_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO99_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(99,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO99_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO100_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(100,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO100_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO101_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(101,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO101_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO102_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(102,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO102_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO103_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(103,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO103_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO104_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(104,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO104_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO105_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(105,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO105_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO106_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(106,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO106_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO107_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(107,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO107_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO111_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(111,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO111_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO112_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(112,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO112_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO113_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(113,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO113_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZCHECKPRO114_2","LOCALS",0)
+	EEex_LuaTrigger("return LZPCHECK(114,2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZCHECKPRO114_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON89","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON89","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(89,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON90","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON90","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(90,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON91","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON91","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(91,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON92","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON92","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(92,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON93","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON93","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(93,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON94","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON94","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(94,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON95","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON95","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(95,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON96","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON96","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(96,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON97","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON97","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(97,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON115","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON115","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(115,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON98","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON98","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(98,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON99","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON99","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(99,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON100","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON100","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(100,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON101","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON101","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(101,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON102","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON102","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(102,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON103","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON103","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(103,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON104","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON104","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(104,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON105","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON105","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(105,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON106","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON106","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(106,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON107","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON107","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(107,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON111","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON111","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(111,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON112","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON112","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(112,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON113","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON113","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(113,nil)")
+		Continue()
+END
+
+IF
+	Global("FIRSTCHOICEWEAPON114","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("FIRSTCHOICEWEAPON114","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(114,nil)")
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON89","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON89","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,89)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON90","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON90","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,90)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON91","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON91","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,91)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON92","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON92","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,92)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON93","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON93","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,93)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON94","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON94","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,94)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON95","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON95","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,95)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON96","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON96","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,96)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON97","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON97","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,97)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON115","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON115","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,115)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON98","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON98","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,98)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON99","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON99","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,99)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON100","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON100","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,100)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON101","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON101","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,101)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON102","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON102","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,102)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON103","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON103","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,103)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON104","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON104","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,104)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON105","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON105","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,105)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON106","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON106","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,106)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON107","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON107","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,107)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON111","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON111","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,111)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON112","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON112","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,112)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON113","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON113","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,113)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("SECONDCHOICEWEAPON114","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("SECONDCHOICEWEAPON114","LOCALS",0)
+		EEex_LuaAction("LZPROFIC(nil,114)")
+		CreateVisualEffectObject("BDSHSUM",LastTalkedToBy(Myself))
+		SaveGame(0)
+		Continue()
+END
+
+IF
+	Global("LZPCHANGETALK","LOCALS",0)
+	NumberOfTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+		SetGlobal("LZPCHANGETALK","LOCALS",1)
+		StartDialogueNoSet(LastSummonerOf(Myself))
+END
+
+IF
+	Global("LZPCHANGETALK","LOCALS",1)
+	ActionListEmpty()
+THEN
+	RESPONSE #100
+		SetGlobal("LZPCHANGETALK","LOCALS",0)
+		DestroySelf()
+END
+

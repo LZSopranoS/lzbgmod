@@ -1,0 +1,731 @@
+LOAD_TRA ~lzbgmod/LZSHOP/lang/schinese/install.tra~
+
+COPY ~lzbgmod/LZSHOP/copy~ ~override~
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~M_LZPATH.lua~ THEN BEGIN
+	COPY ~lzbgmod/LZSHOP/lua/M_LZPATH.lua~   ~override~
+END
+
+COPY ~lzbgmod/LZSHOP/lua/M_LZBT.lua~ ~override~
+COPY ~lzbgmod/LZSHOP/lua/M_LZEXP.lua~ ~override~
+COPY ~lzbgmod/LZSHOP/lua/M_LZPROF.lua~ ~override~
+COPY ~lzbgmod/LZSHOP/lua/M_LZSPOT.lua~ ~override~
+
+COPY ~lzbgmod/LZSHOP/copysay/LZSHOP.CRE~ ~override~
+    SAY NAME1 @100
+	SAY NAME2 @100
+
+COPY ~lzbgmod/LZSHOP/copysay/FTBUTTON.ITM~ ~override~
+	SAY IDENTIFIED_DESC @121
+
+COPY ~lzbgmod/LZSHOP/copysay/TBUTTON.ITM~ ~override~
+	SAY IDENTIFIED_DESC @122
+
+COPY ~lzbgmod/LZSHOP/copysay/SBUTTON.ITM~ ~override~
+	SAY IDENTIFIED_DESC @123
+
+COPY ~lzbgmod/LZSHOP/copysay/BSBUTTON.ITM~ ~override~
+	SAY IDENTIFIED_DESC @124
+
+COPY ~lzbgmod/LZSHOP/copysay/CSBUTTON.ITM~ ~override~
+	SAY IDENTIFIED_DESC @125
+
+COPY ~lzbgmod/LZSHOP/copysay/GBUTTON.ITM~ ~override~
+	SAY IDENTIFIED_DESC @126
+
+COPY ~lzbgmod/LZSHOP/copysay/TUBUTTON.ITM~ ~override~
+	SAY IDENTIFIED_DESC @127
+
+COPY ~lzbgmod/LZSHOP/copysay/LZFTPOT1.ITM~ ~override~
+	SAY NAME2 @128
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZFTPOT2.ITM~ ~override~
+	SAY NAME2 @129
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZLPPOT1.ITM~ ~override~
+	SAY NAME2 @130
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZLPPOT2.ITM~ ~override~
+	SAY NAME2 @131
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZPPPOT1.ITM~ ~override~
+	SAY NAME2 @132
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZPPPOT2.ITM~ ~override~
+	SAY NAME2 @133
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZMSPOT1.ITM~ ~override~
+	SAY NAME2 @134
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZMSPOT2.ITM~ ~override~
+	SAY NAME2 @135
+
+COPY ~lzbgmod/LZSHOP/copysay/LZHSPOT1.ITM~ ~override~
+	SAY NAME2 @136
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZHSPOT2.ITM~ ~override~
+	SAY NAME2 @137
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZDIPOT1.ITM~ ~override~
+	SAY NAME2 @138
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZDIPOT2.ITM~ ~override~
+	SAY NAME2 @139
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZTULEVL.ITM~ ~override~
+	SAY NAME2 @140
+
+COPY ~lzbgmod/LZSHOP/copysay/LZBSONG1.ITM~ ~override~
+	SAY NAME2 @141
+	SAY IDENTIFIED_DESC @142
+
+COPY ~lzbgmod/LZSHOP/copysay/LZBSONG2.ITM~ ~override~
+	SAY NAME2 @143
+	SAY IDENTIFIED_DESC @144
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZBSONG3.ITM~ ~override~
+	SAY NAME2 @145
+	SAY IDENTIFIED_DESC @146
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZBSONG4.ITM~ ~override~
+	SAY NAME2 @147
+	SAY IDENTIFIED_DESC @148
+
+COPY ~lzbgmod/LZSHOP/copysay/LZFABLTY.ITM~ ~override~
+	SAY IDENTIFIED_DESC @149
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZPABLTY.ITM~ ~override~
+	SAY IDENTIFIED_DESC @150
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZSDABLT.ITM~ ~override~
+	SAY IDENTIFIED_DESC @151
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZENSONG.ITM~ ~override~
+	SAY IDENTIFIED_DESC @152
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZUSEITM.ITM~ ~override~
+	SAY IDENTIFIED_DESC @153
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZSPLA01.ITM~ ~override~
+	SAY IDENTIFIED_DESC @154
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZSPLA02.ITM~ ~override~
+	SAY IDENTIFIED_DESC @155
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZSPLA03.ITM~ ~override~
+	SAY IDENTIFIED_DESC @156
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZSPLA04.ITM~ ~override~
+	SAY IDENTIFIED_DESC @157
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZSPLA05.ITM~ ~override~
+	SAY IDENTIFIED_DESC @158
+
+COPY ~lzbgmod/LZSHOP/copysay/LZSPLA06.ITM~ ~override~
+	SAY IDENTIFIED_DESC @159
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZSPLA07.ITM~ ~override~
+	SAY IDENTIFIED_DESC @160
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZSPLA08.ITM~ ~override~
+	SAY IDENTIFIED_DESC @161
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZSPLA09.ITM~ ~override~
+	SAY IDENTIFIED_DESC @162
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZSPLA10.ITM~ ~override~
+	SAY IDENTIFIED_DESC @163
+
+COPY ~lzbgmod/LZSHOP/copysay/LZSPLA11.ITM~ ~override~
+	SAY IDENTIFIED_DESC @164
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZSPLA12.ITM~ ~override~
+	SAY IDENTIFIED_DESC @165
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZSPLA13.ITM~ ~override~
+	SAY IDENTIFIED_DESC @166
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZXPSHAR.ITM~ ~override~
+	SAY NAME2 @167
+	SAY IDENTIFIED_DESC @168
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZCHANGE.ITM~ ~override~
+	SAY NAME2 @169
+	SAY IDENTIFIED_DESC @170
+	
+COPY ~lzbgmod/LZSHOP/copysay/LZDCPACT.ITM~ ~override~
+	SAY NAME2 @171
+	SAY IDENTIFIED_DESC @172
+
+COPY ~lzbgmod/LZSHOP/copysay/QWBUTON1.ITM~ ~override~
+	SAY NAME2 @173
+	SAY IDENTIFIED_DESC @174
+	
+COPY ~lzbgmod/LZSHOP/copysay/QWBUTON2.ITM~ ~override~
+	SAY NAME2 @175
+	SAY IDENTIFIED_DESC @176
+	
+COPY ~lzbgmod/LZSHOP/copysay/QWBUTON3.ITM~ ~override~
+	SAY NAME2 @177
+	SAY IDENTIFIED_DESC @178
+
+COMPILE ~lzbgmod/LZSHOP/d~
+
+COMPILE ~lzbgmod/LZSHOP/baf~
+
+	//FIND_TRAPS BUTTON
+    OUTER_SET slot_setbutton = IDS_OF_SYMBOL(~splstate~ ~LZFTBUTTON~)
+    ACTION_IF (slot_setbutton < 0) BEGIN
+      OUTER_PATCH ~~ BEGIN
+        FOR (idx = 100; idx < 256; ++idx) BEGIN
+          LOOKUP_IDS_SYMBOL_OF_INT value ~splstate~ idx
+          PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+            SET slot_setbutton = idx
+            SET idx = 256
+          END
+        END
+      END
+/*	
+    // --- 第二步：将找到的 idx 赋值给一个全局变量以便后续使用 ---
+    // 注意：在 OUTER_PATCH 中计算的变量是局部的，必须用 OUTER_SET 传出来
+    OUTER_SET found_idx = slot_setbutton
+    // --- 第三步：修改 Lua 文件 --- 使用 %found_idx% 将变量值插入到文本替换中
+    COPY_EXISTING ~M_LZBT.lua~ ~override~
+    REPLACE_TEXTUALLY ~EEex_Sprite_GetSpellState(sprite, 64)~
+    ~EEex_Sprite_GetSpellState(sprite, %found_idx%)~
+    BUT_ONLY
+*/
+      ACTION_IF (slot_setbutton >= 0) BEGIN
+	    //COPY ~lzbgmod/LZSHOP/lua/M_LZBT.lua~ ~override~
+	    COPY_EXISTING ~M_LZBT.lua~ ~override~
+		REPLACE_TEXTUALLY ~EEex_Sprite_GetSpellState(sprite, LZFTBUTTON119)~
+        ~EEex_Sprite_GetSpellState(sprite, %slot_setbutton%)~
+		BUT_ONLY
+        APPEND ~splstate.ids~ ~%slot_setbutton% LZFTBUTTON~ UNLESS ~LZFTBUTTON~
+        CLEAR_IDS_MAP
+      END
+    END
+	COPY_EXISTING ~FTBUTTON.ITM~ ~override~
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 328      // Set spell state
+          target = 1        // Self
+          parameter2 = slot_setbutton
+          timing = 9
+          //duration = 0
+          special = 1       // use spell states from table
+        END
+
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 321      // Remove effects by resource
+          target = 1        // Self
+          timing = 1
+        STR_VAR
+          resource = ~FTBUTTON~
+        END
+		
+	//STEALTH BUTTON
+    OUTER_SET slot_setbutton = IDS_OF_SYMBOL(~splstate~ ~LZSBUTTON~)
+    ACTION_IF (slot_setbutton < 0) BEGIN
+      OUTER_PATCH ~~ BEGIN
+        FOR (idx = 100; idx < 256; ++idx) BEGIN
+          LOOKUP_IDS_SYMBOL_OF_INT value ~splstate~ idx
+          PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+            SET slot_setbutton = idx
+            SET idx = 256
+          END
+        END
+      END
+      ACTION_IF (slot_setbutton >= 0) BEGIN
+	    COPY_EXISTING ~M_LZBT.lua~ ~override~
+		REPLACE_TEXTUALLY ~EEex_Sprite_GetSpellState(sprite, LZSBUTTON127)~
+        ~EEex_Sprite_GetSpellState(sprite, %slot_setbutton%)~
+		BUT_ONLY
+        APPEND ~splstate.ids~ ~%slot_setbutton% LZSBUTTON~ UNLESS ~LZSBUTTON~
+        CLEAR_IDS_MAP
+      END
+    END
+	COPY_EXISTING ~SBUTTON.ITM~ ~override~
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 328      // Set spell state
+          target = 1        // Self
+          parameter2 = slot_setbutton
+          timing = 9
+          //duration = 0
+          special = 1       // use spell states from table
+        END
+
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 321      // Remove effects by resource
+          target = 1        // Self
+          timing = 1
+        STR_VAR
+          resource = ~SBUTTON~
+        END
+		
+	//THIEVING BUTTON
+    OUTER_SET slot_setbutton = IDS_OF_SYMBOL(~splstate~ ~LZTBUTTON~)
+    ACTION_IF (slot_setbutton < 0) BEGIN
+      OUTER_PATCH ~~ BEGIN
+        FOR (idx = 100; idx < 256; ++idx) BEGIN
+          LOOKUP_IDS_SYMBOL_OF_INT value ~splstate~ idx
+          PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+            SET slot_setbutton = idx
+            SET idx = 256
+          END
+        END
+      END
+      ACTION_IF (slot_setbutton >= 0) BEGIN
+	    COPY_EXISTING ~M_LZBT.lua~ ~override~
+		REPLACE_TEXTUALLY ~EEex_Sprite_GetSpellState(sprite, LZTBUTTON128)~
+        ~EEex_Sprite_GetSpellState(sprite, %slot_setbutton%)~
+		BUT_ONLY
+        APPEND ~splstate.ids~ ~%slot_setbutton% LZTBUTTON~ UNLESS ~LZTBUTTON~
+        CLEAR_IDS_MAP
+      END
+    END
+	COPY_EXISTING ~TBUTTON.ITM~ ~override~
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 328      // Set spell state
+          target = 1        // Self
+          parameter2 = slot_setbutton
+          timing = 9
+          //duration = 0
+          special = 1       // use spell states from table
+        END
+
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 321      // Remove effects by resource
+          target = 1        // Self
+          timing = 1
+        STR_VAR
+          resource = ~TBUTTON~
+        END
+	
+	//BARD_SONG BUTTON
+    OUTER_SET slot_setbutton = IDS_OF_SYMBOL(~splstate~ ~LZBSBUTTON~)
+    ACTION_IF (slot_setbutton < 0) BEGIN
+      OUTER_PATCH ~~ BEGIN
+        FOR (idx = 100; idx < 256; ++idx) BEGIN
+          LOOKUP_IDS_SYMBOL_OF_INT value ~splstate~ idx
+          PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+            SET slot_setbutton = idx
+            SET idx = 256
+          END
+        END
+      END
+      ACTION_IF (slot_setbutton >= 0) BEGIN
+	    COPY_EXISTING ~M_LZBT.lua~ ~override~
+		REPLACE_TEXTUALLY ~EEex_Sprite_GetSpellState(sprite, LZBSBUTTON129)~
+        ~EEex_Sprite_GetSpellState(sprite, %slot_setbutton%)~
+		BUT_ONLY
+        APPEND ~splstate.ids~ ~%slot_setbutton% LZBSBUTTON~ UNLESS ~LZBSBUTTON~
+        CLEAR_IDS_MAP
+      END
+    END
+	COPY_EXISTING ~BSBUTTON.ITM~ ~override~
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 328      // Set spell state
+          target = 1        // Self
+          parameter2 = slot_setbutton
+          timing = 9
+          //duration = 0
+          special = 1       // use spell states from table
+        END
+
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 321      // Remove effects by resource
+          target = 1        // Self
+          timing = 1
+        STR_VAR
+          resource = ~BSBUTTON~
+        END
+		
+	//CAST_SPELL BUTTON
+	OUTER_SET slot_setbutton = IDS_OF_SYMBOL(~splstate~ ~LZCSBUTTON~)
+    ACTION_IF (slot_setbutton < 0) BEGIN
+      OUTER_PATCH ~~ BEGIN
+        FOR (idx = 100; idx < 256; ++idx) BEGIN
+          LOOKUP_IDS_SYMBOL_OF_INT value ~splstate~ idx
+          PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+            SET slot_setbutton = idx
+            SET idx = 256
+          END
+        END
+      END
+      ACTION_IF (slot_setbutton >= 0) BEGIN
+	    COPY_EXISTING ~M_LZBT.lua~ ~override~
+		REPLACE_TEXTUALLY ~EEex_Sprite_GetSpellState(sprite, LZCSBUTTON130)~
+        ~EEex_Sprite_GetSpellState(sprite, %slot_setbutton%)~
+		BUT_ONLY
+        APPEND ~splstate.ids~ ~%slot_setbutton% LZCSBUTTON~ UNLESS ~LZCSBUTTON~
+        CLEAR_IDS_MAP
+      END
+    END
+	COPY_EXISTING ~CSBUTTON.ITM~ ~override~
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 328      // Set spell state
+          target = 1        // Self
+          parameter2 = slot_setbutton
+          timing = 9
+          //duration = 0
+          special = 1       // use spell states from table
+        END
+
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 321      // Remove effects by resource
+          target = 1        // Self
+          timing = 1
+        STR_VAR
+          resource = ~CSBUTTON~
+        END
+
+	//GUARD BUTTON
+	OUTER_SET slot_setbutton = IDS_OF_SYMBOL(~splstate~ ~LZGBUTTON~)
+    ACTION_IF (slot_setbutton < 0) BEGIN
+      OUTER_PATCH ~~ BEGIN
+        FOR (idx = 100; idx < 256; ++idx) BEGIN
+          LOOKUP_IDS_SYMBOL_OF_INT value ~splstate~ idx
+          PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+            SET slot_setbutton = idx
+            SET idx = 256
+          END
+        END
+      END
+      ACTION_IF (slot_setbutton >= 0) BEGIN
+	    COPY_EXISTING ~M_LZBT.lua~ ~override~
+		REPLACE_TEXTUALLY ~EEex_Sprite_GetSpellState(sprite, LZGBUTTON131)~
+        ~EEex_Sprite_GetSpellState(sprite, %slot_setbutton%)~
+		BUT_ONLY
+        APPEND ~splstate.ids~ ~%slot_setbutton% LZGBUTTON~ UNLESS ~LZGBUTTON~
+        CLEAR_IDS_MAP
+      END
+    END	
+	COPY_EXISTING ~GBUTTON.ITM~ ~override~
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 328      // Set spell state
+          target = 1        // Self
+          parameter2 = slot_setbutton
+          timing = 9
+          //duration = 0
+          special = 1       // use spell states from table
+        END
+
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 321      // Remove effects by resource
+          target = 1        // Self
+          timing = 1
+        STR_VAR
+          resource = ~GBUTTON~
+        END
+
+	//TURN_UNDEAD BUTTON
+	OUTER_SET slot_setbutton = IDS_OF_SYMBOL(~splstate~ ~LZTUBUTTON~)
+    ACTION_IF (slot_setbutton < 0) BEGIN
+      OUTER_PATCH ~~ BEGIN
+        FOR (idx = 100; idx < 256; ++idx) BEGIN
+          LOOKUP_IDS_SYMBOL_OF_INT value ~splstate~ idx
+          PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+            SET slot_setbutton = idx
+            SET idx = 256
+          END
+        END
+      END
+      ACTION_IF (slot_setbutton >= 0) BEGIN
+	    COPY_EXISTING ~M_LZBT.lua~ ~override~
+		REPLACE_TEXTUALLY ~EEex_Sprite_GetSpellState(sprite, LZTUBUTTON132)~
+        ~EEex_Sprite_GetSpellState(sprite, %slot_setbutton%)~
+		BUT_ONLY
+        APPEND ~splstate.ids~ ~%slot_setbutton% LZTUBUTTON~ UNLESS ~LZTUBUTTON~
+        CLEAR_IDS_MAP
+      END
+    END	
+	COPY_EXISTING ~TUBUTTON.ITM~ ~override~
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 328      // Set spell state
+          target = 1        // Self
+          parameter2 = slot_setbutton
+          timing = 9
+          //duration = 0
+          special = 1       // use spell states from table
+        END
+
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 321      // Remove effects by resource
+          target = 1        // Self
+          timing = 1
+        STR_VAR
+          resource = ~TUBUTTON~
+        END
+
+COPY_EXISTING ~numwslot.2da~ ~override~
+  REPLACE_TEXTUALLY ~\([ %TAB%]+\)[123][ %TAB%%MNL%]*$~ ~\14~ // thanks argent77!来自cdtweaks comp_3280.tpa，只把2da中1、2、3个槽位改为4，如果为4则不改。
+BUT_ONLY
+
+	//QUICK WEAPON BUTTON STYLE 1
+    OUTER_SET slot_setbutton = IDS_OF_SYMBOL(~splstate~ ~LZQWSTYLEONE~)
+    ACTION_IF (slot_setbutton < 0) BEGIN
+      OUTER_PATCH ~~ BEGIN
+        FOR (idx = 100; idx < 256; ++idx) BEGIN
+          LOOKUP_IDS_SYMBOL_OF_INT value ~splstate~ idx
+          PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+            SET slot_setbutton = idx
+            SET idx = 256
+          END
+        END
+      END
+      ACTION_IF (slot_setbutton >= 0) BEGIN
+	    COPY_EXISTING ~M_LZBT.lua~ ~override~
+		REPLACE_TEXTUALLY ~EEex_Sprite_GetSpellState(sprite, LZQWBUTTON1)~
+        ~EEex_Sprite_GetSpellState(sprite, %slot_setbutton%)~
+		BUT_ONLY
+        APPEND ~splstate.ids~ ~%slot_setbutton% LZQWSTYLEONE~ UNLESS ~LZQWSTYLEONE~
+        CLEAR_IDS_MAP
+      END
+    END
+	COPY_EXISTING ~QWBUTON1.ITM~ ~override~
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 328      // Set spell state
+          target = 1        // Self
+          parameter2 = slot_setbutton
+          timing = 9
+          //duration = 0
+          special = 1       // use spell states from table
+        END
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 321      // Remove effects by resource
+          target = 1        // Self
+          timing = 1
+        STR_VAR
+          resource = ~QWBUTON3~
+        END
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 321      // Remove effects by resource
+          target = 1        // Self
+          timing = 1
+        STR_VAR
+          resource = ~QWBUTON2~
+        END
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 321      // Remove effects by resource
+          target = 1        // Self
+          timing = 1
+        STR_VAR
+          resource = ~QWBUTON1~
+        END
+
+//ACTION_IF NOT FILE_EXISTS_IN_GAME ~m_gttwks.lua~ THEN BEGIN        //快捷键改为F，兼容了CDTWEAKS全部职业/宗派拥有四个武器栏组件的类似功能，检测判断就不需要了
+	//QUICK WEAPON BUTTON STYLE 2
+    OUTER_SET slot_setbutton = IDS_OF_SYMBOL(~splstate~ ~LZTWOSLOTQW~)
+    ACTION_IF (slot_setbutton < 0) BEGIN
+      OUTER_PATCH ~~ BEGIN
+        FOR (idx = 100; idx < 256; ++idx) BEGIN
+          LOOKUP_IDS_SYMBOL_OF_INT value ~splstate~ idx
+          PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+            SET slot_setbutton = idx
+            SET idx = 256
+          END
+        END
+      END
+      ACTION_IF (slot_setbutton >= 0) BEGIN
+	    COPY_EXISTING ~M_LZBT.lua~ ~override~
+		REPLACE_TEXTUALLY ~EEex_Sprite_GetSpellState(sprite, LZQWBUTTON2)~
+        ~EEex_Sprite_GetSpellState(sprite, %slot_setbutton%)~
+		BUT_ONLY
+        APPEND ~splstate.ids~ ~%slot_setbutton% LZTWOSLOTQW~ UNLESS ~LZTWOSLOTQW~
+        CLEAR_IDS_MAP
+      END
+    END
+	COPY_EXISTING ~QWBUTON2.ITM~ ~override~
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 328      // Set spell state
+          target = 1        // Self
+          parameter2 = slot_setbutton
+          timing = 9
+          //duration = 0
+          special = 1       // use spell states from table
+        END
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 321      // Remove effects by resource
+          target = 1        // Self
+          timing = 1
+        STR_VAR
+          resource = ~QWBUTON1~
+        END
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 321      // Remove effects by resource
+          target = 1        // Self
+          timing = 1
+        STR_VAR
+          resource = ~QWBUTON3~
+        END
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 321      // Remove effects by resource
+          target = 1        // Self
+          timing = 1
+        STR_VAR
+          resource = ~QWBUTON2~
+        END
+	//QUICK WEAPON BUTTON STYLE 3
+    OUTER_SET slot_setbutton = IDS_OF_SYMBOL(~splstate~ ~LZTHREESLOTQW~)
+    ACTION_IF (slot_setbutton < 0) BEGIN
+      OUTER_PATCH ~~ BEGIN
+        FOR (idx = 100; idx < 256; ++idx) BEGIN
+          LOOKUP_IDS_SYMBOL_OF_INT value ~splstate~ idx
+          PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+            SET slot_setbutton = idx
+            SET idx = 256
+          END
+        END
+      END
+      ACTION_IF (slot_setbutton >= 0) BEGIN
+	    COPY_EXISTING ~M_LZBT.lua~ ~override~
+		REPLACE_TEXTUALLY ~EEex_Sprite_GetSpellState(sprite, LZQWBUTTON3)~
+        ~EEex_Sprite_GetSpellState(sprite, %slot_setbutton%)~
+		BUT_ONLY
+        APPEND ~splstate.ids~ ~%slot_setbutton% LZTHREESLOTQW~ UNLESS ~LZTHREESLOTQW~
+        CLEAR_IDS_MAP
+      END
+    END
+	COPY_EXISTING ~QWBUTON3.ITM~ ~override~
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 328      // Set spell state
+          target = 1        // Self
+          parameter2 = slot_setbutton
+          timing = 9
+          //duration = 0
+          special = 1       // use spell states from table
+        END
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 321      // Remove effects by resource
+          target = 1        // Self
+          timing = 1
+        STR_VAR
+          resource = ~QWBUTON1~
+        END
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 321      // Remove effects by resource
+          target = 1        // Self
+          timing = 1
+        STR_VAR
+          resource = ~QWBUTON2~
+        END
+        LPF ADD_ITEM_EFFECT
+        INT_VAR
+          insert_point = 0  // add on top
+          opcode = 321      // Remove effects by resource
+          target = 1        // Self
+          timing = 1
+        STR_VAR
+          resource = ~QWBUTON3~
+        END		
+//END ELSE BEGIN                               //快捷键改为F，兼容了CDTWEAKS全部职业/宗派拥有四个武器栏组件的类似功能，删除物品就不需要了
+    //COPY_EXISTING ~LZSHOP.STO~    ~override~
+      //REMOVE_STORE_ITEM ~QWBUTON2~ ~QWBUTON3~
+    //BUT_ONLY
+//END
+
+COPY_EXISTING ~thiefscl.2da~ ~override~
+  COUNT_2DA_COLS num_cols
+  COUNT_2DA_ROWS num_cols num_rows
+  SET col_limit = num_cols - 1  //直接用num_cols会导致后面读class_value读不出职业、读的是下一行。		
+  FOR (col = 1; col < col_limit; ++col) BEGIN
+    READ_2DA_ENTRY 0 col col_limit class_value
+    //PATCH_IF (NOT "%class_value%" STR_EQ "OHTYR" AND NOT "%class_value%" STR_EQ "OHTEMPUS") BEGIN  //会导致SHAMAN列下面数据没改。
+	PATCH_IF (NOT "%class_value%" STR_EQ "OHTEMPUS") BEGIN  //上面row为0且col_limit和下面row为0且num_cols在2da里是上下两行，用PRINT调试读上一行class_value下的值实际是前一列的值，所以用NOT "OHTEMPUS"判断。
+      FOR (row = 0; row < num_rows; ++row) BEGIN            //row为0读的是PICK_POCKETS那一行。
+        READ_2DA_ENTRY row 0 num_cols skill_name
+        //PATCH_IF ("%skill_name%" STR_EQ ("PICK_POCKETS" OR "OPEN_LOCKS" OR "FIND_TRAPS" OR "MOVE_SILENTLY" OR "HIDE_IN_SHADOWS" OR "DETECT_ILLUSION")) BEGIN
+		PATCH_IF ("%skill_name%" STR_EQ "PICK_POCKETS" OR "%skill_name%" STR_EQ "OPEN_LOCKS" OR "%skill_name%" STR_EQ "FIND_TRAPS" OR "%skill_name%" STR_EQ "MOVE_SILENTLY" OR "%skill_name%" STR_EQ "HIDE_IN_SHADOWS" OR "%skill_name%" STR_EQ "DETECT_ILLUSION") BEGIN
+          READ_2DA_ENTRY row col num_cols cell_value
+          PATCH_IF (cell_value == 0) BEGIN
+            SET_2DA_ENTRY row col num_cols 100
+          END
+        END
+      END
+    END
+  END
+  PRETTY_PRINT_2DA  //必加，否则改完很乱不会自动对齐。
+BUT_ONLY_IF_IT_CHANGES
+
+/*调试
+COPY_EXISTING ~thiefscl.2da~ ~override~
+  COUNT_2DA_COLS num_cols
+  COUNT_2DA_ROWS num_cols num_rows
+  SET col_check = num_cols - 1
+  FOR (col = 0; col < col_check; ++col) BEGIN
+    READ_2DA_ENTRY 0 col col_check class_value
+	PATCH_IF (NOT "%class_value%" STR_EQ "OHTYR" AND NOT "%class_value%" STR_EQ "OHTEMPUS" AND NOT "%class_value%" STR_EQ "SHAMAN") BEGIN
+	
+    READ_2DA_ENTRY 0 col num_cols class_value1
+	READ_2DA_ENTRY 1 col num_cols class_value2
+	READ_2DA_ENTRY 2 col num_cols class_value3
+	READ_2DA_ENTRY 3 col num_cols class_value4
+	READ_2DA_ENTRY 4 col num_cols class_value5
+	
+	READ_2DA_ENTRY 0 col col_check class_value11
+	READ_2DA_ENTRY 1 col col_check class_value21
+	READ_2DA_ENTRY 2 col col_check class_value31
+	READ_2DA_ENTRY 3 col col_check class_value41
+	READ_2DA_ENTRY 4 col col_check class_value51
+	
+	//SET col = col_check // kill loop
+  END
+END
+PRINT ~DEBUG: row=0, col=%col%, value=%class_value1%~
+PRINT ~DEBUG: row=1, col=%col%, value=%class_value2%~
+PRINT ~DEBUG: row=2, col=%col%, value=%class_value3%~
+
+PRINT "DEBUG: row=0, col=%col%, value=%class_value11%"
+PRINT "DEBUG: row=1, col=%col%, value=%class_value21%"
+PRINT "DEBUG: row=2, col=%col%, value=%class_value31%"
+*/

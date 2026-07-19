@@ -1,0 +1,64 @@
+IF
+	Global("BDNWish","GLOBAL",9)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobal("BDNWish","GLOBAL",0)
+		FaceObject(LastSummonerOf(Myself))
+		DisplayStringHead(Myself,100276)  // 那它应当如此。
+		Wait(1)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+END
+
+IF
+	Global("BDNWish","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+END
+
+IF
+	Global("BDNWish","GLOBAL",1)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobal("BDNWish","GLOBAL",0)
+		DisplayStringHead(LastSummonerOf(Myself),58565)  // 我希望能够重新记忆法术！
+		FaceObject(LastSummonerOf(Myself))
+		DisplayStringHead(Myself,100276)  // 那它应当如此。
+		ActionOverride(LastSummonerOf(Myself),Rest())
+		SetInterrupt(TRUE)
+END
+
+IF
+	Global("BDNWish","GLOBAL",2)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobal("BDNWish","GLOBAL",0)
+		DisplayStringHead(LastSummonerOf(Myself),100279)  // 我希望我的敌人无还手之力地屈服！
+		FaceObject(LastSummonerOf(Myself))
+		DisplayStringHead(Myself,100280)  // 搞定。
+		ActionOverride(LastSummonerOf(Myself),ReallyForceSpellRES("SPWISH38",Myself))  // 破解术
+		SetInterrupt(TRUE)
+END
+
+IF
+	Global("BDNWish","GLOBAL",3)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobal("BDNWish","GLOBAL",0)
+		DisplayStringHead(LastSummonerOf(Myself),100277)  // 我希望时间本身站在我一边！
+		FaceObject(LastSummonerOf(Myself))
+		DisplayStringHead(Myself,100278)  // 遵命。
+		ActionOverride(LastSummonerOf(Myself),ReallyForceSpellRES("SPWISH17",Myself))  // 时间停止
+		DisplayString(LastSummonerOf(Myself),63217)  // 高等迅捷
+		SetInterrupt(TRUE)
+END
+

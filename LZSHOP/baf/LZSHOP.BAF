@@ -1,0 +1,303 @@
+IF
+	Global("LZSHOPItemChange","BG0800",0)
+	AreaCheck("BG0800")
+	InMyArea([PC])
+THEN
+	RESPONSE #100
+		SetGlobal("LZSHOPItemChange","BG0800",1)
+		RemoveStoreItem("LZSHOP","LZENSONG",1)  // 强力吟唱
+		RemoveStoreItem("LZSHOP","LZUSEITM",1)  // 万能巧手
+		RemoveStoreItem("LZSHOP","LZSPLA08",1)  // 愿望术
+		RemoveStoreItem("LZSHOP","LZSPLA09",1)  // 律令：死亡
+		RemoveStoreItem("LZSHOP","LZSPLA10",1)  // 形态改变
+END
+
+IF
+	Global("LZSHOPItemChange","AR0400",0)  // Slums
+	AreaCheck("AR0400")  // Slums
+	InMyArea([PC])
+THEN
+	RESPONSE #100
+		SetGlobal("LZSHOPItemChange","AR0400",1)  // Slums
+		AddStoreItem("LZSHOP","LZSPLA08",1,1)  // 愿望术
+		AddStoreItem("LZSHOP","LZSPLA09",1,1)  // 律令：死亡
+		AddStoreItem("LZSHOP","LZSPLA10",1,1)  // 形态改变
+		AddStoreItem("LZSHOP","LZENSONG",1,1)  // 强力吟唱
+		AddStoreItem("LZSHOP","LZUSEITM",1,1)  // 万能巧手
+END
+
+IF
+	Global("LZSHOPEquipWeapon","LOCALS",0)
+	!GlobalTimerNotExpired("LZSHOPCombatTimer","LOCALS")
+	!GlobalTimerNotExpired("LZSHOPDSTimer","LOCALS")
+	See([PC])
+THEN
+	RESPONSE #40
+		SetGlobalTimer("LZSHOPDSTimer","LOCALS",TWO_TURNS)
+		DisplayString(Myself,@104)  // LZ技能商店，盗贼的寻找陷阱、侦测幻象、潜行，诗人的战歌，牧师的超度亡灵...，普通的、特殊的、高阶的应有尽有，集齐战法盗牧诗特长于一身不再是梦想...
+		Continue()
+	RESPONSE #40
+		SetGlobalTimer("LZSHOPDSTimer","LOCALS",ONE_TURN)
+		DisplayString(Myself,@104)  // LZ技能商店，盗贼的寻找陷阱、侦测幻象、潜行，诗人的战歌，牧师的超度亡灵...，普通的、特殊的、高阶的应有尽有，集齐战法盗牧诗特长于一身不再是梦想...
+		Continue()
+	RESPONSE #20
+		SetGlobalTimer("LZSHOPDSTimer","LOCALS",FIVE_ROUNDS)
+		Continue()
+END
+
+IF
+	Global("LZSHOPEquipWeapon","LOCALS",0)
+	!GlobalTimerNotExpired("LZSHOPCombatTimer","LOCALS")
+	OR(11)
+		AttackedBy([ANYONE],DEFAULT)
+		HitBy([ANYONE],ACID)
+		HitBy([ANYONE],COLD)
+		HitBy([ANYONE],ELECTRICITY)
+		HitBy([ANYONE],FIRE)
+		HitBy([ANYONE],POISON)
+		HitBy([ANYONE],MAGIC)
+		HitBy([ANYONE],CRUSHING)
+		HitBy([ANYONE],PIERCING)
+		HitBy([ANYONE],MISSILE)
+		HitBy([ANYONE],SLASHING)
+	!HasItemEquipedReal("SW1H77",Myself)  // 答复者+4
+	!HasItemEquiped("STDEATH",Myself)  // 影之刃+3
+THEN
+	RESPONSE #100
+		SetGlobal("LZSHOPEquipWeapon","LOCALS",1)
+		SetGlobalTimer("LZSHOPCombatTimer","LOCALS",ONE_TURN)
+		SetInterrupt(FALSE)
+		CreateItem("SW1H77",0,0,0)  // 答复者+4
+		XEquipItem("SW1H77",Myself,SLOT_WEAPON0,EQUIP)  // 答复者+4
+		CreateItem("STDEATH",0,0,0)  // 影之刃+3
+		XEquipItem("STDEATH",Myself,SLOT_SHIELD,EQUIP)  // 影之刃+3
+		SetInterrupt(TRUE)
+		Continue()
+END
+
+IF
+	Global("LZSHOPEquipWeapon","LOCALS",1)
+	!GlobalTimerNotExpired("LZSHOPVisualBuff","LOCALS")
+	HasItem("LZSHOPSP",Myself)  // 火焰护盾（蓝）
+THEN
+	RESPONSE #100
+		SetGlobalTimer("LZSHOPVisualBuff","LOCALS",ONE_TURN)
+		UseItem("LZSHOPSP",Myself)  // 火焰护盾（蓝）
+		Continue()
+END
+
+IF
+	GlobalTimerNotExpired("LZSHOPCombatTimer","LOCALS")
+	AttackedBy([ANYONE],DEFAULT)
+	RandomNum(2,1)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastAttackerOf(Myself))
+	RESPONSE #100
+		ForceSpellRange(LastAttackerOf(Myself),ROGUE_SET_SPIKE_TRAP)  // SPCL910.SPL (装设尖刺陷阱)
+		ForceSpellRangeRES("SPCL910B",LastAttackerOf(Myself))  // No such index
+		ForceSpellRange(LastAttackerOf(Myself),ROGUE_SET_EXPLODING_TRAP)  // SPCL911.SPL (装设爆裂陷阱)
+		ForceSpellRangeRES("SPCL911B",LastAttackerOf(Myself))  // No such index
+		ForceSpellRange(LastAttackerOf(Myself),ROGUE_SET_SPIKE_TRAP)  // SPCL910.SPL (装设尖刺陷阱)
+		ForceSpellRangeRES("SPCL910B",LastAttackerOf(Myself))  // No such index
+		ForceSpellRange(LastAttackerOf(Myself),ROGUE_SET_EXPLODING_TRAP)  // SPCL911.SPL (装设爆裂陷阱)
+		ForceSpellRangeRES("SPCL911B",LastAttackerOf(Myself))  // No such index
+		ForceSpellRange(LastAttackerOf(Myself),ROGUE_SET_SPIKE_TRAP)  // SPCL910.SPL (装设尖刺陷阱)
+		ForceSpellRangeRES("SPCL910B",LastAttackerOf(Myself))  // No such index
+	RESPONSE #100
+		ForceSpellRange(LastAttackerOf(Myself),WIZARD_DRAGONS_BREATH)  // SPWI922.SPL (龙息术)
+		ForceSpellRange(LastAttackerOf(Myself),WIZARD_COMET)  // SPWI925.SPL (彗星术)
+		ForceSpellRange(LastAttackerOf(Myself),WIZARD_DRAGONS_BREATH)  // SPWI922.SPL (龙息术)
+		ForceSpellRange(LastAttackerOf(Myself),WIZARD_COMET)  // SPWI925.SPL (彗星术)
+		ForceSpellRange(LastAttackerOf(Myself),WIZARD_DRAGONS_BREATH)  // SPWI922.SPL (龙息术)
+	RESPONSE #100
+		ForceSpellRange(LastAttackerOf(Myself),CLERIC_IMPLOSION)  // SPPR728.SPL (内爆术)
+		ForceSpellRange(LastAttackerOf(Myself),CLERIC_IMPLOSION)  // SPPR728.SPL (内爆术)
+		ForceSpellRange(LastAttackerOf(Myself),CLERIC_IMPLOSION)  // SPPR728.SPL (内爆术)
+		ForceSpellRange(LastAttackerOf(Myself),CLERIC_IMPLOSION)  // SPPR728.SPL (内爆术)
+		ForceSpellRange(LastAttackerOf(Myself),CLERIC_IMPLOSION)  // SPPR728.SPL (内爆术)
+END
+
+IF
+	GlobalTimerNotExpired("LZSHOPCombatTimer","LOCALS")
+	OR(10)
+		HitBy([ANYONE],ACID)
+		HitBy([ANYONE],COLD)
+		HitBy([ANYONE],ELECTRICITY)
+		HitBy([ANYONE],FIRE)
+		HitBy([ANYONE],POISON)
+		HitBy([ANYONE],MAGIC)
+		HitBy([ANYONE],CRUSHING)
+		HitBy([ANYONE],PIERCING)
+		HitBy([ANYONE],MISSILE)
+		HitBy([ANYONE],SLASHING)
+	RandomNum(2,2)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastHitter(Myself))
+	RESPONSE #100
+		ForceSpellRange(LastHitter(Myself),ROGUE_SET_SPIKE_TRAP)  // SPCL910.SPL (装设尖刺陷阱)
+		ForceSpellRangeRES("SPCL910B",LastHitter(Myself))  // No such index
+		ForceSpellRange(LastHitter(Myself),ROGUE_SET_EXPLODING_TRAP)  // SPCL911.SPL (装设爆裂陷阱)
+		ForceSpellRangeRES("SPCL911B",LastHitter(Myself))  // No such index
+		ForceSpellRange(LastHitter(Myself),ROGUE_SET_SPIKE_TRAP)  // SPCL910.SPL (装设尖刺陷阱)
+		ForceSpellRangeRES("SPCL910B",LastHitter(Myself))  // No such index
+		ForceSpellRange(LastHitter(Myself),ROGUE_SET_EXPLODING_TRAP)  // SPCL911.SPL (装设爆裂陷阱)
+		ForceSpellRangeRES("SPCL911B",LastHitter(Myself))  // No such index
+		ForceSpellRange(LastHitter(Myself),ROGUE_SET_SPIKE_TRAP)  // SPCL910.SPL (装设尖刺陷阱)
+		ForceSpellRangeRES("SPCL910B",LastHitter(Myself))  // No such index
+	RESPONSE #100
+		ForceSpellRange(LastHitter(Myself),WIZARD_DRAGONS_BREATH)  // SPWI922.SPL (龙息术)
+		ForceSpellRange(LastHitter(Myself),WIZARD_COMET)  // SPWI925.SPL (彗星术)
+		ForceSpellRange(LastHitter(Myself),WIZARD_DRAGONS_BREATH)  // SPWI922.SPL (龙息术)
+		ForceSpellRange(LastHitter(Myself),WIZARD_COMET)  // SPWI925.SPL (彗星术)
+		ForceSpellRange(LastHitter(Myself),WIZARD_DRAGONS_BREATH)  // SPWI922.SPL (龙息术)
+	RESPONSE #100
+		ForceSpellRange(LastHitter(Myself),CLERIC_IMPLOSION)  // SPPR728.SPL (内爆术)
+		ForceSpellRange(LastHitter(Myself),CLERIC_IMPLOSION)  // SPPR728.SPL (内爆术)
+		ForceSpellRange(LastHitter(Myself),CLERIC_IMPLOSION)  // SPPR728.SPL (内爆术)
+		ForceSpellRange(LastHitter(Myself),CLERIC_IMPLOSION)  // SPPR728.SPL (内爆术)
+		ForceSpellRange(LastHitter(Myself),CLERIC_IMPLOSION)  // SPPR728.SPL (内爆术)
+END
+
+IF
+	Global("LZSHOPEquipWeapon","LOCALS",1)
+	GlobalTimerExpired("LZSHOPCombatTimer","LOCALS")
+	HasItemEquipedReal("SW1H77",Myself)  // 答复者+4
+	HasItemEquiped("STDEATH",Myself)  // 影之刃+3
+	ActionListEmpty()
+THEN
+	RESPONSE #100
+		SetGlobal("LZSHOPEquipWeapon","LOCALS",0)
+		DestroyItem("SW1H77")  // 答复者+4
+		DestroyItem("STDEATH")  // 影之刃+3
+		Continue()
+END
+
+IF
+	OR(4)
+		StateCheck(Myself,STATE_SLEEPING)
+		StateCheck(Myself,STATE_HELPLESS)
+		StateCheck(Myself,STATE_BLIND)
+		!CheckStat(Myself,0,POLYMORPHED)
+THEN
+	RESPONSE #100
+		ReallyForceSpell(Myself,WIZARD_TRUE_DISPEL_MAGIC)  // SPWI326.SPL (解除魔法)
+		Continue()
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	OR(4)
+		SpellCastPriest([ANYONE],CLERIC_MISCAST_MAGIC)  // SPPR310.SPL (封魔术)
+		SpellCastPriest([ANYONE],CLERIC_SUMMON_INSECTS)  // SPPR319.SPL (召唤昆虫)
+		SpellCastPriest([ANYONE],CLERIC_INSECT_PLAGUE)  // SPPR517.SPL (疫病虫群)
+		SpellCastPriest([ANYONE],CLERIC_CREEPING_DOOM)  // SPPR717.SPL (漫天虫蚀)
+	!GlobalTimerNotExpired("SOSStateTimer","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("SOSStateTimer","LOCALS",ONE_ROUND)
+		Continue()
+END
+
+IF
+	GlobalTimerNotExpired("SOSStateTimer","LOCALS")
+	CheckStatGT(Myself,49,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		ReallyForceSpell(Myself,WIZARD_TRUE_DISPEL_MAGIC)  // SPWI326.SPL (解除魔法)
+		Wait(2)
+		Continue()
+END
+
+IF
+	SpellCastPriest(Player1,CLERIC_HARM)  // SPPR608.SPL (伤害术)
+	HasItem("HARM",Player1)  // 伤害术
+THEN
+	RESPONSE #100
+		ReallyForceSpell(Player1,WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	SpellCastPriest(Player2,CLERIC_HARM)  // SPPR608.SPL (伤害术)
+	HasItem("HARM",Player2)  // 伤害术
+THEN
+	RESPONSE #100
+		ReallyForceSpell(Player2,WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	SpellCastPriest(Player3,CLERIC_HARM)  // SPPR608.SPL (伤害术)
+	HasItem("HARM",Player3)  // 伤害术
+THEN
+	RESPONSE #100
+		ReallyForceSpell(Player3,WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	SpellCastPriest(Player4,CLERIC_HARM)  // SPPR608.SPL (伤害术)
+	HasItem("HARM",Player4)  // 伤害术
+THEN
+	RESPONSE #100
+		ReallyForceSpell(Player4,WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	SpellCastPriest(Player5,CLERIC_HARM)  // SPPR608.SPL (伤害术)
+	HasItem("HARM",Player5)  // 伤害术
+THEN
+	RESPONSE #100
+		ReallyForceSpell(Player5,WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	SpellCastPriest(Player6,CLERIC_HARM)  // SPPR608.SPL (伤害术)
+	HasItem("HARM",Player6)  // 伤害术
+THEN
+	RESPONSE #100
+		ReallyForceSpell(Player6,WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	OR(6)
+		CheckStatLT(Myself,15,STR)
+		CheckStatLT(Myself,15,DEX)
+		CheckStatLT(Myself,15,CON)
+		CheckStatLT(Myself,15,INT)
+		CheckStatLT(Myself,15,WIS)
+		CheckStatLT(Myself,15,CHR)
+	!GlobalTimerNotExpired("LZSHOPCastTimer","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("LZSHOPCastTimer","LOCALS",FIVE_ROUNDS)
+		DisplayString(Myself,40252)  // 意外术－防护魔法武器
+		ReallyForceSpell(Myself,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)  // SPWI611.SPL (防护魔法武器)
+		DisplayString(Myself,39969)  // 法术定序－已用出
+		ReallyForceSpell(Myself,WIZARD_STONE_SKIN)  // SPWI408.SPL (石肤术)
+		ReallyForceSpell(Myself,WIZARD_FIRE_SHIELD_RED)  // SPWI418.SPL (火焰护盾（红）)
+		ReallyForceSpell(Myself,WIZARD_IMPROVED_INVISIBILITY)  // SPWI405.SPL (高等隐形术)
+		DisplayString(Myself,39968)  // 法术启动－已用出
+		ReallyForceSpell(Myself,WIZARD_PROTECTION_FROM_MAGIC_ENERGY)  // SPWI606.SPL (防护魔法能量)
+		ReallyForceSpell(Myself,WIZARD_GLOBE_OF_INVULNERABILITY)  // SPWI602.SPL (法术无效结界)
+		ReallyForceSpell(Myself,WIZARD_SPELL_IMMUNITY_ABJURATION)  // SPWI590.SPL (法术免疫：防护系)
+		Continue()
+END
+
+IF
+	OR(5)
+		See([NEUTRAL])
+		See([ALLY])
+		See([FAMILIAR])
+		See([CONTROLLED])
+		See([CHARMED])
+	InWeaponRange(LastSeenBy(Myself))
+	TookDamage()
+	!InWeaponRange(LastHitter(Myself))
+	WeaponEffectiveVs(LastHitter(Myself),MAINHAND)
+	WeaponCanDamage(LastHitter(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		ReallyForceSpell(LastHitter(Myself),WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		AttackOneRound(LastHitter(Myself))
+END
+

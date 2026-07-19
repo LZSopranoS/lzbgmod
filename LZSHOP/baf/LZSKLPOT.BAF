@@ -1,0 +1,440 @@
+IF
+	Global("LZSKPONT","GLOBAL",2)
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		ChangeStat(LastSummonerOf(Myself),TRAPS,5,ADD)
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",3)
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		ChangeStat(LastSummonerOf(Myself),LOCKPICKING,5,ADD)
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",4)
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		ChangeStat(LastSummonerOf(Myself),PICKPOCKET,5,ADD)
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",5)
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		ChangeStat(LastSummonerOf(Myself),STEALTH,5,ADD)
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",6)
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		EEex_LuaAction("LZTSKIL5()")
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",7)
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		EEex_LuaAction("LZTSKIL6()")
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",8)
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		ChangeStat(LastSummonerOf(Myself),TURNUNDEADLEVEL,4,ADD)
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",12)
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		ChangeStat(LastSummonerOf(Myself),TRAPS,10,ADD)
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",13)
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		ChangeStat(LastSummonerOf(Myself),LOCKPICKING,10,ADD)
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",14)
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		ChangeStat(LastSummonerOf(Myself),PICKPOCKET,10,ADD)
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",15)
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		ChangeStat(LastSummonerOf(Myself),STEALTH,10,ADD)
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",16)
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		EEex_LuaAction("LZTSKIL5(10)")
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",17)
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		EEex_LuaAction("LZTSKIL6(10)")
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",20)
+	EEex_LuaTrigger("return LZXPABOVE2()")
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		AddXPObject(LastSummonerOf(Myself),-100000)
+		ActionOverride(LastSummonerOf(Myself),AddSpecialAbility("SPDWD02"))  // 防御姿态
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",21)
+	EEex_LuaTrigger("return LZXPABOVE2()")
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		AddXPObject(LastSummonerOf(Myself),-100000)
+		ActionOverride(LastSummonerOf(Myself),AddSpecialAbility("SPCL231"))  // 解除魔法
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",22)
+	EEex_LuaTrigger("return LZXPABOVE2()")
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		AddXPObject(LastSummonerOf(Myself),-100000)
+		ActionOverride(LastSummonerOf(Myself),AddSpecialAbility("SPSD02"))  // 暗影步
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",23)
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		ActionOverride(LastSummonerOf(Myself),ApplySpellRES("fjbard",Myself))  // No such index
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",24)
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		ActionOverride(LastSummonerOf(Myself),ApplySpellRES("fjblade",Myself))  // No such index
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",25)
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		ActionOverride(LastSummonerOf(Myself),ApplySpellRES("SPCL751",Myself))  // No such index
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",26)
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		ActionOverride(LastSummonerOf(Myself),ApplySpellRES("SPCL542",Myself))  // No such index
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",27)
+	EEex_LuaTrigger("return LZXPABOVE6()")
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		AddXPObject(LastSummonerOf(Myself),-1000000)
+		ActionOverride(LastSummonerOf(Myself),ApplySpellRES("SPCL920",Myself))  // 强力吟唱
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",28)
+	EEex_LuaTrigger("return LZXPABOVE7()")
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		AddXPObject(LastSummonerOf(Myself),-2000000)
+		ActionOverride(LastSummonerOf(Myself),ApplySpellRES("SPCL915",Myself))  // 万能巧手
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",30)
+	NumItemsPartyGT("SCRL72",0)  // 友好术
+	EEex_LuaTrigger("return LZXPABOVE1()")
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		TakePartyItemNum("SCRL72",1)  // 友好术
+		DestroyItem("SCRL72")  // 友好术
+		AddXPObject(LastSummonerOf(Myself),-50000)
+		ActionOverride(LastSummonerOf(Myself),AddSpecialAbility("LZSPLA01"))  // 友好术
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",31)
+	NumItemsPartyGT("SCRL6S",0)  // 法术免疫
+	EEex_LuaTrigger("return LZXPABOVE2()")
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		TakePartyItemNum("SCRL6S",1)  // 法术免疫
+		DestroyItem("SCRL6S")  // 法术免疫
+		AddXPObject(LastSummonerOf(Myself),-100000)
+		ActionOverride(LastSummonerOf(Myself),AddSpecialAbility("LZSPLA02"))  // 法术免疫
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",32)
+	NumItemsPartyGT("SCRL7G",0)  // 谭森变形术
+	EEex_LuaTrigger("return LZXPABOVE2()")
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		TakePartyItemNum("SCRL7G",1)  // 谭森变形术
+		DestroyItem("SCRL7G")  // 谭森变形术
+		AddXPObject(LastSummonerOf(Myself),-100000)
+		ActionOverride(LastSummonerOf(Myself),AddSpecialAbility("LZSPLA03"))  // 谭森变形术
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",33)
+	NumItemsPartyGT("SCRL7I",0)  // 死亡术
+	EEex_LuaTrigger("return LZXPABOVE2()")
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		TakePartyItemNum("SCRL7I",1)  // 死亡术
+		DestroyItem("SCRL7I")  // 死亡术
+		AddXPObject(LastSummonerOf(Myself),-100000)
+		ActionOverride(LastSummonerOf(Myself),AddSpecialAbility("LZSPLA04"))  // 死亡术
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",34)
+	NumItemsPartyGT("SCRL8W",0)  // 集体隐形
+	EEex_LuaTrigger("return LZXPABOVE2()")
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		TakePartyItemNum("SCRL8W",1)  // 集体隐形
+		DestroyItem("SCRL8W")  // 集体隐形
+		AddXPObject(LastSummonerOf(Myself),-100000)
+		ActionOverride(LastSummonerOf(Myself),AddSpecialAbility("LZSPLA05"))  // 集体隐形
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",35)
+	NumItemsPartyGT("SCRL8Y",0)  // 防护能量
+	EEex_LuaTrigger("return LZXPABOVE3()")
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		TakePartyItemNum("SCRL8Y",1)  // 防护能量
+		DestroyItem("SCRL8Y")  // 防护能量
+		AddXPObject(LastSummonerOf(Myself),-150000)
+		ActionOverride(LastSummonerOf(Myself),AddSpecialAbility("LZSPLA06"))  // 防护能量
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",36)
+	NumItemsPartyGT("SCRL9H",0)  // 迷宫术
+	EEex_LuaTrigger("return LZXPABOVE3()")
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		TakePartyItemNum("SCRL9H",1)  // 迷宫术
+		DestroyItem("SCRL9H")  // 迷宫术
+		AddXPObject(LastSummonerOf(Myself),-150000)
+		ActionOverride(LastSummonerOf(Myself),AddSpecialAbility("LZSPLA07"))  // 迷宫术
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",37)
+	NumItemsPartyGT("SCRLB4",0)  // 愿望术
+	EEex_LuaTrigger("return LZXPABOVE4()")
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		TakePartyItemNum("SCRLB4",1)  // 愿望术
+		DestroyItem("SCRLB4")  // 愿望术
+		AddXPObject(LastSummonerOf(Myself),-200000)
+		ActionOverride(LastSummonerOf(Myself),AddSpecialAbility("LZSPLA08"))  // 愿望术
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",38)
+	NumItemsPartyGT("SCRL9U",0)  // 律令：死亡
+	EEex_LuaTrigger("return LZXPABOVE4()")
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		TakePartyItemNum("SCRL9U",1)  // 律令：死亡
+		DestroyItem("SCRL9U")  // 律令：死亡
+		AddXPObject(LastSummonerOf(Myself),-200000)
+		ActionOverride(LastSummonerOf(Myself),AddSpecialAbility("LZSPLA09"))  // 律令：死亡
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",39)
+	NumItemsPartyGT("SCRL9Y",0)  // 形态改变
+	EEex_LuaTrigger("return LZXPABOVE4()")
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		TakePartyItemNum("SCRL9Y",1)  // 形态改变
+		DestroyItem("SCRL9Y")  // 形态改变
+		AddXPObject(LastSummonerOf(Myself),-200000)
+		ActionOverride(LastSummonerOf(Myself),AddSpecialAbility("LZSPLA10"))  // 形态改变
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",40)
+	NumItemsPartyGT("SCRL58",0)  // 自由行动
+	EEex_LuaTrigger("return LZXPABOVE5()")
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		TakePartyItemNum("SCRL58",1)  // 自由行动
+		DestroyItem("SCRL58")  // 自由行动
+		AddXPObject(LastSummonerOf(Myself),-70000)
+		ActionOverride(LastSummonerOf(Myself),AddSpecialAbility("LZSPLA11"))  // 自由行动
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",41)
+	NumItemsPartyGT("SCRL63",0)  // 死者复活
+	EEex_LuaTrigger("return LZXPABOVE3()")
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		TakePartyItemNum("SCRL63",1)  // 死者复活
+		DestroyItem("SCRL63")  // 死者复活
+		AddXPObject(LastSummonerOf(Myself),-150000)
+		ActionOverride(LastSummonerOf(Myself),AddSpecialAbility("LZSPLA12"))  // 死者复活
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",42)
+	NumItemsPartyGT("SCRL5F",0)  // 混乱命令
+	EEex_LuaTrigger("return LZXPABOVE3()")
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",1)
+		TakePartyItemNum("SCRL5F",1)  // 混乱命令
+		DestroyItem("SCRL5F")  // 混乱命令
+		AddXPObject(LastSummonerOf(Myself),-150000)
+		ActionOverride(LastSummonerOf(Myself),AddSpecialAbility("LZSPLA13"))  // 混乱命令
+		CreateVisualEffectObject("ASUMM1X",LastSummonerOf(Myself))
+		Continue()
+END
+
+IF
+	Global("LZSKPONT","GLOBAL",1)
+	ActionListEmpty()
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",0)
+		DestroySelf()
+END
+
+IF
+	GlobalGT("LZSKPONT","GLOBAL",1)
+	ActionListEmpty()
+	Delay(2)
+THEN
+	RESPONSE #100
+		SetGlobal("LZSKPONT","GLOBAL",0)
+		DestroySelf()
+END
+

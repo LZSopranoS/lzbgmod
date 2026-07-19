@@ -1,0 +1,66 @@
+IF
+	Global("BD_Visited_BD5300","Global",6)
+	Global("CaelarUpgradeItem","AR5202",0)
+	PartyHasItem("XARING22")  // 戒指
+	PartyHasItem("BDHELMCA")
+    PartyHasItem("BDSHLDCA")
+    PartyHasItem("BDSW1HCA")
+	InParty("BDCAELAR")
+    InMyArea("BDCAELAR")
+	InMyArea(Player1)
+	!Alignment(Player1,MASK_EVIL)
+THEN
+	RESPONSE #100
+	    SetGlobal("CaelarUpgradeItem","AR5202",1)
+	    CreateCreatureEffect("BDPGOOD","SPFLESHS",[1450.660],SW)
+	    Continue()
+END
+
+IF
+	Global("CaelarUpgradeItem","AR5202",1)
+	TriggerOverride("BDPGOOD",See([PC]))
+	PartyHasItem("XARING22")  // 戒指
+	PartyHasItem("BDHELMCA")
+    PartyHasItem("BDSHLDCA")
+    PartyHasItem("BDSW1HCA")
+	InParty("BDCAELAR")
+    InMyArea("BDCAELAR")
+	InMyArea(Player1)
+	!Alignment(Player1,MASK_EVIL)
+THEN
+	RESPONSE #100
+	    SetGlobal("CaelarUpgradeItem","AR5202",2)
+		ActionOverride("BDPGOOD",FaceObject(Player1))
+		Wait(2)
+		ActionOverride("BDPGOOD",StartDialogueNoSet(Player1))
+END
+
+IF
+	Global("CaelarUpgradeItem","AR5202",2)
+    !InMyArea("BDPGOOD")
+	InMyArea(Player1)
+	Delay(2)
+THEN
+	RESPONSE #100
+	    SetGlobal("CaelarUpgradeItem","AR5202",3)
+		CreateCreatureEffect("LZSHOP","SPFLESHS",[1450.660],SW)
+		Wait(1)
+		AddStoreItem("LZSHOP","LZMSPLL1",1,1)
+		AddStoreItem("LZSHOP","LZMSPLL2",1,1)
+		AddStoreItem("LZSHOP","LZMSPLL3",1,1)
+		AddStoreItem("LZSHOP","LZMSPLL4",1,1)
+		AddStoreItem("LZSHOP","LZMSPLL5",1,1)
+		AddStoreItem("LZSHOP","LZMSPLL6",1,1)
+		AddStoreItem("LZSHOP","LZMSPLL7",1,1)
+		AddStoreItem("LZSHOP","LZMSPLL8",1,1)
+		AddStoreItem("LZSHOP","LZMSPLL9",1,1)
+		AddStoreItem("LZSHOP","LZCSPLL1",1,1)
+		AddStoreItem("LZSHOP","LZCSPLL2",1,1)
+		AddStoreItem("LZSHOP","LZCSPLL3",1,1)
+		AddStoreItem("LZSHOP","LZCSPLL4",1,1)
+		AddStoreItem("LZSHOP","LZCSPLL5",1,1)
+		AddStoreItem("LZSHOP","LZCSPLL6",1,1)
+		AddStoreItem("LZSHOP","LZCSPLL7",1,1)
+	    Continue()
+END
+

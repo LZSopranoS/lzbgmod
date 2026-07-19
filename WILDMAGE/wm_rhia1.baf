@@ -1,0 +1,737 @@
+IF
+	See(Player1)
+	Global("doomed","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("doomed","LOCALS",1)
+		StartDialog("WM_RHIA",Player1)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	Global("SpellTrigger","LOCALS",0)
+	LevelLT(LastSeenBy(Myself),8)
+THEN
+	RESPONSE #100
+		DisplayString(Myself,39968)  // 法术启动－已用出
+		ReallyForceSpellRES("WM_LUCK",Myself)
+		SetGlobal("SpellTrigger","LOCALS",1)
+		ReallyForceSpellRES("WM_LIGHT",Myself)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_GREATER_MALISON)  // SPWI412.SPL (毒咒)
+		ReallyForceSpell(Myself,WIZARD_STONE_SKIN)  // SPWI408.SPL (石肤术)
+		ReallyForceSpell(Myself,WIZARD_MIRROR_IMAGE)  // SPWI212.SPL (镜影术)
+		ReallyForceSpellRES("WM_ARMOR",Myself)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	Global("SpellTrigger","LOCALS",0)
+	LevelGT(LastSeenBy(Myself),7)
+THEN
+	RESPONSE #100
+		DisplayString(Myself,39968)  // 法术启动－已用出
+		ReallyForceSpellRES("WM_LUCK",Myself)
+		SetGlobal("SpellTrigger","LOCALS",1)
+		ReallyForceSpellRES("WM_LIGHT",Myself)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_GREATER_MALISON)  // SPWI412.SPL (毒咒)
+		ReallyForceSpellRES("WM_SHLD",Myself)
+		ReallyForceSpell(Myself,WIZARD_STONE_SKIN)  // SPWI408.SPL (石肤术)
+		ReallyForceSpell(Myself,WIZARD_MIRROR_IMAGE)  // SPWI212.SPL (镜影术)
+		ReallyForceSpellRES("WM_ARMOR",Myself)
+		ReallyForceSpell(Myself,WIZARD_SPELL_SHIELD)  // SPWI519.SPL (法术护盾)
+		ReallyForceSpell(Myself,WIZARD_GLOBE_OF_INVULNERABILITY)  // SPWI602.SPL (法术无效结界)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_EMOTION_HOPELESSNESS)  // SPWI411.SPL (情绪控制：绝望)
+END
+
+IF
+	Global("Prep","LOCALS",0)
+	See(NearestEnemyOf(Myself))
+	TookDamage()
+	LevelLT(LastSeenBy(Myself),15)
+THEN
+	RESPONSE #100
+		DisplayString(Myself,40252)  // 意外术－防护魔法武器
+		ApplySpell(Myself,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)  // SPWI611.SPL (防护魔法武器)
+		SetGlobal("Prep","LOCALS",1)
+END
+
+IF
+	Global("Prep","LOCALS",0)
+	See(NearestEnemyOf(Myself))
+	TookDamage()
+	!LevelLT(LastSeenBy(Myself),15)
+THEN
+	RESPONSE #100
+		DisplayString(Myself,43050)  // 连锁意外术－高级壁罩术
+		ApplySpell(Myself,WIZARD_IMPROVED_MANTLE)  // SPWI808.SPL (高级壁罩术)
+		DisplayString(Myself,3302)  // 连锁意外术－法术反转
+		ApplySpell(Myself,WIZARD_SPELL_TURNING)  // SPWI701.SPL (法术反转)
+		DisplayString(Myself,40240)  // 连锁意外术－误导术
+		ApplySpell(Myself,WIZARD_MISLEAD)  // SPWI607.SPL (误导术)
+		SetGlobal("Prep","LOCALS",1)
+END
+
+IF
+	See([GOODCUTOFF.0.0.0.0.SUMMONED])
+	Global("summon","LOCALS",0)
+THEN
+	RESPONSE #100
+		FaceObject(LastSeenBy(Myself))
+		Spell(LastSeenBy(Myself),WIZARD_DEATH_SPELL)  // SPWI605.SPL (死亡术)
+		SetGlobal("summon","LOCALS",1)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),9)
+	!HasBounceEffects(Myself)
+	!HasImmunityEffects(Myself)
+	Global("spell_turning","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("spell_turning","LOCALS",1)
+		Spell(Myself,WIZARD_SPELL_TURNING)  // SPWI701.SPL (法术反转)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	StateCheck(Myself,STATE_SILENCED)
+	Global("vocalize","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("vocalize","LOCALS",1)
+		Spell(Myself,WIZARD_VOCALIZE)  // SPWI219.SPL (发声术)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	Detect([PC])
+	!See(LastSeenBy(Myself))
+	Global("true_sight","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("true_sight","LOCALS",1)
+		Spell(Myself,WIZARD_TRUE_SIGHT)  // SPWI609.SPL (真实视域)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),0)
+	Global("slow","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("slow","LOCALS",1)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_SLOW)  // SPWI312.SPL (缓慢术)
+		ReallyForceSpellRES("WM_HORDE",LastSeenBy(Myself))
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_FIREBALL)  // SPWI304.SPL (火球术)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),6)
+	Global("fireshield","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("fireshield","LOCALS",1)
+		ReallyForceSpell(Myself,WIZARD_FIRE_SHIELD_RED)  // SPWI418.SPL (火焰护盾（红）)
+END
+
+IF
+	Global("glyph","LOCALS",0)
+	See(TenthNearestEnemyOf(Myself))
+	!Range(LastSeenBy(Myself),5)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("glyph","LOCALS",1)
+		SpellRES("WM_GLPH",LastSeenBy(Myself))
+END
+
+IF
+	Global("word","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+	See(NearestEnemyOf(Myself))
+	NumCreatureGT([ENEMY],1)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("word","LOCALS",1)
+		SpellRES("WM_WORD",LastSeenBy(Myself))
+END
+
+IF
+	Global("word","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+	See(NearestEnemyOf(Myself))
+	See([NEUTRAL])
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("word","LOCALS",1)
+		SpellRES("WM_WORD",LastSeenBy(Myself))
+END
+
+IF
+	Global("strike","LOCALS",0)
+	GlobalGT("doomed","LOCALS",2)
+	See(TenthNearestEnemyOfType([0.0.0.MAGE_ALL]))
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("strike","LOCALS",1)
+		SpellRES("WM_STRIK",LastSeenBy(Myself))
+END
+
+IF
+	Global("sphere","LOCALS",0)
+	GlobalGT("doomed","LOCALS",4)
+	See(TenthNearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),15)
+	!Range(LastSeenBy(Myself),15)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("sphere","LOCALS",1)
+		SpellRES("WM_SPHR",LastSeenBy(Myself))
+END
+
+IF
+	Global("wm_start","GLOBAL",1)
+	See(NearestEnemyOf(Myself))
+	GlobalGT("doomed","LOCALS",5)
+	Level(Player1,1)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobal("wm_start","GLOBAL",2)
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		ForceSpellRES("WM_RHIA1",LastSeenBy(Myself))
+END
+
+IF
+	Global("wm_start","GLOBAL",1)
+	See(NearestEnemyOf(Myself))
+	GlobalGT("doomed","LOCALS",8)
+	LevelLT(LastSeenBy(Myself),5)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobal("wm_start","GLOBAL",2)
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		ForceSpellRES("WM_RHIA1",LastSeenBy(Myself))
+END
+
+IF
+	Global("wm_start","GLOBAL",1)
+	See(NearestEnemyOf(Myself))
+	GlobalGT("doomed","LOCALS",12)
+	LevelLT(LastSeenBy(Myself),10)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobal("wm_start","GLOBAL",2)
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		ForceSpellRES("WM_RHIA1",LastSeenBy(Myself))
+END
+
+IF
+	Global("wm_start","GLOBAL",1)
+	See(NearestEnemyOf(Myself))
+	GlobalGT("doomed","LOCALS",16)
+	LevelLT(LastSeenBy(Myself),20)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobal("wm_start","GLOBAL",2)
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		ForceSpellRES("WM_RHIA1",LastSeenBy(Myself))
+END
+
+IF
+	Global("wm_start","GLOBAL",1)
+	See(NearestEnemyOf(Myself))
+	GlobalGT("doomed","LOCALS",20)
+	LevelLT(LastSeenBy(Myself),51)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobal("wm_start","GLOBAL",2)
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		ForceSpellRES("WM_RHIA1",LastSeenBy(Myself))
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	Global("spray","LOCALS",0)
+	Range(LastSeenBy(Myself),5)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("spray","LOCALS",1)
+		ReallyForceSpellRES("WM_ATTR",Player1)
+		ReallyForceSpell(Myself,WIZARD_PRISMATIC_SPRAY)  // SPWI714.SPL (棱镜喷射)
+		ReallyForceSpell(Myself,WIZARD_SUN_FIRE)  // SPWI523.SPL (日焰)
+END
+
+IF
+	Global("missile","LOCALS",0)
+	See(TenthNearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),4)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("missile","LOCALS",1)
+		SpellRES("WM_MISS",LastSeenBy(Myself))
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),2)
+	Global("missile2","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("missile2","LOCALS",1)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_MAGIC_MISSILE)  // SPWI112.SPL (魔法飞弹)
+		ReallyForceSpellRES("WM_MISS",LastSeenBy(Myself))
+END
+
+IF
+	Global("missile","LOCALS",1)
+	See(TenthNearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),4)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("missile","LOCALS",1)
+		SpellRES("WM_MISS",LastSeenBy(Myself))
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),0)
+	Global("wiz_shield","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("wiz_shield","LOCALS",1)
+		ReallyForceSpell(Player1,WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+		ReallyForceSpellRES("WM_LIGHT",Myself)
+		ReallyForceSpellRES("WM_EYE",Myself)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),0)
+	Global("symbol_fear","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("symbol_fear","LOCALS",1)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_NPC_SYMBOL_FEAR)  // SPWI899.SPL (恐惧法印)
+END
+
+IF
+	Global("missile","LOCALS",2)
+	See(TenthNearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),4)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("missile","LOCALS",1)
+		SpellRES("WM_MISS",LastSeenBy(Myself))
+END
+
+IF
+	See(TenthNearestEnemyOf(Myself))
+	Global("larloch","LOCALS",0)
+	!Range(LastSeenBy(Myself),10)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("larloch","LOCALS",1)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_LARLOCH_MINOR_DRAIN)  // SPWI119.SPL (拉络克次级吸能术)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_LARLOCH_MINOR_DRAIN)  // SPWI119.SPL (拉络克次级吸能术)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_LARLOCH_MINOR_DRAIN)  // SPWI119.SPL (拉络克次级吸能术)
+END
+
+IF
+	See(TenthNearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),5)
+	!Range(LastSeenBy(Myself),15)
+	Global("fireball","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("fireball","LOCALS",1)
+		ReallyForceSpellRES("WM_HORDE",LastSeenBy(Myself))
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_COMET)  // SPWI925.SPL (彗星术)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),2)
+	Global("symbol_stun","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("symbol_stun","LOCALS",1)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_NPC_SYMBOL_STUN)  // SPWI898.SPL (震慑法印)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),6)
+	Global("domination","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("domination","LOCALS",1)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_DOMINATION)  // SPWI506.SPL (控制术)
+		ReallyForceSpellRES("WM_COW",LastSeenBy(Myself))
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),3)
+	Global("flame_arrow","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("flame_arrow","LOCALS",1)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_FLAME_ARROW)  // SPWI303.SPL (火焰箭)
+		ReallyForceSpellRES("WM_COW",LastSeenBy(Myself))
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),0)
+	Global("poly_other","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("poly_other","LOCALS",1)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_POLYMORPH_OTHER)  // SPWI415.SPL (变形他人)
+		ReallyForceSpellRES("WM_COW",LastSeenBy(Myself))
+END
+
+IF
+	Global("glyph","LOCALS",1)
+	See(TenthNearestEnemyOf(Myself))
+	!Range(LastSeenBy(Myself),5)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("glyph","LOCALS",1)
+		SpellRES("WM_GLPH",LastSeenBy(Myself))
+END
+
+IF
+	Global("strike","LOCALS",1)
+	GlobalGT("doomed","LOCALS",2)
+	See(TenthNearestEnemyOfType([0.0.0.MAGE_ALL]))
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("strike","LOCALS",1)
+		SpellRES("WM_STRIK",LastSeenBy(Myself))
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),15)
+	Global("abi_dalzim","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("abi_dalzim","LOCALS",1)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_ABI_DALZIMS_HORRID_WILTING)  // SPWI812.SPL (亚比达奇凋死术)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_ABI_DALZIMS_HORRID_WILTING)  // SPWI812.SPL (亚比达奇凋死术)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_ABI_DALZIMS_HORRID_WILTING)  // SPWI812.SPL (亚比达奇凋死术)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),15)
+	Global("efreeti","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("efreeti","LOCALS",1)
+		ReallyForceSpell(Myself,WIZARD_SUMMON_EFREET)  // SPWI717.SPL (召唤火巨灵)
+		ReallyForceSpell(Myself,WIZARD_SUMMON_EFREET)  // SPWI717.SPL (召唤火巨灵)
+		ReallyForceSpell(Myself,WIZARD_SUMMON_EFREET)  // SPWI717.SPL (召唤火巨灵)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),15)
+	Global("sunfire","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("sunfire","LOCALS",1)
+		ReallyForceSpellRES("WM_ATTR",Player1)
+		ReallyForceSpell(Myself,WIZARD_SUN_FIRE)  // SPWI523.SPL (日焰)
+		ReallyForceSpell(Myself,WIZARD_SUN_FIRE)  // SPWI523.SPL (日焰)
+		ReallyForceSpell(Myself,WIZARD_SUN_FIRE)  // SPWI523.SPL (日焰)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),15)
+	Global("prismatic","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("prismatic","LOCALS",1)
+		ReallyForceSpellRES("WM_COW",LastSeenBy(Myself))
+		ReallyForceSpellRES("WM_CHAOB",Myself)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),15)
+	Global("finger","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("finger","LOCALS",1)
+		ReallyForceSpellRES("WM_COW",LastSeenBy(Myself))
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_FINGER_OF_DEATH)  // SPWI713.SPL (死亡一指)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),15)
+	Global("flesh_to_stone","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("flesh_to_stone","LOCALS",1)
+		ReallyForceSpellRES("WM_COW",LastSeenBy(Myself))
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_FLESH_TO_STONE)  // SPWI604.SPL (石化术)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	LevelGT(LastSeenBy(Myself),15)
+	Global("disintegrate","LOCALS",0)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		IncrementGlobal("disintegrate","LOCALS",1)
+		ReallyForceSpellRES("WM_COW",LastSeenBy(Myself))
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_DISINTEGRATE)  // SPWI616.SPL (解离术)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	GlobalLT("assassin","LOCALS",2)
+	LevelGT(LastSeenBy(Myself),15)
+	Range(LastSeenBy(Myself),4)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",TWO_MINUTES)
+		IncrementGlobal("assassin","LOCALS",1)
+		SpellRES("SPCL916",Myself)  // 暗杀
+		Continue()
+END
+
+IF
+	See(TenthNearestEnemyOf(Myself))
+	!Range(LastSeenBy(Myself),10)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_LARLOCH_MINOR_DRAIN)  // SPWI119.SPL (拉络克次级吸能术)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_LARLOCH_MINOR_DRAIN)  // SPWI119.SPL (拉络克次级吸能术)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_LARLOCH_MINOR_DRAIN)  // SPWI119.SPL (拉络克次级吸能术)
+END
+
+IF
+	See(TenthNearestEnemyOf(Myself))
+	!Range(LastSeenBy(Myself),10)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_LARLOCH_MINOR_DRAIN)  // SPWI119.SPL (拉络克次级吸能术)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_LARLOCH_MINOR_DRAIN)  // SPWI119.SPL (拉络克次级吸能术)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_LARLOCH_MINOR_DRAIN)  // SPWI119.SPL (拉络克次级吸能术)
+END
+
+IF
+	See(TenthNearestEnemyOf(Myself))
+	!Range(LastSeenBy(Myself),10)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_LARLOCH_MINOR_DRAIN)  // SPWI119.SPL (拉络克次级吸能术)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_LARLOCH_MINOR_DRAIN)  // SPWI119.SPL (拉络克次级吸能术)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_LARLOCH_MINOR_DRAIN)  // SPWI119.SPL (拉络克次级吸能术)
+END
+
+IF
+	See(TenthNearestEnemyOf(Myself))
+	!Range(LastSeenBy(Myself),10)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_LARLOCH_MINOR_DRAIN)  // SPWI119.SPL (拉络克次级吸能术)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_LARLOCH_MINOR_DRAIN)  // SPWI119.SPL (拉络克次级吸能术)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_LARLOCH_MINOR_DRAIN)  // SPWI119.SPL (拉络克次级吸能术)
+END
+
+IF
+	See(TenthNearestEnemyOf(Myself))
+	!Range(LastSeenBy(Myself),10)
+	!GlobalTimerNotExpired("delay","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("delay","LOCALS",ONE_ROUND)
+		IncrementGlobal("doomed","LOCALS",1)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_LARLOCH_MINOR_DRAIN)  // SPWI119.SPL (拉络克次级吸能术)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_LARLOCH_MINOR_DRAIN)  // SPWI119.SPL (拉络克次级吸能术)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_LARLOCH_MINOR_DRAIN)  // SPWI119.SPL (拉络克次级吸能术)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(LastSeenBy(Myself),15)
+		Continue()
+END
+
+IF
+	See(SecondNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(LastSeenBy(Myself),15)
+		Continue()
+END
+
+IF
+	See(ThirdNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(LastSeenBy(Myself),15)
+		Continue()
+END
+
+IF
+	See(FourthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(LastSeenBy(Myself),15)
+		Continue()
+END
+
+IF
+	See(FifthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(LastSeenBy(Myself),15)
+		Continue()
+END
+
+IF
+	See(SixthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(LastSeenBy(Myself),15)
+		Continue()
+END
+
+IF
+	!See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		MoveToObject(Player1)
+		Continue()
+END
+

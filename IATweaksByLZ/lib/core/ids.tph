@@ -1,0 +1,361 @@
+/// update and patch various IDS lists ///
+
+// update the stats.ids file // Tweak By LZ
+
+OUTER_SET num = 2
+OUTER_WHILE (num <= 19) BEGIN
+    //OUTER_SET slot_empty = IDS_OF_SYMBOL(~stats~ ~EXTRAPROFICIENCY{%num%}~)   //EXTRAPROFICIENCY%num%分不清EXTRAPROFICIENCY2、EXTRAPROFICIENCY20，要改成EXTRAPROFICIENCY{%num%}
+    OUTER_SET slot_empty = IDS_OF_SYMBOL(~stats~ ~EXTRAPROFICIENCY%num%$~)    //同上，$匹配行尾，可以区分EXTRAPROFICIENCY2、EXTRAPROFICIENCY20
+    ACTION_IF (slot_empty < 0) BEGIN
+        OUTER_PATCH ~~ BEGIN
+            FOR (idx = 100; idx < 512; ++idx) BEGIN
+                LOOKUP_IDS_SYMBOL_OF_INT value ~stats~ idx
+                PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+                    SET slot_empty = idx
+                    SET idx = 512
+                END
+            END
+        END
+    END
+    ACTION_IF (slot_empty >= 0) BEGIN
+	    //APPEND ~stats.ids~ ~%slot_empty% EXTRAPROFICIENCY%num%~ UNLESS ~EXTRAPROFICIENCY{%num%}~    //EXTRAPROFICIENCY%num%分不清EXTRAPROFICIENCY2、EXTRAPROFICIENCY20，要改成EXTRAPROFICIENCY{%num%}
+        APPEND ~stats.ids~ ~%slot_empty% EXTRAPROFICIENCY%num%~ UNLESS ~^[0-9]+[ %TAB%]+EXTRAPROFICIENCY%num%$~     //同上，$匹配行尾，可以区分EXTRAPROFICIENCY2、EXTRAPROFICIENCY20。原写法~EXTRAPROFICIENCY%num%$~
+    END
+	OUTER_SET num = num + 1
+END
+
+OUTER_SET num = 7
+OUTER_WHILE (num <= 20) BEGIN
+    OUTER_SET slot_empty = IDS_OF_SYMBOL(~stats~ ~SCRIPTINGSTATE%num%$~)    //$匹配行尾
+    ACTION_IF (slot_empty < 0) BEGIN
+        OUTER_PATCH ~~ BEGIN
+            FOR (idx = 100; idx < 512; ++idx) BEGIN
+                LOOKUP_IDS_SYMBOL_OF_INT value ~stats~ idx
+                PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+                    SET slot_empty = idx
+                    SET idx = 512
+                END
+            END
+        END
+    END
+    ACTION_IF (slot_empty >= 0) BEGIN
+        APPEND ~stats.ids~ ~%slot_empty% SCRIPTINGSTATE%num%~ UNLESS ~^[0-9]+[ %TAB%]+SCRIPTINGSTATE%num%$~     //$匹配行尾。原写法~SCRIPTINGSTATE%num%$~
+    END
+	OUTER_SET num = num + 1
+END
+
+/*
+原版STATS.IDS编号156~161有12个状态、每2个共用1个编号，铁砧原来是2合1删掉其中1个，重新调整把每2个拆分成不同编号。只对后面BAF编译有效。
+游戏已有的BCS如果含157 SCRIPTINGSTATE2或157 DEATH_WARD会自动变为157 SCRIPTINGSTATE2，
+后面编译的BAF能识别拆分出的DEATH_WARD，如果采用2合1删掉其中1个则会自动编译为157 SCRIPTINGSTATE2，如果不拆分保持原样则会编译为157 DEATH_WARD。
+*/
+
+// 读取 WING_BUFFET 的老槽位（通常返回 156）
+OUTER_SET old_slot = IDS_OF_SYMBOL(~stats~ ~WING_BUFFET~)
+
+// 如果 old_slot 等于 156，说明确实需要拆分清理
+ACTION_IF (old_slot == 156) BEGIN
+
+    OUTER_SET slot_empty = IDS_OF_SYMBOL(~stats~ ~LZTEMPREPALCE~)
+    ACTION_IF (slot_empty < 0) BEGIN
+        OUTER_PATCH ~~ BEGIN
+            FOR (idx = 100; idx < 512; ++idx) BEGIN
+                LOOKUP_IDS_SYMBOL_OF_INT value ~stats~ idx
+                PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+                    SET slot_empty = idx
+                    SET idx = 512
+                END
+            END
+        END
+	END
+    ACTION_IF (slot_empty >= 0) BEGIN
+        APPEND ~stats.ids~ ~%slot_empty% LZTEMPREPALCE~ UNLESS ~^[0-9]+[ %TAB%]+LZTEMPREPALCE$~
+		COPY_EXISTING ~stats.ids~ ~override~
+		    REPLACE_TEXTUALLY ~156 SCRIPTINGSTATE1[%LNL%%MNL%%WNL%]+156 WING_BUFFET~ ~156 SCRIPTINGSTATE1~
+		    REPLACE_TEXTUALLY ~%slot_empty%[ %TAB%]+LZTEMPREPALCE~ ~%slot_empty% WING_BUFFET~
+		BUT_ONLY
+    END
+END
+
+// 读取 DEATH_WARD 的老槽位（通常返回 157）
+OUTER_SET old_slot = IDS_OF_SYMBOL(~stats~ ~DEATH_WARD~)
+
+// 如果 old_slot 等于 157，说明确实需要拆分清理
+ACTION_IF (old_slot == 157) BEGIN
+
+    OUTER_SET slot_empty = IDS_OF_SYMBOL(~stats~ ~LZTEMPREPALCE~)
+    ACTION_IF (slot_empty < 0) BEGIN
+        OUTER_PATCH ~~ BEGIN
+            FOR (idx = 100; idx < 512; ++idx) BEGIN
+                LOOKUP_IDS_SYMBOL_OF_INT value ~stats~ idx
+                PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+                    SET slot_empty = idx
+                    SET idx = 512
+                END
+            END
+        END
+	END
+    ACTION_IF (slot_empty >= 0) BEGIN
+        APPEND ~stats.ids~ ~%slot_empty% LZTEMPREPALCE~ UNLESS ~^[0-9]+[ %TAB%]+LZTEMPREPALCE$~
+		COPY_EXISTING ~stats.ids~ ~override~
+		    REPLACE_TEXTUALLY ~157 SCRIPTINGSTATE2[%LNL%%MNL%%WNL%]+157 DEATH_WARD~ ~157 SCRIPTINGSTATE2~
+		    REPLACE_TEXTUALLY ~%slot_empty%[ %TAB%]+LZTEMPREPALCE~ ~%slot_empty% DEATH_WARD~
+		BUT_ONLY
+    END
+END
+
+// 读取 LEVEL_DRAIN_IMMUNITY 的老槽位（通常返回 158）
+OUTER_SET old_slot = IDS_OF_SYMBOL(~stats~ ~LEVEL_DRAIN_IMMUNITY~)
+
+// 如果 old_slot 等于 158，说明确实需要拆分清理
+ACTION_IF (old_slot == 158) BEGIN
+
+    OUTER_SET slot_empty = IDS_OF_SYMBOL(~stats~ ~LZTEMPREPALCE~)
+    ACTION_IF (slot_empty < 0) BEGIN
+        OUTER_PATCH ~~ BEGIN
+            FOR (idx = 100; idx < 512; ++idx) BEGIN
+                LOOKUP_IDS_SYMBOL_OF_INT value ~stats~ idx
+                PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+                    SET slot_empty = idx
+                    SET idx = 512
+                END
+            END
+        END
+	END
+    ACTION_IF (slot_empty >= 0) BEGIN
+        APPEND ~stats.ids~ ~%slot_empty% LZTEMPREPALCE~ UNLESS ~^[0-9]+[ %TAB%]+LZTEMPREPALCE$~
+		COPY_EXISTING ~stats.ids~ ~override~
+		    REPLACE_TEXTUALLY ~158 SCRIPTINGSTATE3[%LNL%%MNL%%WNL%]+158 LEVEL_DRAIN_IMMUNITY~ ~158 SCRIPTINGSTATE3~
+		    REPLACE_TEXTUALLY ~%slot_empty%[ %TAB%]+LZTEMPREPALCE~ ~%slot_empty% LEVEL_DRAIN_IMMUNITY~
+		BUT_ONLY
+    END
+END
+
+// 读取 OFFENSIVE_MODIFIER 的老槽位（通常返回 159）
+OUTER_SET old_slot = IDS_OF_SYMBOL(~stats~ ~OFFENSIVE_MODIFIER~)
+
+// 如果 old_slot 等于 159，说明确实需要拆分清理
+ACTION_IF (old_slot == 159) BEGIN
+
+    OUTER_SET slot_empty = IDS_OF_SYMBOL(~stats~ ~LZTEMPREPALCE~)
+    ACTION_IF (slot_empty < 0) BEGIN
+        OUTER_PATCH ~~ BEGIN
+            FOR (idx = 100; idx < 512; ++idx) BEGIN
+                LOOKUP_IDS_SYMBOL_OF_INT value ~stats~ idx
+                PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+                    SET slot_empty = idx
+                    SET idx = 512
+                END
+            END
+        END
+	END
+    ACTION_IF (slot_empty >= 0) BEGIN
+        APPEND ~stats.ids~ ~%slot_empty% LZTEMPREPALCE~ UNLESS ~^[0-9]+[ %TAB%]+LZTEMPREPALCE$~
+		COPY_EXISTING ~stats.ids~ ~override~
+		    REPLACE_TEXTUALLY ~159 SCRIPTINGSTATE4[%LNL%%MNL%%WNL%]+159 OFFENSIVE_MODIFIER~ ~159 SCRIPTINGSTATE4~
+		    REPLACE_TEXTUALLY ~%slot_empty%[ %TAB%]+LZTEMPREPALCE~ ~%slot_empty% OFFENSIVE_MODIFIER~
+		BUT_ONLY
+    END
+END
+
+// 读取 DEFENSIVE_MODIFIER 的老槽位（通常返回 160）
+OUTER_SET old_slot = IDS_OF_SYMBOL(~stats~ ~DEFENSIVE_MODIFIER~)
+
+// 如果 old_slot 等于 160，说明确实需要拆分清理
+ACTION_IF (old_slot == 160) BEGIN
+
+    OUTER_SET slot_empty = IDS_OF_SYMBOL(~stats~ ~LZTEMPREPALCE~)
+    ACTION_IF (slot_empty < 0) BEGIN
+        OUTER_PATCH ~~ BEGIN
+            FOR (idx = 100; idx < 512; ++idx) BEGIN
+                LOOKUP_IDS_SYMBOL_OF_INT value ~stats~ idx
+                PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+                    SET slot_empty = idx
+                    SET idx = 512
+                END
+            END
+        END
+	END
+    ACTION_IF (slot_empty >= 0) BEGIN
+        APPEND ~stats.ids~ ~%slot_empty% LZTEMPREPALCE~ UNLESS ~^[0-9]+[ %TAB%]+LZTEMPREPALCE$~
+		COPY_EXISTING ~stats.ids~ ~override~
+		    REPLACE_TEXTUALLY ~160 SCRIPTINGSTATE5[%LNL%%MNL%%WNL%]+160 DEFENSIVE_MODIFIER~ ~160 SCRIPTINGSTATE5~
+		    REPLACE_TEXTUALLY ~%slot_empty%[ %TAB%]+LZTEMPREPALCE~ ~%slot_empty% DEFENSIVE_MODIFIER~
+		BUT_ONLY
+    END
+END
+
+// 读取 STRENGTH_MODIFIER 的老槽位（通常返回 161）
+OUTER_SET old_slot = IDS_OF_SYMBOL(~stats~ ~STRENGTH_MODIFIER~)
+
+// 如果 old_slot 等于 161，说明确实需要拆分清理
+ACTION_IF (old_slot == 161) BEGIN
+
+    OUTER_SET slot_empty = IDS_OF_SYMBOL(~stats~ ~LZTEMPREPALCE~)
+    ACTION_IF (slot_empty < 0) BEGIN
+        OUTER_PATCH ~~ BEGIN
+            FOR (idx = 100; idx < 512; ++idx) BEGIN
+                LOOKUP_IDS_SYMBOL_OF_INT value ~stats~ idx
+                PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+                    SET slot_empty = idx
+                    SET idx = 512
+                END
+            END
+        END
+	END
+    ACTION_IF (slot_empty >= 0) BEGIN
+        APPEND ~stats.ids~ ~%slot_empty% LZTEMPREPALCE~ UNLESS ~^[0-9]+[ %TAB%]+LZTEMPREPALCE$~
+		COPY_EXISTING ~stats.ids~ ~override~
+		    REPLACE_TEXTUALLY ~161 SCRIPTINGSTATE6[%LNL%%MNL%%WNL%]+161 STRENGTH_MODIFIER~ ~161 SCRIPTINGSTATE6~
+		    REPLACE_TEXTUALLY ~%slot_empty%[ %TAB%]+LZTEMPREPALCE~ ~%slot_empty% STRENGTH_MODIFIER~
+		BUT_ONLY
+    END
+END
+
+// Add new IA spells to SPELL.IDS // Tweak By LZ
+
+APPEND ~SPELL.IDS~ ~1418 CLERIC_ACID_SHIELD~
+APPEND ~SPELL.IDS~ ~1218 CLERIC_ALICORN_LANCE~
+APPEND ~SPELL.IDS~ ~1445 CLERIC_SPIRITUAL_WEAPON~
+APPEND ~SPELL.IDS~ ~1545 CLERIC_ENTROPY_SHIELD~
+APPEND ~SPELL.IDS~ ~1546 CLERIC_ENTROPY_SHIELD_CRUSHING~
+APPEND ~SPELL.IDS~ ~1547 CLERIC_ENTROPY_SHIELD_MISSILE~
+APPEND ~SPELL.IDS~ ~1548 CLERIC_ENTROPY_SHIELD_PIERCING~
+APPEND ~SPELL.IDS~ ~1549 CLERIC_ENTROPY_SHIELD_SLASHING~
+APPEND ~SPELL.IDS~ ~1649 CLERIC_IMPERVIOUS_SANCTITY_OF_MIND~
+APPEND ~SPELL.IDS~ ~1749 CLERIC_STORM_SHELL~
+APPEND ~SPELL.IDS~ ~2966 LESSER_WEREWOLF_CHANGE~
+
+OUTER_SET slot_empty = IDS_OF_SYMBOL(~spell~ ~CLERIC_SOOTHING_FOG~)
+ACTION_IF (slot_empty < 0) BEGIN
+    OUTER_PATCH ~~ BEGIN
+        FOR (idx = 1751; idx < 2050; ++idx) BEGIN
+            LOOKUP_IDS_SYMBOL_OF_INT value ~spell~ idx
+            PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+                SET slot_empty = idx
+                SET idx = 2050
+            END
+        END
+    END
+END
+ACTION_IF (slot_empty >= 0) BEGIN
+    APPEND ~spell.ids~ ~%slot_empty% CLERIC_SOOTHING_FOG~ UNLESS ~CLERIC_SOOTHING_FOG~
+END
+
+OUTER_SET slot_empty = IDS_OF_SYMBOL(~spell~ ~CLERIC_PRIMAL_WARD~)
+ACTION_IF (slot_empty < 0) BEGIN
+    OUTER_PATCH ~~ BEGIN
+        FOR (idx = 1751; idx < 2050; ++idx) BEGIN
+            LOOKUP_IDS_SYMBOL_OF_INT value ~spell~ idx
+            PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+                SET slot_empty = idx
+                SET idx = 2050
+            END
+        END
+    END
+END
+ACTION_IF (slot_empty >= 0) BEGIN
+    APPEND ~spell.ids~ ~%slot_empty% CLERIC_PRIMAL_WARD~ UNLESS ~CLERIC_PRIMAL_WARD~
+END
+
+OUTER_SET slot_empty = IDS_OF_SYMBOL(~spell~ ~CLERIC_SENSE_OF_LIMBO~)
+ACTION_IF (slot_empty < 0) BEGIN
+    OUTER_PATCH ~~ BEGIN
+        FOR (idx = 1751; idx < 2050; ++idx) BEGIN
+            LOOKUP_IDS_SYMBOL_OF_INT value ~spell~ idx
+            PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+                SET slot_empty = idx
+                SET idx = 2050
+            END
+        END
+    END
+END
+ACTION_IF (slot_empty >= 0) BEGIN
+    APPEND ~spell.ids~ ~%slot_empty% CLERIC_SENSE_OF_LIMBO~ UNLESS ~CLERIC_SENSE_OF_LIMBO~
+END
+
+OUTER_SET slot_empty = IDS_OF_SYMBOL(~spell~ ~CLERIC_BOLT_OF_THE_GROVE~)
+ACTION_IF (slot_empty < 0) BEGIN
+    OUTER_PATCH ~~ BEGIN
+        FOR (idx = 1751; idx < 2050; ++idx) BEGIN
+            LOOKUP_IDS_SYMBOL_OF_INT value ~spell~ idx
+            PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+                SET slot_empty = idx
+                SET idx = 2050
+            END
+        END
+    END
+END
+ACTION_IF (slot_empty >= 0) BEGIN
+    APPEND ~spell.ids~ ~%slot_empty% CLERIC_BOLT_OF_THE_GROVE~ UNLESS ~CLERIC_BOLT_OF_THE_GROVE~
+END
+
+// Add new spell states to SPLSTATE.IDS //
+
+LAF resolve_state STR_VAR new_state_id = ~WIZARD_SPELL_TURNING~ RET new_state_index END
+OUTER_SET spell_turning_state = %new_state_index%
+
+LAF resolve_state STR_VAR new_state_id = ~IMMUNE_FEAR~ RET new_state_index END
+OUTER_SET immune_fear_state = %new_state_index%
+
+LAF resolve_state STR_VAR new_state_id = ~RIGHTEOUS_MAGIC~ RET new_state_index END
+OUTER_SET righteous_magic_state = %new_state_index%
+
+LAF resolve_state STR_VAR new_state_id = ~ACID_SHIELD~ RET new_state_index END
+OUTER_SET acid_shield_state = %new_state_index%
+
+LAF resolve_state STR_VAR new_state_id = ~PERFORM_RITUAL~ RET new_state_index END
+OUTER_SET perform_ritual_state = %new_state_index%
+
+LAF resolve_state STR_VAR new_state_id = ~FLAME_BLADE~ RET new_state_index END
+OUTER_SET flame_blade_state = %new_state_index%
+
+LAF resolve_state STR_VAR new_state_id = ~SLOW_IMMUNITY~ RET new_state_index END
+OUTER_SET slow_immunity_state = %new_state_index%
+
+LAF resolve_state STR_VAR new_state_id = ~CORROSIVE_CLOUD~ RET new_state_index END
+OUTER_SET corrosive_cloud_state = %new_state_index%
+
+// Fix KIT.IDS //
+
+COPY_EXISTING ~kit.ids~ ~override~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(TRUECLASS[ %TAB%%LNL%%MNL%%WNL%]+\)~              ~0x4000 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(BERSERKER[ %TAB%%LNL%%MNL%%WNL%]+\)~              ~0x4001 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(WIZARDSLAYER[ %TAB%%LNL%%MNL%%WNL%]+\)~           ~0x4002 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(KENSAI[ %TAB%%LNL%%MNL%%WNL%]+\)~                 ~0x4003 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(CAVALIER[ %TAB%%LNL%%MNL%%WNL%]+\)~               ~0x4004 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(INQUISITOR[ %TAB%%LNL%%MNL%%WNL%]+\)~             ~0x4005 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(UNDEADHUNTER[ %TAB%%LNL%%MNL%%WNL%]+\)~           ~0x4006 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(MAGESCHOOL_ABJURER[ %TAB%%LNL%%MNL%%WNL%]+\)~     ~0x0040 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(MAGESCHOOL_CONJURER[ %TAB%%LNL%%MNL%%WNL%]+\)~    ~0x0080 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(MAGESCHOOL_DIVINER[ %TAB%%LNL%%MNL%%WNL%]+\)~     ~0x0100 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(MAGESCHOOL_ENCHANTER[ %TAB%%LNL%%MNL%%WNL%]+\)~   ~0x0200 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(MAGESCHOOL_ILLUSIONIST[ %TAB%%LNL%%MNL%%WNL%]+\)~ ~0x0400 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(MAGESCHOOL_INVOKER[ %TAB%%LNL%%MNL%%WNL%]+\)~     ~0x0800 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(MAGESCHOOL_NECROMANCER[ %TAB%%LNL%%MNL%%WNL%]+\)~ ~0x1000 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(MAGESCHOOL_TRANSMUTER[ %TAB%%LNL%%MNL%%WNL%]+\)~  ~0x2000 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(MAGESCHOOL_GENERALIST[ %TAB%%LNL%%MNL%%WNL%]+\)~  ~0x4000 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(FERALAN[ %TAB%%LNL%%MNL%%WNL%]+\)~                ~0x4007 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(STALKER[ %TAB%%LNL%%MNL%%WNL%]+\)~                ~0x4008 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(BEASTMASTER[ %TAB%%LNL%%MNL%%WNL%]+\)~            ~0x4009 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(ASSASIN[ %TAB%%LNL%%MNL%%WNL%]+\)~                ~0x400A \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(BOUNTYHUNTER[ %TAB%%LNL%%MNL%%WNL%]+\)~           ~0x400B \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(SWASHBUCKLER[ %TAB%%LNL%%MNL%%WNL%]+\)~           ~0x400C \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(BLADE[ %TAB%%LNL%%MNL%%WNL%]+\)~                  ~0x400D \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(JESTER[ %TAB%%LNL%%MNL%%WNL%]+\)~                 ~0x400E \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(SKALD[ %TAB%%LNL%%MNL%%WNL%]+\)~                  ~0x400F \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(GODTALOS[ %TAB%%LNL%%MNL%%WNL%]+\)~               ~0x4013 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(GODHELM[ %TAB%%LNL%%MNL%%WNL%]+\)~                ~0x4014 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(GODLATHANDER[ %TAB%%LNL%%MNL%%WNL%]+\)~           ~0x4015 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(TOTEMIC[ %TAB%%LNL%%MNL%%WNL%]+\)~                ~0x4010 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(SHAPESHIFTER[ %TAB%%LNL%%MNL%%WNL%]+\)~           ~0x4011 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(BEASTFRIEND[ %TAB%%LNL%%MNL%%WNL%]+\)~            ~0x4012 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(BARBARIAN[ %TAB%%LNL%%MNL%%WNL%]+\)~              ~0x40000000 \1~
+  REPLACE_TEXTUALLY ~^.+[ %TAB%]\(WILDMAGE[ %TAB%%LNL%%MNL%%WNL%]+\)~               ~0x80000000 \1~
+  BUT_ONLY
+
+APPEND ~kit.ids~ ~0x4000 TRUECLASS~ UNLESS ~^.+[ %TAB%]TRUECLASS[ %TAB%%LNL%%MNL%%WNL%]+~
+APPEND ~kit.ids~ ~0x40000000 BARBARIAN~ UNLESS ~^.+[ %TAB%]BARBARIAN[ %TAB%%LNL%%MNL%%WNL%]+~
+APPEND ~kit.ids~ ~0x80000000 WILDMAGE~ UNLESS ~^.+[ %TAB%]WILDMAGE[ %TAB%%LNL%%MNL%%WNL%]+~
+
+CLEAR_IDS_MAP

@@ -1,0 +1,63 @@
+// 来自cdtweaks\lib\increased_party_movement_speed.tpa
+
+// Adds a script on top or at the bottom of all available global scripts (i.e. baldur.bcs, etc.)
+DEFINE_ACTION_FUNCTION A7_ADD_GLOBAL_SCRIPT
+INT_VAR
+  extend_top = 1    // 0: EXTEND_BOTTOM, 1: EXTEND_TOP
+STR_VAR
+  script_file = ~~  // filename of the script to add (leave empty to skip)
+  script = ~~       // Script content to add (leave empty to skip)
+BEGIN
+  ACTION_CLEAR_ARRAY ~script_files~
+
+  // hardcoded script files
+  OUTER_SET $script_files(~BALDUR~) = 1
+  OUTER_SET $script_files(~BALDUR25~) = 1
+
+  // externalized script files
+  COPY_EXISTING ~campaign.2da~ ~override~
+    COUNT_2DA_ROWS 32 numRows
+    FOR (row = 0; row < numRows; ++row) BEGIN
+      READ_2DA_ENTRY row 1 32 resref
+      TO_UPPER ~resref~
+      SET $script_files(~%resref%~) = 1
+    END
+  BUT_ONLY IF_EXISTS
+
+  // append script to files
+  ACTION_PHP_EACH script_files AS resref => value BEGIN
+    ACTION_IF (IS_AN_INT ~value~ && value != 0) BEGIN
+      OUTER_TEXT_SPRINT source_file ~%resref%.bcs~
+      LAM __A7_EXTEND_SCRIPT
+    END
+  END
+END
+
+
+// Used internally. Variables: extend_top, source_file, script_file, script
+DEFINE_ACTION_MACRO __A7_EXTEND_SCRIPT
+BEGIN
+  LOCAL_SET strlen = STRING_LENGTH ~%script%~
+
+  ACTION_IF (FILE_EXISTS_IN_GAME ~%source_file%~) BEGIN
+    // adding script file
+    ACTION_IF (FILE_EXISTS ~%script_file%~) BEGIN
+      ACTION_IF (extend_top) BEGIN
+        EXTEND_TOP ~%source_file%~ ~%script_file%~ EVAL
+      END ELSE BEGIN
+        EXTEND_BOTTOM ~%source_file%~ ~%script_file%~ EVAL
+      END
+    END
+
+    // adding script content
+    ACTION_IF (strlen > 0) BEGIN
+      COPY_EXISTING ~%source_file%~ ~override~
+        DECOMPILE_AND_PATCH BEGIN
+          SET ofs = extend_top ? 0 : BUFFER_LENGTH
+          INSERT_BYTES ofs strlen
+          WRITE_ASCIIE ofs ~%script%~ (strlen)
+        END
+      BUT_ONLY IF_EXISTS
+    END
+  END
+END

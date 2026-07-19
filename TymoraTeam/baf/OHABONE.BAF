@@ -1,0 +1,1321 @@
+IF
+	Allegiance(Myself,ENEMY)
+	See(NearestEnemyOf(Myself))
+	GlobalTimerExpired("OHABONERest","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OHABONERest","LOCALS",FOUR_HOURS)
+		SetGlobal("Iaruneg01","LOCALS",0)
+		SetGlobal("Iaruneg02","LOCALS",0)
+		SetGlobal("Iaruneg03","LOCALS",0)
+		SetGlobal("Iaruneg04","LOCALS",0)
+		SetGlobal("Iaruneg05","LOCALS",0)
+		SetGlobal("Iaruneg06","LOCALS",0)
+		SetGlobal("OHABONETSNum","LOCALS",0)
+		SetGlobal("OHABONESTNum","LOCALS",0)
+		SetGlobal("OHABONEETNum","LOCALS",0)
+		SetGlobal("OHABONESNNum","LOCALS",0)
+		SetGlobal("OHABONESNum","LOCALS",0)
+		SetGlobal("OHABONEPFMW","LOCALS",0)
+		SetGlobal("OHABONESCMFStart","LOCALS",0)
+		SetGlobal("OHABONEHLA","LOCALS",0)
+		SetGlobal("OHABONEBB","LOCALS",0)
+		ReallyForceSpellRES("SPWII07",Myself)  // No such index
+		Rest()
+END
+
+IF
+	Global("Iapcastts","GLOBAL",1)
+	Global("Iatsinvulner","LOCALS",0)
+	!HPLT(Myself,2)
+THEN
+	RESPONSE #100
+		SetGlobal("Iatsinvulner","LOCALS",1)
+		ApplySpellRES("SPINI70",Myself)  // No such index
+END
+
+IF
+	Global("Iapcastts","GLOBAL",0)
+	Global("Iatsinvulner","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("Iatsinvulner","LOCALS",0)
+		ApplySpellRES("SPINI71",Myself)  // No such index
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	OR(2)
+		CheckStatGT(Myself,0,SCRIPTINGSTATE9)
+		Global("Iapcastts","GLOBAL",1)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+END
+
+IF
+	OR(5)
+		See([NEUTRAL])
+		See([ALLY])
+		See([FAMILIAR])
+		See([CONTROLLED])
+		See([CHARMED])
+	InWeaponRange(LastSeenBy(Myself))
+	TookDamage()
+	!InWeaponRange(LastHitter(Myself))
+	WeaponEffectiveVs(LastHitter(Myself),MAINHAND)
+	WeaponCanDamage(LastHitter(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		ReallyForceSpell(LastHitter(Myself),WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		AttackOneRound(LastHitter(Myself))
+END
+
+IF
+	OR(2)
+		!Detect([PC])
+		!Detect([GOODCUTOFF])
+	ActionListEmpty()
+	InMyArea(Player1)
+	Allegiance(Myself,ENEMY)
+	!StateCheck(Myself,STATE_BLIND)
+	!StateCheck(Myself,STATE_HELPLESS)
+	!StateCheck(Myself,STATE_CONFUSED)
+	!StateCheck(Myself,STATE_STUNNED)
+	!StateCheck(Myself,STATE_PANIC)
+	!StateCheck(Myself,STATE_CHARMED)
+	CheckStatLT(Player1,1,SANCTUARY)
+	!StateCheck(Player1,STATE_REALLY_DEAD)
+	!StateCheck(Player1,STATE_NOT_APPROACHABLE)
+	!GlobalTimerNotExpired("MO_TeleToPlayer","LOCALS")
+THEN
+	RESPONSE #100
+		MoveToObject(Player1)
+	RESPONSE #100
+		SetGlobalTimer("MO_TeleToPlayer","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player1,WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		Continue()
+END
+
+IF
+	OR(2)
+		!Detect([PC])
+		!Detect([GOODCUTOFF])
+	ActionListEmpty()
+	Allegiance(Myself,ENEMY)
+	!StateCheck(Myself,STATE_BLIND)
+	!StateCheck(Myself,STATE_HELPLESS)
+	!StateCheck(Myself,STATE_CONFUSED)
+	!StateCheck(Myself,STATE_STUNNED)
+	!StateCheck(Myself,STATE_PANIC)
+	!StateCheck(Myself,STATE_CHARMED)
+	OR(3)
+		CheckStatGT(Player1,0,SANCTUARY)
+		StateCheck(Player1,STATE_REALLY_DEAD)
+		StateCheck(Player1,STATE_NOT_APPROACHABLE)
+	!GlobalTimerNotExpired("MO_TeleToPlayer","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("MO_TeleToPlayer","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player2,WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		Continue()
+	RESPONSE #100
+		SetGlobalTimer("MO_TeleToPlayer","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player3,WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		Continue()
+	RESPONSE #100
+		SetGlobalTimer("MO_TeleToPlayer","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player4,WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		Continue()
+	RESPONSE #100
+		SetGlobalTimer("MO_TeleToPlayer","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player5,WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		Continue()
+	RESPONSE #100
+		SetGlobalTimer("MO_TeleToPlayer","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player6,WIZARD_DIMENSION_DOOR)  // SPWI402.SPL (任意门)
+		Continue()
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	SpellCast([ANYONE],WIZARD_TIME_STOP)  // SPWI909.SPL (时间停止)
+	!GlobalTimerNotExpired("TSNOCUT","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("TSNOCUT","LOCALS",THREE_ROUNDS)
+		Continue()
+END
+
+IF
+	OR(5)
+		GlobalLT("OHABONETSNum","LOCALS",3)
+		GlobalLT("OHABONESTNum","LOCALS",10)
+		GlobalLT("OHABONEETNum","LOCALS",10)
+		GlobalLT("OHABONESNNum","LOCALS",10)
+		GlobalLT("OHABONESNum","LOCALS",10)
+	Global("OHABONETrapStart","LOCALS",0)
+	!GlobalTimerNotExpired("OHABONETrapDealy","LOCALS")
+	ActionListEmpty()
+	Allegiance(Myself,ENEMY)
+	Range(NearestEnemyOf(Myself),4)
+	!HPLT(NearestEnemyOf(Myself),30)
+	!StateCheck(NearestEnemyOf(Myself),STATE_CONFUSED)
+	!StateCheck(NearestEnemyOf(Myself),STATE_PANIC)
+	!StateCheck(NearestEnemyOf(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(NearestEnemyOf(Myself),STATE_INVISIBLE)
+	!StateCheck(NearestEnemyOf(Myself),STATE_MIRRORIMAGE)
+	RandomNum(5,1)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		ForceSpell(Myself,WIZARD_BLINDNESS)  // SPWI106.SPL (目盲)
+		SetGlobal("OHABONETrapStart","LOCALS",1)
+		SetGlobalTimer("OHABONETrapDealy","LOCALS",ONE_ROUND)
+		SetInterrupt(TRUE)
+END
+
+IF
+	HasItem("CDMINDFL",Myself)  // 攻击
+	Global("OHABONEHLA","LOCALS",6)
+	Global("OHABONETrapStart","LOCALS",1)
+	GlobalLT("OHABONETSNum","LOCALS",3)
+	!GlobalTimerNotExpired("OHABONETrapDealy","LOCALS")
+	!GlobalTimerNotExpired("TSNOCUT","LOCALS")
+	!GlobalTimerNotExpired("DTSNOCUT","LOCALS")
+	Allegiance(Myself,ENEMY)
+	Range(NearestEnemyOf(Myself),4)
+	!StateCheck(NearestEnemyOf(Myself),STATE_CONFUSED)
+	!StateCheck(NearestEnemyOf(Myself),STATE_PANIC)
+	!StateCheck(NearestEnemyOf(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(NearestEnemyOf(Myself),STATE_INVISIBLE)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobal("OHABONETrapStart","LOCALS",2)
+		IncrementGlobal("OHABONETSNum","LOCALS",1)
+		SetGlobalTimer("OHABONETrapDealy","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,63990)  // 装设缓时陷阱
+		ForceSpellRES("OHAB912",Myself)  // No such index
+		SetInterrupt(TRUE)
+END
+
+IF
+	Global("OHABONETrapStart","LOCALS",1)
+	GlobalLT("OHABONESTNum","LOCALS",10)
+	!GlobalTimerNotExpired("OHABONETrapDealy","LOCALS")
+	Allegiance(Myself,ENEMY)
+	Range(NearestEnemyOf(Myself),4)
+	!HPLT(NearestEnemyOf(Myself),30)
+	!StateCheck(NearestEnemyOf(Myself),STATE_CONFUSED)
+	!StateCheck(NearestEnemyOf(Myself),STATE_PANIC)
+	!StateCheck(NearestEnemyOf(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(NearestEnemyOf(Myself),STATE_INVISIBLE)
+	!StateCheck(NearestEnemyOf(Myself),STATE_MIRRORIMAGE)
+	RandomNumLT(10,5)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobal("OHABONETrapStart","LOCALS",2)
+		IncrementGlobal("OHABONESTNum","LOCALS",1)
+		SetGlobalTimer("OHABONETrapDealy","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Myself,ROGUE_SET_SPIKE_TRAP)  // SPCL910.SPL (装设尖刺陷阱)
+		ForceSpellRangeRES("SPCL910B",NearestEnemyOf(Myself))  // No such index
+		SetInterrupt(TRUE)
+END
+
+IF
+	Global("OHABONETrapStart","LOCALS",1)
+	GlobalLT("OHABONEETNum","LOCALS",10)
+	!GlobalTimerNotExpired("OHABONETrapDealy","LOCALS")
+	Allegiance(Myself,ENEMY)
+	Range(NearestEnemyOf(Myself),4)
+	!HPLT(NearestEnemyOf(Myself),30)
+	!StateCheck(NearestEnemyOf(Myself),STATE_CONFUSED)
+	!StateCheck(NearestEnemyOf(Myself),STATE_PANIC)
+	!StateCheck(NearestEnemyOf(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(NearestEnemyOf(Myself),STATE_INVISIBLE)
+	!StateCheck(NearestEnemyOf(Myself),STATE_MIRRORIMAGE)
+	RandomNumGT(10,4)
+	RandomNumLT(10,8)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobal("OHABONETrapStart","LOCALS",2)
+		IncrementGlobal("OHABONEETNum","LOCALS",1)
+		SetGlobalTimer("OHABONETrapDealy","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Myself,ROGUE_SET_EXPLODING_TRAP)  // SPCL911.SPL (装设爆裂陷阱)
+		ForceSpellRangeRES("SPCL911B",NearestEnemyOf(Myself))  // No such index
+		SetInterrupt(TRUE)
+END
+
+IF
+	Global("OHABONETrapStart","LOCALS",1)
+	GlobalLT("OHABONESNNum","LOCALS",10)
+	!GlobalTimerNotExpired("OHABONETrapDealy","LOCALS")
+	Allegiance(Myself,ENEMY)
+	Range(NearestEnemyOf(Myself),4)
+	!HPLT(NearestEnemyOf(Myself),30)
+	!StateCheck(NearestEnemyOf(Myself),STATE_CONFUSED)
+	!StateCheck(NearestEnemyOf(Myself),STATE_PANIC)
+	!StateCheck(NearestEnemyOf(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(NearestEnemyOf(Myself),STATE_INVISIBLE)
+	!StateCheck(NearestEnemyOf(Myself),STATE_MIRRORIMAGE)
+	RandomNumGT(10,7)
+	RandomNumLT(10,10)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobal("OHABONETrapStart","LOCALS",2)
+		IncrementGlobal("OHABONESNNum","LOCALS",1)
+		SetGlobalTimer("OHABONETrapDealy","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Myself,THIEF_SET_SPECIAL_SNARE)  // SPCL414.SPL (设置特殊陷阱)
+		ForceSpellRangeRES("SPCL415",NearestEnemyOf(Myself))  // No such index
+		SetInterrupt(TRUE)
+END
+
+IF
+	Global("OHABONETrapStart","LOCALS",1)
+	GlobalLT("OHABONESNum","LOCALS",10)
+	!GlobalTimerNotExpired("OHABONETrapDealy","LOCALS")
+	Allegiance(Myself,ENEMY)
+	Range(NearestEnemyOf(Myself),4)
+	!HPLT(NearestEnemyOf(Myself),30)
+	!StateCheck(NearestEnemyOf(Myself),STATE_CONFUSED)
+	!StateCheck(NearestEnemyOf(Myself),STATE_PANIC)
+	!StateCheck(NearestEnemyOf(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(NearestEnemyOf(Myself),STATE_INVISIBLE)
+	!StateCheck(NearestEnemyOf(Myself),STATE_MIRRORIMAGE)
+	RandomNum(10,10)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobal("OHABONETrapStart","LOCALS",2)
+		IncrementGlobal("OHABONESNum","LOCALS",1)
+		SetGlobalTimer("OHABONETrapDealy","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Myself,THIEF_SET_SNARE)  // SPCL412.SPL (装设陷阱)
+		ForceSpellRangeRES("SPCL411",NearestEnemyOf(Myself))  // No such index
+		SetInterrupt(TRUE)
+END
+
+IF
+	Global("OHABONETrapStart","LOCALS",2)
+	!GlobalTimerNotExpired("OHABONETrapDealy","LOCALS")
+	Allegiance(Myself,ENEMY)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		ForceSpell(Myself,CLERIC_CURE_DISEASE)  // SPPR317.SPL (治疗疾病)
+		SetGlobal("OHABONETrapStart","LOCALS",0)
+		SetGlobalTimer("OHABONETrapDealy","LOCALS",ONE_ROUND)
+		SetInterrupt(TRUE)
+END
+
+IF
+	HasItem("CDMINDFL",Myself)  // 攻击
+	!GlobalTimerNotExpired("OHABONETrapDealy","LOCALS")
+	GlobalLT("OHABONEPFMW","LOCALS",5)
+	Allegiance(Myself,ENEMY)
+	AttackedBy([GOODCUTOFF],DEFAULT)
+	TookDamage()
+	CheckStat(Myself,0,SCRIPTINGSTATE6)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("OHABONETrapDealy","LOCALS",ONE_ROUND)
+		IncrementGlobal("OHABONEPFMW","LOCALS",1)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		ForceSpell(Myself,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)  // SPWI611.SPL (防护魔法武器)
+END
+
+IF
+	Global("OHABONESCMFStart","LOCALS",0)
+	HPPercentLT(Myself,65)
+	ActionListEmpty()
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("MINDFL_TIME","LOCALS")
+	!CheckStatGT(NearestEnemyOf(Myself),0,SCRIPTINGSTATE6)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobal("OHABONESCMFStart","LOCALS",1)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		ForceSpell(Myself,SHAPECHANGE_MIND_FLAYER)  // SPIN152.SPL (变形术：夺心魔)
+		Polymorph(MINDFLAYER)
+		SetGlobalTimer("MINDFL_TIME","LOCALS",ONE_HOUR)
+		SetInterrupt(TRUE)
+END
+
+IF
+	HasItem("CDMINDFL",Myself)  // 攻击
+	ActionListEmpty()
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("OHABONETrapDealy","LOCALS")
+	!GlobalTimerNotExpired("OHABONE_Mblast","LOCALS")
+	See([GOODCUTOFF])
+	!General(LastSeenBy(Myself),UNDEAD)
+	!Race(LastSeenBy(Myself),DEMONIC)
+	!StateCheck(LastSeenBy(Myself),STATE_REALLY_DEAD)
+	!StateCheck(LastSeenBy(Myself),STATE_HARMLESS)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!HasItem("MORSWORD",LastSeenBy(Myself))  // 魔邓肯之剑
+	!HasItemEquipedReal("NPSW01",LastSeenBy(Myself))  // 阿尔孚琳之剑+2
+	!HasItemEquipedReal("SW1H27",LastSeenBy(Myself))  // 亚班的敏捷之刃+2
+	!HasItemEquiped("RING09",LastSeenBy(Myself))  // 艾德凡塔的礼物
+	!HasItemEquipedReal("SW2H06",LastSeenBy(Myself))  // 双手剑+2
+	RandomNum(5,2)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobalTimer("OHABONETrapDealy","LOCALS",ONE_ROUND)
+		SetGlobalTimer("OHABONE_Mblast","LOCALS",THREE_ROUNDS)
+		ForceSpell(LastSeenBy(Myself),MIND_FLAYER_PSIONIC_BLAST)  // SPIN974.SPL (心灵爆震)
+		SetInterrupt(TRUE)
+END
+
+IF
+	GlobalTimerNotExpired("MINDFL_TIME","LOCALS")
+	!GlobalTimerNotExpired("OHABONEKILLSUM","LOCALS")
+	HasItem("CDMINDFL",Myself)  // 攻击
+	ActionListEmpty()
+	See([GOODCUTOFF.0.0.0.0.SUMMONED])
+	!CheckStatGT(Myself,0,EXTRAPROFICIENCY6)
+	!StateCheck(Myself,STATE_SILENCED)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobalTimer("OHABONEKILLSUM","LOCALS",THREE_ROUNDS)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		ForceSpell(LastSeenBy(Myself),WIZARD_DEATH_SPELL)  // SPWI605.SPL (死亡术)
+		SetInterrupt(TRUE)
+END
+
+IF
+	GlobalTimerNotExpired("MINDFL_TIME","LOCALS")
+	!GlobalTimerNotExpired("OHABONETrapDealy","LOCALS")
+	GlobalLT("OHABONEHLA","LOCALS",6)
+	HasItem("CDMINDFL",Myself)  // 攻击
+	See([PC])
+	!CheckStatGT(LastSeenBy(Myself),0,SCRIPTINGSTATE6)
+	Range(LastSeenBy(Myself),4)
+	RandomNum(5,3)
+THEN
+	RESPONSE #50
+		SetGlobalTimer("OHABONETrapDealy","LOCALS",ONE_ROUND)
+		IncrementGlobal("OHABONEHLA","LOCALS",1)
+		ForceSpell(Myself,WARRIOR_CRITICAL_STRIKE)  // SPCL905.SPL (致命一击)
+	RESPONSE #50
+		SetGlobalTimer("OHABONETrapDealy","LOCALS",ONE_ROUND)
+		IncrementGlobal("OHABONEHLA","LOCALS",1)
+		ForceSpell(Myself,WARRIOR_GREATER_WHIRLWIND)  // SPCL901.SPL (强力旋风攻击)
+END
+
+IF
+	GlobalTimerNotExpired("MINDFL_TIME","LOCALS")
+	HasItem("CDMINDFL",Myself)  // 攻击
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_CONFUSED)
+	!StateCheck(LastSeenBy(Myself),STATE_PANIC)
+	!StateCheck(LastSeenBy(Myself),STATE_CHARMED)
+	!StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(LastSeenBy(Myself),STATE_INVISIBLE)
+	!CheckStatGT(LastSeenBy(Myself),0,SCRIPTINGSTATE6)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	GlobalTimerNotExpired("MINDFL_TIME","LOCALS")
+	HasItem("CDMINDFL",Myself)  // 攻击
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_CONFUSED)
+	!StateCheck(LastSeenBy(Myself),STATE_PANIC)
+	!StateCheck(LastSeenBy(Myself),STATE_CHARMED)
+	!StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(LastSeenBy(Myself),STATE_INVISIBLE)
+	!CheckStatGT(LastSeenBy(Myself),0,SCRIPTINGSTATE6)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	GlobalTimerNotExpired("MINDFL_TIME","LOCALS")
+	HasItem("CDMINDFL",Myself)  // 攻击
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_CONFUSED)
+	!StateCheck(LastSeenBy(Myself),STATE_PANIC)
+	!StateCheck(LastSeenBy(Myself),STATE_CHARMED)
+	!StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(LastSeenBy(Myself),STATE_INVISIBLE)
+	!CheckStatGT(LastSeenBy(Myself),0,SCRIPTINGSTATE6)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	GlobalTimerNotExpired("MINDFL_TIME","LOCALS")
+	HasItem("CDMINDFL",Myself)  // 攻击
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_CONFUSED)
+	!StateCheck(LastSeenBy(Myself),STATE_PANIC)
+	!StateCheck(LastSeenBy(Myself),STATE_CHARMED)
+	!StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(LastSeenBy(Myself),STATE_INVISIBLE)
+	!CheckStatGT(LastSeenBy(Myself),0,SCRIPTINGSTATE6)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	GlobalTimerNotExpired("MINDFL_TIME","LOCALS")
+	HasItem("CDMINDFL",Myself)  // 攻击
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_CONFUSED)
+	!StateCheck(LastSeenBy(Myself),STATE_PANIC)
+	!StateCheck(LastSeenBy(Myself),STATE_CHARMED)
+	!StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(LastSeenBy(Myself),STATE_INVISIBLE)
+	!CheckStatGT(LastSeenBy(Myself),0,SCRIPTINGSTATE6)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	GlobalTimerNotExpired("MINDFL_TIME","LOCALS")
+	HasItem("CDMINDFL",Myself)  // 攻击
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_CONFUSED)
+	!StateCheck(LastSeenBy(Myself),STATE_PANIC)
+	!StateCheck(LastSeenBy(Myself),STATE_CHARMED)
+	!StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(LastSeenBy(Myself),STATE_INVISIBLE)
+	!CheckStatGT(LastSeenBy(Myself),0,SCRIPTINGSTATE6)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	!GlobalTimerNotExpired("MINDFL_TIME","LOCALS")
+	HasItem("CDMINDFL",Myself)  // 攻击
+THEN
+	RESPONSE #100
+		ReallyForceSpell(Myself,SHAPESHIFT_NATURAL_FORM_2)  // SPIN151.SPL (变回原来形态)
+		Polymorph(FIGHTER_MALE_HALFLING)
+END
+
+IF
+	!HasItem("BLAKBLAD",Myself)  // 毁灭魔剑
+	!HasItem("CDMINDFL",Myself)  // 攻击
+	ActionListEmpty()
+	Allegiance(Myself,ENEMY)
+	GlobalLT("OHABONEBB","LOCALS",3)
+	!GlobalTimerNotExpired("OHABONETrapDealy","LOCALS")
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		ForceSpell(Myself,WIZARD_BLACK_BLADE_OF_DISASTER)  // SPWI915.SPL (毁灭魔剑)
+		IncrementGlobal("OHABONEBB","LOCALS",1)
+		SetGlobalTimer("OHABONETrapDealy","LOCALS",ONE_ROUND)
+		SetInterrupt(TRUE)
+END
+
+IF
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	Allegiance(Myself,ENEMY)
+	HasItem("scrl9u",Myself)  // 律令：死亡
+	See(Player1)
+	!StateCheck(Player1,STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(Player1,STATE_INVISIBLE)
+	CheckStatLT(Player1,25,RESISTMAGIC)
+	!CheckStat(Player1,2,SCRIPTINGSTATE7)
+	!CheckStatGT(Player1,0,SCRIPTINGSTATE2)
+	Global("Iap1nr","GLOBAL",0)
+	HPLT(Player1,60)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		UseItem("scrl9u",Player1)  // 律令：死亡
+END
+
+IF
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	Allegiance(Myself,ENEMY)
+	HasItem("scrl9u",Myself)  // 律令：死亡
+	See(Player2)
+	!StateCheck(Player2,STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(Player2,STATE_INVISIBLE)
+	CheckStatLT(Player2,25,RESISTMAGIC)
+	HPLT(Player2,60)
+	!CheckStat(Player2,2,SCRIPTINGSTATE7)
+	!CheckStatGT(Player2,0,SCRIPTINGSTATE2)
+	Global("Iap2nr","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		UseItem("scrl9u",Player2)  // 律令：死亡
+END
+
+IF
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	Allegiance(Myself,ENEMY)
+	HasItem("scrl9u",Myself)  // 律令：死亡
+	See(Player3)
+	!StateCheck(Player3,STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(Player3,STATE_INVISIBLE)
+	CheckStatLT(Player3,25,RESISTMAGIC)
+	HPLT(Player3,60)
+	!CheckStat(Player3,2,SCRIPTINGSTATE7)
+	!CheckStatGT(Player3,0,SCRIPTINGSTATE2)
+	Global("Iap3nr","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		UseItem("scrl9u",Player3)  // 律令：死亡
+END
+
+IF
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	Allegiance(Myself,ENEMY)
+	HasItem("scrl9u",Myself)  // 律令：死亡
+	See(Player4)
+	!StateCheck(Player4,STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(Player4,STATE_INVISIBLE)
+	CheckStatLT(Player4,25,RESISTMAGIC)
+	HPLT(Player4,60)
+	!CheckStat(Player4,2,SCRIPTINGSTATE7)
+	!CheckStatGT(Player4,0,SCRIPTINGSTATE2)
+	Global("Iap4nr","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		UseItem("scrl9u",Player4)  // 律令：死亡
+END
+
+IF
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	Allegiance(Myself,ENEMY)
+	HasItem("scrl9u",Myself)  // 律令：死亡
+	See(Player5)
+	!StateCheck(Player5,STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(Player5,STATE_INVISIBLE)
+	CheckStatLT(Player5,25,RESISTMAGIC)
+	HPLT(Player5,60)
+	!CheckStat(Player5,2,SCRIPTINGSTATE7)
+	!CheckStatGT(Player5,0,SCRIPTINGSTATE2)
+	Global("Iap5nr","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		UseItem("scrl9u",Player5)  // 律令：死亡
+END
+
+IF
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	Allegiance(Myself,ENEMY)
+	HasItem("scrl9u",Myself)  // 律令：死亡
+	See(Player6)
+	!StateCheck(Player6,STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(Player6,STATE_INVISIBLE)
+	CheckStatLT(Player6,25,RESISTMAGIC)
+	HPLT(Player6,60)
+	!CheckStat(Player6,2,SCRIPTINGSTATE7)
+	!CheckStatGT(Player6,0,SCRIPTINGSTATE2)
+	Global("Iap6nr","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		UseItem("scrl9u",Player6)  // 律令：死亡
+END
+
+IF
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	Allegiance(Myself,ENEMY)
+	HasItem("scrl9u",Myself)  // 律令：死亡
+	See(Player1)
+	!StateCheck(Player1,STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(Player1,STATE_INVISIBLE)
+	CheckStatLT(Player1,25,RESISTMAGIC)
+	!CheckStat(Player1,2,SCRIPTINGSTATE7)
+	!CheckStatGT(Player1,0,SCRIPTINGSTATE2)
+	Global("Iap1nr","GLOBAL",1)
+	OR(2)
+		CheckStatGT(Player1,0,SCRIPTINGSTATE7)
+		CheckStatGT(Player1,0,MINORGLOBE)
+	HPLT(Player1,60)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		UseItem("scrl9u",Player1)  // 律令：死亡
+END
+
+IF
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	Allegiance(Myself,ENEMY)
+	HasItem("scrl9u",Myself)  // 律令：死亡
+	See(Player2)
+	!StateCheck(Player2,STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(Player2,STATE_INVISIBLE)
+	CheckStatLT(Player2,25,RESISTMAGIC)
+	HPLT(Player2,60)
+	!CheckStat(Player2,2,SCRIPTINGSTATE7)
+	!CheckStatGT(Player2,0,SCRIPTINGSTATE2)
+	Global("Iap2nr","GLOBAL",1)
+	OR(2)
+		CheckStatGT(Player2,0,SCRIPTINGSTATE7)
+		CheckStatGT(Player2,0,MINORGLOBE)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		UseItem("scrl9u",Player2)  // 律令：死亡
+END
+
+IF
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	Allegiance(Myself,ENEMY)
+	HasItem("scrl9u",Myself)  // 律令：死亡
+	See(Player3)
+	!StateCheck(Player3,STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(Player3,STATE_INVISIBLE)
+	CheckStatLT(Player3,25,RESISTMAGIC)
+	HPLT(Player3,60)
+	!CheckStat(Player3,2,SCRIPTINGSTATE7)
+	!CheckStatGT(Player3,0,SCRIPTINGSTATE2)
+	Global("Iap3nr","GLOBAL",1)
+	OR(2)
+		CheckStatGT(Player3,0,SCRIPTINGSTATE7)
+		CheckStatGT(Player3,0,MINORGLOBE)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		UseItem("scrl9u",Player3)  // 律令：死亡
+END
+
+IF
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	Allegiance(Myself,ENEMY)
+	HasItem("scrl9u",Myself)  // 律令：死亡
+	See(Player4)
+	!StateCheck(Player4,STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(Player4,STATE_INVISIBLE)
+	CheckStatLT(Player4,25,RESISTMAGIC)
+	HPLT(Player4,60)
+	!CheckStat(Player4,2,SCRIPTINGSTATE7)
+	!CheckStatGT(Player4,0,SCRIPTINGSTATE2)
+	Global("Iap4nr","GLOBAL",1)
+	OR(2)
+		CheckStatGT(Player4,0,SCRIPTINGSTATE7)
+		CheckStatGT(Player4,0,MINORGLOBE)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		UseItem("scrl9u",Player4)  // 律令：死亡
+END
+
+IF
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	Allegiance(Myself,ENEMY)
+	HasItem("scrl9u",Myself)  // 律令：死亡
+	See(Player5)
+	!StateCheck(Player5,STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(Player5,STATE_INVISIBLE)
+	CheckStatLT(Player5,25,RESISTMAGIC)
+	HPLT(Player5,60)
+	!CheckStat(Player5,2,SCRIPTINGSTATE7)
+	!CheckStatGT(Player5,0,SCRIPTINGSTATE2)
+	Global("Iap5nr","GLOBAL",1)
+	OR(2)
+		CheckStatGT(Player5,0,SCRIPTINGSTATE7)
+		CheckStatGT(Player5,0,MINORGLOBE)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		UseItem("scrl9u",Player5)  // 律令：死亡
+END
+
+IF
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	Allegiance(Myself,ENEMY)
+	HasItem("scrl9u",Myself)  // 律令：死亡
+	See(Player6)
+	!StateCheck(Player6,STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(Player6,STATE_INVISIBLE)
+	CheckStatLT(Player6,25,RESISTMAGIC)
+	HPLT(Player6,60)
+	!CheckStat(Player6,2,SCRIPTINGSTATE7)
+	!CheckStatGT(Player6,0,SCRIPTINGSTATE2)
+	Global("Iap6nr","GLOBAL",1)
+	OR(2)
+		CheckStatGT(Player6,0,SCRIPTINGSTATE7)
+		CheckStatGT(Player6,0,MINORGLOBE)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		UseItem("scrl9u",Player6)  // 律令：死亡
+END
+
+IF
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	Allegiance(Myself,ENEMY)
+	HasItem("scrl9u",Myself)  // 律令：死亡
+	See(Player1)
+	!StateCheck(Player1,STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(Player1,STATE_INVISIBLE)
+	CheckStatLT(Player1,25,RESISTMAGIC)
+	!CheckStat(Player1,2,SCRIPTINGSTATE7)
+	!CheckStatGT(Player1,0,SCRIPTINGSTATE2)
+	Global("Iap1nr","GLOBAL",2)
+	CheckStatGT(Player1,0,SCRIPTINGSTATE7)
+	CheckStatGT(Player1,0,MINORGLOBE)
+	HPLT(Player1,60)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		UseItem("scrl9u",Player1)  // 律令：死亡
+END
+
+IF
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	Allegiance(Myself,ENEMY)
+	HasItem("scrl9u",Myself)  // 律令：死亡
+	See(Player2)
+	!StateCheck(Player2,STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(Player2,STATE_INVISIBLE)
+	CheckStatLT(Player2,25,RESISTMAGIC)
+	HPLT(Player2,60)
+	!CheckStat(Player2,2,SCRIPTINGSTATE7)
+	!CheckStatGT(Player2,0,SCRIPTINGSTATE2)
+	Global("Iap2nr","GLOBAL",2)
+	CheckStatGT(Player2,0,SCRIPTINGSTATE7)
+	CheckStatGT(Player2,0,MINORGLOBE)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		UseItem("scrl9u",Player2)  // 律令：死亡
+END
+
+IF
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	Allegiance(Myself,ENEMY)
+	HasItem("scrl9u",Myself)  // 律令：死亡
+	See(Player3)
+	!StateCheck(Player3,STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(Player3,STATE_INVISIBLE)
+	CheckStatLT(Player3,25,RESISTMAGIC)
+	HPLT(Player3,60)
+	!CheckStat(Player3,2,SCRIPTINGSTATE7)
+	!CheckStatGT(Player3,0,SCRIPTINGSTATE2)
+	Global("Iap3nr","GLOBAL",2)
+	CheckStatGT(Player3,0,SCRIPTINGSTATE7)
+	CheckStatGT(Player3,0,MINORGLOBE)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		UseItem("scrl9u",Player3)  // 律令：死亡
+END
+
+IF
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	Allegiance(Myself,ENEMY)
+	HasItem("scrl9u",Myself)  // 律令：死亡
+	See(Player4)
+	!StateCheck(Player4,STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(Player4,STATE_INVISIBLE)
+	CheckStatLT(Player4,25,RESISTMAGIC)
+	HPLT(Player4,60)
+	!CheckStat(Player4,2,SCRIPTINGSTATE7)
+	!CheckStatGT(Player4,0,SCRIPTINGSTATE2)
+	Global("Iap4nr","GLOBAL",2)
+	CheckStatGT(Player4,0,SCRIPTINGSTATE7)
+	CheckStatGT(Player4,0,MINORGLOBE)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		UseItem("scrl9u",Player4)  // 律令：死亡
+END
+
+IF
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	Allegiance(Myself,ENEMY)
+	HasItem("scrl9u",Myself)  // 律令：死亡
+	See(Player5)
+	!StateCheck(Player5,STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(Player5,STATE_INVISIBLE)
+	CheckStatLT(Player5,25,RESISTMAGIC)
+	HPLT(Player5,60)
+	!CheckStat(Player5,2,SCRIPTINGSTATE7)
+	!CheckStatGT(Player5,0,SCRIPTINGSTATE2)
+	Global("Iap5nr","GLOBAL",2)
+	CheckStatGT(Player5,0,SCRIPTINGSTATE7)
+	CheckStatGT(Player5,0,MINORGLOBE)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		UseItem("scrl9u",Player5)  // 律令：死亡
+END
+
+IF
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	Allegiance(Myself,ENEMY)
+	HasItem("scrl9u",Myself)  // 律令：死亡
+	See(Player6)
+	!StateCheck(Player6,STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(Player6,STATE_INVISIBLE)
+	CheckStatLT(Player6,25,RESISTMAGIC)
+	HPLT(Player6,60)
+	!CheckStat(Player6,2,SCRIPTINGSTATE7)
+	!CheckStatGT(Player6,0,SCRIPTINGSTATE2)
+	Global("Iap6nr","GLOBAL",2)
+	CheckStatGT(Player6,0,SCRIPTINGSTATE7)
+	CheckStatGT(Player6,0,MINORGLOBE)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		UseItem("scrl9u",Player6)  // 律令：死亡
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	See(NearestEnemyOf(Myself))
+	TookDamage()
+	Global("Iaruneg01","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Iaruneg01","LOCALS",1)
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		ForceSpell(Myself,ROGUE_GREATER_EVASION)  // SPCL914.SPL (高等闪躲技巧)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	AttackedBy([GOODCUTOFF],DEFAULT)
+	TookDamage()
+	CheckStat(Myself,0,SCRIPTINGSTATE6)
+	HasItem("scrl9p",Myself)  // 绝对免疫
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,46153)  // 使用卷轴
+		UseItem("scrl9p",Myself)  // 绝对免疫
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	HPPercentLT(Myself,90)
+	CheckStat(Myself,0,SCRIPTINGSTATE6)
+	CheckStatLT(Myself,71,RESISTSLASHING)
+	CheckStatLT(Myself,71,RESISTCRUSHING)
+	CheckStatLT(Myself,71,RESISTPIERCING)
+	AttackedBy([GOODCUTOFF],DEFAULT)
+	TookDamage()
+	GlobalLT("Iaruneg06","LOCALS",3)
+THEN
+	RESPONSE #100
+		IncrementGlobal("Iaruneg06","LOCALS",1)
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		ForceSpell(Myself,WARRIOR_HARDINESS)  // SPCL907.SPL (强韧)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	HPPercentLT(Myself,75)
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	HasItem("POTN55",Myself)  // 超级强效医疗药水
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,46150)  // 喝下药水
+		UseItem("POTN55",Myself)  // 超级强效医疗药水
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	See([PC])
+	Range(LastSeenBy(Myself),5)
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+	Global("Iaruneg03","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Iaruneg03","LOCALS",1)
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		ForceSpell(Myself,WARRIOR_GREATER_WHIRLWIND)  // SPCL901.SPL (强力旋风攻击)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!StateCheck(Myself,STATE_INVISIBLE)
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	See([PC])
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+	CheckStatLT(LastSeenBy(Myself),1,STONESKINS)
+	!StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+	!Kit(LastSeenBy(Myself),BARBARIAN)
+	!HasItemEquiped("S!sw11",LastSeenBy(Myself))  // 军阀之刃+5
+	!HasItemEquiped("S!sw04",LastSeenBy(Myself))  // 审判日+5
+	!CheckStat(LastSeenBy(Myself),1,SCRIPTINGSTATE13)
+	Range(LastSeenBy(Myself),5)
+	Global("Iaruneg02","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Iaruneg02","LOCALS",1)
+		SetGlobalTimer("Iabackstabbing","LOCALS",7)
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		ForceSpell(Myself,ROGUE_ASSASINATION)  // SPCL916.SPL (暗杀)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!StateCheck(Myself,STATE_INVISIBLE)
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	See(SecondNearest([PC]))
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+	CheckStatLT(LastSeenBy(Myself),1,STONESKINS)
+	!StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+	!Kit(LastSeenBy(Myself),BARBARIAN)
+	!HasItemEquiped("S!sw11",LastSeenBy(Myself))  // 军阀之刃+5
+	!HasItemEquiped("S!sw04",LastSeenBy(Myself))  // 审判日+5
+	!CheckStat(LastSeenBy(Myself),1,SCRIPTINGSTATE13)
+	Range(LastSeenBy(Myself),5)
+	Global("Iaruneg02","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Iaruneg02","LOCALS",1)
+		SetGlobalTimer("Iabackstabbing","LOCALS",7)
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		ForceSpell(Myself,ROGUE_ASSASINATION)  // SPCL916.SPL (暗杀)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!StateCheck(Myself,STATE_INVISIBLE)
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	See(ThirdNearest([PC]))
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+	CheckStatLT(LastSeenBy(Myself),1,STONESKINS)
+	!StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+	!Kit(LastSeenBy(Myself),BARBARIAN)
+	!HasItemEquiped("S!sw11",LastSeenBy(Myself))  // 军阀之刃+5
+	!HasItemEquiped("S!sw04",LastSeenBy(Myself))  // 审判日+5
+	!CheckStat(LastSeenBy(Myself),1,SCRIPTINGSTATE13)
+	Range(LastSeenBy(Myself),5)
+	Global("Iaruneg02","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Iaruneg02","LOCALS",1)
+		SetGlobalTimer("Iabackstabbing","LOCALS",7)
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		ForceSpell(Myself,ROGUE_ASSASINATION)  // SPCL916.SPL (暗杀)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	See([PC])
+	Range(LastSeenBy(Myself),5)
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+	CheckStatLT(LastSeenBy(Myself),1,STONESKINS)
+	!StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+	Global("Iaruneg04","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Iaruneg04","LOCALS",1)
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		ForceSpell(Myself,WARRIOR_CRITICAL_STRIKE)  // SPCL905.SPL (致命一击)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	See([PC])
+	Range(LastSeenBy(Myself),5)
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+	Global("Iaruneg03","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("Iaruneg03","LOCALS",2)
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		ForceSpell(Myself,WARRIOR_GREATER_WHIRLWIND)  // SPCL901.SPL (强力旋风攻击)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	See([PC])
+	Range(LastSeenBy(Myself),5)
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+	CheckStatLT(LastSeenBy(Myself),1,STONESKINS)
+	!StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+	Global("Iaruneg04","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("Iaruneg04","LOCALS",2)
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		ForceSpell(Myself,WARRIOR_CRITICAL_STRIKE)  // SPCL905.SPL (致命一击)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	See([PC])
+	Range(LastSeenBy(Myself),5)
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+	Global("Iaruneg03","LOCALS",2)
+THEN
+	RESPONSE #100
+		SetGlobal("Iaruneg03","LOCALS",3)
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		ForceSpell(Myself,WARRIOR_GREATER_WHIRLWIND)  // SPCL901.SPL (强力旋风攻击)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	See(NearestEnemyOf(Myself))
+	Range(LastSeenBy(Myself),5)
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+	Global("Iaruneg05","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Iaruneg05","LOCALS",1)
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		ForceSpell(Myself,WARRIOR_WHIRLWIND)  // SPCL900.SPL (旋风攻击)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iainnate","LOCALS")
+	See([PC])
+	Range(LastSeenBy(Myself),5)
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+	!CheckStat(LastSeenBy(Myself),1,SCRIPTINGSTATE5)
+	!StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+	Global("Iaruneg04","LOCALS",2)
+THEN
+	RESPONSE #100
+		SetGlobal("Iaruneg04","LOCALS",3)
+		SetGlobalTimer("Iainnate","LOCALS",ONE_ROUND)
+		ForceSpell(Myself,WARRIOR_POWER_ATTACK)  // SPCL906.SPL (威猛攻击)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	ActionListEmpty()
+	Global("Iaruneg02","LOCALS",1)
+	GlobalTimerNotExpired("Iabackstabbing","LOCALS")
+	See([PC])
+	!StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+	CheckStatLT(LastSeenBy(Myself),1,STONESKINS)
+	!Kit(LastSeenBy(Myself),BARBARIAN)
+	!HasItemEquiped("S!sw11",LastSeenBy(Myself))  // 军阀之刃+5
+	!HasItemEquiped("S!sw04",LastSeenBy(Myself))  // 审判日+5
+	!CheckStat(LastSeenBy(Myself),1,SCRIPTINGSTATE13)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	ActionListEmpty()
+	Global("Iaruneg02","LOCALS",1)
+	GlobalTimerNotExpired("Iabackstabbing","LOCALS")
+	See(SecondNearest([PC]))
+	!StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+	CheckStatLT(LastSeenBy(Myself),1,STONESKINS)
+	!Kit(LastSeenBy(Myself),BARBARIAN)
+	!HasItemEquiped("S!sw11",LastSeenBy(Myself))  // 军阀之刃+5
+	!HasItemEquiped("S!sw04",LastSeenBy(Myself))  // 审判日+5
+	!CheckStat(LastSeenBy(Myself),1,SCRIPTINGSTATE13)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	ActionListEmpty()
+	Global("Iaruneg02","LOCALS",1)
+	GlobalTimerNotExpired("Iabackstabbing","LOCALS")
+	See(ThirdNearest([PC]))
+	!StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+	CheckStatLT(LastSeenBy(Myself),1,STONESKINS)
+	!Kit(LastSeenBy(Myself),BARBARIAN)
+	!HasItemEquiped("S!sw11",LastSeenBy(Myself))  // 军阀之刃+5
+	!HasItemEquiped("S!sw04",LastSeenBy(Myself))  // 审判日+5
+	!CheckStat(LastSeenBy(Myself),1,SCRIPTINGSTATE13)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	ActionListEmpty()
+	Global("Iaruneg02","LOCALS",1)
+	GlobalTimerNotExpired("Iabackstabbing","LOCALS")
+	See([PC])
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+	!Kit(LastSeenBy(Myself),BARBARIAN)
+	!HasItemEquiped("S!sw11",LastSeenBy(Myself))  // 军阀之刃+5
+	!HasItemEquiped("S!sw04",LastSeenBy(Myself))  // 审判日+5
+	!CheckStat(LastSeenBy(Myself),1,SCRIPTINGSTATE13)
+	OR(2)
+		!StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+		CheckStatLT(LastSeenBy(Myself),1,STONESKINS)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	ActionListEmpty()
+	Global("Iaruneg02","LOCALS",1)
+	GlobalTimerNotExpired("Iabackstabbing","LOCALS")
+	See(SecondNearest([PC]))
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+	!Kit(LastSeenBy(Myself),BARBARIAN)
+	!HasItemEquiped("S!sw11",LastSeenBy(Myself))  // 军阀之刃+5
+	!HasItemEquiped("S!sw04",LastSeenBy(Myself))  // 审判日+5
+	!CheckStat(LastSeenBy(Myself),1,SCRIPTINGSTATE13)
+	OR(2)
+		!StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+		CheckStatLT(LastSeenBy(Myself),1,STONESKINS)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	ActionListEmpty()
+	Global("Iaruneg02","LOCALS",1)
+	GlobalTimerNotExpired("Iabackstabbing","LOCALS")
+	See(ThirdNearest([PC]))
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+	!Kit(LastSeenBy(Myself),BARBARIAN)
+	!HasItemEquiped("S!sw11",LastSeenBy(Myself))  // 军阀之刃+5
+	!HasItemEquiped("S!sw04",LastSeenBy(Myself))  // 审判日+5
+	!CheckStat(LastSeenBy(Myself),1,SCRIPTINGSTATE13)
+	OR(2)
+		!StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+		CheckStatLT(LastSeenBy(Myself),1,STONESKINS)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	ActionListEmpty()
+	See(SecondNearestEnemyOf(Myself))
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+	RandomNumGT(6,4)
+	Range(LastSeenBy(Myself),4)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	ActionListEmpty()
+	See(NearestEnemyOf(Myself))
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+THEN
+	RESPONSE #100
+		AttackOneRound(NearestEnemyOf(Myself))
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	ActionListEmpty()
+	See(SecondNearestEnemyOf(Myself))
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	ActionListEmpty()
+	See(ThirdNearestEnemyOf(Myself))
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	ActionListEmpty()
+	See(FourthNearestEnemyOf(Myself))
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	ActionListEmpty()
+	See(FifthNearestEnemyOf(Myself))
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	ActionListEmpty()
+	See(SixthNearestEnemyOf(Myself))
+	!CheckStatGT(LastSeenBy(Myself),2,SCRIPTINGSTATE6)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	ActionListEmpty()
+	See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		AttackOneRound(NearestEnemyOf(Myself))
+END
+

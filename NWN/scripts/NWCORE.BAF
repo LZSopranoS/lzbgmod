@@ -1,0 +1,234 @@
+IF
+	See([PC])
+	NumberOfTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+		Dialogue([PC])
+END
+
+IF
+	HPPercentLT(Myself,20)
+	!Global("Restore","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Restore","LOCALS",1)
+		ApplySpell(Myself,RESTORE_FULL_HEALTH)  // SPIN746.SPL (No such index)
+		DisplayStringHead(Myself,@107072)
+		PlaySound("NWMAU054")
+		Continue()
+END
+
+IF
+	Global("psSpellUp","LOCALS",0)
+THEN
+	RESPONSE #100
+		ReallyForceSpell(Myself,WIZARD_MIRROR_IMAGE)  // SPWI212.SPL (镜影术)
+		ReallyForceSpell(Myself,WIZARD_STONE_SKIN)  // SPWI408.SPL (石肤术)
+		ReallyForceSpell(Myself,WIZARD_GLOBE_OF_INVULNERABILITY)  // SPWI602.SPL (法术无效结界)
+		ReallyForceSpell(Myself,WIZARD_SPELL_TRAP)  // SPWI902.SPL (法术陷阱)
+		ReallyForceSpell(Myself,WIZARD_SUMMON_PLANATAR_EVIL)
+		ReallyForceSpell(Myself,WIZARD_SUMMON_PLANATAR_EVIL)
+		ReallyForceSpell(Myself,WIZARD_SUMMON_PLANATAR_EVIL)
+		ReallyForceSpell(Myself,WIZARD_SUMMON_PLANATAR_EVIL)
+		ReallyForceSpell(Myself,WIZARD_FIRE_SHIELD_RED)  // SPWI418.SPL (火焰护盾（红）)
+		ReallyForceSpell(Myself,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)  // SPWI611.SPL (防护魔法武器)
+		ReallyForceSpell(Myself,WIZARD_TRUE_SIGHT)  // SPWI609.SPL (真实视域)
+		ReallyForceSpell(Myself,WIZARD_SIMULACRUM)  // SPWI804.SPL (拟象术)
+		ReallyForceSpell(Myself,WIZARD_PROTECTION_FROM_ENERGY)  // SPWI803.SPL (防护能量)
+		SetGlobal("psSpellUp","LOCALS",1)
+END
+
+IF
+	TookDamage()
+	Global("psMelInitialContToggle","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("psMelInitialContToggle","LOCALS",1)
+		ReallyForceSpell(Myself,WIZARD_MIRROR_IMAGE)  // SPWI212.SPL (镜影术)
+		ReallyForceSpell(Myself,WIZARD_STONE_SKIN)  // SPWI408.SPL (石肤术)
+		ReallyForceSpell(Myself,WIZARD_GLOBE_OF_INVULNERABILITY)  // SPWI602.SPL (法术无效结界)
+		ReallyForceSpell(Myself,WIZARD_SUMMON_PLANATAR_EVIL)  // SPWI924.SPL (召唤深渊界侍者)
+		ReallyForceSpell(Myself,WIZARD_FIRE_SHIELD_RED)  // SPWI418.SPL (火焰护盾（红）)
+		ReallyForceSpell(Myself,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)  // SPWI611.SPL (防护魔法武器)
+		ReallyForceSpell(Myself,WIZARD_TRUE_SIGHT)  // SPWI609.SPL (真实视域)
+		ReallyForceSpell(Myself,WIZARD_IMPROVED_INVISIBILITY)  // SPWI405.SPL (高等隐形术)
+END
+
+IF
+	RandomNum(12,1)
+	GlobalLT("psMelCastMantleCounter","LOCALS",6)
+THEN
+	RESPONSE #100
+		ForceSpell(Myself,WIZARD_ABSOLUTE_IMMUNITY)  // SPWI907.SPL (绝对免疫)
+		ForceSpell(Myself,WIZARD_STONE_SKIN)  // SPWI408.SPL (石肤术)
+		ForceSpell(Myself,WIZARD_SUMMON_FIEND)  // SPWI807.SPL (召唤狂魔)
+		IncrementGlobal("psMelCastMantleCounter","LOCALS",1)
+END
+
+IF
+	RandomNum(15,1)
+	GlobalLT("psMelCastTimestopCounter","LOCALS",4)
+	GlobalTimerExpired("psMelTimestopTimer","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("psMelTimestopTimer","LOCALS",THREE_ROUNDS)
+		ForceSpell(Myself,WIZARD_TIME_STOP)  // SPWI909.SPL (时间停止)
+		IncrementGlobal("psMelCastTimestopCounter","LOCALS",1)
+		Continue()
+END
+
+IF
+	RandomNum(15,1)
+	GlobalLT("psMelCastRageCounter","LOCALS",1)
+THEN
+	RESPONSE #100
+		ForceSpellRES("NWDIMRA",NearestEnemyOf(Myself))
+		IncrementGlobal("psMelCastRageCounter","LOCALS",1)
+END
+
+IF
+	RandomNum(12,1)
+	GlobalLT("psMelCastWiltingCounter","LOCALS",4)
+THEN
+	RESPONSE #100
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_GREATER_MALISON)  // SPWI412.SPL (毒咒)
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_SLOW)  // SPWI312.SPL (缓慢术)
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_EMOTION_HOPELESSNESS)  // SPWI411.SPL (情绪控制：绝望)
+		ForceSpell(NearestEnemyOf(Myself),CLERIC_STORM_OF_VENGEANCE)  // SPPR722.SPL (复仇暴风)
+		IncrementGlobal("psMelCastWiltingCounter","LOCALS",1)
+END
+
+IF
+	RandomNum(20,1)
+	GlobalLT("psMelCastRainCounter","LOCALS",1)
+THEN
+	RESPONSE #100
+		ForceSpellRES("NWMELR",NearestEnemyOf(Myself))
+		IncrementGlobal("psMelCastRainCounter","LOCALS",1)
+END
+
+IF
+	RandomNum(25,1)
+	GlobalLT("psMelCastPlanatarCounter","LOCALS",2)
+THEN
+	RESPONSE #100
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_SUMMON_PLANATAR_EVIL)  // SPWI924.SPL (召唤深渊界侍者)
+		IncrementGlobal("psMelCastPlanatarCounter","LOCALS",1)
+END
+
+IF
+	RandomNum(40,1)
+	GlobalLT("psMelCastSpellstrikeCounter","LOCALS",2)
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,@107071)
+		PlaySound("NWMAU055")
+		ReallyForceSpell(Player1,WIZARD_SPELL_STRIKE)  // SPWI903.SPL (法术重击)
+		ReallyForceSpell(Player2,WIZARD_SPELL_STRIKE)  // SPWI903.SPL (法术重击)
+		ReallyForceSpell(Player3,WIZARD_SPELL_STRIKE)  // SPWI903.SPL (法术重击)
+		ReallyForceSpell(Player4,WIZARD_SPELL_STRIKE)  // SPWI903.SPL (法术重击)
+		ReallyForceSpell(Player5,WIZARD_SPELL_STRIKE)  // SPWI903.SPL (法术重击)
+		ReallyForceSpell(Player6,WIZARD_SPELL_STRIKE)  // SPWI903.SPL (法术重击)
+		IncrementGlobal("psMelCastSpellstrikeCounter","LOCALS",1)
+END
+
+IF
+	RandomNum(25,1)
+	GlobalLT("psMelCastDispelCounter","LOCALS",2)
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,@107071)
+		PlaySound("NWMAU055")
+		ReallyForceSpell(Player1,WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+		ReallyForceSpell(Player2,WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+		ReallyForceSpell(Player3,WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+		ReallyForceSpell(Player4,WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+		ReallyForceSpell(Player5,WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+		ReallyForceSpell(Player6,WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+		IncrementGlobal("psMelCastDispelCounter","LOCALS",1)
+END
+
+IF
+	RandomNum(15,1)
+	GlobalLT("psMelCastBigbysCounter","LOCALS",6)
+THEN
+	RESPONSE #100
+		ForceSpell(NearestEnemyOf(Myself),CLERIC_IMPLOSION)  // SPPR728.SPL (内爆术)
+		IncrementGlobal("psMelCastBigbysCounter","LOCALS",1)
+END
+
+IF
+	RandomNum(15,1)
+	GlobalLT("psMelCastEvilChainComboCounter","LOCALS",4)
+THEN
+	RESPONSE #100
+		ReallyForceSpell(NearestEnemyOf(Myself),WIZARD_GREATER_MALISON)  // SPWI412.SPL (毒咒)
+		ReallyForceSpell(NearestEnemyOf(Myself),WIZARD_CHAIN_LIGHTNING)  // SPWI615.SPL (连环闪电)
+		ReallyForceSpell(NearestEnemyOf(Myself),WIZARD_CHAOS)  // SPWI508.SPL (混乱术)
+		IncrementGlobal("psMelCastEvilChainComboCounter","LOCALS",1)
+END
+
+IF
+	RandomNum(10,1)
+	Range(NearestEnemyOf(Myself),5)
+	GlobalLT("psMelCantCatchMeCounter","LOCALS",3)
+THEN
+	RESPONSE #100
+		IncrementGlobal("psMelCantCatchMeCounter","LOCALS",1)
+		ReallyForceSpell(Myself,WIZARD_SUN_FIRE)  // SPWI523.SPL (日焰)
+END
+
+IF
+	RandomNum(10,1)
+THEN
+	RESPONSE #100
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_ABI_DALZIMS_HORRID_WILTING)  // SPWI812.SPL (亚比达奇凋死术)
+END
+
+IF
+	RandomNum(5,1)
+THEN
+	RESPONSE #100
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_FIREBALL)  // SPWI304.SPL (火球术)
+END
+
+IF
+	RandomNum(3,1)
+THEN
+	RESPONSE #100
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_CHAIN_LIGHTNING)  // SPWI615.SPL (连环闪电)
+END
+
+IF
+	RandomNum(2,1)
+THEN
+	RESPONSE #100
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_MAGIC_MISSILE)
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_MAGIC_MISSILE)
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_MAGIC_MISSILE)
+	RESPONSE #100
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_CHROMATIC_ORB)
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_CHROMATIC_ORB)
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_CHROMATIC_ORB)
+	RESPONSE #100
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_MELF_ACID_ARROW)
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_MELF_ACID_ARROW)
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_MELF_ACID_ARROW)
+	RESPONSE #100
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_FLAME_ARROW)
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_FLAME_ARROW)
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_FLAME_ARROW)
+	RESPONSE #100
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_SKULL_TRAP)
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_SKULL_TRAP)
+		ForceSpell(NearestEnemyOf(Myself),WIZARD_SKULL_TRAP)
+END
+
+IF
+	RandomNum(2,1)
+THEN
+	RESPONSE #100
+		MoveToObject(Player1)
+		Continue()
+END
+

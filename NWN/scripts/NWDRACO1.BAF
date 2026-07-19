@@ -1,0 +1,250 @@
+IF
+	!PartyHasItem("NWDRACA3")  // 时代护身符
+	Global("Talk","LOCALS",0)
+	See([PC])
+THEN
+	RESPONSE #100
+		SetGlobal("Talk","LOCALS",1)
+		DisplayStringHead(Myself,@106477)  // 来吧，微小的生物。如果你胆子够大的话，来跟我说说话。
+		PlaySound("NWDRA151")
+END
+
+IF
+	PartyHasItem("NWDRACA3")  // 时代护身符
+	GlobalLT("KillPlayer","LOCALS",3)
+	Global("Down","LOCALS",0)
+	Range([PC],20)
+THEN
+	RESPONSE #100
+		SetGlobal("Down","LOCALS",1)
+		DisplayStringHead(Myself,@106476)  // 你拥有时代护身符，所以你必须死！
+		PlaySound("NWDRA150")
+		SetGlobal("KillPlayer","LOCALS",0)
+		Enemy()
+		SetGlobal("RemoveMagic","LOCALS",0)
+		DestroyItem("NWMINH1Z")  // No such index
+		ForceSpell(Player1,WIZARD_ICE_STORM)  // SPWI404.SPL (冰风暴)
+		ForceSpell(Player2,WIZARD_ICE_STORM)  // SPWI404.SPL (冰风暴)
+		ForceSpell(Player3,WIZARD_ICE_STORM)  // SPWI404.SPL (冰风暴)
+		ForceSpell(Player4,WIZARD_ICE_STORM)  // SPWI404.SPL (冰风暴)
+		ForceSpell(Player5,WIZARD_ICE_STORM)  // SPWI404.SPL (冰风暴)
+		ForceSpell(Player6,WIZARD_ICE_STORM)  // SPWI404.SPL (冰风暴)
+		ForceSpell(Player1,WIZARD_DEATH_FOG)  // SPWI614.SPL (死亡之雾)
+		ForceSpell(Player2,WIZARD_DEATH_FOG)  // SPWI614.SPL (死亡之雾)
+		ForceSpell(Player3,WIZARD_DEATH_FOG)  // SPWI614.SPL (死亡之雾)
+		ForceSpell(Player4,WIZARD_DEATH_FOG)  // SPWI614.SPL (死亡之雾)
+		ForceSpell(Player5,WIZARD_DEATH_FOG)  // SPWI614.SPL (死亡之雾)
+		ForceSpell(Player6,WIZARD_DEATH_FOG)  // SPWI614.SPL (死亡之雾)
+		Continue()
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	Global("RemoveMagic","LOCALS",0)
+THEN
+	RESPONSE #100
+		ForceSpell(Myself,DRAGON_STONE_SKIN)  // SPIN694.SPL (石肤术)
+		ForceSpell(Myself,WIZARD_SPELL_TURNING)  // SPWI701.SPL (法术反转)
+		ForceSpell(Myself,WIZARD_PROTECTION_FROM_ENERGY)  // SPWI803.SPL (防护能量)
+		ForceSpell(Myself,WIZARD_ABSOLUTE_IMMUNITY)  // SPWI907.SPL (绝对免疫)
+		ForceSpell(Myself,WIZARD_IMPROVED_HASTE)  // SPWI613.SPL (高等加速术)
+		ForceSpell(Myself,WIZARD_IMPROVED_INVISIBILITY)  // SPWI405.SPL (高等隐形术)
+		ForceSpell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+		SetGlobal("StoneSkin","LOCALS",1)
+		SetGlobal("RemoveMagic","LOCALS",1)
+END
+
+IF
+	Global("RemoveMagic","LOCALS",1)
+	Global("KillPlayer","LOCALS",1)
+THEN
+	RESPONSE #100
+		ForceSpellRES("NWDRG1",Player1)  // 冰风暴
+		ForceSpellRES("NWDRG1",Player2)  // 冰风暴
+		ForceSpellRES("NWDRG1",Player3)  // 冰风暴
+		ForceSpellRES("NWDRG1",Player4)  // 冰风暴
+		ForceSpellRES("NWDRG1",Player5)  // 冰风暴
+		ForceSpellRES("NWDRG1",Player6)  // 冰风暴
+		SetGlobal("KillPlayer","LOCALS",2)
+END
+
+IF
+	Global("KillPlayer","LOCALS",2)
+THEN
+	RESPONSE #100
+		ForceSpellRES("NWDRG1",Player1)  // 冰风暴
+		ForceSpellRES("NWDRG1",Player2)  // 冰风暴
+		ForceSpellRES("NWDRG1",Player3)  // 冰风暴
+		ForceSpellRES("NWDRG1",Player4)  // 冰风暴
+		ForceSpellRES("NWDRG1",Player5)  // 冰风暴
+		ForceSpellRES("NWDRG1",Player6)  // 冰风暴
+		Kill(Player1)
+		Kill(Player2)
+		Kill(Player3)
+		Kill(Player4)
+		Kill(Player5)
+		Kill(Player6)
+		SetGlobal("KillPlayer","LOCALS",3)
+END
+
+IF
+	!Detect([PC])
+	HPLT(Myself,50)
+	CombatCounter(0)
+THEN
+	RESPONSE #100
+		SetGlobal("RemoveMagic","LOCALS",0)
+		SetGlobal("WingBuffet","LOCALS",0)
+		SetGlobal("Haste","LOCALS",0)
+		SetGlobal("DRAGONFEAR","LOCALS",0)
+		ForceSpell(Myself,CLERIC_HEAL)  // SPPR607.SPL (痊愈术)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	Global("DRAGONFEAR","LOCALS",0)
+THEN
+	RESPONSE #100
+		ReallyForceSpell(NearestEnemyOf(Myself),DRAGON_FEAR)  // SPIN895.SPL (龙威)
+		SetGlobal("DRAGONFEAR","LOCALS",1)
+		SetGlobalTimer("NWBLACKDRAGONBREATH","GLOBAL",1)
+		SetGlobalTimer("NWbdFlapping","GLOBAL",1)
+		ForceSpell(LastSeenBy(Myself),DRAGON_WING_BUFFET)  // SPIN695.SPL (龙翼拍击)
+END
+
+IF
+	GlobalTimerExpired("NWBLACKDRAGONBREATH","GLOBAL")
+	GlobalTimerExpired("NWbdFlapping","GLOBAL")
+	See(NearestEnemyOf(Myself))
+	Range(LastSeenBy(Myself),11)
+	Global("WingBuffet","LOCALS",0)
+THEN
+	RESPONSE #100
+		ForceSpell(LastSeenBy(Myself),DRAGON_WING_BUFFET)  // SPIN695.SPL (龙翼拍击)
+		SetGlobalTimer("NWBLACKDRAGONBREATH","GLOBAL",2)
+		Wait(1)
+		SetGlobal("WingBuffet","LOCALS",1)
+	RESPONSE #30
+		Continue()
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	!Range(LastSeenBy(Myself),10)
+	Range(LastSeenBy(Myself),17)
+	GlobalTimerExpired("NWBLACKDRAGONBREATH","GLOBAL")
+THEN
+	RESPONSE #100
+		ForceSpell(LastSeenBy(Myself),BLACK_DRAGON_BREATH)  // SPIN691.SPL (黑龙喷吐)
+		SetGlobal("WingBuffet","LOCALS",0)
+		SetGlobalTimer("NWBLACKDRAGONBREATH","GLOBAL",THREE_ROUNDS)
+END
+
+IF
+	Global("WingBuffet","LOCALS",1)
+	See(NearestEnemyOf(Myself))
+	Range(LastSeenBy(Myself),10)
+THEN
+	RESPONSE #100
+		RunAwayFrom(LastSeenBy(Myself),60)
+		SetGlobal("WingBuffet","LOCALS",0)
+		SetGlobalTimer("NWBLACKDRAGONBREATH","GLOBAL",THREE_ROUNDS)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	Range(NearestEnemyOf(Myself),15)
+	Global("dbPlant","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("NWbdFlapping","GLOBAL",SIXTEEN_MINUTES)
+		ForceSpell(Myself,BLACK_DRAGON_PLANT)  // SPIN688.SPL (植物生长)
+		SetGlobal("dbPlant","LOCALS",1)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	Global("dbOffense1","LOCALS",0)
+THEN
+	RESPONSE #100
+		ForceSpell(LastSeenBy(Myself),BLACK_DRAGON_INSECT)  // SPIN689.SPL (召唤昆虫)
+		SetGlobal("dbOffense1","LOCALS",1)
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		EquipMostDamagingMelee()
+		AttackReevaluate(LastSeenBy(Myself),35)
+	RESPONSE #30
+		ForceSpell(LastSeenBy(Myself),WIZARD_CHARM_PERSON)  // SPWI104.SPL (魅惑人类)
+END
+
+IF
+	See(SecondNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+	RESPONSE #10
+		ForceSpell(LastSeenBy(Myself),WIZARD_CHARM_PERSON)  // SPWI104.SPL (魅惑人类)
+END
+
+IF
+	See(ThirdNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+	RESPONSE #10
+		ForceSpell(LastSeenBy(Myself),WIZARD_CHARM_PERSON)  // SPWI104.SPL (魅惑人类)
+END
+
+IF
+	See(FourthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+	RESPONSE #10
+		ForceSpell(LastSeenBy(Myself),WIZARD_CHARM_PERSON)  // SPWI104.SPL (魅惑人类)
+END
+
+IF
+	See(FifthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+	RESPONSE #10
+		ForceSpell(LastSeenBy(Myself),WIZARD_CHARM_PERSON)  // SPWI104.SPL (魅惑人类)
+END
+
+IF
+	See(SixthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+	RESPONSE #10
+		ForceSpell(LastSeenBy(Myself),WIZARD_CHARM_PERSON)  // SPWI104.SPL (魅惑人类)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		MoveToObject(NearestEnemyOf(Myself))
+END
+
+IF
+	AttackedBy([GOODCUTOFF],DEFAULT)
+	Allegiance(Myself,NEUTRAL)
+THEN
+	RESPONSE #100
+		Enemy()
+END
+

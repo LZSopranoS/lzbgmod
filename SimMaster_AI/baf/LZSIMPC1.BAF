@@ -1,0 +1,966 @@
+IF
+	Die()
+THEN
+	RESPONSE #100
+		ChangeAIScript("",SPECIFICS)
+END
+
+IF
+	Global("LZ_it_start","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_start","LOCALS",1)
+		SetGlobalTimer("LZ_imagetype_time","LOCALS",TWO_TURNS)
+		Continue()
+END
+
+IF
+	GlobalTimerExpired("LZ_imagetype_time","LOCALS")
+THEN
+	RESPONSE #100
+		ChangeAIScript("",SPECIFICS)
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI921")  // 高等迅捷
+	See(NearestEnemyOf(Myself))
+	CheckStat(Myself,0,AURACLEANSING)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI921",Myself)  // 高等迅捷
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI907")  // 绝对免疫
+	See(NearestEnemyOf(Myself))
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	AttackedBy([ANYONE],DEFAULT)
+	TookDamage()
+THEN
+	RESPONSE #100
+		SpellRES("SPWI907",Myself)  // 绝对免疫
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI611")  // 防护魔法武器
+	See(NearestEnemyOf(Myself))
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	AttackedBy([ANYONE],DEFAULT)
+	TookDamage()
+THEN
+	RESPONSE #100
+		SpellRES("SPWI611",Myself)  // 防护魔法武器
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI408")  // 石肤术
+	See(NearestEnemyOf(Myself))
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	CheckStatLT(Myself,1,STONESKINS)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI408",Myself)  // 石肤术
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI803")  // 防护能量
+	See(NearestEnemyOf(Myself))
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	OR(5)
+		HitBy([ANYTHING],ACID)
+		HitBy([ANYTHING],COLD)
+		HitBy([ANYTHING],ELECTRICITY)
+		HitBy([ANYTHING],FIRE)
+		HitBy([ANYTHING],MAGIC)
+	TookDamage()
+THEN
+	RESPONSE #100
+		SpellRES("SPWI803",Myself)  // 防护能量
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI602")  // 法术无效结界
+	See(NearestEnemyOf(Myself))
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	CheckStat(Myself,0,MINORGLOBE)
+	OR(5)
+		HitBy([ANYTHING],ACID)
+		HitBy([ANYTHING],COLD)
+		HitBy([ANYTHING],ELECTRICITY)
+		HitBy([ANYTHING],FIRE)
+		HitBy([ANYTHING],MAGIC)
+	TookDamage()
+THEN
+	RESPONSE #100
+		SpellRES("SPWI602",Myself)  // 法术无效结界
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI613")  // 高等加速术
+	See(NearestEnemyOf(Myself))
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!StateCheck(Myself,STATE_HASTED)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI613",Myself)  // 高等加速术
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI923")  // 召唤神界侍者
+	See(NearestEnemyOf(Myself))
+	NumCreatureLT([GOODCUTOFF.0.0.0.0.SUMMONED],5)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI923",Myself)  // 召唤神界侍者
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI924")  // 召唤深渊界侍者
+	See(NearestEnemyOf(Myself))
+	NumCreatureLT([GOODCUTOFF.0.0.0.0.SUMMONED],5)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI924",Myself)  // 召唤深渊界侍者
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI902")  // 法术陷阱
+	!GlobalTimerNotExpired("BUFF_SPWI902","LOCALS")
+	OR(4)
+		Exists(NearestEnemyOfType([0.0.0.MAGE_ALL]))
+		Exists(NearestEnemyOfType([0.0.0.SORCERER]))
+		Exists(NearestEnemyOfType([0.0.0.DRUID_ALL]))
+		Exists(NearestEnemyOfType([0.0.0.CLERIC_ALL]))
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("BUFF_SPWI902","LOCALS",TWO_TURNS)
+		SpellRES("SPWI902",Myself)  // 法术陷阱
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI912")  // 律令：死亡
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	HPLT(LastSeenBy(Myself),60)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTMAGIC)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI912",LastSeenBy(Myself))  // 律令：死亡
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI911")  // 流星爆
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI911",LastSeenBy(Myself))  // 流星爆
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI922")  // 龙息
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI922",LastSeenBy(Myself))  // 龙息
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI925")  // 彗星术
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI925",LastSeenBy(Myself))  // 彗星术
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI913")  // 女妖之嚎
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	Range(LastSeenBy(Myself),12)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSDEATH)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI913",Myself)  // 女妖之嚎
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI810")  // 焚云术
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI810",LastSeenBy(Myself))  // 焚云术
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI818")  // 比格拜巨力拳
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTCRUSHING)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTMAGIC)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI818",LastSeenBy(Myself))  // 比格拜巨力拳
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI812")  // 亚比达奇凋死术
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI812",LastSeenBy(Myself))  // 亚比达奇凋死术
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI713")  // 死亡一指
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	!HasBounceEffects(LastSeenBy(Myself))
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI713",LastSeenBy(Myself))  // 死亡一指
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI716")  // 魔邓肯之剑
+	See(NearestEnemyOf(Myself))
+	NumCreatureLT([GOODCUTOFF.0.0.0.0.SUMMONED],5)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI716",Myself)  // 魔邓肯之剑
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI712")  // 延宕爆裂火球
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTFIRE)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI712",LastSeenBy(Myself))  // 延宕爆裂火球
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPPR722")  // 复仇暴风
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTFIRE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTACID)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTELECTRICITY)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+THEN
+	RESPONSE #100
+		SpellRES("SPPR722",LastSeenBy(Myself))  // 复仇暴风
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPPR728")  // 内爆术
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTFIRE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTCRUSHING)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+THEN
+	RESPONSE #100
+		SpellRES("SPPR728",LastSeenBy(Myself))  // 内爆术
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPPR726")  // 召唤使徒
+	See(NearestEnemyOf(Myself))
+	NumCreatureLT([GOODCUTOFF.0.0.0.0.SUMMONED],5)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+THEN
+	RESPONSE #100
+		SpellRES("SPPR726",Myself)  // 召唤使徒
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPPR727")  // 召唤堕落使徒
+	See(NearestEnemyOf(Myself))
+	NumCreatureLT([GOODCUTOFF.0.0.0.0.SUMMONED],5)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+THEN
+	RESPONSE #100
+		SpellRES("SPPR727",Myself)  // 召唤堕落使徒
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPPR707")  // 阳炎爆
+	NumCreatureGT([EVILCUTOFF.UNDEAD],2)
+	Range([EVILCUTOFF.UNDEAD],10)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+THEN
+	RESPONSE #100
+		SpellRES("SPPR707",Myself)  // 阳炎爆
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPPR713")  // 强力复原术
+	See([PC])
+	OR(2)
+		HPPercentLT(Player1,50)
+		HPPercentLT(Player4,50)
+	OR(2)
+		HPPercentLT(Player2,50)
+		HPPercentLT(Player5,50)
+	OR(2)
+		HPPercentLT(Player3,50)
+		HPPercentLT(Player6,50)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+THEN
+	RESPONSE #100
+		SpellRES("SPPR713",LastSeenBy(Myself))  // 强力复原术
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPPR711")  // 再生术
+	See([PC])
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	HPPercentLT(LastSeenBy(Myself),60)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+THEN
+	RESPONSE #100
+		SpellRES("SPPR711",LastSeenBy(Myself))  // 再生术
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPPR607")  // 痊愈术
+	See([PC])
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	HPPercentLT(LastSeenBy(Myself),30)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+THEN
+	RESPONSE #100
+		SpellRES("SPPR607",LastSeenBy(Myself))  // 痊愈术
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI605")  // 死亡术
+	OR(3)
+		See([EVILCUTOFF.0.0.0.0.SUMMONED])
+		See([EVILCUTOFF.WEAPON.SWORD.0.0.SUMMONED])
+		See([EVILCUTOFF.0.MIST.0.0.SUMMONED])
+	OR(3)
+		HasItem("MORSWORD",LastSeenBy(Myself))  // 魔邓肯之剑
+		HasItem("NISHRUU",LastSeenBy(Myself))  // 攻击
+		NumCreatureGT([EVILCUTOFF.0.0.0.0.SUMMONED],2)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI605",LastSeenBy(Myself))  // 死亡术
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI614")  // 死亡之雾
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTACID)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI614",LastSeenBy(Myself))  // 死亡之雾
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI615")  // 连环闪电
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTELECTRICITY)
+	!HasBounceEffects(LastSeenBy(Myself))
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI615",LastSeenBy(Myself))  // 连环闪电
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI412")  // 毒咒
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),MALISON)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI412",LastSeenBy(Myself))  // 毒咒
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI411")  // 情绪控制：绝望
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI411",LastSeenBy(Myself))  // 情绪控制：绝望
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI312")  // 缓慢术
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTMAGIC)
+	!StateCheck(LastSeenBy(Myself),STATE_SLOWED)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI312",LastSeenBy(Myself))  // 缓慢术
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI304")  // 火球术
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTFIRE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTMAGIC)
+	!Range(LastSeenBy(Myself),15)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI304",LastSeenBy(Myself))  // 火球术
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI303")  // 火焰箭
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTFIRE)
+	!HasBounceEffects(LastSeenBy(Myself))
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI303",LastSeenBy(Myself))  // 火焰箭
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI211")  // 马友夫强酸箭
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),30,RESISTACID)
+	!HasBounceEffects(LastSeenBy(Myself))
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI211",LastSeenBy(Myself))  // 马友夫强酸箭
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI112")  // 魔法飞弹
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),30,RESISTMAGIC)
+	CheckStatLT(LastSeenBy(Myself),30,MAGICDAMAGERESISTANCE)
+	!HasBounceEffects(LastSeenBy(Myself))
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI112",LastSeenBy(Myself))  // 魔法飞弹
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI118")  // 五彩球
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),30,RESISTMAGIC)
+	CheckStatLT(LastSeenBy(Myself),30,MAGICDAMAGERESISTANCE)
+	!HasBounceEffects(LastSeenBy(Myself))
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI118",LastSeenBy(Myself))  // 五彩球
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPPR113")  // 灾难术
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),DOOM)
+	!HasBounceEffects(LastSeenBy(Myself))
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+THEN
+	RESPONSE #100
+		SpellRES("SPPR113",LastSeenBy(Myself))  // 灾难术
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI212")  // 镜影术
+	See(NearestEnemyOf(Myself))
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!StateCheck(Myself,STATE_MIRRORIMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI212",Myself)  // 镜影术
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPPR214")  // 召唤圣力
+	See(NearestEnemyOf(Myself))
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	!StateCheck(Myself,STATE_DRAWUPONHOLYMIGHT)
+THEN
+	RESPONSE #100
+		SpellRES("SPPR214",Myself)  // 召唤圣力
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPPR203")  // 赞美术
+	OR(2)
+		Range(NearestAllyOf(Myself),15)
+		Range(NearestEnemyOf(Myself),15)
+	OR(2)
+		Range(SecondNearestAllyOf(Myself),15)
+		Range(SecondNearestEnemyOf(Myself),15)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	!StateCheck(Myself,STATE_CHANT)
+THEN
+	RESPONSE #100
+		SpellRES("SPPR203",Myself)  // 赞美术
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPPR101")  // 祝福术
+	Range(NearestAllyOf(Myself),15)
+	Range(SecondNearestAllyOf(Myself),15)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	!StateCheck(Myself,STATE_BLESS)
+THEN
+	RESPONSE #100
+		SpellRES("SPPR101",Myself)  // 祝福术
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPPR111")  // 信仰护甲
+	See(NearestEnemyOf(Myself))
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	!CheckSpellState(Myself,ARMOR_OF_FAITH)
+THEN
+	RESPONSE #100
+		SpellRES("SPPR111",Myself)  // 信仰护甲
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPWI920")  // 魔能刃
+	See(NearestEnemyOf(Myself))
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!HasItem("eneblade",Myself)  // 魔能刃
+THEN
+	RESPONSE #100
+		SpellRES("SPWI920",Myself)  // 魔能刃
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPPR721")  // 魔能刃
+	See(NearestEnemyOf(Myself))
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	!HasItem("eneblade",Myself)  // 魔能刃
+THEN
+	RESPONSE #100
+		SpellRES("SPPR721",Myself)  // 魔能刃
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPCL905")  // 致命一击
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	Range(LastSeenBy(Myself),5)
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+THEN
+	RESPONSE #100
+		SpellRES("SPCL905",Myself)  // 致命一击
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPCL901")  // 强力旋风攻击
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	Range(LastSeenBy(Myself),5)
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+THEN
+	RESPONSE #100
+		SpellRES("SPCL901",Myself)  // 强力旋风攻击
+END
+
+IF
+	OnCreation()
+	HaveSpellRES("SPWI919")  // 愿望术
+THEN
+	RESPONSE #100
+		SetGlobalTimer("WishDelay","LOCALS",ONE_TURN)
+		Continue()
+END
+
+IF
+	GlobalTimerExpired("WishDelay","LOCALS")
+	ActionListEmpty()
+	HaveSpellRES("SPWI919")  // 愿望术
+	NumCreature("WISH02",0)  // 风巨灵
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI919",Myself)  // 愿望术
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPPR413")  // 防护负界伤害
+	See([0.0.VAMPIRE])
+	See([PC])
+	CheckStat(LastSeenBy(Myself),0,LEVEL_DRAIN_IMMUNITY)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+THEN
+	RESPONSE #100
+		SpellRES("SPPR413",LastSeenBy(Myself))  // 防护负界伤害
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPPR413")  // 防护负界伤害
+	See([0.0.VAMPIRE])
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	CheckStat(Myself,0,LEVEL_DRAIN_IMMUNITY)
+THEN
+	RESPONSE #100
+		SpellRES("SPPR413",Myself)  // 防护负界伤害
+END
+
+IF
+	ActionListEmpty()
+	HaveSpellRES("SPPR514")  // 群体治疗
+	See([PC])
+	OR(2)
+		HPPercentLT(Player1,80)
+		HPPercentLT(Player4,80)
+	OR(2)
+		HPPercentLT(Player2,80)
+		HPPercentLT(Player5,80)
+	OR(2)
+		HPPercentLT(Player3,80)
+		HPPercentLT(Player6,80)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+THEN
+	RESPONSE #100
+		SpellRES("SPPR514",LastSeenBy(Myself))  // 群体治疗
+END
+
+IF
+	ActionListEmpty()
+	See(NearestEnemyOf(Myself))
+	!StateCheck(Myself,STATE_HASTED)
+	HasItem("POTN14",Myself)  // 速度之油
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,46150)  // 喝下药水
+		UseItem("POTN14",Myself)  // 速度之油
+END
+
+IF
+	ActionListEmpty()
+	See(NearestEnemyOf(Myself))
+	HPPercentLT(Myself,70)
+	HasItem("POTN55",Myself)  // 超级强效医疗药水
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,46150)  // 喝下药水
+		UseItem("POTN55",Myself)  // 超级强效医疗药水
+END
+
+IF
+	ActionListEmpty()
+	See(NearestEnemyOf(Myself))
+	HPPercentLT(Myself,50)
+	HasItem("POTN52",Myself)  // 强力医疗药水
+THEN
+	RESPONSE #100
+		DisplayStringHead(Myself,46150)  // 喝下药水
+		UseItem("POTN52",Myself)  // 强力医疗药水
+END
+
+IF
+	ActionListEmpty()
+	Detect(NearestEnemyOf(Myself))
+	!See(NearestEnemyOf(Myself))
+	HaveSpellRES("SPWI609")  // 真实视域
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+THEN
+	RESPONSE #100
+		SpellRES("SPWI609",Myself)  // 真实视域
+END
+
+IF
+	ActionListEmpty()
+	Detect(NearestEnemyOf(Myself))
+	!See(NearestEnemyOf(Myself))
+	HaveSpellRES("SPPR505")  // 真实目光
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+THEN
+	RESPONSE #100
+		SpellRES("SPPR505",Myself)  // 真实目光
+END
+
+IF
+	ActionListEmpty()
+	Class(Myself,BARD_ALL)
+	!ModalState(BATTLESONG)
+	OR(2)
+		See(NearestEnemyOf(Myself))
+		CombatCounterGT(0)
+	HasItemEquiped("BDHELM11",Myself)  // 诗人之帽
+THEN
+	RESPONSE #100
+		BattleSong()
+END
+
+IF
+	ActionListEmpty()
+	Class(Myself,BARD_ALL)
+	ModalState(BATTLESONG)
+	OR(2)
+		See(NearestEnemyOf(Myself))
+		CombatCounterGT(0)
+	HasItemEquiped("BDHELM11",Myself)  // 诗人之帽
+	!GlobalTimerNotExpired("AttackDuringSong","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("AttackDuringSong","LOCALS",TWO_ROUNDS)
+		DisplayStringHead(Myself,11798)  // 吟唱歌曲
+END
+
+IF
+	ActionListEmpty()
+	IsWeaponRanged(Myself)
+	See(NearestEnemyOf(Myself))
+	Range(LastSeenBy(Myself),6)
+THEN
+	RESPONSE #100
+		RunAwayFrom(LastSeenBy(Myself),30)
+END
+
+IF
+	ActionListEmpty()
+	CheckStat(Myself,0,AURACLEANSING)
+	See(NearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	ActionListEmpty()
+	CheckStat(Myself,0,AURACLEANSING)
+	See(SecondNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	ActionListEmpty()
+	CheckStat(Myself,0,AURACLEANSING)
+	See(ThirdNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	ActionListEmpty()
+	CheckStat(Myself,0,AURACLEANSING)
+	See(FourthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	ActionListEmpty()
+	CheckStat(Myself,0,AURACLEANSING)
+	See(FifthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	ActionListEmpty()
+	CheckStat(Myself,0,AURACLEANSING)
+	See(SixthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	ActionListEmpty()
+	!Detect(NearestEnemyOf(Myself))
+	See([PC])
+	!Range(LastSeenBy(Myself),15)
+THEN
+	RESPONSE #100
+		MoveToObject(LastSeenBy(Myself))
+END
+

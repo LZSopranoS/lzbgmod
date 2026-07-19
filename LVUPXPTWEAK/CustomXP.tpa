@@ -1,0 +1,174 @@
+//1
+COPY_EXISTING ~XPCAP.2DA~ ~override~
+    REPLACE_TEXTUALLY ~\([A-Za-z_]+[ %tab%]+\)\([0-9]+\)[ %tab%]*~ ~\1-1~
+BUT_ONLY
+
+//2
+ACTION_CLEAR_ARRAY  cd_start_areas
+
+ACTION_DEFINE_ASSOCIATIVE_ARRAY cd_start_areas BEGIN
+    startare => 0
+    startbp  => 0
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~campaign.2da~ THEN BEGIN
+
+    COPY_EXISTING ~campaign.2da~ ~override~
+        COUNT_2DA_COLS col_num
+        COUNT_2DA_ROWS (col_num - 1) row_num
+			FOR (index = 1 ; index < row_num ; ++index) BEGIN // start at 1 to skip header row
+				READ_2DA_ENTRY index 13 13 file
+				DEFINE_ASSOCIATIVE_ARRAY cd_start_areas BEGIN "%file%" => 0 END
+			END
+    BUT_ONLY
+END
+
+// for EE
+ACTION_PHP_EACH cd_start_areas AS file => val BEGIN
+
+    PRINT ~patching campaign file %file%.2da~
+
+    ACTION_IF FILE_EXISTS_IN_GAME ~%file%.2da~ THEN BEGIN
+
+		COPY_EXISTING ~%file%.2da~ ~override~ 
+			REPLACE_TEXTUALLY ~\(START_\(MP_\)?XP_CAP[ %tab%]+\)\([0-9]+\)[ %tab%]*~ ~\1-1~
+			//写法2
+			//REPLACE_TEXTUALLY ~\(START_\(MP_\)?XP_CAP[ %tab%]+\)[^0-9-]*\([0-9]+\)[ %tab%]*~ ~\1-1~
+        BUT_ONLY
+    END
+END
+
+//3
+ACTION_MATCH xp_choice WITH
+
+1 BEGIN
+
+	COPY_EXISTING ~XPLEVEL.2DA~ ~override~
+    
+		COUNT_2DA_COLS num_cols           //40级时num_cols为42
+		COUNT_2DA_ROWS num_cols num_rows
+		SET col_limit = num_cols - 1      //40级时col_limit为41，对应LEVEL 41，41下面经验值都是-1。
+	
+		FOR (col = 1; col < col_limit; ++col) BEGIN
+			READ_2DA_ENTRY 0 col col_limit lv_value
+			PATCH_IF (lv_value >= 12 AND lv_value <= 51) BEGIN    //LEVEL那行的列有移位，11实际对应的10下面的数据，所以lv_value >= 12表示10级后升级经验*2，1~10级正常
+		
+				FOR (row = 0; row < num_rows; ++row) BEGIN
+					READ_2DA_ENTRY row col num_cols cell_value
+					PATCH_IF (cell_value > 0) BEGIN
+						SET_2DA_ENTRY row col num_cols cell_value*2
+					END
+				END
+			END
+		END
+		PRETTY_PRINT_2DA
+    BUT_ONLY_IF_IT_CHANGES
+END
+
+2 BEGIN
+
+	COPY_EXISTING ~XPLEVEL.2DA~ ~override~
+    
+		COUNT_2DA_COLS num_cols           //40级时num_cols为42
+		COUNT_2DA_ROWS num_cols num_rows
+		SET col_limit = num_cols - 1      //40级时col_limit为41，对应LEVEL 41，41下面经验值都是-1。
+  
+		FOR (col = 1; col < col_limit; ++col) BEGIN
+			READ_2DA_ENTRY 0 col col_limit lv_value
+			PATCH_IF (lv_value >= 1 AND lv_value <= 51) BEGIN    //40级时要写成lv_value <= 41，只有这行对应LEVEL 41，下面几行都是对应LEVEL 40下面的经验值。50级判断包含40级，写成lv_value <= 51也适用40级
+		
+				FOR (row = 0; row < num_rows; ++row) BEGIN
+					READ_2DA_ENTRY row col num_cols cell_value
+					PATCH_IF (cell_value > 0) BEGIN
+						SET_2DA_ENTRY row col num_cols cell_value*2
+					END
+				END
+			END
+		END
+		PRETTY_PRINT_2DA
+	BUT_ONLY_IF_IT_CHANGES
+END
+
+3 BEGIN
+
+	COPY_EXISTING ~XPLEVEL.2DA~ ~override~
+    
+		COUNT_2DA_COLS num_cols           //40级时num_cols为42
+		COUNT_2DA_ROWS num_cols num_rows
+		SET col_limit = num_cols - 1      //40级时col_limit为41，对应LEVEL 41，41下面经验值都是-1。
+	
+		FOR (col = 1; col < col_limit; ++col) BEGIN
+			READ_2DA_ENTRY 0 col col_limit lv_value
+			PATCH_IF (lv_value >= 12 AND lv_value <= 51) BEGIN    //LEVEL那行的列有移位，11实际对应的10下面的数据，所以lv_value >= 12表示10级后升级经验*3，1~10级正常
+		
+				FOR (row = 0; row < num_rows; ++row) BEGIN
+					READ_2DA_ENTRY row col num_cols cell_value
+					PATCH_IF (cell_value > 0) BEGIN
+						SET_2DA_ENTRY row col num_cols cell_value*3
+					END
+				END
+			END
+		END
+		PRETTY_PRINT_2DA
+	BUT_ONLY_IF_IT_CHANGES
+END
+
+4 BEGIN
+
+	COPY_EXISTING ~XPLEVEL.2DA~ ~override~
+    
+		COUNT_2DA_COLS num_cols           //40级时num_cols为42
+		COUNT_2DA_ROWS num_cols num_rows
+		SET col_limit = num_cols - 1      //40级时col_limit为41，对应LEVEL 41，41下面经验值都是-1。
+	
+		FOR (col = 1; col < col_limit; ++col) BEGIN
+			READ_2DA_ENTRY 0 col col_limit lv_value
+			PATCH_IF (lv_value >= 1 AND lv_value <= 51) BEGIN    //40级时要写成lv_value <= 41，只有这行对应LEVEL 41，下面几行都是对应LEVEL 40下面的经验值。50级判断包含40级，写成lv_value <= 51也适用40级
+		
+				FOR (row = 0; row < num_rows; ++row) BEGIN
+					READ_2DA_ENTRY row col num_cols cell_value
+					PATCH_IF (cell_value > 0) BEGIN
+						SET_2DA_ENTRY row col num_cols cell_value*3
+					END
+				END
+			END
+		END
+		PRETTY_PRINT_2DA
+	BUT_ONLY_IF_IT_CHANGES
+END
+
+5 BEGIN
+
+	COPY_EXISTING ~XPLEVEL.2DA~ ~override~
+    
+		COUNT_2DA_COLS num_cols           //40级时num_cols为42
+		COUNT_2DA_ROWS num_cols num_rows
+		SET col_limit = num_cols - 1      //40级时col_limit为41，对应LEVEL 41，41下面经验值都是-1。
+	
+		FOR (col = 1; col < col_limit; ++col) BEGIN
+			READ_2DA_ENTRY 0 col col_limit lv_value
+			PATCH_IF (lv_value >= 12 AND lv_value <= 51) BEGIN    
+		
+				PATCH_IF (lv_value >= 12 AND lv_value <= 31) BEGIN       //LEVEL那行的列有移位，11实际对应的10下面的数据，1~10级正常,11~30级升级经验*2
+					SET multiplier = 2
+				END
+			
+				PATCH_IF (lv_value >= 32 AND lv_value <= 51) BEGIN       //LEVEL那行的列有移位，31~50级升级经验*3
+					SET multiplier = 3
+				END
+		
+				FOR (row = 0; row < num_rows; ++row) BEGIN
+					READ_2DA_ENTRY row col num_cols cell_value
+					PATCH_IF (cell_value > 0) BEGIN
+						SET_2DA_ENTRY row col num_cols cell_value*multiplier
+					END
+				END
+			END
+		END
+		PRETTY_PRINT_2DA
+	BUT_ONLY_IF_IT_CHANGES
+END
+
+//ACTION_MATCH 最后必须加一个 DEFAULT 分支才能正常结束
+DEFAULT END
+

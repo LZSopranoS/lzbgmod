@@ -1,0 +1,60 @@
+LOAD_TRA ~lzbgmod/SimMaster_AI/lang/schinese/install.tra~
+
+COPY ~lzbgmod/SimMaster_AI/copy~ ~override~
+
+COPY ~lzbgmod/SimMaster_AI/copysay/LZIMAGAI.ITM~ ~override~
+	SAY NAME1 @500 SAY NAME2 @502
+	SAY UNIDENTIFIED_DESC @501
+	SAY DESC @503
+
+COPY ~lzbgmod/SimMaster_AI/copysay/LZSIMMAS.CRE~ ~override~
+	SAY NAME1 @509 SAY NAME2 @509
+	
+COMPILE ~lzbgmod/SimMaster_AI/d~
+
+COMPILE ~lzbgmod/SimMaster_AI/baf~
+
+APPEND  ~itemdial.2da~  ~LZIMAGAI 5689 LZIMAGAI~   UNLESS ~LZIMAGAI~
+
+COPY_EXISTING ~itemdial.2da~ ~override~
+	PRETTY_PRINT_2DA
+BUT_ONLY
+
+// =====================================
+// 批量注入 scripts 目录下的所有自定 AI 脚本
+// =====================================
+ACTION_BASH_FOR ~scripts~ ~^.+\.bs$~ BEGIN
+
+    // NONE.bs刚好6字节，过滤小于等于6字节的空脚本，防止坏档。NONE.bs里插入内容后再选择实际也不起作用
+    ACTION_IF (BASH_FOR_SIZE > 6) BEGIN 
+
+        // 1. 原地 COPY
+        COPY ~%BASH_FOR_FILESPEC%~ ~%BASH_FOR_FILESPEC%~
+            
+            // 2. 直接在内存中把当前的二进制 .bs 反编译为可读的 BAF 文本流
+            DECOMPILE_AND_PATCH BEGIN
+                
+                // 3. 在第 0 字节位置（即最顶部）插入BAF文件，此时处于反编译后的文本环境，INSERT_FILE 插入的是纯文本，不会破坏二进制文件头
+                INSERT_FILE 0 ~lzbgmod/SimMaster_AI/baf2/LZSIMPC2.BAF~
+                
+            END // 4. 退出块时，WeiDU 会自动在内存中把修补后的文本重新编译为二进制
+        BUT_ONLY // 5. 只有真正被修改过的文件才写入硬盘
+    END
+END
+
+EXTEND_TOP ~BDDEFAI.BCS~ ~lzbgmod/SimMaster_AI/baf2/LZSIMPC2.BAF~
+
+COPY ~lzbgmod/LZSHOP/lua/M_LZSIM.lua~   ~override~
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~M_LZPATH.lua~ THEN BEGIN
+	COPY ~lzbgmod/LZSHOP/lua/M_LZPATH.lua~   ~override~
+END
+
+COPY ~lzbgmod/SimMaster_AI/spl/simulacr.spl~ ~override~
+
+COPY ~lzbgmod/SimMaster_AI/spl/projimag.spl~ ~override~
+
+//检测还原NewSpells.tpa对mislead.spl的修改
+ACTION_IF (MOD_IS_INSTALLED ~MESpells.tp2~ ~1000~) OR (MOD_IS_INSTALLED ~MESpells.tp2~ ~1001~) BEGIN
+	COPY ~lzbgmod/SimMaster_AI/spl/mislead.spl~ ~override~
+END

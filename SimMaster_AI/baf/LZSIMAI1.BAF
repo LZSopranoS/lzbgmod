@@ -1,0 +1,5421 @@
+IF
+	Die()
+THEN
+	RESPONSE #100
+		ChangeAIScript("",SPECIFICS)
+END
+
+IF
+	Global("LZ_it_start","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_start","LOCALS",1)
+		SetGlobalTimer("LZ_imagetype_time","LOCALS",TWO_TURNS)
+		Continue()
+END
+
+IF
+	GlobalTimerExpired("LZ_imagetype_time","LOCALS")
+THEN
+	RESPONSE #100
+		ChangeAIScript("",SPECIFICS)
+END
+
+IF
+	Global("LZ_it_diff","LOCALS",0)
+	OR(6)
+		XPGT(Player1,3000000)
+		XPGT(Player2,3000000)
+		XPGT(Player3,3000000)
+		XPGT(Player4,3000000)
+		XPGT(Player5,3000000)
+		XPGT(Player6,3000000)
+	XPLT(Player1,5000000)
+	XPLT(Player2,5000000)
+	XPLT(Player3,5000000)
+	XPLT(Player4,5000000)
+	XPLT(Player5,5000000)
+	XPLT(Player6,5000000)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_diff","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZ_it_diff","LOCALS",0)
+	OR(6)
+		XPGT(Player1,5000000)
+		XPGT(Player2,5000000)
+		XPGT(Player3,5000000)
+		XPGT(Player4,5000000)
+		XPGT(Player5,5000000)
+		XPGT(Player6,5000000)
+	XPLT(Player1,7000000)
+	XPLT(Player2,7000000)
+	XPLT(Player3,7000000)
+	XPLT(Player4,7000000)
+	XPLT(Player5,7000000)
+	XPLT(Player6,7000000)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_diff","LOCALS",2)
+		Continue()
+END
+
+IF
+	Global("LZ_it_diff","LOCALS",0)
+	OR(6)
+		XPGT(Player1,7000000)
+		XPGT(Player2,7000000)
+		XPGT(Player3,7000000)
+		XPGT(Player4,7000000)
+		XPGT(Player5,7000000)
+		XPGT(Player6,7000000)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_diff","LOCALS",3)
+		Continue()
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_ia","LOCALS",0)
+	!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+	ClassLevelGT(Myself,WIZARD,10)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	CheckStat(Myself,0,AURACLEANSING)
+	See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_ia","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI921",Myself)  // 高等迅捷
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_pfmw","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	AttackedBy([ANYONE],DEFAULT)
+	TookDamage()
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_pfmw","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI611",Myself)  // 防护魔法武器
+END
+
+IF
+	Global("LZ_it_pfmw","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	AttackedBy([ANYONE],DEFAULT)
+	TookDamage()
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_pfmw","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI611",Myself)  // 防护魔法武器
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_ss","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	CheckStatLT(Myself,1,STONESKINS)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_ss","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI408",Myself)  // 石肤术
+END
+
+IF
+	Global("LZ_it_ss","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	CheckStatLT(Myself,1,STONESKINS)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_ss","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI408",Myself)  // 石肤术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_pfe","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	OR(5)
+		HitBy([ANYTHING],ACID)
+		HitBy([ANYTHING],COLD)
+		HitBy([ANYTHING],ELECTRICITY)
+		HitBy([ANYTHING],FIRE)
+		HitBy([ANYTHING],MAGIC)
+	TookDamage()
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_pfe","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI803",Myself)  // 防护能量
+END
+
+IF
+	Global("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_goi","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	CheckStat(Myself,0,MINORGLOBE)
+	OR(5)
+		HitBy([ANYTHING],ACID)
+		HitBy([ANYTHING],COLD)
+		HitBy([ANYTHING],ELECTRICITY)
+		HitBy([ANYTHING],FIRE)
+		HitBy([ANYTHING],MAGIC)
+	TookDamage()
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_goi","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI602",Myself)  // 法术无效结界
+END
+
+IF
+	Global("LZ_it_ih","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!StateCheck(Myself,STATE_HASTED)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_ih","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI613",Myself)  // 高等加速术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv9a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+THEN
+	RESPONSE #40
+		SetGlobal("LZ_it_sklv9a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI911",LastSeenBy(Myself))  // 流星爆
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv9a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI922",LastSeenBy(Myself))  // 龙息
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv9a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI925",LastSeenBy(Myself))  // 彗星术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv9b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	Range(LastSeenBy(Myself),15)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSDEATH)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv9b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI913",Myself)  // 女妖之嚎
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv8a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #70
+		SetGlobal("LZ_it_sklv8a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI810",LastSeenBy(Myself))  // 焚云术
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv8a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI816",LastSeenBy(Myself))  // 震慑法印
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv8a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #60
+		SetGlobal("LZ_it_sklv8a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI810",LastSeenBy(Myself))  // 焚云术
+	RESPONSE #40
+		SetGlobal("LZ_it_sklv8a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI816",LastSeenBy(Myself))  // 震慑法印
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv8b","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTCRUSHING)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTMAGIC)
+THEN
+	RESPONSE #70
+		SetGlobal("LZ_it_sklv8b","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI818",LastSeenBy(Myself))  // 比格拜巨力拳
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv8b","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI812",LastSeenBy(Myself))  // 亚比达奇凋死术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv8b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTCRUSHING)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTMAGIC)
+THEN
+	RESPONSE #60
+		SetGlobal("LZ_it_sklv8b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI818",LastSeenBy(Myself))  // 比格拜巨力拳
+	RESPONSE #40
+		SetGlobal("LZ_it_sklv8b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI812",LastSeenBy(Myself))  // 亚比达奇凋死术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv7c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI713",LastSeenBy(Myself))  // 死亡一指
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI716",Myself)  // 魔邓肯之剑
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv7a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI712",LastSeenBy(Myself))  // 延宕爆裂火球
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI713",LastSeenBy(Myself))  // 死亡一指
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv7b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(2)
+		HasBounceEffects(LastSeenBy(Myself))
+		HasImmunityEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI704",LastSeenBy(Myself))  // 红宝石逆转射线
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI705",LastSeenBy(Myself))  // 凯尔本守护之鞭
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_csklv7a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_csklv7a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR722",LastSeenBy(Myself))  // 复仇暴风
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_csklv7b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),70,RESISTFIRE)
+	CheckStatLT(LastSeenBy(Myself),70,RESISTCRUSHING)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_csklv7b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR728",LastSeenBy(Myself))  // 内爆术
+END
+
+IF
+	Global("LZ_it_sklv6a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTACID)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv6a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI614",LastSeenBy(Myself))  // 死亡之雾
+END
+
+IF
+	Global("LZ_it_sklv6b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTELECTRICITY)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv6b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI615",LastSeenBy(Myself))  // 连环闪电
+END
+
+IF
+	Global("LZ_it_sklv6c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),20,RESISTMAGIC)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv6c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI608",LastSeenBy(Myself))  // 识破魔法
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv5a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),20,RESISTMAGIC)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI514",LastSeenBy(Myself))  // 降低抗性
+END
+
+IF
+	Global("LZ_it_sklv5a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),20,RESISTMAGIC)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI514",LastSeenBy(Myself))  // 降低抗性
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv5b","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(5)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),MANTLE)
+		CheckSpellState(LastSeenBy(Myself),IMPROVED_MANTLE)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5b","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI513",LastSeenBy(Myself))  // 破解术
+END
+
+IF
+	Global("LZ_it_sklv5b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(5)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),MANTLE)
+		CheckSpellState(LastSeenBy(Myself),IMPROVED_MANTLE)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI513",LastSeenBy(Myself))  // 破解术
+END
+
+IF
+	Global("LZ_it_sklv4a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),MALISON)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI412",LastSeenBy(Myself))  // 毒咒
+END
+
+IF
+	Global("LZ_it_sklv4b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI411",LastSeenBy(Myself))  // 情绪控制：绝望
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv4c","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	HPGT(LastSeenBy(Myself),100)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSPOLY)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4c","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI415",LastSeenBy(Myself))  // 变形他人
+END
+
+IF
+	Global("LZ_it_sklv4c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	HPGT(LastSeenBy(Myself),100)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSPOLY)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI415",LastSeenBy(Myself))  // 变形他人
+END
+
+IF
+	Global("LZ_it_sklv3a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(2)
+		HasBounceEffects(LastSeenBy(Myself))
+		HasImmunityEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv3a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI321",LastSeenBy(Myself))  // 法术穿透
+END
+
+IF
+	Global("LZ_it_sklv3b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTMAGIC)
+	!StateCheck(LastSeenBy(Myself),STATE_SLOWED)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv3b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI312",LastSeenBy(Myself))  // 缓慢术
+END
+
+IF
+	Global("LZ_it_sklv3c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTFIRE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTMAGIC)
+	!Range(LastSeenBy(Myself),15)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI304",LastSeenBy(Myself))  // 火球术
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI313",LastSeenBy(Myself))  // 骷髅陷阱
+END
+
+IF
+	Global("LZ_it_sklv3d","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTFIRE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTELECTRICITY)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3d","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI303",LastSeenBy(Myself))  // 火焰箭
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3d","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI308",LastSeenBy(Myself))  // 闪电术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv2a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),30,RESISTACID)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv2a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI211",LastSeenBy(Myself))  // 马友夫强酸箭
+END
+
+IF
+	Global("LZ_it_sklv2a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),30,RESISTACID)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv2a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI211",LastSeenBy(Myself))  // 马友夫强酸箭
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv1a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),20,RESISTMAGIC)
+	CheckStatLT(LastSeenBy(Myself),20,MAGICDAMAGERESISTANCE)
+	!HasBounceEffects(LastSeenBy(Myself))
+	!HasItemEquiped("MISC5X",LastSeenBy(Myself))  // 竖琴手别针
+	!HasItemEquiped("OHRAMUL1",LastSeenBy(Myself))  // 流浪剑客的胸针
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI112",LastSeenBy(Myself))  // 魔法飞弹
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI118",LastSeenBy(Myself))  // 五彩球
+END
+
+IF
+	Global("LZ_it_sklv1a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),20,RESISTMAGIC)
+	CheckStatLT(LastSeenBy(Myself),20,MAGICDAMAGERESISTANCE)
+	!HasBounceEffects(LastSeenBy(Myself))
+	!HasItemEquiped("MISC5X",LastSeenBy(Myself))  // 竖琴手别针
+	!HasItemEquiped("OHRAMUL1",LastSeenBy(Myself))  // 流浪剑客的胸针
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI112",LastSeenBy(Myself))  // 魔法飞弹
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI118",LastSeenBy(Myself))  // 五彩球
+END
+
+IF
+	Global("LZ_it_csklv1a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),DOOM)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_csklv1a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR113",LastSeenBy(Myself))  // 灾难术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv9a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+THEN
+	RESPONSE #40
+		SetGlobal("LZ_it_sklv9a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI911",LastSeenBy(Myself))  // 流星爆
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv9a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI922",LastSeenBy(Myself))  // 龙息
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv9a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI925",LastSeenBy(Myself))  // 彗星术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv9b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	Range(LastSeenBy(Myself),15)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSDEATH)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv9b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI913",Myself)  // 女妖之嚎
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv8a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #70
+		SetGlobal("LZ_it_sklv8a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI810",LastSeenBy(Myself))  // 焚云术
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv8a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI816",LastSeenBy(Myself))  // 震慑法印
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv8a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #60
+		SetGlobal("LZ_it_sklv8a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI810",LastSeenBy(Myself))  // 焚云术
+	RESPONSE #40
+		SetGlobal("LZ_it_sklv8a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI816",LastSeenBy(Myself))  // 震慑法印
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv8b","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTCRUSHING)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTMAGIC)
+THEN
+	RESPONSE #70
+		SetGlobal("LZ_it_sklv8b","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI818",LastSeenBy(Myself))  // 比格拜巨力拳
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv8b","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI812",LastSeenBy(Myself))  // 亚比达奇凋死术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv8b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTCRUSHING)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTMAGIC)
+THEN
+	RESPONSE #60
+		SetGlobal("LZ_it_sklv8b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI818",LastSeenBy(Myself))  // 比格拜巨力拳
+	RESPONSE #40
+		SetGlobal("LZ_it_sklv8b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI812",LastSeenBy(Myself))  // 亚比达奇凋死术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv7c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI713",LastSeenBy(Myself))  // 死亡一指
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI716",Myself)  // 魔邓肯之剑
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv7a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI712",LastSeenBy(Myself))  // 延宕爆裂火球
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI713",LastSeenBy(Myself))  // 死亡一指
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv7b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(2)
+		HasBounceEffects(LastSeenBy(Myself))
+		HasImmunityEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI704",LastSeenBy(Myself))  // 红宝石逆转射线
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI705",LastSeenBy(Myself))  // 凯尔本守护之鞭
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_csklv7a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_csklv7a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR722",LastSeenBy(Myself))  // 复仇暴风
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_csklv7b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),70,RESISTFIRE)
+	CheckStatLT(LastSeenBy(Myself),70,RESISTCRUSHING)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_csklv7b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR728",LastSeenBy(Myself))  // 内爆术
+END
+
+IF
+	Global("LZ_it_sklv6a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTACID)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv6a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI614",LastSeenBy(Myself))  // 死亡之雾
+END
+
+IF
+	Global("LZ_it_sklv6b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTELECTRICITY)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv6b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI615",LastSeenBy(Myself))  // 连环闪电
+END
+
+IF
+	Global("LZ_it_sklv6c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),20,RESISTMAGIC)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv6c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI608",LastSeenBy(Myself))  // 识破魔法
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv5a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),20,RESISTMAGIC)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI514",LastSeenBy(Myself))  // 降低抗性
+END
+
+IF
+	Global("LZ_it_sklv5a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),20,RESISTMAGIC)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI514",LastSeenBy(Myself))  // 降低抗性
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv5b","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(5)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),MANTLE)
+		CheckSpellState(LastSeenBy(Myself),IMPROVED_MANTLE)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5b","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI513",LastSeenBy(Myself))  // 破解术
+END
+
+IF
+	Global("LZ_it_sklv5b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(5)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),MANTLE)
+		CheckSpellState(LastSeenBy(Myself),IMPROVED_MANTLE)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI513",LastSeenBy(Myself))  // 破解术
+END
+
+IF
+	Global("LZ_it_sklv4a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),MALISON)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI412",LastSeenBy(Myself))  // 毒咒
+END
+
+IF
+	Global("LZ_it_sklv4b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI411",LastSeenBy(Myself))  // 情绪控制：绝望
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv4c","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	HPGT(LastSeenBy(Myself),100)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSPOLY)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4c","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI415",LastSeenBy(Myself))  // 变形他人
+END
+
+IF
+	Global("LZ_it_sklv4c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	HPGT(LastSeenBy(Myself),100)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSPOLY)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI415",LastSeenBy(Myself))  // 变形他人
+END
+
+IF
+	Global("LZ_it_sklv3a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(2)
+		HasBounceEffects(LastSeenBy(Myself))
+		HasImmunityEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv3a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI321",LastSeenBy(Myself))  // 法术穿透
+END
+
+IF
+	Global("LZ_it_sklv3b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTMAGIC)
+	!StateCheck(LastSeenBy(Myself),STATE_SLOWED)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv3b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI312",LastSeenBy(Myself))  // 缓慢术
+END
+
+IF
+	Global("LZ_it_sklv3c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTFIRE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTMAGIC)
+	!Range(LastSeenBy(Myself),15)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI304",LastSeenBy(Myself))  // 火球术
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI313",LastSeenBy(Myself))  // 骷髅陷阱
+END
+
+IF
+	Global("LZ_it_sklv3d","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTFIRE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTELECTRICITY)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3d","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI303",LastSeenBy(Myself))  // 火焰箭
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3d","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI308",LastSeenBy(Myself))  // 闪电术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv2a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),30,RESISTACID)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv2a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI211",LastSeenBy(Myself))  // 马友夫强酸箭
+END
+
+IF
+	Global("LZ_it_sklv2a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),30,RESISTACID)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv2a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI211",LastSeenBy(Myself))  // 马友夫强酸箭
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv1a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),20,RESISTMAGIC)
+	CheckStatLT(LastSeenBy(Myself),20,MAGICDAMAGERESISTANCE)
+	!HasBounceEffects(LastSeenBy(Myself))
+	!HasItemEquiped("MISC5X",LastSeenBy(Myself))  // 竖琴手别针
+	!HasItemEquiped("OHRAMUL1",LastSeenBy(Myself))  // 流浪剑客的胸针
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI112",LastSeenBy(Myself))  // 魔法飞弹
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI118",LastSeenBy(Myself))  // 五彩球
+END
+
+IF
+	Global("LZ_it_sklv1a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),20,RESISTMAGIC)
+	CheckStatLT(LastSeenBy(Myself),20,MAGICDAMAGERESISTANCE)
+	!HasBounceEffects(LastSeenBy(Myself))
+	!HasItemEquiped("MISC5X",LastSeenBy(Myself))  // 竖琴手别针
+	!HasItemEquiped("OHRAMUL1",LastSeenBy(Myself))  // 流浪剑客的胸针
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI112",LastSeenBy(Myself))  // 魔法飞弹
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI118",LastSeenBy(Myself))  // 五彩球
+END
+
+IF
+	Global("LZ_it_csklv1a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(SecondNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),DOOM)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_csklv1a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR113",LastSeenBy(Myself))  // 灾难术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv9a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+THEN
+	RESPONSE #40
+		SetGlobal("LZ_it_sklv9a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI911",LastSeenBy(Myself))  // 流星爆
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv9a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI922",LastSeenBy(Myself))  // 龙息
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv9a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI925",LastSeenBy(Myself))  // 彗星术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv9b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	Range(LastSeenBy(Myself),15)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSDEATH)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv9b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI913",Myself)  // 女妖之嚎
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv8a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #70
+		SetGlobal("LZ_it_sklv8a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI810",LastSeenBy(Myself))  // 焚云术
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv8a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI816",LastSeenBy(Myself))  // 震慑法印
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv8a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #60
+		SetGlobal("LZ_it_sklv8a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI810",LastSeenBy(Myself))  // 焚云术
+	RESPONSE #40
+		SetGlobal("LZ_it_sklv8a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI816",LastSeenBy(Myself))  // 震慑法印
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv8b","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTCRUSHING)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTMAGIC)
+THEN
+	RESPONSE #70
+		SetGlobal("LZ_it_sklv8b","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI818",LastSeenBy(Myself))  // 比格拜巨力拳
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv8b","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI812",LastSeenBy(Myself))  // 亚比达奇凋死术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv8b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTCRUSHING)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTMAGIC)
+THEN
+	RESPONSE #60
+		SetGlobal("LZ_it_sklv8b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI818",LastSeenBy(Myself))  // 比格拜巨力拳
+	RESPONSE #40
+		SetGlobal("LZ_it_sklv8b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI812",LastSeenBy(Myself))  // 亚比达奇凋死术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv7c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI713",LastSeenBy(Myself))  // 死亡一指
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI716",Myself)  // 魔邓肯之剑
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv7a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI712",LastSeenBy(Myself))  // 延宕爆裂火球
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI713",LastSeenBy(Myself))  // 死亡一指
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv7b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(2)
+		HasBounceEffects(LastSeenBy(Myself))
+		HasImmunityEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI704",LastSeenBy(Myself))  // 红宝石逆转射线
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI705",LastSeenBy(Myself))  // 凯尔本守护之鞭
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_csklv7a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_csklv7a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR722",LastSeenBy(Myself))  // 复仇暴风
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_csklv7b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),70,RESISTFIRE)
+	CheckStatLT(LastSeenBy(Myself),70,RESISTCRUSHING)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_csklv7b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR728",LastSeenBy(Myself))  // 内爆术
+END
+
+IF
+	Global("LZ_it_sklv6a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTACID)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv6a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI614",LastSeenBy(Myself))  // 死亡之雾
+END
+
+IF
+	Global("LZ_it_sklv6b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTELECTRICITY)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv6b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI615",LastSeenBy(Myself))  // 连环闪电
+END
+
+IF
+	Global("LZ_it_sklv6c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),20,RESISTMAGIC)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv6c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI608",LastSeenBy(Myself))  // 识破魔法
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv5a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),20,RESISTMAGIC)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI514",LastSeenBy(Myself))  // 降低抗性
+END
+
+IF
+	Global("LZ_it_sklv5a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),20,RESISTMAGIC)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI514",LastSeenBy(Myself))  // 降低抗性
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv5b","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(5)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),MANTLE)
+		CheckSpellState(LastSeenBy(Myself),IMPROVED_MANTLE)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5b","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI513",LastSeenBy(Myself))  // 破解术
+END
+
+IF
+	Global("LZ_it_sklv5b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(5)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),MANTLE)
+		CheckSpellState(LastSeenBy(Myself),IMPROVED_MANTLE)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI513",LastSeenBy(Myself))  // 破解术
+END
+
+IF
+	Global("LZ_it_sklv4a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),MALISON)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI412",LastSeenBy(Myself))  // 毒咒
+END
+
+IF
+	Global("LZ_it_sklv4b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI411",LastSeenBy(Myself))  // 情绪控制：绝望
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv4c","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	HPGT(LastSeenBy(Myself),100)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSPOLY)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4c","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI415",LastSeenBy(Myself))  // 变形他人
+END
+
+IF
+	Global("LZ_it_sklv4c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	HPGT(LastSeenBy(Myself),100)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSPOLY)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI415",LastSeenBy(Myself))  // 变形他人
+END
+
+IF
+	Global("LZ_it_sklv3a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(2)
+		HasBounceEffects(LastSeenBy(Myself))
+		HasImmunityEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv3a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI321",LastSeenBy(Myself))  // 法术穿透
+END
+
+IF
+	Global("LZ_it_sklv3b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTMAGIC)
+	!StateCheck(LastSeenBy(Myself),STATE_SLOWED)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv3b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI312",LastSeenBy(Myself))  // 缓慢术
+END
+
+IF
+	Global("LZ_it_sklv3c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTFIRE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTMAGIC)
+	!Range(LastSeenBy(Myself),15)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI304",LastSeenBy(Myself))  // 火球术
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI313",LastSeenBy(Myself))  // 骷髅陷阱
+END
+
+IF
+	Global("LZ_it_sklv3d","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTFIRE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTELECTRICITY)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3d","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI303",LastSeenBy(Myself))  // 火焰箭
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3d","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI308",LastSeenBy(Myself))  // 闪电术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv2a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),30,RESISTACID)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv2a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI211",LastSeenBy(Myself))  // 马友夫强酸箭
+END
+
+IF
+	Global("LZ_it_sklv2a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),30,RESISTACID)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv2a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI211",LastSeenBy(Myself))  // 马友夫强酸箭
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv1a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),20,RESISTMAGIC)
+	CheckStatLT(LastSeenBy(Myself),20,MAGICDAMAGERESISTANCE)
+	!HasBounceEffects(LastSeenBy(Myself))
+	!HasItemEquiped("MISC5X",LastSeenBy(Myself))  // 竖琴手别针
+	!HasItemEquiped("OHRAMUL1",LastSeenBy(Myself))  // 流浪剑客的胸针
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI112",LastSeenBy(Myself))  // 魔法飞弹
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI118",LastSeenBy(Myself))  // 五彩球
+END
+
+IF
+	Global("LZ_it_sklv1a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),20,RESISTMAGIC)
+	CheckStatLT(LastSeenBy(Myself),20,MAGICDAMAGERESISTANCE)
+	!HasBounceEffects(LastSeenBy(Myself))
+	!HasItemEquiped("MISC5X",LastSeenBy(Myself))  // 竖琴手别针
+	!HasItemEquiped("OHRAMUL1",LastSeenBy(Myself))  // 流浪剑客的胸针
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI112",LastSeenBy(Myself))  // 魔法飞弹
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI118",LastSeenBy(Myself))  // 五彩球
+END
+
+IF
+	Global("LZ_it_csklv1a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(ThirdNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),DOOM)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_csklv1a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR113",LastSeenBy(Myself))  // 灾难术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv9a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+THEN
+	RESPONSE #40
+		SetGlobal("LZ_it_sklv9a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI911",LastSeenBy(Myself))  // 流星爆
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv9a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI922",LastSeenBy(Myself))  // 龙息
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv9a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI925",LastSeenBy(Myself))  // 彗星术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv9b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	Range(LastSeenBy(Myself),15)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSDEATH)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv9b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI913",Myself)  // 女妖之嚎
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv8a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #70
+		SetGlobal("LZ_it_sklv8a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI810",LastSeenBy(Myself))  // 焚云术
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv8a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI816",LastSeenBy(Myself))  // 震慑法印
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv8a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #60
+		SetGlobal("LZ_it_sklv8a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI810",LastSeenBy(Myself))  // 焚云术
+	RESPONSE #40
+		SetGlobal("LZ_it_sklv8a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI816",LastSeenBy(Myself))  // 震慑法印
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv8b","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTCRUSHING)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTMAGIC)
+THEN
+	RESPONSE #70
+		SetGlobal("LZ_it_sklv8b","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI818",LastSeenBy(Myself))  // 比格拜巨力拳
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv8b","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI812",LastSeenBy(Myself))  // 亚比达奇凋死术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv8b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTCRUSHING)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTMAGIC)
+THEN
+	RESPONSE #60
+		SetGlobal("LZ_it_sklv8b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI818",LastSeenBy(Myself))  // 比格拜巨力拳
+	RESPONSE #40
+		SetGlobal("LZ_it_sklv8b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI812",LastSeenBy(Myself))  // 亚比达奇凋死术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv7c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI713",LastSeenBy(Myself))  // 死亡一指
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI716",Myself)  // 魔邓肯之剑
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv7a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI712",LastSeenBy(Myself))  // 延宕爆裂火球
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI713",LastSeenBy(Myself))  // 死亡一指
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv7b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(2)
+		HasBounceEffects(LastSeenBy(Myself))
+		HasImmunityEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI704",LastSeenBy(Myself))  // 红宝石逆转射线
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI705",LastSeenBy(Myself))  // 凯尔本守护之鞭
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_csklv7a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_csklv7a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR722",LastSeenBy(Myself))  // 复仇暴风
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_csklv7b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),70,RESISTFIRE)
+	CheckStatLT(LastSeenBy(Myself),70,RESISTCRUSHING)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_csklv7b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR728",LastSeenBy(Myself))  // 内爆术
+END
+
+IF
+	Global("LZ_it_sklv6a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTACID)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv6a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI614",LastSeenBy(Myself))  // 死亡之雾
+END
+
+IF
+	Global("LZ_it_sklv6b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTELECTRICITY)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv6b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI615",LastSeenBy(Myself))  // 连环闪电
+END
+
+IF
+	Global("LZ_it_sklv6c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),20,RESISTMAGIC)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv6c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI608",LastSeenBy(Myself))  // 识破魔法
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv5a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),20,RESISTMAGIC)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI514",LastSeenBy(Myself))  // 降低抗性
+END
+
+IF
+	Global("LZ_it_sklv5a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),20,RESISTMAGIC)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI514",LastSeenBy(Myself))  // 降低抗性
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv5b","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(5)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),MANTLE)
+		CheckSpellState(LastSeenBy(Myself),IMPROVED_MANTLE)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5b","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI513",LastSeenBy(Myself))  // 破解术
+END
+
+IF
+	Global("LZ_it_sklv5b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(5)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),MANTLE)
+		CheckSpellState(LastSeenBy(Myself),IMPROVED_MANTLE)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI513",LastSeenBy(Myself))  // 破解术
+END
+
+IF
+	Global("LZ_it_sklv4a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),MALISON)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI412",LastSeenBy(Myself))  // 毒咒
+END
+
+IF
+	Global("LZ_it_sklv4b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI411",LastSeenBy(Myself))  // 情绪控制：绝望
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv4c","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	HPGT(LastSeenBy(Myself),100)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSPOLY)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4c","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI415",LastSeenBy(Myself))  // 变形他人
+END
+
+IF
+	Global("LZ_it_sklv4c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	HPGT(LastSeenBy(Myself),100)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSPOLY)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI415",LastSeenBy(Myself))  // 变形他人
+END
+
+IF
+	Global("LZ_it_sklv3a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(2)
+		HasBounceEffects(LastSeenBy(Myself))
+		HasImmunityEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv3a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI321",LastSeenBy(Myself))  // 法术穿透
+END
+
+IF
+	Global("LZ_it_sklv3b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTMAGIC)
+	!StateCheck(LastSeenBy(Myself),STATE_SLOWED)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv3b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI312",LastSeenBy(Myself))  // 缓慢术
+END
+
+IF
+	Global("LZ_it_sklv3c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTFIRE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTMAGIC)
+	!Range(LastSeenBy(Myself),15)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI304",LastSeenBy(Myself))  // 火球术
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI313",LastSeenBy(Myself))  // 骷髅陷阱
+END
+
+IF
+	Global("LZ_it_sklv3d","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTFIRE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTELECTRICITY)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3d","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI303",LastSeenBy(Myself))  // 火焰箭
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3d","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI308",LastSeenBy(Myself))  // 闪电术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv2a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),30,RESISTACID)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv2a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI211",LastSeenBy(Myself))  // 马友夫强酸箭
+END
+
+IF
+	Global("LZ_it_sklv2a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),30,RESISTACID)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv2a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI211",LastSeenBy(Myself))  // 马友夫强酸箭
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv1a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),20,RESISTMAGIC)
+	CheckStatLT(LastSeenBy(Myself),20,MAGICDAMAGERESISTANCE)
+	!HasBounceEffects(LastSeenBy(Myself))
+	!HasItemEquiped("MISC5X",LastSeenBy(Myself))  // 竖琴手别针
+	!HasItemEquiped("OHRAMUL1",LastSeenBy(Myself))  // 流浪剑客的胸针
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI112",LastSeenBy(Myself))  // 魔法飞弹
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI118",LastSeenBy(Myself))  // 五彩球
+END
+
+IF
+	Global("LZ_it_sklv1a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),20,RESISTMAGIC)
+	CheckStatLT(LastSeenBy(Myself),20,MAGICDAMAGERESISTANCE)
+	!HasBounceEffects(LastSeenBy(Myself))
+	!HasItemEquiped("MISC5X",LastSeenBy(Myself))  // 竖琴手别针
+	!HasItemEquiped("OHRAMUL1",LastSeenBy(Myself))  // 流浪剑客的胸针
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI112",LastSeenBy(Myself))  // 魔法飞弹
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI118",LastSeenBy(Myself))  // 五彩球
+END
+
+IF
+	Global("LZ_it_csklv1a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(FourthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),DOOM)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_csklv1a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR113",LastSeenBy(Myself))  // 灾难术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv9a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+THEN
+	RESPONSE #40
+		SetGlobal("LZ_it_sklv9a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI911",LastSeenBy(Myself))  // 流星爆
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv9a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI922",LastSeenBy(Myself))  // 龙息
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv9a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI925",LastSeenBy(Myself))  // 彗星术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv9b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	Range(LastSeenBy(Myself),15)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSDEATH)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv9b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI913",Myself)  // 女妖之嚎
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv8a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #70
+		SetGlobal("LZ_it_sklv8a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI810",LastSeenBy(Myself))  // 焚云术
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv8a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI816",LastSeenBy(Myself))  // 震慑法印
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv8a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #60
+		SetGlobal("LZ_it_sklv8a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI810",LastSeenBy(Myself))  // 焚云术
+	RESPONSE #40
+		SetGlobal("LZ_it_sklv8a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI816",LastSeenBy(Myself))  // 震慑法印
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv8b","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTCRUSHING)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTMAGIC)
+THEN
+	RESPONSE #70
+		SetGlobal("LZ_it_sklv8b","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI818",LastSeenBy(Myself))  // 比格拜巨力拳
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv8b","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI812",LastSeenBy(Myself))  // 亚比达奇凋死术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv8b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTCRUSHING)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTMAGIC)
+THEN
+	RESPONSE #60
+		SetGlobal("LZ_it_sklv8b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI818",LastSeenBy(Myself))  // 比格拜巨力拳
+	RESPONSE #40
+		SetGlobal("LZ_it_sklv8b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI812",LastSeenBy(Myself))  // 亚比达奇凋死术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv7c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI713",LastSeenBy(Myself))  // 死亡一指
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI716",Myself)  // 魔邓肯之剑
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv7a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI712",LastSeenBy(Myself))  // 延宕爆裂火球
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI713",LastSeenBy(Myself))  // 死亡一指
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv7b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(2)
+		HasBounceEffects(LastSeenBy(Myself))
+		HasImmunityEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI704",LastSeenBy(Myself))  // 红宝石逆转射线
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI705",LastSeenBy(Myself))  // 凯尔本守护之鞭
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_csklv7a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_csklv7a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR722",LastSeenBy(Myself))  // 复仇暴风
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_csklv7b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),70,RESISTFIRE)
+	CheckStatLT(LastSeenBy(Myself),70,RESISTCRUSHING)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_csklv7b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR728",LastSeenBy(Myself))  // 内爆术
+END
+
+IF
+	Global("LZ_it_sklv6a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTACID)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv6a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI614",LastSeenBy(Myself))  // 死亡之雾
+END
+
+IF
+	Global("LZ_it_sklv6b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTELECTRICITY)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv6b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI615",LastSeenBy(Myself))  // 连环闪电
+END
+
+IF
+	Global("LZ_it_sklv6c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),20,RESISTMAGIC)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv6c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI608",LastSeenBy(Myself))  // 识破魔法
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv5a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),20,RESISTMAGIC)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI514",LastSeenBy(Myself))  // 降低抗性
+END
+
+IF
+	Global("LZ_it_sklv5a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),20,RESISTMAGIC)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI514",LastSeenBy(Myself))  // 降低抗性
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv5b","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(5)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),MANTLE)
+		CheckSpellState(LastSeenBy(Myself),IMPROVED_MANTLE)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5b","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI513",LastSeenBy(Myself))  // 破解术
+END
+
+IF
+	Global("LZ_it_sklv5b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(5)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),MANTLE)
+		CheckSpellState(LastSeenBy(Myself),IMPROVED_MANTLE)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI513",LastSeenBy(Myself))  // 破解术
+END
+
+IF
+	Global("LZ_it_sklv4a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),MALISON)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI412",LastSeenBy(Myself))  // 毒咒
+END
+
+IF
+	Global("LZ_it_sklv4b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI411",LastSeenBy(Myself))  // 情绪控制：绝望
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv4c","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	HPGT(LastSeenBy(Myself),100)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSPOLY)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4c","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI415",LastSeenBy(Myself))  // 变形他人
+END
+
+IF
+	Global("LZ_it_sklv4c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	HPGT(LastSeenBy(Myself),100)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSPOLY)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI415",LastSeenBy(Myself))  // 变形他人
+END
+
+IF
+	Global("LZ_it_sklv3a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(2)
+		HasBounceEffects(LastSeenBy(Myself))
+		HasImmunityEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv3a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI321",LastSeenBy(Myself))  // 法术穿透
+END
+
+IF
+	Global("LZ_it_sklv3b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTMAGIC)
+	!StateCheck(LastSeenBy(Myself),STATE_SLOWED)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv3b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI312",LastSeenBy(Myself))  // 缓慢术
+END
+
+IF
+	Global("LZ_it_sklv3c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTFIRE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTMAGIC)
+	!Range(LastSeenBy(Myself),15)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI304",LastSeenBy(Myself))  // 火球术
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI313",LastSeenBy(Myself))  // 骷髅陷阱
+END
+
+IF
+	Global("LZ_it_sklv3d","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTFIRE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTELECTRICITY)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3d","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI303",LastSeenBy(Myself))  // 火焰箭
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3d","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI308",LastSeenBy(Myself))  // 闪电术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv2a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),30,RESISTACID)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv2a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI211",LastSeenBy(Myself))  // 马友夫强酸箭
+END
+
+IF
+	Global("LZ_it_sklv2a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),30,RESISTACID)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv2a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI211",LastSeenBy(Myself))  // 马友夫强酸箭
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv1a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),20,RESISTMAGIC)
+	CheckStatLT(LastSeenBy(Myself),20,MAGICDAMAGERESISTANCE)
+	!HasBounceEffects(LastSeenBy(Myself))
+	!HasItemEquiped("MISC5X",LastSeenBy(Myself))  // 竖琴手别针
+	!HasItemEquiped("OHRAMUL1",LastSeenBy(Myself))  // 流浪剑客的胸针
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI112",LastSeenBy(Myself))  // 魔法飞弹
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI118",LastSeenBy(Myself))  // 五彩球
+END
+
+IF
+	Global("LZ_it_sklv1a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),20,RESISTMAGIC)
+	CheckStatLT(LastSeenBy(Myself),20,MAGICDAMAGERESISTANCE)
+	!HasBounceEffects(LastSeenBy(Myself))
+	!HasItemEquiped("MISC5X",LastSeenBy(Myself))  // 竖琴手别针
+	!HasItemEquiped("OHRAMUL1",LastSeenBy(Myself))  // 流浪剑客的胸针
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI112",LastSeenBy(Myself))  // 魔法飞弹
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI118",LastSeenBy(Myself))  // 五彩球
+END
+
+IF
+	Global("LZ_it_csklv1a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(FifthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),DOOM)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_csklv1a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR113",LastSeenBy(Myself))  // 灾难术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv9a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+THEN
+	RESPONSE #40
+		SetGlobal("LZ_it_sklv9a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI911",LastSeenBy(Myself))  // 流星爆
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv9a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI922",LastSeenBy(Myself))  // 龙息
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv9a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI925",LastSeenBy(Myself))  // 彗星术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv9b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	Range(LastSeenBy(Myself),15)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSDEATH)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv9b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI913",Myself)  // 女妖之嚎
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv8a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #70
+		SetGlobal("LZ_it_sklv8a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI810",LastSeenBy(Myself))  // 焚云术
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv8a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI816",LastSeenBy(Myself))  // 震慑法印
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv8a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #60
+		SetGlobal("LZ_it_sklv8a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI810",LastSeenBy(Myself))  // 焚云术
+	RESPONSE #40
+		SetGlobal("LZ_it_sklv8a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI816",LastSeenBy(Myself))  // 震慑法印
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv8b","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTCRUSHING)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTMAGIC)
+THEN
+	RESPONSE #70
+		SetGlobal("LZ_it_sklv8b","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI818",LastSeenBy(Myself))  // 比格拜巨力拳
+	RESPONSE #30
+		SetGlobal("LZ_it_sklv8b","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI812",LastSeenBy(Myself))  // 亚比达奇凋死术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv8b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTCRUSHING)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTMAGIC)
+THEN
+	RESPONSE #60
+		SetGlobal("LZ_it_sklv8b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI818",LastSeenBy(Myself))  // 比格拜巨力拳
+	RESPONSE #40
+		SetGlobal("LZ_it_sklv8b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI812",LastSeenBy(Myself))  // 亚比达奇凋死术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_sklv7c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI713",LastSeenBy(Myself))  // 死亡一指
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI716",Myself)  // 魔邓肯之剑
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv7a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),60,RESISTFIRE)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSSPELL)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI712",LastSeenBy(Myself))  // 延宕爆裂火球
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI713",LastSeenBy(Myself))  // 死亡一指
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv7b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(2)
+		HasBounceEffects(LastSeenBy(Myself))
+		HasImmunityEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI704",LastSeenBy(Myself))  // 红宝石逆转射线
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv7b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI705",LastSeenBy(Myself))  // 凯尔本守护之鞭
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_csklv7a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_csklv7a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR722",LastSeenBy(Myself))  // 复仇暴风
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_csklv7b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),70,RESISTFIRE)
+	CheckStatLT(LastSeenBy(Myself),70,RESISTCRUSHING)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_csklv7b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR728",LastSeenBy(Myself))  // 内爆术
+END
+
+IF
+	Global("LZ_it_sklv6a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),15)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTACID)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv6a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI614",LastSeenBy(Myself))  // 死亡之雾
+END
+
+IF
+	Global("LZ_it_sklv6b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTELECTRICITY)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv6b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI615",LastSeenBy(Myself))  // 连环闪电
+END
+
+IF
+	Global("LZ_it_sklv6c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),20,RESISTMAGIC)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv6c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI608",LastSeenBy(Myself))  // 识破魔法
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv5a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),20,RESISTMAGIC)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI514",LastSeenBy(Myself))  // 降低抗性
+END
+
+IF
+	Global("LZ_it_sklv5a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStatGT(LastSeenBy(Myself),20,RESISTMAGIC)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI514",LastSeenBy(Myself))  // 降低抗性
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv5b","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(5)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),MANTLE)
+		CheckSpellState(LastSeenBy(Myself),IMPROVED_MANTLE)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5b","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI513",LastSeenBy(Myself))  // 破解术
+END
+
+IF
+	Global("LZ_it_sklv5b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(5)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),MANTLE)
+		CheckSpellState(LastSeenBy(Myself),IMPROVED_MANTLE)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv5b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI513",LastSeenBy(Myself))  // 破解术
+END
+
+IF
+	Global("LZ_it_sklv4a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),MALISON)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI412",LastSeenBy(Myself))  // 毒咒
+END
+
+IF
+	Global("LZ_it_sklv4b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI411",LastSeenBy(Myself))  // 情绪控制：绝望
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv4c","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	HPGT(LastSeenBy(Myself),100)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSPOLY)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4c","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI415",LastSeenBy(Myself))  // 变形他人
+END
+
+IF
+	Global("LZ_it_sklv4c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	HPGT(LastSeenBy(Myself),100)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),50,RESISTMAGIC)
+	CheckStatGT(LastSeenBy(Myself),0,SAVEVSPOLY)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv4c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI415",LastSeenBy(Myself))  // 变形他人
+END
+
+IF
+	Global("LZ_it_sklv3a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	OR(2)
+		HasBounceEffects(LastSeenBy(Myself))
+		HasImmunityEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv3a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI321",LastSeenBy(Myself))  // 法术穿透
+END
+
+IF
+	Global("LZ_it_sklv3b","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTMAGIC)
+	!StateCheck(LastSeenBy(Myself),STATE_SLOWED)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv3b","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI312",LastSeenBy(Myself))  // 缓慢术
+END
+
+IF
+	Global("LZ_it_sklv3c","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTFIRE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTMAGIC)
+	!Range(LastSeenBy(Myself),15)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI304",LastSeenBy(Myself))  // 火球术
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3c","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI313",LastSeenBy(Myself))  // 骷髅陷阱
+END
+
+IF
+	Global("LZ_it_sklv3d","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTFIRE)
+	CheckStatLT(LastSeenBy(Myself),40,RESISTELECTRICITY)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3d","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI303",LastSeenBy(Myself))  // 火焰箭
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv3d","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI308",LastSeenBy(Myself))  // 闪电术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv2a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),30,RESISTACID)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv2a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI211",LastSeenBy(Myself))  // 马友夫强酸箭
+END
+
+IF
+	Global("LZ_it_sklv2a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),30,RESISTACID)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv2a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI211",LastSeenBy(Myself))  // 马友夫强酸箭
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv1a","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),20,RESISTMAGIC)
+	CheckStatLT(LastSeenBy(Myself),20,MAGICDAMAGERESISTANCE)
+	!HasBounceEffects(LastSeenBy(Myself))
+	!HasItemEquiped("MISC5X",LastSeenBy(Myself))  // 竖琴手别针
+	!HasItemEquiped("OHRAMUL1",LastSeenBy(Myself))  // 流浪剑客的胸针
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI112",LastSeenBy(Myself))  // 魔法飞弹
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI118",LastSeenBy(Myself))  // 五彩球
+END
+
+IF
+	Global("LZ_it_sklv1a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	CheckStatLT(LastSeenBy(Myself),20,RESISTMAGIC)
+	CheckStatLT(LastSeenBy(Myself),20,MAGICDAMAGERESISTANCE)
+	!HasBounceEffects(LastSeenBy(Myself))
+	!HasItemEquiped("MISC5X",LastSeenBy(Myself))  // 竖琴手别针
+	!HasItemEquiped("OHRAMUL1",LastSeenBy(Myself))  // 流浪剑客的胸针
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI112",LastSeenBy(Myself))  // 魔法飞弹
+	RESPONSE #50
+		SetGlobal("LZ_it_sklv1a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI118",LastSeenBy(Myself))  // 五彩球
+END
+
+IF
+	Global("LZ_it_csklv1a","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(SixthNearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	CheckStat(LastSeenBy(Myself),0,MINORGLOBE)
+	!CheckSpellState(LastSeenBy(Myself),DOOM)
+	!HasBounceEffects(LastSeenBy(Myself))
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_csklv1a","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR113",LastSeenBy(Myself))  // 灾难术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_cure","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(NearestAllyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	HPPercentLT(LastSeenBy(Myself),50)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_cure","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR713",LastSeenBy(Myself))  // 强力复原术
+	RESPONSE #30
+		SetGlobal("LZ_it_cure","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR711",LastSeenBy(Myself))  // 再生术
+	RESPONSE #20
+		SetGlobal("LZ_it_cure","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR607",LastSeenBy(Myself))  // 痊愈术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv6d","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(NearestAllyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	!StateCheck(LastSeenBy(Myself),STATE_HASTED)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv6d","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI613",LastSeenBy(Myself))  // 高等加速术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_cure","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(SecondNearestAllyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	HPPercentLT(LastSeenBy(Myself),50)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_cure","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR713",LastSeenBy(Myself))  // 强力复原术
+	RESPONSE #30
+		SetGlobal("LZ_it_cure","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR711",LastSeenBy(Myself))  // 再生术
+	RESPONSE #20
+		SetGlobal("LZ_it_cure","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR607",LastSeenBy(Myself))  // 痊愈术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv6d","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SecondNearestAllyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	!StateCheck(LastSeenBy(Myself),STATE_HASTED)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv6d","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI613",LastSeenBy(Myself))  // 高等加速术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_cure","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(ThirdNearestAllyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	HPPercentLT(LastSeenBy(Myself),50)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_cure","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR713",LastSeenBy(Myself))  // 强力复原术
+	RESPONSE #30
+		SetGlobal("LZ_it_cure","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR711",LastSeenBy(Myself))  // 再生术
+	RESPONSE #20
+		SetGlobal("LZ_it_cure","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR607",LastSeenBy(Myself))  // 痊愈术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv6d","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(ThirdNearestAllyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	!StateCheck(LastSeenBy(Myself),STATE_HASTED)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv6d","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI613",LastSeenBy(Myself))  // 高等加速术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_cure","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(FourthNearestAllyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	HPPercentLT(LastSeenBy(Myself),50)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_cure","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR713",LastSeenBy(Myself))  // 强力复原术
+	RESPONSE #30
+		SetGlobal("LZ_it_cure","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR711",LastSeenBy(Myself))  // 再生术
+	RESPONSE #20
+		SetGlobal("LZ_it_cure","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR607",LastSeenBy(Myself))  // 痊愈术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv6d","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FourthNearestAllyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	!StateCheck(LastSeenBy(Myself),STATE_HASTED)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv6d","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI613",LastSeenBy(Myself))  // 高等加速术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_cure","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(FifthNearestAllyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	HPPercentLT(LastSeenBy(Myself),50)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_cure","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR713",LastSeenBy(Myself))  // 强力复原术
+	RESPONSE #30
+		SetGlobal("LZ_it_cure","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR711",LastSeenBy(Myself))  // 再生术
+	RESPONSE #20
+		SetGlobal("LZ_it_cure","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR607",LastSeenBy(Myself))  // 痊愈术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv6d","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(FifthNearestAllyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	!StateCheck(LastSeenBy(Myself),STATE_HASTED)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv6d","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI613",LastSeenBy(Myself))  // 高等加速术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_cure","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	See(SixthNearestAllyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	HPPercentLT(LastSeenBy(Myself),50)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_cure","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR713",LastSeenBy(Myself))  // 强力复原术
+	RESPONSE #30
+		SetGlobal("LZ_it_cure","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR711",LastSeenBy(Myself))  // 再生术
+	RESPONSE #20
+		SetGlobal("LZ_it_cure","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR607",LastSeenBy(Myself))  // 痊愈术
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_sklv6d","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	See(SixthNearestAllyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	!StateCheck(LastSeenBy(Myself),STATE_HASTED)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_sklv6d","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI613",LastSeenBy(Myself))  // 高等加速术
+END
+
+IF
+	Global("LZ_it_h","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!StateCheck(Myself,STATE_HASTED)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_h","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI305",Myself)  // 加速术
+END
+
+IF
+	Global("LZ_it_miluck","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	OR(2)
+		Class(Myself,MAGE_ALL)
+		Class(Myself,BARD_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!StateCheck(Myself,STATE_MIRRORIMAGE)
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_miluck","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI212",Myself)  // 镜影术
+	RESPONSE #50
+		SetGlobal("LZ_it_miluck","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI209",Myself)  // 幸运术
+END
+
+IF
+	Global("LZ_it_duhm","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	!StateCheck(Myself,STATE_DRAWUPONHOLYMIGHT)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_duhm","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR214",Myself)  // 召唤圣力
+END
+
+IF
+	Global("LZ_it_chant","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	!StateCheck(Myself,STATE_CHANT)
+	OR(2)
+		Range(NearestAllyOf(Myself),15)
+		Range(NearestEnemyOf(Myself),15)
+	OR(2)
+		Range(SecondNearestAllyOf(Myself),15)
+		Range(SecondNearestEnemyOf(Myself),15)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_chant","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR203",Myself)  // 赞美术
+END
+
+IF
+	Global("LZ_it_bless","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	!StateCheck(Myself,STATE_BLESS)
+	Range(NearestAllyOf(Myself),15)
+	Range(SecondNearestAllyOf(Myself),15)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_bless","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR101",Myself)  // 祝福术
+END
+
+IF
+	Global("LZ_it_caof","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	!CheckSpellState(Myself,ARMOR_OF_FAITH)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_caof","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR111",Myself)  // 信仰护甲
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_ebbb","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,MAGE_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
+	!HasItem("eneblade",Myself)  // 魔能刃
+	!HasItem("blakblad",Myself)  // 毁灭魔剑
+THEN
+	RESPONSE #40
+		SetGlobal("LZ_it_ebbb","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI920",Myself)  // 魔能刃
+	RESPONSE #40
+		SetGlobal("LZ_it_ebbb","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPWI915",Myself)  // 毁灭魔剑
+	RESPONSE #20
+		SetGlobal("LZ_it_ebbb","LOCALS",1)
+		Continue()
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_ceba","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,CLERIC_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	CheckStatLT(Myself,50,SPELLFAILUREPRIEST)
+	!HasItem("eneblade",Myself)  // 魔能刃
+THEN
+	RESPONSE #50
+		SetGlobal("LZ_it_ceba","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR721",Myself)  // 魔能刃
+	RESPONSE #50
+		SetGlobal("LZ_it_ceba","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPPR730",Myself)  // 殛焰灵光
+END
+
+IF
+	Global("LZ_it_trapb","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,THIEF_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_trapb","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,12015)  // 目盲
+		Continue()
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_trapb","LOCALS",1)
+	GlobalLT("LZ_it_settrapc","LOCALS",3)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,THIEF_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),4)
+THEN
+	RESPONSE #50
+		IncrementGlobal("LZ_it_settrapc","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		MoveToObject(LastSeenBy(Myself))
+		ReallyForceSpell(Myself,ROGUE_SET_SPIKE_TRAP)  // SPCL910.SPL (装设尖刺陷阱)
+		ForceSpellRES("SPCL910B",LastSeenBy(Myself))  // No such index
+	RESPONSE #50
+		IncrementGlobal("LZ_it_settrapc","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		MoveToObject(LastSeenBy(Myself))
+		ReallyForceSpell(Myself,ROGUE_SET_EXPLODING_TRAP)  // SPCL911.SPL (装设爆裂陷阱)
+		ForceSpellRES("SPCL911B",LastSeenBy(Myself))  // No such index
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_trapb","LOCALS",1)
+	GlobalLT("LZ_it_settrapc","LOCALS",3)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,THIEF_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	Range(LastSeenBy(Myself),4)
+THEN
+	RESPONSE #50
+		IncrementGlobal("LZ_it_settrapc","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Myself,ROGUE_SET_SPIKE_TRAP)  // SPCL910.SPL (装设尖刺陷阱)
+		ForceSpellRES("SPCL910B",LastSeenBy(Myself))  // No such index
+	RESPONSE #50
+		IncrementGlobal("LZ_it_settrapc","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Myself,ROGUE_SET_EXPLODING_TRAP)  // SPCL911.SPL (装设爆裂陷阱)
+		ForceSpellRES("SPCL911B",LastSeenBy(Myself))  // No such index
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_trapb","LOCALS",1)
+	GlobalLT("LZ_it_settrapb","LOCALS",4)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,THIEF_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),4)
+THEN
+	RESPONSE #55
+		IncrementGlobal("LZ_it_settrapb","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		MoveToObject(LastSeenBy(Myself))
+		ReallyForceSpell(Myself,THIEF_SET_SNARE)  // SPCL412.SPL (装设陷阱)
+		ForceSpellRES("SPCL411",LastSeenBy(Myself))  // No such index
+	RESPONSE #35
+		IncrementGlobal("LZ_it_settrapb","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		MoveToObject(LastSeenBy(Myself))
+		ReallyForceSpell(Myself,THIEF_SET_SPECIAL_SNARE)  // SPCL414.SPL (设置特殊陷阱)
+		ForceSpellRES("SPCL415",LastSeenBy(Myself))  // 陷阱
+	RESPONSE #5
+		IncrementGlobal("LZ_it_settrapb","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		MoveToObject(LastSeenBy(Myself))
+		ReallyForceSpell(Myself,ROGUE_SET_SPIKE_TRAP)  // SPCL910.SPL (装设尖刺陷阱)
+		ForceSpellRES("SPCL910B",LastSeenBy(Myself))  // No such index
+	RESPONSE #5
+		IncrementGlobal("LZ_it_settrapb","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		MoveToObject(LastSeenBy(Myself))
+		ReallyForceSpell(Myself,ROGUE_SET_EXPLODING_TRAP)  // SPCL911.SPL (装设爆裂陷阱)
+		ForceSpellRES("SPCL911B",LastSeenBy(Myself))  // No such index
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_trapb","LOCALS",1)
+	GlobalLT("LZ_it_settrapb","LOCALS",4)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,THIEF_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	Range(LastSeenBy(Myself),4)
+THEN
+	RESPONSE #55
+		IncrementGlobal("LZ_it_settrapb","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Myself,THIEF_SET_SNARE)  // SPCL412.SPL (装设陷阱)
+		ForceSpellRES("SPCL411",LastSeenBy(Myself))  // No such index
+	RESPONSE #35
+		IncrementGlobal("LZ_it_settrapb","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Myself,THIEF_SET_SPECIAL_SNARE)  // SPCL414.SPL (设置特殊陷阱)
+		ForceSpellRES("SPCL415",LastSeenBy(Myself))  // 陷阱
+	RESPONSE #5
+		IncrementGlobal("LZ_it_settrapb","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Myself,ROGUE_SET_SPIKE_TRAP)  // SPCL910.SPL (装设尖刺陷阱)
+		ForceSpellRES("SPCL910B",LastSeenBy(Myself))  // No such index
+	RESPONSE #5
+		IncrementGlobal("LZ_it_settrapb","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Myself,ROGUE_SET_EXPLODING_TRAP)  // SPCL911.SPL (装设爆裂陷阱)
+		ForceSpellRES("SPCL911B",LastSeenBy(Myself))  // No such index
+END
+
+IF
+	Global("LZ_it_trapb","LOCALS",1)
+	GlobalLT("LZ_it_settrapa","LOCALS",5)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,THIEF_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!Range(LastSeenBy(Myself),4)
+THEN
+	RESPONSE #80
+		IncrementGlobal("LZ_it_settrapa","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		MoveToObject(LastSeenBy(Myself))
+		ReallyForceSpell(Myself,THIEF_SET_SNARE)  // SPCL412.SPL (装设陷阱)
+		ForceSpellRES("SPCL411",LastSeenBy(Myself))  // No such index
+	RESPONSE #20
+		IncrementGlobal("LZ_it_settrapa","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		MoveToObject(LastSeenBy(Myself))
+		ReallyForceSpell(Myself,THIEF_SET_SPECIAL_SNARE)  // SPCL414.SPL (设置特殊陷阱)
+		ForceSpellRES("SPCL415",LastSeenBy(Myself))  // 陷阱
+END
+
+IF
+	Global("LZ_it_trapb","LOCALS",1)
+	GlobalLT("LZ_it_settrapa","LOCALS",5)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,THIEF_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	Range(LastSeenBy(Myself),4)
+THEN
+	RESPONSE #80
+		IncrementGlobal("LZ_it_settrapa","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Myself,THIEF_SET_SNARE)  // SPCL412.SPL (装设陷阱)
+		ForceSpellRES("SPCL411",LastSeenBy(Myself))  // No such index
+	RESPONSE #20
+		IncrementGlobal("LZ_it_settrapa","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Myself,THIEF_SET_SPECIAL_SNARE)  // SPCL414.SPL (设置特殊陷阱)
+		ForceSpellRES("SPCL415",LastSeenBy(Myself))  // 陷阱
+END
+
+IF
+	Global("LZ_it_diff","LOCALS",3)
+	Global("LZ_it_settrapc","LOCALS",3)
+	Global("LZ_it_settrapb","LOCALS",4)
+	Global("LZ_it_settrapa","LOCALS",5)
+	Global("LZ_it_trapcb","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,THIEF_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_trapcb","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,294)  // 治疗目盲/耳聋
+		Continue()
+END
+
+IF
+	Global("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_settrapb","LOCALS",4)
+	Global("LZ_it_settrapa","LOCALS",5)
+	Global("LZ_it_trapcb","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,THIEF_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_trapcb","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,294)  // 治疗目盲/耳聋
+		Continue()
+END
+
+IF
+	Global("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_settrapa","LOCALS",5)
+	Global("LZ_it_trapcb","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,THIEF_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_trapcb","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		DisplayStringHead(Myself,294)  // 治疗目盲/耳聋
+		Continue()
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",2)
+	Global("LZ_it_fhla","LOCALS",1)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,FIGHTER_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	Range(LastSeenBy(Myself),6)
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_fhla","LOCALS",2)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPCL905",Myself)  // 致命一击
+END
+
+IF
+	GlobalGT("LZ_it_diff","LOCALS",1)
+	Global("LZ_it_fhla","LOCALS",0)
+	OR(2)
+		!GlobalTimerNotExpired("LZ_it_Cast","LOCALS")
+		CheckStatGT(Myself,0,AURACLEANSING)
+	Class(Myself,FIGHTER_ALL)
+	!StateCheck(Myself,STATE_DISABLED_CASTING)
+	See(NearestEnemyOf(Myself))
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	Range(LastSeenBy(Myself),6)
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		SetGlobal("LZ_it_fhla","LOCALS",1)
+		SetGlobalTimer("LZ_it_Cast","LOCALS",ONE_ROUND)
+		ForceSpellRES("SPCL901",Myself)  // 强力旋风攻击
+END
+
+IF
+	IsWeaponRanged(Myself)
+	See(NearestEnemyOf(Myself))
+	Range(LastSeenBy(Myself),6)
+THEN
+	RESPONSE #100
+		RunAwayFrom(LastSeenBy(Myself),30)
+END
+
+IF
+	CheckStat(Myself,0,AURACLEANSING)
+	See(NearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	CheckStat(Myself,0,AURACLEANSING)
+	See(SecondNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	CheckStat(Myself,0,AURACLEANSING)
+	See(ThirdNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	CheckStat(Myself,0,AURACLEANSING)
+	See(FourthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	CheckStat(Myself,0,AURACLEANSING)
+	See(FifthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	CheckStat(Myself,0,AURACLEANSING)
+	See(SixthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	!Detect([GOODCUTOFF])
+	InMyArea(Player1)
+	!StateCheck(Player1,STATE_REALLY_DEAD)
+	!StateCheck(Player1,STATE_NOT_APPROACHABLE)
+	CheckStat(Player1,0,SANCTUARY)
+	!StateCheck(Myself,STATE_DISABLED)
+	ActionListEmpty()
+THEN
+	RESPONSE #100
+		MoveToObject(Player1)
+END
+

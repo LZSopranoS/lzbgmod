@@ -1,0 +1,100 @@
+IF
+	OR(6)
+		InMyArea(Player1)
+		InMyArea(Player2)
+		InMyArea(Player3)
+		InMyArea(Player4)
+		InMyArea(Player5)
+		InMyArea(Player6)
+	InMyArea("OHBDENNA")  // 德纳顿
+	Delay(3)
+THEN
+	RESPONSE #100
+		StartCutSceneMode()
+		ClearAllActions()
+		CreateVisualEffectObject("SPFLESHS","OHBDENNA")  // 德纳顿
+		ActionOverride("OHBDENNA",ChangeAnimationNoEffect("BDPGOOD"))  // 异界神侍
+		CutSceneId("BDPGOOD")  // 异界神侍
+		Wait(3)
+		ActionOverride("BDPGOOD",MoveViewObject(Player1,INSTANT))
+		ActionOverride("BDPGOOD",FaceObject(Player1))
+		ActionOverride("BDPGOOD",DisplayStringHead(Myself,@209))  // 巴尔之子，通过太摩拉的试炼，证明你的能力
+		Wait(3)
+		CreateVisualEffect("SPPLANAR",[1190.540])
+		CreateVisualEffect("SPPLANAR",[1380.540])
+		CreateVisualEffect("SPPLANAR",[1170.580])
+		CreateVisualEffect("SPPLANAR",[1410.590])
+		CreateVisualEffect("SPPLANAR",[1155.630])
+		CreateVisualEffect("SPPLANAR",[1440.630])
+		Wait(3)
+		CreateCreature("OHBOSSA",[1190.540],E)  // 太摩拉双子·金童
+		CreateCreature("OHBOSSB",[1380.540],S)  // 太摩拉双子·玉女
+		CreateCreature("OHABONE",[1170.580],E)  // 神之从刃·战盗
+		CreateCreature("OHABTWO",[1410.590],S)  // 神之从刃·游牧
+		CreateCreature("OHABTHR",[1155.630],E)  // 神之从刃·舞剑
+		CreateCreature("OHABFOR",[1440.630],S)  // 神之从刃·武僧
+		Wait(2)
+		ActionOverride("BDPGOOD",ForceSpellRES("AC#DTTP",Myself))  // 定点传送术
+		Wait(3)
+		ActionOverride("BDPGOOD",DestroySelf())
+		Wait(2)
+		ActionOverride("OHBOSSA",Enemy())
+		ActionOverride("OHBOSSB",Enemy())
+		ActionOverride("OHABONE",Enemy())
+		ActionOverride("OHABTWO",Enemy())
+		ActionOverride("OHABTHR",Enemy())
+		ActionOverride("OHABFOR",Enemy())
+		UnhideGUI()
+		EndCutSceneMode()
+END
+
+IF
+	OR(6)
+		InMyArea(Player1)
+		InMyArea(Player2)
+		InMyArea(Player3)
+		InMyArea(Player4)
+		InMyArea(Player5)
+		InMyArea(Player6)
+	!InMyArea("OHBDENNA")  // 德纳顿
+	NumDeadGT("OHBOSSA",0)  // 太摩拉双子·金童
+	NumDeadGT("OHBOSSB",0)  // 太摩拉双子·玉女
+	NumDeadGT("OHABONE",0)  // 神之从刃·战盗
+	NumDeadGT("OHABTWO",0)  // 神之从刃·游牧
+	NumDeadGT("OHABTHR",0)  // 神之从刃·舞剑
+	NumDeadGT("OHABFOR",0)  // 神之从刃·武僧
+	Delay(50)
+THEN
+	RESPONSE #100
+		StartCutSceneMode()
+		ClearAllActions()
+		CreateCreatureObjectEffect("BDPGOOD","SPPORTAL",Player1)  // 异界神侍
+		Wait(3)
+		CutSceneId("BDPGOOD")  // 异界神侍
+		ActionOverride("BDPGOOD",MoveViewObject(Player1,INSTANT))
+		ActionOverride("BDPGOOD",FaceObject(Player1))
+		Wait(2)
+		ActionOverride("BDPGOOD",DisplayStringHead(Myself,@210))  // <CHARNAME>恭喜你通过了考验
+		Wait(3)
+		ActionOverride("BDPGOOD",ForceSpellRES("AC#DTTP",Myself))  // 定点传送术
+		Wait(3)
+		CreateVisualEffectObject("SPDIMNDR",Player1)
+		CreateVisualEffectObject("SPDIMNDR",Player2)
+		CreateVisualEffectObject("SPDIMNDR",Player3)
+		CreateVisualEffectObject("SPDIMNDR",Player4)
+		CreateVisualEffectObject("SPDIMNDR",Player5)
+		CreateVisualEffectObject("SPDIMNDR",Player6)
+		Wait(2)
+		ActionOverride("BDPGOOD",DestroySelf())
+		Wait(1)
+		ActionOverride(Player1,LeaveAreaLUA("OH6460","",[3900.2990],NE))  // Neera - The Black Pits: Staging Area
+		ActionOverride(Player2,LeaveAreaLUA("OH6460","",[3970.2990],NE))  // Neera - The Black Pits: Staging Area
+		ActionOverride(Player3,LeaveAreaLUA("OH6460","",[3900.3030],NE))  // Neera - The Black Pits: Staging Area
+		ActionOverride(Player4,LeaveAreaLUA("OH6460","",[3970.3030],NE))  // Neera - The Black Pits: Staging Area
+		ActionOverride(Player5,LeaveAreaLUA("OH6460","",[3900.3070],NE))  // Neera - The Black Pits: Staging Area
+		ActionOverride(Player6,LeaveAreaLUA("OH6460","",[3970.3070],NE))  // Neera - The Black Pits: Staging Area
+		Wait(3)
+		UnhideGUI()
+		EndCutSceneMode()
+END
+

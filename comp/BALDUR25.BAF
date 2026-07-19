@@ -1,0 +1,261 @@
+IF
+	Global("LZBGAIAbility","GLOBAL",0)
+	!HaveSpellRES("LZAIABL1")  // LZ战斗强化
+	!HaveSpellRES("LZAIABL2")  // LZ战斗强化
+	!StateCheck(Player1,CD_STATE_NOTVALID)
+THEN
+	RESPONSE #100
+		SetGlobal("LZBGAIAbility","GLOBAL",1)
+		ActionOverride(Player1,AddSpecialAbility("LZAIABL2"))  // LZ战斗强化
+		Continue()
+END
+
+IF
+	Global("LZBGAIActive","GLOBAL",0)
+	Global("LZBGAICombatCheck","GLOBAL",0)
+	TriggerOverride(Player1,Detect([ENEMY]))
+THEN
+	RESPONSE #100
+		SetGlobal("LZBGAICombatCheck","GLOBAL",1)
+		CreateCreatureObject("LZBGAI",Player1,0,0,0)  // No such index
+		Continue()
+END
+
+IF
+	Global("LZBGAIActive","GLOBAL",0)
+	Global("LZBGAICombatCheck","GLOBAL",0)
+	!TriggerOverride(Player1,Detect([ENEMY]))
+	TriggerOverride(Player2,Detect([ENEMY]))
+THEN
+	RESPONSE #100
+		SetGlobal("LZBGAICombatCheck","GLOBAL",1)
+		CreateCreatureObject("LZBGAI",Player2,0,0,0)  // No such index
+		Continue()
+END
+
+IF
+	Global("LZBGAIActive","GLOBAL",0)
+	Global("LZBGAICombatCheck","GLOBAL",0)
+	!TriggerOverride(Player1,Detect([ENEMY]))
+	!TriggerOverride(Player2,Detect([ENEMY]))
+	TriggerOverride(Player3,Detect([ENEMY]))
+THEN
+	RESPONSE #100
+		SetGlobal("LZBGAICombatCheck","GLOBAL",1)
+		CreateCreatureObject("LZBGAI",Player3,0,0,0)  // No such index
+		Continue()
+END
+
+IF
+	Global("LZBGAIActive","GLOBAL",0)
+	Global("LZBGAICombatCheck","GLOBAL",0)
+	!TriggerOverride(Player1,Detect([ENEMY]))
+	!TriggerOverride(Player2,Detect([ENEMY]))
+	!TriggerOverride(Player3,Detect([ENEMY]))
+	TriggerOverride(Player4,Detect([ENEMY]))
+THEN
+	RESPONSE #100
+		SetGlobal("LZBGAICombatCheck","GLOBAL",1)
+		CreateCreatureObject("LZBGAI",Player4,0,0,0)  // No such index
+		Continue()
+END
+
+IF
+	Global("LZBGAIActive","GLOBAL",0)
+	Global("LZBGAICombatCheck","GLOBAL",0)
+	!TriggerOverride(Player1,Detect([ENEMY]))
+	!TriggerOverride(Player2,Detect([ENEMY]))
+	!TriggerOverride(Player3,Detect([ENEMY]))
+	!TriggerOverride(Player4,Detect([ENEMY]))
+	TriggerOverride(Player5,Detect([ENEMY]))
+THEN
+	RESPONSE #100
+		SetGlobal("LZBGAICombatCheck","GLOBAL",1)
+		CreateCreatureObject("LZBGAI",Player5,0,0,0)  // No such index
+		Continue()
+END
+
+IF
+	Global("LZBGAIActive","GLOBAL",0)
+	Global("LZBGAICombatCheck","GLOBAL",0)
+	!TriggerOverride(Player1,Detect([ENEMY]))
+	!TriggerOverride(Player2,Detect([ENEMY]))
+	!TriggerOverride(Player3,Detect([ENEMY]))
+	!TriggerOverride(Player4,Detect([ENEMY]))
+	!TriggerOverride(Player5,Detect([ENEMY]))
+	TriggerOverride(Player6,Detect([ENEMY]))
+THEN
+	RESPONSE #100
+		SetGlobal("LZBGAICombatCheck","GLOBAL",1)
+		CreateCreatureObject("LZBGAI",Player6,0,0,0)  // No such index
+		Continue()
+END
+
+IF
+	Global("LZBGAIActive","GLOBAL",0)
+	Global("LZBGAICombatCheck","GLOBAL",1)
+	NumInParty(6)
+	!TriggerOverride(Player1,Detect([ENEMY]))
+	!TriggerOverride(Player2,Detect([ENEMY]))
+	!TriggerOverride(Player3,Detect([ENEMY]))
+	!TriggerOverride(Player4,Detect([ENEMY]))
+	!TriggerOverride(Player5,Detect([ENEMY]))
+	!TriggerOverride(Player6,Detect([ENEMY]))
+THEN
+	RESPONSE #100
+		SetGlobal("LZBGAICombatCheck","GLOBAL",0)
+		ApplySpellRES("LZAISP00",Player1)  // No such index
+		Continue()
+END
+
+IF
+	Global("LZBGAIActive","GLOBAL",0)
+	Global("LZBGAICombatCheck","GLOBAL",1)
+	NumInParty(5)
+	!TriggerOverride(Player1,Detect([ENEMY]))
+	!TriggerOverride(Player2,Detect([ENEMY]))
+	!TriggerOverride(Player3,Detect([ENEMY]))
+	!TriggerOverride(Player4,Detect([ENEMY]))
+	!TriggerOverride(Player5,Detect([ENEMY]))
+THEN
+	RESPONSE #100
+		SetGlobal("LZBGAICombatCheck","GLOBAL",0)
+		ApplySpellRES("LZAISP00",Player1)  // No such index
+		Continue()
+END
+
+IF
+	Global("LZBGAIActive","GLOBAL",0)
+	Global("LZBGAICombatCheck","GLOBAL",1)
+	NumInParty(4)
+	!TriggerOverride(Player1,Detect([ENEMY]))
+	!TriggerOverride(Player2,Detect([ENEMY]))
+	!TriggerOverride(Player3,Detect([ENEMY]))
+	!TriggerOverride(Player4,Detect([ENEMY]))
+THEN
+	RESPONSE #100
+		SetGlobal("LZBGAICombatCheck","GLOBAL",0)
+		ApplySpellRES("LZAISP00",Player1)  // No such index
+		Continue()
+END
+
+IF
+	Global("LZBGAIActive","GLOBAL",0)
+	Global("LZBGAICombatCheck","GLOBAL",1)
+	NumInParty(3)
+	!TriggerOverride(Player1,Detect([ENEMY]))
+	!TriggerOverride(Player2,Detect([ENEMY]))
+	!TriggerOverride(Player3,Detect([ENEMY]))
+THEN
+	RESPONSE #100
+		SetGlobal("LZBGAICombatCheck","GLOBAL",0)
+		ApplySpellRES("LZAISP00",Player1)  // No such index
+		Continue()
+END
+
+IF
+	Global("LZBGAIActive","GLOBAL",0)
+	Global("LZBGAICombatCheck","GLOBAL",1)
+	NumInParty(2)
+	!TriggerOverride(Player1,Detect([ENEMY]))
+	!TriggerOverride(Player2,Detect([ENEMY]))
+THEN
+	RESPONSE #100
+		SetGlobal("LZBGAICombatCheck","GLOBAL",0)
+		ApplySpellRES("LZAISP00",Player1)  // No such index
+		Continue()
+END
+
+IF
+	Global("LZBGAIActive","GLOBAL",0)
+	Global("LZBGAICombatCheck","GLOBAL",1)
+	NumInParty(1)
+	!TriggerOverride(Player1,Detect([ENEMY]))
+THEN
+	RESPONSE #100
+		SetGlobal("LZBGAICombatCheck","GLOBAL",0)
+		ApplySpellRES("LZAISP00",Player1)  // No such index
+		Continue()
+END
+
+IF
+	Global("LZBGAIActive","GLOBAL",0)
+	Global("LZBGAICombatCheck","GLOBAL",1)
+	NumInParty(6)
+	!TriggerOverride(Player1,Detect("LZBGAI"))  // No such index
+	!TriggerOverride(Player2,Detect("LZBGAI"))  // No such index
+	!TriggerOverride(Player3,Detect("LZBGAI"))  // No such index
+	!TriggerOverride(Player4,Detect("LZBGAI"))  // No such index
+	!TriggerOverride(Player5,Detect("LZBGAI"))  // No such index
+	!TriggerOverride(Player6,Detect("LZBGAI"))  // No such index
+THEN
+	RESPONSE #100
+		SetGlobal("LZBGAICombatCheck","GLOBAL",0)
+		Continue()
+END
+
+IF
+	Global("LZBGAIActive","GLOBAL",0)
+	Global("LZBGAICombatCheck","GLOBAL",1)
+	NumInParty(5)
+	!TriggerOverride(Player1,Detect("LZBGAI"))  // No such index
+	!TriggerOverride(Player2,Detect("LZBGAI"))  // No such index
+	!TriggerOverride(Player3,Detect("LZBGAI"))  // No such index
+	!TriggerOverride(Player4,Detect("LZBGAI"))  // No such index
+	!TriggerOverride(Player5,Detect("LZBGAI"))  // No such index
+THEN
+	RESPONSE #100
+		SetGlobal("LZBGAICombatCheck","GLOBAL",0)
+		Continue()
+END
+
+IF
+	Global("LZBGAIActive","GLOBAL",0)
+	Global("LZBGAICombatCheck","GLOBAL",1)
+	NumInParty(4)
+	!TriggerOverride(Player1,Detect("LZBGAI"))  // No such index
+	!TriggerOverride(Player2,Detect("LZBGAI"))  // No such index
+	!TriggerOverride(Player3,Detect("LZBGAI"))  // No such index
+	!TriggerOverride(Player4,Detect("LZBGAI"))  // No such index
+THEN
+	RESPONSE #100
+		SetGlobal("LZBGAICombatCheck","GLOBAL",0)
+		Continue()
+END
+
+IF
+	Global("LZBGAIActive","GLOBAL",0)
+	Global("LZBGAICombatCheck","GLOBAL",1)
+	NumInParty(3)
+	!TriggerOverride(Player1,Detect("LZBGAI"))  // No such index
+	!TriggerOverride(Player2,Detect("LZBGAI"))  // No such index
+	!TriggerOverride(Player3,Detect("LZBGAI"))  // No such index
+THEN
+	RESPONSE #100
+		SetGlobal("LZBGAICombatCheck","GLOBAL",0)
+		Continue()
+END
+
+IF
+	Global("LZBGAIActive","GLOBAL",0)
+	Global("LZBGAICombatCheck","GLOBAL",1)
+	NumInParty(2)
+	!TriggerOverride(Player1,Detect("LZBGAI"))  // No such index
+	!TriggerOverride(Player2,Detect("LZBGAI"))  // No such index
+THEN
+	RESPONSE #100
+		SetGlobal("LZBGAICombatCheck","GLOBAL",0)
+		Continue()
+END
+
+IF
+	Global("LZBGAIActive","GLOBAL",0)
+	Global("LZBGAICombatCheck","GLOBAL",1)
+	NumInParty(1)
+	!TriggerOverride(Player1,Detect("LZBGAI"))  // No such index
+THEN
+	RESPONSE #100
+		SetGlobal("LZBGAICombatCheck","GLOBAL",0)
+		Continue()
+END
+

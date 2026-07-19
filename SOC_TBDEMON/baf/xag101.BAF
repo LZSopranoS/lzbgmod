@@ -1,0 +1,117 @@
+IF
+	Global("BDEEAunplot","Global",5)
+	!InMyArea("BDCaelar")
+	Global("CaelMove","XAG101",0)
+THEN
+	RESPONSE #100
+		SetGlobal("CaelMove","XAG101",1)
+		MoveGlobal("XAG101","BDCaelar",[1189.1112])
+END
+
+IF
+	Global("BDEEAunplot","Global",5)
+	InMyArea("BDCaelar")
+	Global("CaelClean","XAG101",0)
+THEN
+	RESPONSE #100
+		SetGlobal("CaelClean","XAG101",1)
+		ActionOverride("BDCaelar",MakeGlobal())
+		Wait(2)
+		ActionOverride("BDCaelar",DestroyItem("BDSW1HCA"))
+		Wait(2)
+		ActionOverride("BDCaelar",DestroyItem("BDSHLDCA"))
+		Wait(2)
+		ActionOverride("BDCaelar",DestroyItem("BDFinca1"))  // No such index
+		Wait(2)
+		ActionOverride("BDCaelar",DestroyItem("Minhp1"))  // No such index
+		Continue()
+END
+
+IF
+	Global("BDEEAunplot","Global",6)
+	!InMyArea("BDCaelar")
+THEN
+	RESPONSE #100
+		MoveGlobalObject("BDCaelar",Player1)
+END
+
+IF
+	Global("Iarestwish","XAG101",1)
+	Global("Ialayenthing","XAG101",0)
+	Dead("BDSHANG")
+THEN
+	RESPONSE #100
+		SetGlobal("Ialayenthing","XAG101",1)
+		TakeItemReplace("S!layen2","S!layene","BDLAYEN")
+END
+
+IF
+	OR(2)
+		Global("Iap1hidden","XAG101",1)
+		Global("Iap1hidden","XAG101",2)
+	GlobalLT("Iagtwists","XAG101",6)
+	!GlobalTimerNotExpired("Iapunish","XAG101")
+	Global("Iapcastts","GLOBAL",0)
+	InMyArea(Player1)
+	!Dead("BDSHANG")
+THEN
+	RESPONSE #50
+		IncrementGlobal("Iagtwists","XAG101",1)
+		SetGlobalTimer("Iapunish","XAG101",THREE_ROUNDS)
+		CreateVisualEffect("DDOORH",[1500.740])
+		CreateVisualEffect("DDOORH",[1380.830])
+		CreateVisualEffect("DDOORH",[1270.900])
+		Wait(1)
+		CreateCreature("AC#W54AL",[1500.740],W)
+		CreateCreature("AC#WALU9",[1380.830],W)
+		CreateCreature("DEMGLAB",[1270.900],W)  // 迷诱魔
+	RESPONSE #50
+		IncrementGlobal("Iagtwists","XAG101",1)
+		SetGlobalTimer("Iapunish","XAG101",THREE_ROUNDS)
+		CreateVisualEffect("DDOORH",[1500.740])
+		CreateVisualEffect("DDOORH",[1380.830])
+		CreateVisualEffect("DDOORH",[1270.900])
+		Wait(1)
+		CreateCreature("DEMOSUM2",[1500.740],W)  // 巴洛炎魔
+		CreateCreature("DEMOSUM3",[1380.830],W)  // 迷诱魔
+		CreateCreature("DEMPIT01",[1270.900],W)  // 深狱炼魔
+END
+
+IF
+	OR(2)
+		Global("Iap1hidden","XAG101",1)
+		Global("Iap1hidden","XAG101",2)
+	GlobalLT("Iagtwists","XAG101",10)
+	!GlobalTimerNotExpired("Iapunish","XAG101")
+	Global("Iapcastts","GLOBAL",0)
+	InMyArea(Player1)
+	Dead("BDSHANG")
+THEN
+	RESPONSE #30
+		IncrementGlobal("Iagtwists","XAG101",1)
+		SetGlobalTimer("Iapunish","XAG101",THREE_ROUNDS)
+		CreateVisualEffect("DDOORH",[1270.900])
+		CreateVisualEffect("DDOORH",[1380.830])
+		Wait(1)
+		CreateCreature("CHALSLAY",[1270.900],W)  // 杀戮者
+		CreateCreature("DEMABI01",[1380.830],W)  // 阿比沙魔
+	RESPONSE #30
+		IncrementGlobal("Iagtwists","XAG101",1)
+		SetGlobalTimer("Iapunish","XAG101",THREE_ROUNDS)
+		CreateVisualEffect("DDOORH",[1270.900])
+		CreateVisualEffect("DDOORH",[1380.830])
+		Wait(1)
+		CreateCreature("OHBBSLAY",[1270.900],E)  // 杀戮者
+		CreateCreature("NWFINGLB",[1380.830],W)
+	RESPONSE #40
+		IncrementGlobal("Iagtwists","XAG101",1)
+		SetGlobalTimer("Iapunish","XAG101",THREE_ROUNDS)
+		CreateVisualEffect("DDOORH",[1500.740])
+		CreateVisualEffect("DDOORH",[1380.830])
+		CreateVisualEffect("DDOORH",[1270.900])
+		Wait(1)
+		CreateCreature("DEMABI01",[1500.740],W)  // 阿比沙魔
+		CreateCreature("NWABISH1",[1380.830],W)
+		CreateCreature("NWFINGLB",[1270.900],W)
+END
+

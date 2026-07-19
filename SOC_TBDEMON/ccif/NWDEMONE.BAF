@@ -1,0 +1,35 @@
+IF
+	Die()
+THEN
+	RESPONSE #100
+		ReallyForceSpellDeadRES("SPWI523",Myself)
+END
+
+IF
+	Global("CONTROL","LOCALS",1)
+	!Allegiance(Myself,ENEMY)
+THEN
+	RESPONSE #100
+		SetGlobal("CONTROL","LOCALS",0)
+		Enemy()
+END
+
+IF
+	Global("CONTROL","LOCALS",1)
+	Allegiance(Myself,ENEMY)
+THEN
+	RESPONSE #100
+		SetGlobal("CONTROL","LOCALS",0)
+		Continue()
+END
+
+IF
+	!DifficultyLT(NORMAL)
+	Allegiance(Myself,ENEMY)
+	Global("CommandCheck","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("CommandCheck","LOCALS",1)
+		ReallyForceSpellRES("SPWI418",Myself)
+END
+

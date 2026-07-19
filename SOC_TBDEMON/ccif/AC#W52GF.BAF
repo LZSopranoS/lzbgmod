@@ -1,0 +1,25 @@
+IF
+	Die()
+THEN
+	RESPONSE #100
+		DestroySelf()
+END
+
+IF
+	OR(2)
+		SpellCast([PC],CLERIC_ZONE_OF_SWEET_AIR)  // SPPR318.SPL (空气滤净)
+		GlobalTimerExpired("GasFormEnd","XAG101")
+THEN
+	RESPONSE #100
+		ReallyForceSpellRES("AC#WAL2",Myself)  // No such index
+END
+
+IF
+	Global("Cloudkill","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Cloudkill","LOCALS",1)
+		SetGlobalTimer("GasFormEnd","XAG101",FOUR_MINUTES)
+		ReallyForceSpellRES("AC#WALC",Myself)  // 死云术
+END
+

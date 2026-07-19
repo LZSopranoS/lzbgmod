@@ -1,0 +1,146 @@
+IF
+	OnCreation()
+THEN
+	RESPONSE #20
+		SetGlobal("LZSIMGETREST","LOCALS",1)
+	RESPONSE #20
+		SetInterrupt(FALSE)
+		DisplayStringHead(LastSummonerOf(Myself),72538)  // 对附近所有敌人施用“破解术”。
+		FaceObject(LastSummonerOf(Myself))
+		Wait(2)
+		DisplayStringHead(Myself,100280)  // 搞定。
+		ActionOverride(LastSummonerOf(Myself),ReallyForceSpellRES("SPWISH38",Myself))  // 破解术
+		Wait(2)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+	RESPONSE #20
+		SetInterrupt(FALSE)
+		DisplayStringHead(LastSummonerOf(Myself),72532)  // 对附近所有的人，包括我方队员在内，施用“亚比达奇凋死术”。
+		FaceObject(LastSummonerOf(Myself))
+		Wait(2)
+		DisplayStringHead(Myself,3479)  // 如你所愿。
+		ActionOverride(LastSummonerOf(Myself),ReallyForceSpellRES("SPWISH32",Myself))  // 亚比达奇凋死术
+		Wait(2)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+	RESPONSE #20
+		SetInterrupt(FALSE)
+		DisplayStringHead(LastSummonerOf(Myself),72533)  // 让附近所有的人，包括我方队员和敌人，陷入酒醉状态。
+		FaceObject(LastSummonerOf(Myself))
+		Wait(2)
+		DisplayStringHead(Myself,3479)  // 如你所愿。
+		ActionOverride(LastSummonerOf(Myself),ReallyForceSpellRES("SPWISH33",Myself))  // 中毒
+		Wait(2)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+	RESPONSE #20
+		SetInterrupt(FALSE)
+		DisplayStringHead(LastSummonerOf(Myself),72534)  // 包括我方队员在内，让附近所有的人运气变差。
+		FaceObject(LastSummonerOf(Myself))
+		Wait(2)
+		DisplayStringHead(Myself,3479)  // 如你所愿。
+		ActionOverride(LastSummonerOf(Myself),ReallyForceSpellRES("SPWISH34",Myself))  // 霉运
+		Wait(2)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+	RESPONSE #20
+		SetInterrupt(FALSE)
+		DisplayStringHead(LastSummonerOf(Myself),72552)  // 在附近召唤出一额外的敌对怪物。
+		FaceObject(LastSummonerOf(Myself))
+		Wait(2)
+		DisplayStringHead(Myself,3479)  // 如你所愿。
+		ActionOverride(LastSummonerOf(Myself),ReallyForceSpellRES("SPWISH18",Myself))  // 召唤深渊界侍者
+		Wait(2)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+	RESPONSE #20
+		SetInterrupt(FALSE)
+		DisplayStringHead(LastSummonerOf(Myself),72553)  // 每个队员被吸取两个等级。
+		FaceObject(LastSummonerOf(Myself))
+		Wait(2)
+		DisplayStringHead(Myself,3557)  // 没问题。
+		ActionOverride(LastSummonerOf(Myself),ReallyForceSpellRES("SPWISH19",Myself))  // 吸能术
+		Wait(2)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+	RESPONSE #20
+		SetInterrupt(FALSE)
+		DisplayStringHead(LastSummonerOf(Myself),72557)  // 损失10000枚金币。
+		FaceObject(LastSummonerOf(Myself))
+		Wait(2)
+		DisplayStringHead(Myself,3557)  // 没问题。
+		ActionOverride(LastSummonerOf(Myself),ReallyForceSpellRES("SPWISH23",Player1))  // 废墟
+		Wait(2)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+	RESPONSE #20
+		SetInterrupt(FALSE)
+		DisplayStringHead(LastSummonerOf(Myself),72528)  // 治愈所有人的伤势，无论是我方队员还是敌人。
+		FaceObject(LastSummonerOf(Myself))
+		Wait(2)
+		DisplayStringHead(Myself,3557)  // 没问题。
+		ActionOverride(LastSummonerOf(Myself),ReallyForceSpellRES("SPWISH28",Myself))  // 痊愈术
+		Wait(2)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+END
+
+IF
+	Global("LZSIMGETREST","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobal("LZSIMGETREST","LOCALS",0)
+		DisplayStringHead(LastSummonerOf(Myself),72548)  // 让全队像刚睡了一整晚的好觉般状态良好，重新忆起所有的法术。
+		FaceObject(LastSummonerOf(Myself))
+		Wait(2)
+		DisplayStringHead(Myself,100276)  // 那它应当如此。
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_prepbuff","LOCALS",1))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_Seq","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_st","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_ia","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_pfmw","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_ss","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_pfe","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_goi","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_ih","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv9a","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv9b","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv8a","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv8b","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv7c","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv7a","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv7b","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv6a","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv6b","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv6c","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv5a","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv5b","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv4a","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv4b","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv4c","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv3a","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv3b","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv3c","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv3d","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv2a","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv1a","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_sklv6d","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_miluck","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_eb","LOCALS",0))
+		ActionOverride("LZSIMMAS",SetGlobal("LZ_it_thla","LOCALS",0))
+		ActionOverride("LZSIMMAS",Rest())
+		Wait(2)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+END
+

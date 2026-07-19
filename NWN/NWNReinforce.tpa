@@ -1,0 +1,54 @@
+COPY ~lzbgmod/NWN/cre~ ~NWNForBG/cre~
+
+COPY ~lzbgmod/NWN/itm~ ~NWNForBG/itm~
+
+COPY ~lzbgmod/NWN/scripts~ ~NWNForBG/scripts~
+
+ACTION_IF NOT MOD_IS_INSTALLED ~ImprovedAnvil.tp2~ 0 THEN BEGIN
+
+	LOAD_TRA ~lzbgmod/NWN/lang/schinese/install.tra~
+
+    COPY ~lzbgmod/NWN/IACOPY~ ~override~
+	
+	COPY ~lzbgmod/NWN/IACOPYSAY/S!salasu.cre~ ~override~     //火蜥蜴贵族名称原版自带
+	COPY ~lzbgmod/NWN/IACOPYSAY/S!lady5.cre~ ~override~
+		SAY NAME1 @400 SAY NAME2 @400
+	COPY ~lzbgmod/NWN/IACOPYSAY/S!ladynw.cre~ ~override~
+		SAY NAME1 @401 SAY NAME2 @401
+	COPY ~lzbgmod/NWN/IACOPYSAY/S!skelfi.cre~ ~override~
+		SAY NAME1 @402 SAY NAME2 @402
+	COPY ~lzbgmod/NWN/IACOPYSAY/S!gems.cre~ ~override~
+		SAY NAME1 @403 SAY NAME2 @403
+	COPY ~lzbgmod/NWN/IACOPYSAY/S!coins.cre~ ~override~
+		SAY NAME1 @404 SAY NAME2 @404
+	COPY ~lzbgmod/NWN/IACOPYSAY/S!ambere.cre~ ~override~
+		SAY NAME1 @405 SAY NAME2 @405
+	COPY ~lzbgmod/NWN/IACOPYSAY/S!sgamb3.cre~ ~override~
+		SAY NAME1 @406 SAY NAME2 @406
+	COPY ~lzbgmod/NWN/IACOPYSAY/S!woogol.cre~ ~override~
+		SAY NAME1 @407 SAY NAME2 @407
+	COPY ~lzbgmod/NWN/IACOPYSAY/S!mitgol.cre~ ~override~
+		SAY NAME1 @408 SAY NAME2 @408
+	
+    COMPILE ~lzbgmod/NWN/IABAF~
+	
+	COMPILE ~lzbgmod/NWN/bafnormal~
+
+END ELSE BEGIN
+
+	LOAD_TRA ~lzbgmod/NWN/lang/schinese/install.tra~
+	
+	ACTION_IF NOT FILE_EXISTS_IN_GAME ~S!sgamb3.cre~ THEN BEGIN
+		COPY ~lzbgmod/NWN/IACOPY/S!sgamb.itm~ ~override~
+		COPY ~lzbgmod/NWN/IACOPYSAY/S!sgamb3.cre~ ~override~
+			SAY NAME1 @406 SAY NAME2 @406
+	END
+	
+	COPY ~lzbgmod/NWN/IACOPYSAY/S!ladynw.cre~ ~override~
+		SAY NAME1 @401 SAY NAME2 @401
+
+	COMPILE ~lzbgmod/NWN/baf~
+
+	COMPILE ~lzbgmod/NWN/bafnormal/DRAGBLU2.BAF~
+	
+END	

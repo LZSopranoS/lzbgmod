@@ -1,0 +1,864 @@
+IF
+	See(NearestEnemyOf(Myself))
+	Global("Ianobmar01","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Ianobmar01","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		SetGlobalTimer("pfmw","LOCALS",FOUR_ROUNDS)
+		ReallyForceSpell(Myself,DRAGON_STONE_SKIN)  // SPIN694.SPL (石肤术)
+		ReallyForceSpell(Myself,WIZARD_FIRE_SHIELD_RED)  // SPWI418.SPL (火焰护盾（红）)
+		ReallyForceSpell(Myself,WIZARD_FIRE_SHIELD_BLUE)  // SPWI403.SPL (火焰盾（蓝）)
+		ReallyForceSpell(Myself,PROTECTION_MAGIC_WEAPON_NOEFF)  // SPIN686.SPL (防护魔法武器)
+		ReallyForceSpellRES("SPWII02",Myself)
+		ReallyForceSpellRES("SPWII03",Myself)
+		ReallyForceSpellRES("jwglobe",Myself)  // 法术无效结界
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	Detect([PC])
+	Global("Iacreature","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Iacreature","LOCALS",1)
+		CreateCreatureObject("S!lady5",Myself,0,0,0)
+		CreateCreatureObject("S!lady5",Myself,0,0,0)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	OR(2)
+		Detect([PC])
+		Detect([GOODCUTOFF])
+	Global("partyfled","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("partyfled","LOCALS",0)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See([PC])
+	CheckStatLT(Myself,1,STONESKINS)
+	OR(3)
+		Range(LastSeenBy(Myself),5)
+		AttackedBy(LastSeenBy(Myself),MELEE)
+		AttackedBy(LastSeenBy(Myself),RANGED)
+	OR(3)
+		!GlobalTimerNotExpired("pfmw","LOCALS")
+		!CheckSpellState(Myself,PROTECTION_FROM_MAGICAL_WEAPONS)
+		!CheckStatGT(Myself,0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+	GlobalLT("Ianobmar04","LOCALS",3)
+THEN
+	RESPONSE #100
+		IncrementGlobal("Ianobmar04","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		SetGlobalTimer("pfmw","LOCALS",FOUR_ROUNDS)
+		ReallyForceSpell(Myself,PROTECTION_MAGIC_WEAPON_NOEFF)  // SPIN686.SPL (防护魔法武器)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See([PC])
+	OR(3)
+		StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+		StateCheck(LastSeenBy(Myself),STATE_INVISIBLE)
+		StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+	!GlobalTimerNotExpired("truesight","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("truesight","LOCALS",TEN_ROUNDS)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Myself,WIZARD_TRUE_SIGHT)  // SPWI609.SPL (真实视域)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(SecondNearest([PC]))
+	OR(3)
+		StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+		StateCheck(LastSeenBy(Myself),STATE_INVISIBLE)
+		StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+	!GlobalTimerNotExpired("truesight","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("truesight","LOCALS",TEN_ROUNDS)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Myself,WIZARD_TRUE_SIGHT)  // SPWI609.SPL (真实视域)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	!GlobalTimerNotExpired("Iaexrm","LOCALS")
+	See([PC])
+	!StateCheck(LastSeenBy(Myself),STATE_CONFUSED)
+	!StateCheck(LastSeenBy(Myself),STATE_HELPLESS)
+	!StateCheck(LastSeenBy(Myself),STATE_STUNNED)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	OR(3)
+		StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+		StateCheck(LastSeenBy(Myself),STATE_INVISIBLE)
+		StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iaexrm","LOCALS",FOUR_ROUNDS)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	!GlobalTimerNotExpired("Iaexrm","LOCALS")
+	See(SecondNearest([PC]))
+	!StateCheck(LastSeenBy(Myself),STATE_CONFUSED)
+	!StateCheck(LastSeenBy(Myself),STATE_HELPLESS)
+	!StateCheck(LastSeenBy(Myself),STATE_STUNNED)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	OR(3)
+		StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+		StateCheck(LastSeenBy(Myself),STATE_INVISIBLE)
+		StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("Iaexrm","LOCALS",FOUR_ROUNDS)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	Allegiance(Myself,ENEMY)
+	See([PC])
+	CheckStatGT(LastSeenBy(Myself),0,RESISTELECTRICITY)
+	Global("LowerElectric","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("LowerElectric","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),DRAGON_LOWER_ELECTRICAL)  // SPIN532.SPL (降低电抗性)
+END
+
+IF
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	Allegiance(Myself,ENEMY)
+	See([PC])
+	CheckStatLT(LastSeenBy(Myself),100,RESISTELECTRICITY)
+	CheckStatLT(LastSeenBy(Myself),51,RESISTMAGIC)
+	!StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(LastSeenBy(Myself),STATE_INVISIBLE)
+	!StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+	Global("Ianobmar02","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Ianobmar02","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		DisplayString(Myself,39968)  // 法术启动－已用出
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_CHAIN_LIGHTNING)  // SPWI615.SPL (连环闪电)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_CHAIN_LIGHTNING)  // SPWI615.SPL (连环闪电)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_CHAIN_LIGHTNING)  // SPWI615.SPL (连环闪电)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(Player1)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!CheckStat(LastSeenBy(Myself),8,WIZARD_SPELL_IMMUNITY)
+	OR(6)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_SHIELD_OF_THE_ARCHONS)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+		CheckStatGT(LastSeenBy(Myself),0,MINORGLOBE)
+	GlobalLT("Iareversal","LOCALS",3)
+THEN
+	RESPONSE #100
+		IncrementGlobal("Iareversal","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player1,WIZARD_RUBY_RAY_OF_REVERSAL)  // SPWI704.SPL (红宝石逆转射线)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(Player1)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	!CheckSpellState(LastSeenBy(Myself),SPELL_SHIELD)
+	OR(7)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),MANTLE)
+		CheckSpellState(LastSeenBy(Myself),IMPROVED_MANTLE)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,STONESKINS)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_ENERGY)
+	GlobalLT("Iacastbreach","LOCALS",5)
+THEN
+	RESPONSE #100
+		IncrementGlobal("Iacastbreach","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player1,WIZARD_BREACH)  // SPWI513.SPL (破解术)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(Player2)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!CheckStat(LastSeenBy(Myself),8,WIZARD_SPELL_IMMUNITY)
+	OR(6)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_SHIELD_OF_THE_ARCHONS)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+		CheckStatGT(LastSeenBy(Myself),0,MINORGLOBE)
+	GlobalLT("Iareversal","LOCALS",3)
+THEN
+	RESPONSE #100
+		IncrementGlobal("Iareversal","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player2,WIZARD_RUBY_RAY_OF_REVERSAL)  // SPWI704.SPL (红宝石逆转射线)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(Player2)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	!CheckSpellState(LastSeenBy(Myself),SPELL_SHIELD)
+	OR(7)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),MANTLE)
+		CheckSpellState(LastSeenBy(Myself),IMPROVED_MANTLE)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,STONESKINS)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_ENERGY)
+	GlobalLT("Iacastbreach","LOCALS",5)
+THEN
+	RESPONSE #100
+		IncrementGlobal("Iacastbreach","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player2,WIZARD_BREACH)  // SPWI513.SPL (破解术)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(Player3)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!CheckStat(LastSeenBy(Myself),8,WIZARD_SPELL_IMMUNITY)
+	OR(6)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_SHIELD_OF_THE_ARCHONS)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+		CheckStatGT(LastSeenBy(Myself),0,MINORGLOBE)
+	GlobalLT("Iareversal","LOCALS",3)
+THEN
+	RESPONSE #100
+		IncrementGlobal("Iareversal","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player3,WIZARD_RUBY_RAY_OF_REVERSAL)  // SPWI704.SPL (红宝石逆转射线)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(Player3)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	!CheckSpellState(LastSeenBy(Myself),SPELL_SHIELD)
+	OR(7)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),MANTLE)
+		CheckSpellState(LastSeenBy(Myself),IMPROVED_MANTLE)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,STONESKINS)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_ENERGY)
+	GlobalLT("Iacastbreach","LOCALS",5)
+THEN
+	RESPONSE #100
+		IncrementGlobal("Iacastbreach","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player3,WIZARD_BREACH)  // SPWI513.SPL (破解术)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(Player4)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!CheckStat(LastSeenBy(Myself),8,WIZARD_SPELL_IMMUNITY)
+	OR(6)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_SHIELD_OF_THE_ARCHONS)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+		CheckStatGT(LastSeenBy(Myself),0,MINORGLOBE)
+	GlobalLT("Iareversal","LOCALS",3)
+THEN
+	RESPONSE #100
+		IncrementGlobal("Iareversal","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player4,WIZARD_RUBY_RAY_OF_REVERSAL)  // SPWI704.SPL (红宝石逆转射线)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(Player4)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	!CheckSpellState(LastSeenBy(Myself),SPELL_SHIELD)
+	OR(7)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),MANTLE)
+		CheckSpellState(LastSeenBy(Myself),IMPROVED_MANTLE)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,STONESKINS)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_ENERGY)
+	GlobalLT("Iacastbreach","LOCALS",5)
+THEN
+	RESPONSE #100
+		IncrementGlobal("Iacastbreach","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player4,WIZARD_BREACH)  // SPWI513.SPL (破解术)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(Player5)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!CheckStat(LastSeenBy(Myself),8,WIZARD_SPELL_IMMUNITY)
+	OR(6)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_SHIELD_OF_THE_ARCHONS)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+		CheckStatGT(LastSeenBy(Myself),0,MINORGLOBE)
+	GlobalLT("Iareversal","LOCALS",3)
+THEN
+	RESPONSE #100
+		IncrementGlobal("Iareversal","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player5,WIZARD_RUBY_RAY_OF_REVERSAL)  // SPWI704.SPL (红宝石逆转射线)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(Player5)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	!CheckSpellState(LastSeenBy(Myself),SPELL_SHIELD)
+	OR(7)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),MANTLE)
+		CheckSpellState(LastSeenBy(Myself),IMPROVED_MANTLE)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,STONESKINS)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_ENERGY)
+	GlobalLT("Iacastbreach","LOCALS",5)
+THEN
+	RESPONSE #100
+		IncrementGlobal("Iacastbreach","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player5,WIZARD_BREACH)  // SPWI513.SPL (破解术)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(Player6)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!CheckStat(LastSeenBy(Myself),8,WIZARD_SPELL_IMMUNITY)
+	OR(6)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_DEFLECTION)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TURNING)
+		CheckStatGT(LastSeenBy(Myself),0,CLERIC_SHIELD_OF_THE_ARCHONS)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_SPELL_TRAP)
+		CheckStatGT(LastSeenBy(Myself),0,MINORGLOBE)
+	GlobalLT("Iareversal","LOCALS",3)
+THEN
+	RESPONSE #100
+		IncrementGlobal("Iareversal","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player6,WIZARD_RUBY_RAY_OF_REVERSAL)  // SPWI704.SPL (红宝石逆转射线)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(Player6)
+	!StateCheck(LastSeenBy(Myself),STATE_NOT_TARGETABLE)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	!CheckSpellState(LastSeenBy(Myself),SPELL_SHIELD)
+	OR(7)
+		CheckSpellState(LastSeenBy(Myself),PROTECTION_FROM_MAGICAL_WEAPONS)
+		CheckSpellState(LastSeenBy(Myself),MANTLE)
+		CheckSpellState(LastSeenBy(Myself),IMPROVED_MANTLE)
+		CheckSpellState(LastSeenBy(Myself),ABSOLUTE_IMMUNITY)
+		CheckStatGT(LastSeenBy(Myself),0,STONESKINS)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_WEAPONS)
+		CheckStatGT(LastSeenBy(Myself),0,WIZARD_PROTECTION_FROM_MAGIC_ENERGY)
+	GlobalLT("Iacastbreach","LOCALS",5)
+THEN
+	RESPONSE #100
+		IncrementGlobal("Iacastbreach","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Player6,WIZARD_BREACH)  // SPWI513.SPL (破解术)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	See([PC])
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	OR(2)
+		HasBounceEffects(LastSeenBy(Myself))
+		HasImmunityEffects(LastSeenBy(Myself))
+	Global("RemoveMagic","LOCALS",0)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobal("RemoveMagic","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ForceSpell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	See(SecondNearest([PC]))
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	OR(2)
+		HasBounceEffects(LastSeenBy(Myself))
+		HasImmunityEffects(LastSeenBy(Myself))
+	Global("RemoveMagic","LOCALS",0)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobal("RemoveMagic","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ForceSpell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	!GlobalTimerNotExpired("truesight","LOCALS")
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(NearestEnemyOfType([0.0.0.0.0.ILLUSIONARY]))
+THEN
+	RESPONSE #100
+		SetGlobalTimer("truesight","LOCALS",TEN_ROUNDS)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(Myself,WIZARD_TRUE_SIGHT)  // SPWI609.SPL (真实视域)
+END
+
+IF
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(NearestEnemyOfType([0.0.0.0.0.ILLUSIONARY]))
+	GlobalLT("Iadispel","LOCALS",3)
+THEN
+	RESPONSE #100
+		IncrementGlobal("Iadispel","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See([PC])
+	CheckStatGT(LastSeenBy(Myself),30,RESISTMAGIC)
+	!StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(LastSeenBy(Myself),STATE_INVISIBLE)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	GlobalLT("Ianobmar05","LOCALS",2)
+THEN
+	RESPONSE #100
+		IncrementGlobal("Ianobmar05","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_LOWER_RESISTANCE)  // SPWI514.SPL (降低抗性)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(SecondNearest([PC]))
+	CheckStatGT(LastSeenBy(Myself),30,RESISTMAGIC)
+	!StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(LastSeenBy(Myself),STATE_INVISIBLE)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	GlobalLT("Ianobmar05","LOCALS",2)
+THEN
+	RESPONSE #100
+		IncrementGlobal("Ianobmar05","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_LOWER_RESISTANCE)  // SPWI514.SPL (降低抗性)
+END
+
+IF
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	Allegiance(Myself,ENEMY)
+	See([PC])
+	CheckStat(LastSeenBy(Myself),100,MAGICDAMAGERESISTANCE)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	!StateCheck(LastSeenBy(Myself),STATE_STUNNED)
+	!StateCheck(LastSeenBy(Myself),STATE_HELPLESS)
+	!StateCheck(LastSeenBy(Myself),STATE_CONFUSED)
+	!StateCheck(LastSeenBy(Myself),STATE_PANIC)
+	Global("RemoveMagic","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("RemoveMagic","LOCALS",2)
+		SetGlobal("Ianobmar03","LOCALS",0)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	Allegiance(Myself,ENEMY)
+	See(SecondNearest([PC]))
+	CheckStat(LastSeenBy(Myself),100,MAGICDAMAGERESISTANCE)
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	!StateCheck(LastSeenBy(Myself),STATE_STUNNED)
+	!StateCheck(LastSeenBy(Myself),STATE_HELPLESS)
+	!StateCheck(LastSeenBy(Myself),STATE_CONFUSED)
+	!StateCheck(LastSeenBy(Myself),STATE_PANIC)
+	Global("RemoveMagic","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("RemoveMagic","LOCALS",2)
+		SetGlobal("Ianobmar03","LOCALS",0)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See([PC])
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	OR(2)
+		HasBounceEffects(LastSeenBy(Myself))
+		HasImmunityEffects(LastSeenBy(Myself))
+	Global("Iadispelpot","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Iadispelpot","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(SecondNearest([PC]))
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	OR(2)
+		HasBounceEffects(LastSeenBy(Myself))
+		HasImmunityEffects(LastSeenBy(Myself))
+	Global("Iadispelpot","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Iadispelpot","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(ThirdNearest([PC]))
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	OR(2)
+		HasBounceEffects(LastSeenBy(Myself))
+		HasImmunityEffects(LastSeenBy(Myself))
+	Global("Iadispelpot","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Iadispelpot","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(FourthNearest([PC]))
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	OR(2)
+		HasBounceEffects(LastSeenBy(Myself))
+		HasImmunityEffects(LastSeenBy(Myself))
+	Global("Iadispelpot","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Iadispelpot","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(FifthNearest([PC]))
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	OR(2)
+		HasBounceEffects(LastSeenBy(Myself))
+		HasImmunityEffects(LastSeenBy(Myself))
+	Global("Iadispelpot","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Iadispelpot","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(SixthNearest([PC]))
+	!CheckStat(LastSeenBy(Myself),1,WIZARD_SPELL_IMMUNITY)
+	!StateCheck(LastSeenBy(Myself),STATE_DISABLED)
+	OR(2)
+		HasBounceEffects(LastSeenBy(Myself))
+		HasImmunityEffects(LastSeenBy(Myself))
+	Global("Iadispelpot","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Iadispelpot","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_REMOVE_MAGIC)  // SPWI302.SPL (移除魔法)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See([PC])
+	!CheckSpellState(LastSeenBy(Myself),MALISON)
+	!CheckStat(LastSeenBy(Myself),4,WIZARD_SPELL_IMMUNITY)
+	Global("Ianobmar03","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Ianobmar03","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_GREATER_MALISON)  // SPWI412.SPL (毒咒)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See(SecondNearest([PC]))
+	!CheckSpellState(LastSeenBy(Myself),MALISON)
+	!CheckStat(LastSeenBy(Myself),4,WIZARD_SPELL_IMMUNITY)
+	Global("Ianobmar03","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Ianobmar03","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_GREATER_MALISON)  // SPWI412.SPL (毒咒)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	!GlobalTimerNotExpired("Iawilting","LOCALS")
+	See([PC])
+	CheckStatLT(LastSeenBy(Myself),100,MAGICDAMAGERESISTANCE)
+	CheckStatLT(LastSeenBy(Myself),51,RESISTMAGIC)
+	!CheckStat(LastSeenBy(Myself),7,WIZARD_SPELL_IMMUNITY)
+	GlobalLT("Ianobmar06","LOCALS",3)
+THEN
+	RESPONSE #100
+		IncrementGlobal("Ianobmar06","LOCALS",1)
+		SetGlobalTimer("Iawilting","LOCALS",THREE_ROUNDS)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_ABI_DALZIMS_HORRID_WILTING)  // SPWI812.SPL (亚比达奇凋死术)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	!GlobalTimerNotExpired("Iawilting","LOCALS")
+	See(SecondNearest([PC]))
+	CheckStatLT(LastSeenBy(Myself),100,MAGICDAMAGERESISTANCE)
+	CheckStatLT(LastSeenBy(Myself),51,RESISTMAGIC)
+	!CheckStat(LastSeenBy(Myself),7,WIZARD_SPELL_IMMUNITY)
+	GlobalLT("Ianobmar06","LOCALS",3)
+THEN
+	RESPONSE #100
+		IncrementGlobal("Ianobmar06","LOCALS",1)
+		SetGlobalTimer("Iawilting","LOCALS",THREE_ROUNDS)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_ABI_DALZIMS_HORRID_WILTING)  // SPWI812.SPL (亚比达奇凋死术)
+END
+
+IF
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	Allegiance(Myself,ENEMY)
+	See([PC])
+	CheckStatGT(LastSeenBy(Myself),0,RESISTELECTRICITY)
+	Global("LowerElectric","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("LowerElectric","LOCALS",2)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),DRAGON_LOWER_ELECTRICAL)  // SPIN532.SPL (降低电抗性)
+END
+
+IF
+	!GlobalTimerNotExpired("Iaspell","LOCALS")
+	See([PC])
+	CheckStatLT(LastSeenBy(Myself),100,RESISTELECTRICITY)
+	CheckStatLT(LastSeenBy(Myself),51,RESISTMAGIC)
+	!StateCheck(LastSeenBy(Myself),STATE_IMPROVEDINVISIBILITY)
+	!StateCheck(LastSeenBy(Myself),STATE_INVISIBLE)
+	!StateCheck(LastSeenBy(Myself),STATE_MIRRORIMAGE)
+	GlobalLT("Ianobmar09","LOCALS",3)
+THEN
+	RESPONSE #100
+		IncrementGlobal("Ianobmar09","LOCALS",1)
+		SetGlobalTimer("Iaspell","LOCALS",ONE_ROUND)
+		ReallyForceSpell(LastSeenBy(Myself),WIZARD_CHAIN_LIGHTNING)  // SPWI615.SPL (连环闪电)
+END
+
+IF
+	!Detect([PC])
+	!Detect([GOODCUTOFF])
+	Global("partyfled","LOCALS",0)
+	Allegiance(Myself,ENEMY)
+	GlobalGT("Ianobmar01","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobalTimer("chase","LOCALS",EIGHTEEN_MINUTES)
+		SetGlobal("partyfled","LOCALS",1)
+END
+
+IF
+	!StateCheck(Myself,STATE_HELPLESS)
+	!StateCheck(Myself,STATE_CONFUSED)
+	!StateCheck(Myself,STATE_STUNNED)
+	!StateCheck(Myself,STATE_PANIC)
+	!StateCheck(Myself,STATE_CHARMED)
+	!Detect([PC])
+	!Detect([GOODCUTOFF])
+	Global("partyfled","LOCALS",1)
+	GlobalTimerNotExpired("chase","LOCALS")
+	InMyArea(Player1)
+	Allegiance(Myself,ENEMY)
+	GlobalGT("Ianobmar01","LOCALS",0)
+THEN
+	RESPONSE #100
+		MoveToObject(Player1)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	!Detect([PC])
+	!Detect([GOODCUTOFF])
+	GlobalTimerExpired("chase","LOCALS")
+	Global("partyfled","LOCALS",1)
+	GlobalGT("Ianobmar01","LOCALS",0)
+THEN
+	RESPONSE #100
+		SetGlobal("Ianobmar01","LOCALS",0)
+		SetGlobal("Ianobmar02","LOCALS",0)
+		SetGlobal("Ianobmar03","LOCALS",0)
+		SetGlobal("Ianobmar04","LOCALS",0)
+		SetGlobal("Ianobmar05","LOCALS",0)
+		SetGlobal("Ianobmar06","LOCALS",0)
+		SetGlobal("Ianobmar09","LOCALS",0)
+		SetGlobal("RemoveMagic","LOCALS",0)
+		SetGlobal("Iareversal","LOCALS",0)
+		SetGlobal("Iacastbreach","LOCALS",0)
+		SetGlobal("LowerElectric","LOCALS",0)
+		SetGlobal("Iadispel","LOCALS",0)
+		ReallyForceSpellRES("SPWII07",Myself)
+END
+
+IF
+	!Detect([PC])
+	!Detect([GOODCUTOFF])
+	InMyArea(Player1)
+	Allegiance(Myself,ENEMY)
+THEN
+	RESPONSE #100
+		MoveToObject(Player1)
+END
+
+IF
+	Allegiance(Myself,ENEMY)
+	See(SecondNearestEnemyOf(Myself))
+	CheckStatLT(LastSeenBy(Myself),90,RESISTSLASHING)
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	RandomNumGT(6,4)
+	Range(LastSeenBy(Myself),4)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(NearestEnemyOf(Myself))
+END
+
+IF
+	See(SecondNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	See(ThirdNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	See(FourthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackOneRound(LastSeenBy(Myself))
+END
+
+IF
+	See(NearestEnemyOf(Myself))
+THEN
+	RESPONSE #100
+		AttackOneRound(NearestEnemyOf(Myself))
+END
+

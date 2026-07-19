@@ -1,0 +1,558 @@
+IF
+	Global("LZXPCOP2_0","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP2(0)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP2_0","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP3_0","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP3(0)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP3_0","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP4_0","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP4(0)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP4_0","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP5_0","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP5(0)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP5_0","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP6_0","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP6(0)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP6_0","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP1_1","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP1(1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP1_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP3_1","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP3(1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP3_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP4_1","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP4(1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP4_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP5_1","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP5(1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP5_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP6_1","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP6(1)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP6_1","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP1_2","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP1(2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP1_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP2_2","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP2(2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP2_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP4_2","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP4(2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP4_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP5_2","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP5(2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP5_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP6_2","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP6(2)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP6_2","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP1_3","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP1(3)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP1_3","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP2_3","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP2(3)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP2_3","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP3_3","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP3(3)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP3_3","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP5_3","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP5(3)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP5_3","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP6_3","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP6(3)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP6_3","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP1_4","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP1(4)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP1_4","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP2_4","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP2(4)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP2_4","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP3_4","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP3(4)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP3_4","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP4_4","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP4(4)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP4_4","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP6_4","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP6(4)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP6_4","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP1_5","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP1(5)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP1_5","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP2_5","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP2(5)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP2_5","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP3_5","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP3(5)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP3_5","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP4_5","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP4(5)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP4_5","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPCOP5_5","LOCALS",0)
+	EEex_LuaTrigger("return LZXPCOP5(5)")
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPCOP5_5","LOCALS",1)
+		Continue()
+END
+
+IF
+	Global("LZXPP1SHARE","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP1SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(0,1)")
+		Continue()
+END
+
+IF
+	Global("LZXPP1SHARE","LOCALS",2)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP1SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(0,2)")
+		Continue()
+END
+
+IF
+	Global("LZXPP1SHARE","LOCALS",3)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP1SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(0,3)")
+		Continue()
+END
+
+IF
+	Global("LZXPP1SHARE","LOCALS",4)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP1SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(0,4)")
+		Continue()
+END
+
+IF
+	Global("LZXPP1SHARE","LOCALS",5)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP1SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(0,5)")
+		Continue()
+END
+
+IF
+	Global("LZXPP2SHARE","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP2SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(1,0)")
+		Continue()
+END
+
+IF
+	Global("LZXPP2SHARE","LOCALS",2)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP2SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(1,2)")
+		Continue()
+END
+
+IF
+	Global("LZXPP2SHARE","LOCALS",3)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP2SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(1,3)")
+		Continue()
+END
+
+IF
+	Global("LZXPP2SHARE","LOCALS",4)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP2SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(1,4)")
+		Continue()
+END
+
+IF
+	Global("LZXPP2SHARE","LOCALS",5)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP2SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(1,5)")
+		Continue()
+END
+
+IF
+	Global("LZXPP3SHARE","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP3SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(2,0)")
+		Continue()
+END
+
+IF
+	Global("LZXPP3SHARE","LOCALS",2)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP3SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(2,1)")
+		Continue()
+END
+
+IF
+	Global("LZXPP3SHARE","LOCALS",3)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP3SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(2,3)")
+		Continue()
+END
+
+IF
+	Global("LZXPP3SHARE","LOCALS",4)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP3SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(2,4)")
+		Continue()
+END
+
+IF
+	Global("LZXPP3SHARE","LOCALS",5)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP3SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(2,5)")
+		Continue()
+END
+
+IF
+	Global("LZXPP4SHARE","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP4SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(3,0)")
+		Continue()
+END
+
+IF
+	Global("LZXPP4SHARE","LOCALS",2)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP4SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(3,1)")
+		Continue()
+END
+
+IF
+	Global("LZXPP4SHARE","LOCALS",3)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP4SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(3,2)")
+		Continue()
+END
+
+IF
+	Global("LZXPP4SHARE","LOCALS",4)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP4SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(3,4)")
+		Continue()
+END
+
+IF
+	Global("LZXPP4SHARE","LOCALS",5)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP4SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(3,5)")
+		Continue()
+END
+
+IF
+	Global("LZXPP5SHARE","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP5SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(4,0)")
+		Continue()
+END
+
+IF
+	Global("LZXPP5SHARE","LOCALS",2)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP5SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(4,1)")
+		Continue()
+END
+
+IF
+	Global("LZXPP5SHARE","LOCALS",3)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP5SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(4,2)")
+		Continue()
+END
+
+IF
+	Global("LZXPP5SHARE","LOCALS",4)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP5SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(4,3)")
+		Continue()
+END
+
+IF
+	Global("LZXPP5SHARE","LOCALS",5)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP5SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(4,5)")
+		Continue()
+END
+
+IF
+	Global("LZXPP6SHARE","LOCALS",1)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP6SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(5,0)")
+		Continue()
+END
+
+IF
+	Global("LZXPP6SHARE","LOCALS",2)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP6SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(5,1)")
+		Continue()
+END
+
+IF
+	Global("LZXPP6SHARE","LOCALS",3)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP6SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(5,2)")
+		Continue()
+END
+
+IF
+	Global("LZXPP6SHARE","LOCALS",4)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP6SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(5,3)")
+		Continue()
+END
+
+IF
+	Global("LZXPP6SHARE","LOCALS",5)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPP6SHARE","LOCALS",0)
+		EEex_LuaAction("LZXPCHAN(5,4)")
+		Continue()
+END
+
+IF
+	Global("LZXPSHARETALK","LOCALS",0)
+	NumberOfTimesTalkedTo(0)
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPSHARETALK","LOCALS",1)
+		StartDialogueNoSet(LastSummonerOf(Myself))
+END
+
+IF
+	Global("LZXPSHARETALK","LOCALS",1)
+	ActionListEmpty()
+THEN
+	RESPONSE #100
+		SetGlobal("LZXPSHARETALK","LOCALS",0)
+		DestroySelf()
+END
+

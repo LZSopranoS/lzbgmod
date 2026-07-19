@@ -1,0 +1,371 @@
+IF
+	TriggerOverride("OHBOSSB",Global("OHBOSSWish","LOCALS",0))
+	TriggerOverride("OHBOSSA",GlobalTimerNotExpired("BOSSAWISHDEALY","LOCALS"))
+	TriggerOverride("OHBOSSA",Global("FirstWishDTS","LOCALS",0))
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		IncrementGlobal("WNOTRest","GLOBAL",1)
+		ActionOverride("OHBOSSA",SetGlobalTimer("DTSNOCUT","LOCALS",SIX_ROUNDS))
+		ActionOverride("OHBOSSB",SetGlobalTimer("DTSNOCUT","LOCALS",SIX_ROUNDS))
+		ActionOverride("OHABONE",SetGlobalTimer("DTSNOCUT","LOCALS",SIX_ROUNDS))
+		DisplayStringHead("OHBOSSA",72549)  // 在施术者身上施用两倍时效的“时间停止”和“高等迅捷”。
+		FaceObject("OHBOSSA")  // 太摩拉双子·金童
+		DisplayStringHead(Myself,100278)  // 遵命。
+		ActionOverride("OHBOSSA",SetGlobal("OHBOSSAGetDTS","LOCALS",1))
+		ActionOverride("OHBOSSA",ReallyForceSpellRES("SPWISH17",Myself))  // 时间停止
+		DisplayString("OHBOSSA",63217)  // 高等迅捷
+		Wait(1)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+END
+
+IF
+	TriggerOverride("OHBOSSA",Global("OHBOSSWish","LOCALS",0))
+	TriggerOverride("OHBOSSB",GlobalTimerNotExpired("BOSSBWISHDEALY","LOCALS"))
+	TriggerOverride("OHBOSSB",Global("FirstWishDTS","LOCALS",0))
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		IncrementGlobal("WNOTRest","GLOBAL",1)
+		ActionOverride("OHBOSSB",SetGlobalTimer("DTSNOCUT","LOCALS",SIX_ROUNDS))
+		ActionOverride("OHBOSSA",SetGlobalTimer("DTSNOCUT","LOCALS",SIX_ROUNDS))
+		ActionOverride("OHABONE",SetGlobalTimer("DTSNOCUT","LOCALS",SIX_ROUNDS))
+		DisplayStringHead("OHBOSSB",72549)  // 在施术者身上施用两倍时效的“时间停止”和“高等迅捷”。
+		FaceObject("OHBOSSB")  // 太摩拉双子·玉女
+		DisplayStringHead(Myself,100278)  // 遵命。
+		ActionOverride("OHBOSSB",SetGlobal("OHBOSSBGetDTS","LOCALS",1))
+		ActionOverride("OHBOSSB",ReallyForceSpellRES("SPWISH17",Myself))  // 时间停止
+		DisplayString("OHBOSSB",63217)  // 高等迅捷
+		Wait(1)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+END
+
+IF
+	TriggerOverride("OHBOSSB",Global("OHBOSSWish","LOCALS",0))
+	TriggerOverride("OHBOSSA",GlobalTimerNotExpired("BOSSAWISHDEALY","LOCALS"))
+	TriggerOverride("OHBOSSA",Global("AfterRestDTS","LOCALS",1))
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		IncrementGlobal("WNOTRest","GLOBAL",1)
+		ActionOverride("OHBOSSA",SetGlobalTimer("DTSNOCUT","LOCALS",SIX_ROUNDS))
+		ActionOverride("OHBOSSB",SetGlobalTimer("DTSNOCUT","LOCALS",SIX_ROUNDS))
+		ActionOverride("OHABONE",SetGlobalTimer("DTSNOCUT","LOCALS",SIX_ROUNDS))
+		DisplayStringHead("OHBOSSA",72549)  // 在施术者身上施用两倍时效的“时间停止”和“高等迅捷”。
+		FaceObject("OHBOSSA")  // 太摩拉双子·金童
+		DisplayStringHead(Myself,100278)  // 遵命。
+		ActionOverride("OHBOSSA",SetGlobal("OHBOSSAGetDTS","LOCALS",1))
+		ActionOverride("OHBOSSA",ReallyForceSpellRES("SPWISH17",Myself))  // 时间停止
+		DisplayString("OHBOSSA",63217)  // 高等迅捷
+		Wait(1)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+END
+
+IF
+	TriggerOverride("OHBOSSA",Global("OHBOSSWish","LOCALS",0))
+	TriggerOverride("OHBOSSB",GlobalTimerNotExpired("BOSSBWISHDEALY","LOCALS"))
+	TriggerOverride("OHBOSSB",Global("AfterRestDTS","LOCALS",1))
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		IncrementGlobal("WNOTRest","GLOBAL",1)
+		ActionOverride("OHBOSSB",SetGlobalTimer("DTSNOCUT","LOCALS",SIX_ROUNDS))
+		ActionOverride("OHBOSSA",SetGlobalTimer("DTSNOCUT","LOCALS",SIX_ROUNDS))
+		ActionOverride("OHABONE",SetGlobalTimer("DTSNOCUT","LOCALS",SIX_ROUNDS))
+		DisplayStringHead("OHBOSSB",72549)  // 在施术者身上施用两倍时效的“时间停止”和“高等迅捷”。
+		FaceObject("OHBOSSB")  // 太摩拉双子·玉女
+		DisplayStringHead(Myself,100278)  // 遵命。
+		ActionOverride("OHBOSSB",SetGlobal("OHBOSSBGetDTS","LOCALS",1))
+		ActionOverride("OHBOSSB",ReallyForceSpellRES("SPWISH17",Myself))  // 时间停止
+		DisplayString("OHBOSSB",63217)  // 高等迅捷
+		Wait(1)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+END
+
+IF
+	Global("OHBBGETREST","GLOBAL",0)
+	OR(2)
+		GlobalLT("WNOTRest","GLOBAL",5)
+		Global("ROnlyOneTime","GLOBAL",1)
+THEN
+	RESPONSE #20
+		SetGlobal("OHBBGETREST","GLOBAL",1)
+	RESPONSE #20
+		SetInterrupt(FALSE)
+		IncrementGlobal("WNOTRest","GLOBAL",1)
+		DisplayStringHead(LastSummonerOf(Myself),72538)  // 给区域内除队友及高隐敌人外的所有人施加“破解术”。
+		FaceObject(LastSummonerOf(Myself))
+		DisplayStringHead(Myself,100280)  // 搞定。
+		ActionOverride(LastSummonerOf(Myself),ReallyForceSpellRES("SPWISH38",Myself))  // 破解术
+		Wait(1)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+	RESPONSE #20
+		SetInterrupt(FALSE)
+		IncrementGlobal("WNOTRest","GLOBAL",1)
+		DisplayStringHead(LastSummonerOf(Myself),72532)  // 对附近所有的人，包括我方队员在内，施用“亚比达奇凋死术”。
+		FaceObject(LastSummonerOf(Myself))
+		DisplayStringHead(Myself,3479)  // 如你所愿。
+		ActionOverride(LastSummonerOf(Myself),ReallyForceSpellRES("SPWISH32",Myself))  // 亚比达奇凋死术
+		Wait(1)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+	RESPONSE #20
+		SetInterrupt(FALSE)
+		IncrementGlobal("WNOTRest","GLOBAL",1)
+		DisplayStringHead(LastSummonerOf(Myself),72533)  // 让附近所有的人，包括我方队员和敌人，陷入酒醉状态。
+		FaceObject(LastSummonerOf(Myself))
+		DisplayStringHead(Myself,3479)  // 如你所愿。
+		ActionOverride(LastSummonerOf(Myself),ReallyForceSpellRES("SPWISH33",Myself))  // 中毒
+		Wait(1)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+	RESPONSE #20
+		SetInterrupt(FALSE)
+		IncrementGlobal("WNOTRest","GLOBAL",1)
+		DisplayStringHead(LastSummonerOf(Myself),72534)  // 包括我方队员在内，让附近所有的人运气变差。
+		FaceObject(LastSummonerOf(Myself))
+		DisplayStringHead(Myself,3479)  // 如你所愿。
+		ActionOverride(LastSummonerOf(Myself),ReallyForceSpellRES("SPWISH34",Myself))  // 霉运
+		Wait(1)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+	RESPONSE #20
+		SetInterrupt(FALSE)
+		IncrementGlobal("WNOTRest","GLOBAL",1)
+		DisplayStringHead(LastSummonerOf(Myself),72552)  // 在附近召唤出一额外的敌对怪物。
+		FaceObject(LastSummonerOf(Myself))
+		DisplayStringHead(Myself,3479)  // 如你所愿。
+		ActionOverride(LastSummonerOf(Myself),ReallyForceSpellRES("SPWISH18",Myself))  // 召唤深渊界侍者
+		Wait(1)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+	RESPONSE #20
+		SetInterrupt(FALSE)
+		IncrementGlobal("WNOTRest","GLOBAL",1)
+		DisplayStringHead(LastSummonerOf(Myself),72553)  // 每个队员被吸取两个等级。
+		FaceObject(LastSummonerOf(Myself))
+		DisplayStringHead(Myself,3557)  // 没问题。
+		ActionOverride(LastSummonerOf(Myself),ReallyForceSpellRES("SPWISH19",Myself))  // 吸能术
+		Wait(1)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+	RESPONSE #20
+		SetInterrupt(FALSE)
+		IncrementGlobal("WNOTRest","GLOBAL",1)
+		DisplayStringHead(LastSummonerOf(Myself),72557)  // 损失10000枚金币。
+		FaceObject(LastSummonerOf(Myself))
+		DisplayStringHead(Myself,3557)  // 没问题。
+		ActionOverride(LastSummonerOf(Myself),ReallyForceSpellRES("SPWISH23",Player1))  // 废墟
+		Wait(1)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+	RESPONSE #20
+		SetInterrupt(FALSE)
+		IncrementGlobal("WNOTRest","GLOBAL",1)
+		DisplayStringHead(LastSummonerOf(Myself),72528)  // 治愈所有人的伤势，无论是我方队员还是敌人。
+		FaceObject(LastSummonerOf(Myself))
+		DisplayStringHead(Myself,3557)  // 没问题。
+		ActionOverride(LastSummonerOf(Myself),ReallyForceSpellRES("SPWISH28",Myself))  // 痊愈术
+		Wait(1)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+END
+
+IF
+	Global("WNOTRest","GLOBAL",5)
+	Global("ROnlyOneTime","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("WNOTRest","GLOBAL",0)
+		SetGlobal("ROnlyOneTime","GLOBAL",1)
+		SetGlobal("OHBBGETREST","GLOBAL",1)
+		Continue()
+END
+
+IF
+	Global("OHBBGETREST","GLOBAL",1)
+	Global("ROnlyOneTime","GLOBAL",0)
+THEN
+	RESPONSE #100
+		SetGlobal("WNOTRest","GLOBAL",0)
+		SetGlobal("ROnlyOneTime","GLOBAL",1)
+		Continue()
+END
+
+IF
+	Global("OHBBGETREST","GLOBAL",1)
+	Global("ROnlyOneTime","GLOBAL",1)
+THEN
+	RESPONSE #100
+		SetInterrupt(FALSE)
+		SetGlobal("OHBBGETREST","GLOBAL",0)
+		DisplayStringHead(LastSummonerOf(Myself),72548)  // 让全队像刚睡了一整晚的好觉般状态良好，重新忆起所有的法术。
+		FaceObject(LastSummonerOf(Myself))
+		DisplayStringHead(Myself,100276)  // 那它应当如此。
+		ActionOverride("OHBOSSA",SetGlobal("Prepare","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Iadra11","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Iainterrupt","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Prepare2","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Iadra08","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Iaabs","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Iahardiness","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Irefreshsi","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Iareversal","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Iacastbreach","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Iaremove","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Iadispelpotp1","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Iadispelpot","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Iadra12","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Iadra03","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Summon","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Iacshla","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Iagwhla","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Ianoward","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Iadra04","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Iawilting","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Iadra07","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Iamissile","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Iacometbreath","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Iafinger","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("Iafarrow","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("OHBATrapNum","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("OHBAFirstTSCombo","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("OHBOSSWishNum","LOCALS",0))
+		ActionOverride("OHBOSSA",SetGlobal("AfterRestDTS","LOCALS",1))
+		ActionOverride("OHBOSSA",Rest())
+		SmallWait(1)
+		ActionOverride("OHBOSSB",SetGlobal("Prep","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iasendai01","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iaskins","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iasendai02","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iastun","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iablades","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iafaith","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iasendai06","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iaccontin","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iatrigger","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iasendai03","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iareversal","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iacastbreach","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iadispelpfmw","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iaremoves","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iadispelpot","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iasendai16","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Ialower","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iasendai17","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iasendai04","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iadeath","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iasendai13","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iasendai14","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iafinger","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Ianoward","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iadispel","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iasendai09","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Ianoward2","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iasendai12","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iahorrid","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iasendai07","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iasendai15","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iahperson","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iarigid","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iafarrow","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iaacid","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iamissile","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("Iacommand","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("OHBBHarmNum","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("OHBBFirstTSCombo","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("OHBOSSWishNum","LOCALS",0))
+		ActionOverride("OHBOSSB",SetGlobal("AfterRestDTS","LOCALS",1))
+		ActionOverride("OHBOSSB",Rest())
+		SmallWait(1)
+		ActionOverride("OHABONE",SetGlobal("Iaruneg01","LOCALS",0))
+		ActionOverride("OHABONE",SetGlobal("Iaruneg02","LOCALS",0))
+		ActionOverride("OHABONE",SetGlobal("Iaruneg03","LOCALS",0))
+		ActionOverride("OHABONE",SetGlobal("Iaruneg04","LOCALS",0))
+		ActionOverride("OHABONE",SetGlobal("Iaruneg05","LOCALS",0))
+		ActionOverride("OHABONE",SetGlobal("Iaruneg06","LOCALS",0))
+		ActionOverride("OHABONE",SetGlobal("OHABONETSNum","LOCALS",0))
+		ActionOverride("OHABONE",SetGlobal("OHABONESTNum","LOCALS",0))
+		ActionOverride("OHABONE",SetGlobal("OHABONEETNum","LOCALS",0))
+		ActionOverride("OHABONE",SetGlobal("OHABONESNNum","LOCALS",0))
+		ActionOverride("OHABONE",SetGlobal("OHABONESNum","LOCALS",0))
+		ActionOverride("OHABONE",SetGlobal("OHABONEPFMW","LOCALS",0))
+		ActionOverride("OHABONE",SetGlobal("OHABONESCMFStart","LOCALS",0))
+		ActionOverride("OHABONE",SetGlobal("OHABONEHLA","LOCALS",0))
+		ActionOverride("OHABONE",SetGlobal("OHABONEBB","LOCALS",0))
+		ActionOverride("OHABONE",Rest())
+		SmallWait(1)
+		ActionOverride("OHABTWO",SetGlobal("Iapri01","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("Iapri02","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("Iapri03","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("Iapri06","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("Iapri07","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("Iapri08","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("Iapri09","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("Iapri10","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("Iapri11","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("Iapri17","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("Iapri18","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("Iadispel","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("Iacommand","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("OHABTWOSOV","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("OHABTWOCI","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("OHABTWOR","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("OHABTWOMC","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("OHABTWOCC","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("OHABTWOFA","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("OHABTWOCHANT","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("OHABTWOBLESS","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("OHABTWOPFE","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("OHABTWOIS","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("OHABTWOHM","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("OHABTWORM","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("OHABTWOACS","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("OHABTWOWW","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("OHABTWOHARD","LOCALS",0))
+		ActionOverride("OHABTWO",SetGlobal("OHABTWORES","LOCALS",0))
+		ActionOverride("OHABTWO",Rest())
+		SmallWait(1)
+		ActionOverride("OHABTHR",SetGlobal("OH_Cntg","LOCALS",0))
+		ActionOverride("OHABTHR",SetGlobal("OH_Trig","LOCALS",0))
+		ActionOverride("OHABTHR",SetGlobal("OH_Seq","LOCALS",0))
+		ActionOverride("OHABTHR",SetGlobal("OH_MSeq","LOCALS",0))
+		ActionOverride("OHABTHR",SetGlobal("OHABTHRBB","LOCALS",0))
+		ActionOverride("OHABTHR",SetGlobal("OHABONEPFMW","LOCALS",0))
+		ActionOverride("OHABTHR",SetGlobal("OHABTHRSEQI","LOCALS",0))
+		ActionOverride("OHABTHR",SetGlobal("OHABTHRSEQII","LOCALS",0))
+		ActionOverride("OHABTHR",SetGlobal("OHABTHRSEQIII","LOCALS",0))
+		ActionOverride("OHABTHR",SetGlobal("OHABTHRSCIG","LOCALS",0))
+		ActionOverride("OHABTHR",SetGlobal("OHABTHROS","LOCALS",0))
+		ActionOverride("OHABTHR",SetGlobal("OHABTHRDS","LOCALS",0))
+		ActionOverride("OHABTHR",Rest())
+		SmallWait(1)
+		ActionOverride("OHABFOR",SetGlobal("OHABFORLunar","LOCALS",0))
+		ActionOverride("OHABFOR",SetGlobal("OHABFORJFJ","LOCALS",0))
+		ActionOverride("OHABFOR",SetGlobal("OHABFORJGT","LOCALS",0))
+		ActionOverride("OHABFOR",SetGlobal("OHABFORHD","LOCALS",0))
+		ActionOverride("OHABFOR",SetGlobal("SecondWind","LOCALS",0))
+		ActionOverride("OHABFOR",Rest())
+		Wait(1)
+		ReallyForceSpell(Myself,POOF_GONE)  // SPIN660.SPL (传送)
+		DestroySelf()
+		SetInterrupt(TRUE)
+END
+
