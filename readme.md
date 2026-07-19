@@ -1,4 +1,4 @@
-**支持游戏**：`BGEE | BG2EE | EET`  **支持语言**：`Chinese`
+**支持游戏**：`BGEE | BG2EE | EET`    **支持语言**：`Chinese`
 
 
 
