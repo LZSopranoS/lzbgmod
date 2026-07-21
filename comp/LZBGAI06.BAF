@@ -1182,6 +1182,10 @@ THEN
 		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIMageSC","LOCALS",1))
 		ActionOverride(LastSeenBy(Myself),SetGlobalTimer("LZAICastdelay","LOCALS",THREE_ROUNDS))
 		ActionOverride(LastSeenBy(Myself),CreateVisualEffectObject("SPSNRAYI",Myself))
+		ActionOverride(LastSeenBy(Myself),ReallyForceSpellRES("LZAISP08",Myself))  // 维克那之袍
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI921",Myself))  // 高等迅捷
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI613",Myself))  // 高等加速术
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI909",Myself))  // 时间停止
 		ActionOverride(LastSeenBy(Myself),ForceSpellRES("LZSCCOB1",Myself))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
@@ -1190,6 +1194,10 @@ THEN
 		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIMageSC","LOCALS",1))
 		ActionOverride(LastSeenBy(Myself),SetGlobalTimer("LZAICastdelay","LOCALS",THREE_ROUNDS))
 		ActionOverride(LastSeenBy(Myself),CreateVisualEffectObject("SPSNRAYI",Myself))
+		ActionOverride(LastSeenBy(Myself),ReallyForceSpellRES("LZAISP08",Myself))  // 维克那之袍
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI921",Myself))  // 高等迅捷
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI613",Myself))  // 高等加速术
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI909",Myself))  // 时间停止
 		ActionOverride(LastSeenBy(Myself),ForceSpellRES("LZSCCOB2",Myself))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
@@ -2451,6 +2459,10 @@ THEN
 		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIMageSC","LOCALS",1))
 		ActionOverride(LastSeenBy(Myself),SetGlobalTimer("LZAICastdelay","LOCALS",THREE_ROUNDS))
 		ActionOverride(LastSeenBy(Myself),CreateVisualEffectObject("SPSNRAYI",Myself))
+		ActionOverride(LastSeenBy(Myself),ReallyForceSpellRES("LZAISP08",Myself))  // 维克那之袍
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI921",Myself))  // 高等迅捷
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI613",Myself))  // 高等加速术
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI909",Myself))  // 时间停止
 		ActionOverride(LastSeenBy(Myself),ForceSpellRES("LZSCCOB1",Myself))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
@@ -2459,6 +2471,10 @@ THEN
 		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIMageSC","LOCALS",1))
 		ActionOverride(LastSeenBy(Myself),SetGlobalTimer("LZAICastdelay","LOCALS",THREE_ROUNDS))
 		ActionOverride(LastSeenBy(Myself),CreateVisualEffectObject("SPSNRAYI",Myself))
+		ActionOverride(LastSeenBy(Myself),ReallyForceSpellRES("LZAISP08",Myself))  // 维克那之袍
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI921",Myself))  // 高等迅捷
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI613",Myself))  // 高等加速术
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI909",Myself))  // 时间停止
 		ActionOverride(LastSeenBy(Myself),ForceSpellRES("LZSCCOB2",Myself))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
@@ -3720,6 +3736,10 @@ THEN
 		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIMageSC","LOCALS",1))
 		ActionOverride(LastSeenBy(Myself),SetGlobalTimer("LZAICastdelay","LOCALS",THREE_ROUNDS))
 		ActionOverride(LastSeenBy(Myself),CreateVisualEffectObject("SPSNRAYI",Myself))
+		ActionOverride(LastSeenBy(Myself),ReallyForceSpellRES("LZAISP08",Myself))  // 维克那之袍
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI921",Myself))  // 高等迅捷
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI613",Myself))  // 高等加速术
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI909",Myself))  // 时间停止
 		ActionOverride(LastSeenBy(Myself),ForceSpellRES("LZSCCOB1",Myself))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
@@ -3728,6 +3748,10 @@ THEN
 		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIMageSC","LOCALS",1))
 		ActionOverride(LastSeenBy(Myself),SetGlobalTimer("LZAICastdelay","LOCALS",THREE_ROUNDS))
 		ActionOverride(LastSeenBy(Myself),CreateVisualEffectObject("SPSNRAYI",Myself))
+		ActionOverride(LastSeenBy(Myself),ReallyForceSpellRES("LZAISP08",Myself))  // 维克那之袍
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI921",Myself))  // 高等迅捷
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI613",Myself))  // 高等加速术
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI909",Myself))  // 时间停止
 		ActionOverride(LastSeenBy(Myself),ForceSpellRES("LZSCCOB2",Myself))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
@@ -4989,6 +5013,10 @@ THEN
 		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIMageSC","LOCALS",1))
 		ActionOverride(LastSeenBy(Myself),SetGlobalTimer("LZAICastdelay","LOCALS",THREE_ROUNDS))
 		ActionOverride(LastSeenBy(Myself),CreateVisualEffectObject("SPSNRAYI",Myself))
+		ActionOverride(LastSeenBy(Myself),ReallyForceSpellRES("LZAISP08",Myself))  // 维克那之袍
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI921",Myself))  // 高等迅捷
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI613",Myself))  // 高等加速术
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI909",Myself))  // 时间停止
 		ActionOverride(LastSeenBy(Myself),ForceSpellRES("LZSCCOB1",Myself))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
@@ -4997,6 +5025,10 @@ THEN
 		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIMageSC","LOCALS",1))
 		ActionOverride(LastSeenBy(Myself),SetGlobalTimer("LZAICastdelay","LOCALS",THREE_ROUNDS))
 		ActionOverride(LastSeenBy(Myself),CreateVisualEffectObject("SPSNRAYI",Myself))
+		ActionOverride(LastSeenBy(Myself),ReallyForceSpellRES("LZAISP08",Myself))  // 维克那之袍
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI921",Myself))  // 高等迅捷
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI613",Myself))  // 高等加速术
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI909",Myself))  // 时间停止
 		ActionOverride(LastSeenBy(Myself),ForceSpellRES("LZSCCOB2",Myself))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
@@ -6258,6 +6290,10 @@ THEN
 		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIMageSC","LOCALS",1))
 		ActionOverride(LastSeenBy(Myself),SetGlobalTimer("LZAICastdelay","LOCALS",THREE_ROUNDS))
 		ActionOverride(LastSeenBy(Myself),CreateVisualEffectObject("SPSNRAYI",Myself))
+		ActionOverride(LastSeenBy(Myself),ReallyForceSpellRES("LZAISP08",Myself))  // 维克那之袍
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI921",Myself))  // 高等迅捷
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI613",Myself))  // 高等加速术
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI909",Myself))  // 时间停止
 		ActionOverride(LastSeenBy(Myself),ForceSpellRES("LZSCCOB1",Myself))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
@@ -6266,6 +6302,10 @@ THEN
 		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIMageSC","LOCALS",1))
 		ActionOverride(LastSeenBy(Myself),SetGlobalTimer("LZAICastdelay","LOCALS",THREE_ROUNDS))
 		ActionOverride(LastSeenBy(Myself),CreateVisualEffectObject("SPSNRAYI",Myself))
+		ActionOverride(LastSeenBy(Myself),ReallyForceSpellRES("LZAISP08",Myself))  // 维克那之袍
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI921",Myself))  // 高等迅捷
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI613",Myself))  // 高等加速术
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI909",Myself))  // 时间停止
 		ActionOverride(LastSeenBy(Myself),ForceSpellRES("LZSCCOB2",Myself))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
@@ -7527,6 +7567,10 @@ THEN
 		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIMageSC","LOCALS",1))
 		ActionOverride(LastSeenBy(Myself),SetGlobalTimer("LZAICastdelay","LOCALS",THREE_ROUNDS))
 		ActionOverride(LastSeenBy(Myself),CreateVisualEffectObject("SPSNRAYI",Myself))
+		ActionOverride(LastSeenBy(Myself),ReallyForceSpellRES("LZAISP08",Myself))  // 维克那之袍
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI921",Myself))  // 高等迅捷
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI613",Myself))  // 高等加速术
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI909",Myself))  // 时间停止
 		ActionOverride(LastSeenBy(Myself),ForceSpellRES("LZSCCOB1",Myself))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
@@ -7535,6 +7579,10 @@ THEN
 		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIMageSC","LOCALS",1))
 		ActionOverride(LastSeenBy(Myself),SetGlobalTimer("LZAICastdelay","LOCALS",THREE_ROUNDS))
 		ActionOverride(LastSeenBy(Myself),CreateVisualEffectObject("SPSNRAYI",Myself))
+		ActionOverride(LastSeenBy(Myself),ReallyForceSpellRES("LZAISP08",Myself))  // 维克那之袍
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI921",Myself))  // 高等迅捷
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI613",Myself))  // 高等加速术
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI909",Myself))  // 时间停止
 		ActionOverride(LastSeenBy(Myself),ForceSpellRES("LZSCCOB2",Myself))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
@@ -8796,6 +8844,10 @@ THEN
 		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIMageSC","LOCALS",1))
 		ActionOverride(LastSeenBy(Myself),SetGlobalTimer("LZAICastdelay","LOCALS",THREE_ROUNDS))
 		ActionOverride(LastSeenBy(Myself),CreateVisualEffectObject("SPSNRAYI",Myself))
+		ActionOverride(LastSeenBy(Myself),ReallyForceSpellRES("LZAISP08",Myself))  // 维克那之袍
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI921",Myself))  // 高等迅捷
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI613",Myself))  // 高等加速术
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI909",Myself))  // 时间停止
 		ActionOverride(LastSeenBy(Myself),ForceSpellRES("LZSCCOB1",Myself))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
@@ -8804,6 +8856,10 @@ THEN
 		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIMageSC","LOCALS",1))
 		ActionOverride(LastSeenBy(Myself),SetGlobalTimer("LZAICastdelay","LOCALS",THREE_ROUNDS))
 		ActionOverride(LastSeenBy(Myself),CreateVisualEffectObject("SPSNRAYI",Myself))
+		ActionOverride(LastSeenBy(Myself),ReallyForceSpellRES("LZAISP08",Myself))  // 维克那之袍
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI921",Myself))  // 高等迅捷
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI613",Myself))  // 高等加速术
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI909",Myself))  // 时间停止
 		ActionOverride(LastSeenBy(Myself),ForceSpellRES("LZSCCOB2",Myself))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
@@ -10065,6 +10121,10 @@ THEN
 		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIMageSC","LOCALS",1))
 		ActionOverride(LastSeenBy(Myself),SetGlobalTimer("LZAICastdelay","LOCALS",THREE_ROUNDS))
 		ActionOverride(LastSeenBy(Myself),CreateVisualEffectObject("SPSNRAYI",Myself))
+		ActionOverride(LastSeenBy(Myself),ReallyForceSpellRES("LZAISP08",Myself))  // 维克那之袍
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI921",Myself))  // 高等迅捷
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI613",Myself))  // 高等加速术
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI909",Myself))  // 时间停止
 		ActionOverride(LastSeenBy(Myself),ForceSpellRES("LZSCCOB1",Myself))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
@@ -10073,6 +10133,10 @@ THEN
 		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIMageSC","LOCALS",1))
 		ActionOverride(LastSeenBy(Myself),SetGlobalTimer("LZAICastdelay","LOCALS",THREE_ROUNDS))
 		ActionOverride(LastSeenBy(Myself),CreateVisualEffectObject("SPSNRAYI",Myself))
+		ActionOverride(LastSeenBy(Myself),ReallyForceSpellRES("LZAISP08",Myself))  // 维克那之袍
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI921",Myself))  // 高等迅捷
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI613",Myself))  // 高等加速术
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI909",Myself))  // 时间停止
 		ActionOverride(LastSeenBy(Myself),ForceSpellRES("LZSCCOB2",Myself))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
@@ -11334,6 +11398,10 @@ THEN
 		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIMageSC","LOCALS",1))
 		ActionOverride(LastSeenBy(Myself),SetGlobalTimer("LZAICastdelay","LOCALS",THREE_ROUNDS))
 		ActionOverride(LastSeenBy(Myself),CreateVisualEffectObject("SPSNRAYI",Myself))
+		ActionOverride(LastSeenBy(Myself),ReallyForceSpellRES("LZAISP08",Myself))  // 维克那之袍
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI921",Myself))  // 高等迅捷
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI613",Myself))  // 高等加速术
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI909",Myself))  // 时间停止
 		ActionOverride(LastSeenBy(Myself),ForceSpellRES("LZSCCOB1",Myself))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
@@ -11342,6 +11410,10 @@ THEN
 		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIMageSC","LOCALS",1))
 		ActionOverride(LastSeenBy(Myself),SetGlobalTimer("LZAICastdelay","LOCALS",THREE_ROUNDS))
 		ActionOverride(LastSeenBy(Myself),CreateVisualEffectObject("SPSNRAYI",Myself))
+		ActionOverride(LastSeenBy(Myself),ReallyForceSpellRES("LZAISP08",Myself))  // 维克那之袍
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI921",Myself))  // 高等迅捷
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI613",Myself))  // 高等加速术
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI909",Myself))  // 时间停止
 		ActionOverride(LastSeenBy(Myself),ForceSpellRES("LZSCCOB2",Myself))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
@@ -12603,6 +12675,10 @@ THEN
 		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIMageSC","LOCALS",1))
 		ActionOverride(LastSeenBy(Myself),SetGlobalTimer("LZAICastdelay","LOCALS",THREE_ROUNDS))
 		ActionOverride(LastSeenBy(Myself),CreateVisualEffectObject("SPSNRAYI",Myself))
+		ActionOverride(LastSeenBy(Myself),ReallyForceSpellRES("LZAISP08",Myself))  // 维克那之袍
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI921",Myself))  // 高等迅捷
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI613",Myself))  // 高等加速术
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI909",Myself))  // 时间停止
 		ActionOverride(LastSeenBy(Myself),ForceSpellRES("LZSCCOB1",Myself))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
@@ -12611,6 +12687,10 @@ THEN
 		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIMageSC","LOCALS",1))
 		ActionOverride(LastSeenBy(Myself),SetGlobalTimer("LZAICastdelay","LOCALS",THREE_ROUNDS))
 		ActionOverride(LastSeenBy(Myself),CreateVisualEffectObject("SPSNRAYI",Myself))
+		ActionOverride(LastSeenBy(Myself),ReallyForceSpellRES("LZAISP08",Myself))  // 维克那之袍
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI921",Myself))  // 高等迅捷
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI613",Myself))  // 高等加速术
+		ActionOverride(LastSeenBy(Myself),ForceSpellRES("SPWI909",Myself))  // 时间停止
 		ActionOverride(LastSeenBy(Myself),ForceSpellRES("LZSCCOB2",Myself))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
 		ActionOverride(LastSeenBy(Myself),AttackOneRound(NearestEnemyOf(Myself)))
