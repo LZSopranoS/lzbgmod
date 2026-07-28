@@ -729,3 +729,84 @@ PRINT "DEBUG: row=0, col=%col%, value=%class_value11%"
 PRINT "DEBUG: row=1, col=%col%, value=%class_value21%"
 PRINT "DEBUG: row=2, col=%col%, value=%class_value31%"
 */
+
+COPY ~lzbgmod/LZSHOP/copysay/LZPASIVH.ITM~ ~override~
+	SAY NAME2 @179
+	SAY IDENTIFIED_DESC @180
+
+/*
+//来自HouseTweaks的trap_detection.tpa
+DEFINE_ACTION_FUNCTION ADD_SPLPROT_CONDITION
+	STR_VAR
+		splprot_stat=~*~
+		splprot_value=~*~
+		splprot_relation=~*~
+	RET
+		splprot_slot
+BEGIN
+	COPY_EXISTING ~splprot.2da~ ~override~
+		COUNT_2DA_ROWS 4 numrows
+		//INSERT_2DA_ROW numrows 4 ~%numrows%        %splprot_stat%         %splprot_value%        %splprot_relation%~
+		INSERT_2DA_ROW numrows 4 ~%numrows%_STAT(TRAP)>=n        28         -1        4~
+		splprot_slot=numrows
+END
+
+LAF ADD_SPLPROT_CONDITION STR_VAR splprot_stat=~28~ splprot_value=~-1~ splprot_relation=~4~ RET splprot_findtrapsgt=splprot_slot END
+
+LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter2 = splprot_findtrapsgt END
+
+COPY_EXISTING ~c0d_det2.spl~ ~override~
+LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 0 probability2 = 0 END
+*/
+
+
+COPY_EXISTING ~splprot.2da~ ~override~
+    COUNT_2DA_ROWS 4 numrows
+    
+    // 1. 初始化变量，默认 -1 表示在表中还没找到该条件
+    SET splprot_slot = "-1"
+    
+    // 2. 循环遍历当前 2DA 表的所有现有行，检查后三列的数据
+    FOR (row = 0; row < numrows; row += 1) BEGIN
+        READ_2DA_ENTRY row 1 4 current_stat      // 读取第 2 列 (Stat)
+        READ_2DA_ENTRY row 2 4 current_value     // 读取第 3 列 (Value)
+        READ_2DA_ENTRY row 3 4 current_relation  // 读取第 4 列 (Relation)
+        
+        // 精确比对是否等于 "28" "-1" "4"
+        PATCH_IF (~%current_stat%~ STRING_EQUAL ~28~) AND 
+                 (~%current_value%~ STRING_EQUAL ~-1~) AND 
+                 (~%current_relation%~ STRING_EQUAL ~4~) BEGIN
+            // 如果找到了，读取第一列中包含的“真实物理行号”
+            READ_2DA_ENTRY row 0 4 splprot_slot
+            
+            // 终止循环（将循环控制变量设为最大值，效率最高）
+            row = numrows
+        END
+    END
+    
+    // 3. 判断：如果 splprot_slot 还是 "-1"，说明表里没有，执行插入
+    PATCH_IF (splprot_slot = "-1") BEGIN
+        // 按照你强迫症最爱的带文字标签格式插入新行
+        INSERT_2DA_ROW numrows 4 ~%numrows%_STAT(TRAP)>=n        28         -1        4~
+        // 新插入行的物理行号就是当前的总行数
+        SET splprot_slot = numrows
+    END
+	PRETTY_PRINT_2DA
+
+COPY_EXISTING ~LZPASDET.SPL~ ~override~
+    LPF ADD_SPELL_EFFECT
+    INT_VAR
+        insert_point = 0  // add on top
+        opcode = 326
+        target = 1        // Self
+		parameter1 = 100
+        parameter2 = splprot_slot
+        //timing = 0
+        //duration = 0
+    STR_VAR
+        resource = ~LZPASSFT~
+    END
+BUT_ONLY
+
+//COPY_EXISTING ~LZSHOP.STO~ ~override~
+	//ADD_STORE_ITEM ~LZPASIVH.ITM~ #3 #0 #0 ~IDENTIFIED~ #1
