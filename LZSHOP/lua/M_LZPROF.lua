@@ -16,8 +16,9 @@ function LZPROFIC(p1,p2)
 		--要求timingmode是9的proficiency2不存在，点数为0或nil或小于8则移除，防止转职覆盖
 		local theparameter2 = LZ_EEex_ReadDword(eData + 0x20)   --proficiency
 		local thetiming = LZ_EEex_ReadDword(eData + 0x24)       --timing mode
-        local theparent_resource = LZ_EEex_ReadDword(eData + 0x94)
-        if theopcode == 233 and theparameter2 == proficiency1 and thetiming == 9 and theparent_resource == 0 then
+        --local theparent_resource = LZ_EEex_ReadDword(eData + 0x94)
+        --if theopcode == 233 and theparameter2 == proficiency1 and thetiming == 9 and theparent_resource == 0 then
+		if theopcode == 233 and theparameter2 == proficiency1 and thetiming == 9 then
 			LZ_EEex_WriteDword(eData + 0x20, proficiency2)
         end
     end)
@@ -46,8 +47,9 @@ function LZPCHECK(p, step)
         if step == 1 then
             -- 对应原来的第一个函数逻辑 (传入 p1)
             local thetiming = LZ_EEex_ReadDword(eData + 0x24)
-            local theparent_resource = LZ_EEex_ReadDword(eData + 0x94)
-            if theparameter2 == p and thetiming == 9 and theparent_resource == 0 then
+            --local theparent_resource = LZ_EEex_ReadDword(eData + 0x94)
+            --if theparameter2 == p and thetiming == 9 and theparent_resource == 0 then
+			if theparameter2 == p and thetiming == 9 then
                 result = true
             end
             
@@ -84,8 +86,9 @@ function LZDCPACT()
 		local theparameter1_L = theparameter1 % 8               -- 取余数，得到active class value
 		local theparameter1_R = math.floor(theparameter1 / 8)   -- 除以8取整，得到original calss value
 		local thetiming = LZ_EEex_ReadDword(eData + 0x24)
-        local theparent_resource = LZ_EEex_ReadDword(eData + 0x94)
-		if theopcode == 233 and theparameter1_R > theparameter1_L  and thetiming == 9 and theparent_resource == 0 then
+        --local theparent_resource = LZ_EEex_ReadDword(eData + 0x94)
+		--if theopcode == 233 and theparameter1_R > theparameter1_L  and thetiming == 9 and theparent_resource == 0 then
+		if theopcode == 233 and theparameter1_R > theparameter1_L  and thetiming == 9 then
            local newparameter1 = theparameter1 + theparameter1_R - theparameter1_L
 		   LZ_EEex_WriteDword(eData + 0x1C,newparameter1)
 		   hasTriggered = true
