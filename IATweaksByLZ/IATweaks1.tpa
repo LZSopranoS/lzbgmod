@@ -111,3 +111,72 @@ COPY ~lzbgmod/IATweaksByLZ/lib/areas/05_worldmap.tph~   ~ImprovedAnvil/lib/areas
 //已改为改写2da.tph里的相关代码
 //和疯神王座、失落女神的呼唤、暗潮涌动、巴洛维亚的血腥骗局冲突修复，铁砧安装方式是直接COPY到override，2da列范围原版BG2EE同原版EET同安装铁砧后的BG2EE或EET，其它MOD需要添加列
 //COPY ~lzbgmod/IATweaksByLZ/CRASHFIX/SPAWNGRP.2DA~   ~ImprovedAnvil/resources/2da~
+
+// 替换d文件的数字标签，防止某个dlg文件被其它MOD修改后数字标签变化，安装铁砧时编译同名d文件提示标签被占用报错。
+OUTER_SPRINT ia_dlg_dir ~ImprovedAnvil/resources/dlg~ 
+
+ACTION_DEFINE_ASSOCIATIVE_ARRAY ia_d_files_dict BEGIN
+    ~CORNEIL~      => ~CORNEIL.D~
+	~PPSAEM3~      => ~PPSAEM3.D~
+    ~SHOP03~       => ~SHOP03.D~
+	~UDDEMON~      => ~UDDEMON.D~
+	
+	//~CECHALLE_DQ~  => ~CECHALLE_DQ.D~
+    //~PPDRA2~       => ~PPDRA2.D~
+    //~UHRANG01~     => ~UHRANG01.D~
+	
+	//~MURCRAG~      => ~MURCRAG.D~
+END
+
+ACTION_PHP_EACH ia_d_files_dict AS res_name => d_filename BEGIN
+	// 自动拼装当前要处理的 .d 文件的完整硬盘绝对路径
+    OUTER_SPRINT BASH_FOR_FILESPEC ~%ia_dlg_dir%/%d_filename%~
+	// 提取出不含后缀的纯资源名（RESNAME），用作后续文字标签的前缀
+    OUTER_SPRINT BASH_FOR_RES      ~%res_name%~
+
+    COPY - ~%BASH_FOR_FILESPEC%~ ~.../ia_d_patch~
+		// 清空局部数组，并将计数器归零，彻底掐断跨文件的标签数据污染
+        CLEAR_ARRAY local_defined_labels
+        SET label_index = 0
+		
+		// 锁定有 "THEN BEGIN 数字" 的合法上下文，利用圆括号把纯数字捕获到 %MATCH1% 中。
+        // 末尾原样放回 %MATCH0%，实现对正文内容 0 修改的“无痕浏览”。
+        REPLACE_EVALUATE CASE_INSENSITIVE ~[ %TAB%]THEN[ %TAB%]+BEGIN[ %TAB%]+\([0-9]+\)~ BEGIN
+			// 将当前揪出的数字（如 73）存入名为 local_defined_labels 的名单（数组）中
+            SPRINT $local_defined_labels(~%label_index%~) ~%MATCH1%~
+            SET label_index += 1
+        END ~%MATCH0%~
+		
+		REPLACE_EVALUATE CASE_INSENSITIVE ~\([ %TAB%]THEN[ %TAB%]+BEGIN[ %TAB%]+\)\([0-9]+\)\([ %TAB%]*\r?\n?\)~ BEGIN
+			// 每次成功改造节点时，在 WeiDU 窗口实时打印变动细节
+            PATCH_PRINT ~%d_filename%数字标签替换THEN BEGIN %MATCH2%->THEN BEGIN ia_%BASH_FOR_RES%_%MATCH2%~
+        END ~%MATCH1%ia_%BASH_FOR_RES%_%MATCH2%%MATCH3%~
+		
+		// 拿着名单里登记好的数字进行轮询，只有指向新节点的 GOTO 才允许加前缀
+		PHP_EACH local_defined_labels AS info => target_num BEGIN
+			// 使用 \b 单词边界锚定数字，确保精准匹配（如 GOTO 7 绝不会误伤 GOTO 73），%MATCH1% = GOTO及空格 ，%MATCH2% = 词尾边界
+            REPLACE_EVALUATE CASE_INSENSITIVE ~\(\bGOTO[ %TAB%]+\)%target_num%\(\b\)~ BEGIN
+                PATCH_PRINT ~%d_filename%数字标签替换GOTO %target_num%->GOTO ia_%BASH_FOR_RES%_%target_num%~
+            END ~%MATCH1%ia_%BASH_FOR_RES%_%target_num%%MATCH2%~
+        END
+		
+/*
+		// 匹配：IF ~~ 1，等价于IF ~~ THEN BEGIN 1
+		REPLACE_TEXTUALLY "~" "ReplaceMe"
+		
+		REPLACE_EVALUATE CASE_INSENSITIVE ~\([ %TAB%]*IF[ %TAB%]+ReplaceMe[ %TAB%]*ReplaceMe[ %TAB%]*\)\([0-9]+\)\([ %TAB%]*\r?\n?\)~ BEGIN
+            SET match_count += 1
+        END ~%MATCH1%ia_%BASH_FOR_RES%_%MATCH2%%MATCH3%~
+		
+		REPLACE_TEXTUALLY "ReplaceMe" "~"
+
+        // +等价于GOTO，匹配：独立的一个加号 + 后面跟着的纯数字目标，示例：+ 24  ->  + ia_%BASH_FOR_RES%_24
+        REPLACE_EVALUATE CASE_INSENSITIVE ~\(\+[ %TAB%]+\)\([0-9]+\)\([ %TAB%]*\r?\n?\)~ BEGIN
+            SET match_count += 1
+        END ~%MATCH1%ia_%BASH_FOR_RES%_%MATCH2%%MATCH3%~
+*/	
+
+    BUT_ONLY_IF_IT_CHANGES 
+
+    COPY ~.../ia_d_patch~ ~%BASH_FOR_FILESPEC%~
+END
