@@ -1,12 +1,13 @@
 IF
 	Global("LZBGAIAbility","GLOBAL",0)
-	!HaveSpellRES("LZAIABL1")  // LZ战斗强化
-	!HaveSpellRES("LZAIABL2")  // LZ战斗强化
+	!HaveSpellRES("LZAIABL1")  // LZ战斗强化(开启)
+	!HaveSpellRES("LZAIABL2")  // LZ战斗强化(关闭)
 	!StateCheck(Player1,CD_STATE_NOTVALID)
+	ObjectActionListEmpty(Player1)
 THEN
 	RESPONSE #100
 		SetGlobal("LZBGAIAbility","GLOBAL",1)
-		ActionOverride(Player1,AddSpecialAbility("LZAIABL2"))  // LZ战斗强化
+		ActionOverride(Player1,AddSpecialAbility("LZAIABL2"))  // LZ战斗强化(关闭)
 		Continue()
 END
 
