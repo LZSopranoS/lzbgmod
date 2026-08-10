@@ -810,3 +810,9 @@ BUT_ONLY
 
 //COPY_EXISTING ~LZSHOP.STO~ ~override~
 	//ADD_STORE_ITEM ~LZPASIVH.ITM~ #3 #0 #0 ~IDENTIFIED~ #1
+	
+
+//也可以换一种写法，如果检测到override下有ASUMM1X.BAM则删除，删掉后恢复成原版默认。
+ACTION_IF MOD_IS_INSTALLED ~TDD.TP2~ 0 THEN BEGIN
+	COPY ~lzbgmod/LZSHOP/bam~ ~override~
+END
