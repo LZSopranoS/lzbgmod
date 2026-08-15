@@ -1097,7 +1097,7 @@ IF
 THEN
 	RESPONSE #100
 		SetGlobalTimer("LZ_it_Hide","LOCALS",THREE_ROUNDS)
-		DisplayStringHead(Myself,266968)  // *试图阴影躲藏*
+		DisplayStringHead(Myself,101647)  // 尝试阴影躲藏
 		Hide()
 END
 
