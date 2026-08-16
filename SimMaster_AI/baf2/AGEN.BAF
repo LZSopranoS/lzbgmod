@@ -1,0 +1,110 @@
+IF
+	ActionListEmpty()
+	Class(Myself,BARD)
+	!ModalState(BATTLESONG)
+	OR(2)
+		See(NearestEnemyOf(Myself))
+		CombatCounterGT(0)
+	HasItemEquiped("BDHELM11",Myself)  // 诗人之帽
+THEN
+	RESPONSE #100
+		BattleSong()
+END
+
+IF
+	ActionListEmpty()
+	Class(Myself,BARD)
+	ModalState(BATTLESONG)
+	OR(2)
+		See(NearestEnemyOf(Myself))
+		CombatCounterGT(0)
+	HasItemEquiped("BDHELM11",Myself)  // 诗人之帽
+	!GlobalTimerNotExpired("AttackDuringSong","LOCALS")
+THEN
+	RESPONSE #100
+		SetGlobalTimer("AttackDuringSong","LOCALS",TWO_ROUNDS)
+		DisplayStringHead(Myself,11798)  // 吟唱歌曲
+END
+
+IF
+	ActionListEmpty()
+	Class(Myself,BARD)
+	ModalState(BATTLESONG)
+	!See(NearestEnemyOf(Myself))
+	CombatCounter(0)
+	Delay(30)
+THEN
+	RESPONSE #100
+		ClearActions(Myself)
+END
+
+IF
+	ActionListEmpty()
+	IsWeaponRanged(Myself)
+	See(NearestEnemyOf(Myself))
+	Range(LastSeenBy(Myself),6)
+THEN
+	RESPONSE #100
+		RunAwayFrom(LastSeenBy(Myself),30)
+END
+
+IF
+	ActionListEmpty()
+	See(NearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(LastSeenBy(Myself),30)
+END
+
+IF
+	ActionListEmpty()
+	See(SecondNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(LastSeenBy(Myself),30)
+END
+
+IF
+	ActionListEmpty()
+	See(ThirdNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(LastSeenBy(Myself),30)
+END
+
+IF
+	ActionListEmpty()
+	See(FourthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(LastSeenBy(Myself),30)
+END
+
+IF
+	ActionListEmpty()
+	See(FifthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(LastSeenBy(Myself),30)
+END
+
+IF
+	ActionListEmpty()
+	See(SixthNearestEnemyOf(Myself))
+	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
+	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+THEN
+	RESPONSE #100
+		AttackReevaluate(LastSeenBy(Myself),30)
+END
+

@@ -2,7 +2,7 @@ BACKUP ~weidu_external/lzbgmod/backup~
 
 AUTHOR ~LZ~
 
-VERSION ~v6.4~
+VERSION ~v6.5~
 
 README ~lzbgmod/readme.txt~
 
@@ -92,6 +92,11 @@ REQUIRE_COMPONENT ~EEex.tp2~ ~0~ @22
 
 COPY ~lzbgmod/SimMaster_AI/baf2/LZSIMPC3.BAF~ ~scripts/AGEN.BS~
 	COMPILE_BAF_TO_BCS
+
+//AGEN.BAF的内容同LZSIMPC3.BAF
+ACTION_IF FILE_EXISTS_IN_GAME ~AGEN.bcs~ THEN BEGIN
+	COMPILE ~lzbgmod/SimMaster_AI/baf2/AGEN.BAF~
+END
 
 INCLUDE ~lzbgmod/SimMaster_AI/SimMaster_AI.tpa~
 
