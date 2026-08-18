@@ -72,6 +72,62 @@ EXTEND_TOP ~MAGE4.BCS~        ~lzbgmod/SimMaster_AI/baf2/LZSIMPC2.BAF~
 EXTEND_TOP ~THIEF3.BCS~       ~lzbgmod/SimMaster_AI/baf2/LZSIMPC2.BAF~
 EXTEND_TOP ~THIEF4.BCS~       ~lzbgmod/SimMaster_AI/baf2/LZSIMPC2.BAF~
 
+// 第一步：扫描 scripts 文件夹，建立已存在的 .bs 脚本索引名单
+ACTION_BASH_FOR ~scripts~ ~^.+\.bs$~ BEGIN
+    
+    // 提取不带后缀的纯文件名（如 AGEN）
+    OUTER_SPRINT bs_name ~%BASH_FOR_RES%~
+    
+    // 转换为大写建立全局关联数组索引，确保比对时不区分大小写
+    OUTER_SPRINT bs_name_upper ~%bs_name%~
+    ACTION_TO_UPPER bs_name_upper
+    
+    // 标记该脚本在 scripts 文件夹中存在
+    OUTER_SET $scrp_exists(~%bs_name_upper%~) = 1
+    
+    // 打印调试信息确认扫描到了哪些 bs 文件
+    //PRINT ~[扫描 scripts] 发现有效 BS 脚本并登记索引: %bs_name%~
+END
+
+// 第二步：读取 PARTYAI.2da，和 scripts 文件夹的内容进行去重对比
+COPY_EXISTING ~PARTYAI.2da~ ~override~
+    COUNT_2DA_ROWS 2 p_rows
+    FOR (row = 1; row < p_rows; ++row) BEGIN
+        READ_2DA_ENTRY row 1 2 script_name
+	
+        // 打印每次循环最原始读取到的内容和对应的行号
+        //PATCH_PRINT ~[读取 PARTYAI] 第 %row% 行 - 脚本名: %script_name%~
+    
+        // 转换为大写进行比对
+        SPRINT ~script_name_upper~ ~%script_name%~
+        TO_UPPER ~script_name_upper~
+    
+        // 检查该脚本是否属于 scripts 文件夹中已存在的脚本
+        PATCH_IF (VARIABLE_IS_SET $scrp_exists(~%script_name_upper%~)) BEGIN
+        END ELSE BEGIN
+      
+            // 去重：检查该脚本在此次循环中是否已经执行过插入（防止 PARTYAI 内部同名重复）
+            PATCH_IF (VARIABLE_IS_SET $scrp_processed(~%script_name_upper%~)) BEGIN
+                // 已经处理过同名脚本，打印提示并跳过
+                //PATCH_PRINT ~  --> [自身去重] 脚本 %script_name% 已在前面行处理过，跳过插入~
+            END ELSE BEGIN
+        
+                // 确认为未处理过的独有脚本，立即将其标记为“已处理”
+                SET $scrp_processed(~%script_name_upper%~) = 1
+        
+                // 执行置顶注入
+                INNER_ACTION BEGIN
+					ACTION_IF (FILE_EXISTS_IN_GAME ~%script_name%.bcs~) BEGIN
+						EXTEND_TOP ~%script_name%.bcs~ ~lzbgmod/SimMaster_AI/baf2/LZSIMPC2.BAF~
+					END ELSE BEGIN
+						//PRINT ~    [跳过] 游戏资源中未找到实体文件 %script_name%.bcs~
+					END
+				END // INNER_ACTION 结束
+            END // 内部去重判断结束
+        END // 外部排除判断结束
+    END
+BUT_ONLY
+
 COPY ~lzbgmod/LZSHOP/lua/M_LZSIM.lua~   ~override~
 
 ACTION_IF NOT FILE_EXISTS_IN_GAME ~M_LZPATH.lua~ THEN BEGIN

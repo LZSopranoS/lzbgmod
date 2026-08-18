@@ -42,69 +42,69 @@ IF
 	ActionListEmpty()
 	IsWeaponRanged(Myself)
 	See(NearestEnemyOf(Myself))
-	Range(LastSeenBy(Myself),6)
+	Range(NearestEnemyOf(Myself),6)
 THEN
 	RESPONSE #100
-		RunAwayFrom(LastSeenBy(Myself),30)
+		RunAwayFrom(NearestEnemyOf(Myself),30)
 END
 
 IF
 	ActionListEmpty()
 	See(NearestEnemyOf(Myself))
-	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
-	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+	WeaponEffectiveVs(NearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(NearestEnemyOf(Myself),MAINHAND)
 THEN
 	RESPONSE #100
-		AttackReevaluate(LastSeenBy(Myself),30)
+		AttackReevaluate(NearestEnemyOf(Myself),30)
 END
 
 IF
 	ActionListEmpty()
 	See(SecondNearestEnemyOf(Myself))
-	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
-	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+	WeaponEffectiveVs(SecondNearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(SecondNearestEnemyOf(Myself),MAINHAND)
 THEN
 	RESPONSE #100
-		AttackReevaluate(LastSeenBy(Myself),30)
+		AttackReevaluate(SecondNearestEnemyOf(Myself),30)
 END
 
 IF
 	ActionListEmpty()
 	See(ThirdNearestEnemyOf(Myself))
-	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
-	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+	WeaponEffectiveVs(ThirdNearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(ThirdNearestEnemyOf(Myself),MAINHAND)
 THEN
 	RESPONSE #100
-		AttackReevaluate(LastSeenBy(Myself),30)
+		AttackReevaluate(ThirdNearestEnemyOf(Myself),30)
 END
 
 IF
 	ActionListEmpty()
 	See(FourthNearestEnemyOf(Myself))
-	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
-	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+	WeaponEffectiveVs(FourthNearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(FourthNearestEnemyOf(Myself),MAINHAND)
 THEN
 	RESPONSE #100
-		AttackReevaluate(LastSeenBy(Myself),30)
+		AttackReevaluate(FourthNearestEnemyOf(Myself),30)
 END
 
 IF
 	ActionListEmpty()
 	See(FifthNearestEnemyOf(Myself))
-	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
-	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+	WeaponEffectiveVs(FifthNearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(FifthNearestEnemyOf(Myself),MAINHAND)
 THEN
 	RESPONSE #100
-		AttackReevaluate(LastSeenBy(Myself),30)
+		AttackReevaluate(FifthNearestEnemyOf(Myself),30)
 END
 
 IF
 	ActionListEmpty()
 	See(SixthNearestEnemyOf(Myself))
-	WeaponEffectiveVs(LastSeenBy(Myself),MAINHAND)
-	WeaponCanDamage(LastSeenBy(Myself),MAINHAND)
+	WeaponEffectiveVs(SixthNearestEnemyOf(Myself),MAINHAND)
+	WeaponCanDamage(SixthNearestEnemyOf(Myself),MAINHAND)
 THEN
 	RESPONSE #100
-		AttackReevaluate(LastSeenBy(Myself),30)
+		AttackReevaluate(SixthNearestEnemyOf(Myself),30)
 END
 
