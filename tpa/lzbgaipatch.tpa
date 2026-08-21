@@ -1,0 +1,200 @@
+//LZRACEBUFF
+OUTER_SET slot_setbuff = IDS_OF_SYMBOL(~splstate~ ~LZRACEBUFF~)
+ACTION_IF (slot_setbuff < 0) BEGIN
+    OUTER_PATCH ~~ BEGIN
+        FOR (idx = 100; idx < 256; ++idx) BEGIN
+		    LOOKUP_IDS_SYMBOL_OF_INT value ~splstate~ idx
+			PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+				SET slot_setbuff = idx
+                SET idx = 256
+            END
+        END
+    END
+    ACTION_IF (slot_setbuff >= 0) BEGIN
+        APPEND ~splstate.ids~ ~%slot_setbuff% LZRACEBUFF~ UNLESS ~LZRACEBUFF~
+        CLEAR_IDS_MAP
+    END
+END
+//DRAGON，武技超凡手套
+COPY_EXISTING ~LZAISP09.SPL~ ~override~
+    LPF ADD_SPELL_EFFECT
+    INT_VAR
+        insert_point = 1  // Add Effect 1 (Under Effect 0)
+        opcode = 328      // Set spell state
+        target = 2        // Preset target
+        parameter2 = slot_setbuff
+        timing = 1
+        //duration = 0
+        special = 1       // use spell states from table
+    END
+BUT_ONLY
+//DEMONIC，荆棘皮环甲+6
+COPY_EXISTING ~LZAISP12.SPL~ ~override~
+    LPF ADD_SPELL_EFFECT
+    INT_VAR
+        insert_point = 1  // Add Effect 1 (Under Effect 0)
+        opcode = 328      // Set spell state
+        target = 2        // Preset target
+        parameter2 = slot_setbuff
+        timing = 1
+        //duration = 0
+        special = 1       // use spell states from table
+    END
+BUT_ONLY
+//LICH或DEMILICH，葛斯之戒
+COPY_EXISTING ~LZAISP13.SPL~ ~override~
+    LPF ADD_SPELL_EFFECT
+    INT_VAR
+        insert_point = 1  // Add Effect 1 (Under Effect 0)
+        opcode = 328      // Set spell state
+        target = 2        // Preset target
+        parameter2 = slot_setbuff
+        timing = 1
+        //duration = 0
+        special = 1       // use spell states from table
+    END
+BUT_ONLY
+
+//LZCLASSBUFF
+OUTER_SET slot_setbuff = IDS_OF_SYMBOL(~splstate~ ~LZCLASSBUFF~)
+ACTION_IF (slot_setbuff < 0) BEGIN
+    OUTER_PATCH ~~ BEGIN
+        FOR (idx = 100; idx < 256; ++idx) BEGIN
+		    LOOKUP_IDS_SYMBOL_OF_INT value ~splstate~ idx
+			PATCH_IF (~%value%~ STR_EQ ~%idx%~) BEGIN
+				SET slot_setbuff = idx
+                SET idx = 256
+            END
+        END
+    END
+    ACTION_IF (slot_setbuff >= 0) BEGIN
+        APPEND ~splstate.ids~ ~%slot_setbuff% LZCLASSBUFF~ UNLESS ~LZCLASSBUFF~
+        CLEAR_IDS_MAP
+    END
+END
+//Class not MAGE，快速治疗
+COPY_EXISTING ~LZAISP15.SPL~ ~override~
+    LPF ADD_SPELL_EFFECT
+    INT_VAR
+        insert_point = 1  // Add Effect 1 (Under Effect 0)
+        opcode = 328      // Set spell state
+        target = 2        // Preset target
+        parameter2 = slot_setbuff
+        timing = 1
+        //duration = 0
+        special = 1       // use spell states from table
+    END
+BUT_ONLY
+
+COPY_EXISTING ~LZBGAI01.BCS~ ~override~
+    DECOMPILE_AND_PATCH BEGIN
+		//Demonic Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAIDemonicEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIDemonicEff","LOCALS",1))~ ~~
+		//Dragon Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAIDragonEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIDragonEff","LOCALS",1))~ ~~
+		//Lich Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAILichEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAILichEff","LOCALS",1))~ ~~
+		//DemiLich Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAIDemilichEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIDemilichEff","LOCALS",1))~ ~~
+		//Class not Mage Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAINotMageCEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZCLASSBUFF) TriggerOverride(LastSeenBy(Myself),Global("LZAINotMageCEff","LOCALS",0))~
+	END
+
+COPY_EXISTING ~LZBGAI02.BCS~ ~override~
+    DECOMPILE_AND_PATCH BEGIN
+		//Demonic Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAIDemonicEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIDemonicEff","LOCALS",1))~ ~~
+		//Dragon Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAIDragonEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIDragonEff","LOCALS",1))~ ~~
+		//Lich Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAILichEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAILichEff","LOCALS",1))~ ~~
+		//DemiLich Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAIDemilichEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIDemilichEff","LOCALS",1))~ ~~
+		//Class not Mage Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAINotMageCEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZCLASSBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))~ ~~
+	END
+  
+COPY_EXISTING ~LZBGAI03.BCS~ ~override~
+    DECOMPILE_AND_PATCH BEGIN
+		//Demonic Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAIDemonicEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIDemonicEff","LOCALS",1))~ ~~
+		//Dragon Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAIDragonEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIDragonEff","LOCALS",1))~ ~~
+		//Lich Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAILichEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAILichEff","LOCALS",1))~ ~~
+		//DemiLich Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAIDemilichEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIDemilichEff","LOCALS",1))~ ~~
+		//Class not Mage Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAINotMageCEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZCLASSBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))~ ~~
+	END
+
+COPY_EXISTING ~LZBGAI04.BCS~ ~override~
+    DECOMPILE_AND_PATCH BEGIN
+		//Demonic Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAIDemonicEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIDemonicEff","LOCALS",1))~ ~~
+		//Dragon Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAIDragonEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIDragonEff","LOCALS",1))~ ~~
+		//Lich Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAILichEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAILichEff","LOCALS",1))~ ~~
+		//DemiLich Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAIDemilichEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIDemilichEff","LOCALS",1))~ ~~
+		//Class not Mage Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAINotMageCEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZCLASSBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))~ ~~
+	END
+
+COPY_EXISTING ~LZBGAI05.BCS~ ~override~
+    DECOMPILE_AND_PATCH BEGIN
+		//Demonic Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAIDemonicEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIDemonicEff","LOCALS",1))~ ~~
+		//Dragon Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAIDragonEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIDragonEff","LOCALS",1))~ ~~
+		//Lich Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAILichEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAILichEff","LOCALS",1))~ ~~
+		//DemiLich Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAIDemilichEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIDemilichEff","LOCALS",1))~ ~~
+		//Class not Mage Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAINotMageCEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZCLASSBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))~ ~~
+	END
+
+COPY_EXISTING ~LZBGAI06.BCS~ ~override~
+    DECOMPILE_AND_PATCH BEGIN
+		//Demonic Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAIDemonicEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIDemonicEff","LOCALS",1))~ ~~
+		//Dragon Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAIDragonEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIDragonEff","LOCALS",1))~ ~~
+		//Lich Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAILichEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAILichEff","LOCALS",1))~ ~~
+		//DemiLich Race Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAIDemilichEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZRACEBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAIDemilichEff","LOCALS",1))~ ~~
+		//Class not Mage Buff SPL
+		REPLACE_TEXTUALLY ~TriggerOverride(LastSeenBy(Myself),Global("LZAINotMageCEff","LOCALS",0))~ ~!CheckSpellState(LastSeenBy(Myself),LZCLASSBUFF)~
+		REPLACE_TEXTUALLY ~ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))~ ~~
+	END

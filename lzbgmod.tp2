@@ -2,7 +2,7 @@ BACKUP ~weidu_external/lzbgmod/backup~
 
 AUTHOR ~LZ~
 
-VERSION ~v6.6~
+VERSION ~v6.7~
 
 README ~lzbgmod/readme.txt~
 
@@ -59,6 +59,8 @@ COMPILE ~lzbgmod/comp/LZBGAI03.baf~
 COMPILE ~lzbgmod/comp/LZBGAI04.baf~
 COMPILE ~lzbgmod/comp/LZBGAI05.baf~
 COMPILE ~lzbgmod/comp/LZBGAI06.baf~
+
+INCLUDE ~lzbgmod/tpa/lzbgaipatch.tpa~
 
 INCLUDE ~lzbgmod/tpa/ANIMATION.tpa~
 

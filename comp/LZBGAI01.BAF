@@ -419,19 +419,16 @@ IF
 	TriggerOverride(LastSeenBy(Myself),Global("LZAINotMageCEff","LOCALS",0))
 THEN
 	RESPONSE #15
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
 		ReallyForceSpellRES("LZAISP01",LastSeenBy(Myself))  // 天圣怒火+3
 	RESPONSE #15
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
 		ReallyForceSpellRES("LZAISP02",LastSeenBy(Myself))  // 岁月连枷+3
 	RESPONSE #20
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
@@ -448,19 +445,16 @@ IF
 	TriggerOverride(LastSeenBy(Myself),Global("LZAINotMageCEff","LOCALS",0))
 THEN
 	RESPONSE #15
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
 		ReallyForceSpellRES("LZAISP01",LastSeenBy(Myself))  // 天圣怒火+3
 	RESPONSE #15
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
 		ReallyForceSpellRES("LZAISP02",LastSeenBy(Myself))  // 岁月连枷+3
 	RESPONSE #20
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
@@ -477,19 +471,16 @@ IF
 	TriggerOverride(LastSeenBy(Myself),Global("LZAINotMageCEff","LOCALS",0))
 THEN
 	RESPONSE #15
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
 		ReallyForceSpellRES("LZAISP01",LastSeenBy(Myself))  // 天圣怒火+3
 	RESPONSE #15
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
 		ReallyForceSpellRES("LZAISP02",LastSeenBy(Myself))  // 岁月连枷+3
 	RESPONSE #20
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
@@ -506,19 +497,16 @@ IF
 	TriggerOverride(LastSeenBy(Myself),Global("LZAINotMageCEff","LOCALS",0))
 THEN
 	RESPONSE #15
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
 		ReallyForceSpellRES("LZAISP01",LastSeenBy(Myself))  // 天圣怒火+3
 	RESPONSE #15
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
 		ReallyForceSpellRES("LZAISP02",LastSeenBy(Myself))  // 岁月连枷+3
 	RESPONSE #20
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
@@ -535,19 +523,16 @@ IF
 	TriggerOverride(LastSeenBy(Myself),Global("LZAINotMageCEff","LOCALS",0))
 THEN
 	RESPONSE #15
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
 		ReallyForceSpellRES("LZAISP01",LastSeenBy(Myself))  // 天圣怒火+3
 	RESPONSE #15
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
 		ReallyForceSpellRES("LZAISP02",LastSeenBy(Myself))  // 岁月连枷+3
 	RESPONSE #20
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
@@ -564,19 +549,16 @@ IF
 	TriggerOverride(LastSeenBy(Myself),Global("LZAINotMageCEff","LOCALS",0))
 THEN
 	RESPONSE #15
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
 		ReallyForceSpellRES("LZAISP01",LastSeenBy(Myself))  // 天圣怒火+3
 	RESPONSE #15
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
 		ReallyForceSpellRES("LZAISP02",LastSeenBy(Myself))  // 岁月连枷+3
 	RESPONSE #20
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
@@ -593,19 +575,16 @@ IF
 	TriggerOverride(LastSeenBy(Myself),Global("LZAINotMageCEff","LOCALS",0))
 THEN
 	RESPONSE #15
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
 		ReallyForceSpellRES("LZAISP01",LastSeenBy(Myself))  // 天圣怒火+3
 	RESPONSE #15
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
 		ReallyForceSpellRES("LZAISP02",LastSeenBy(Myself))  // 岁月连枷+3
 	RESPONSE #20
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
@@ -622,19 +601,16 @@ IF
 	TriggerOverride(LastSeenBy(Myself),Global("LZAINotMageCEff","LOCALS",0))
 THEN
 	RESPONSE #15
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
 		ReallyForceSpellRES("LZAISP01",LastSeenBy(Myself))  // 天圣怒火+3
 	RESPONSE #15
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
 		ReallyForceSpellRES("LZAISP02",LastSeenBy(Myself))  // 岁月连枷+3
 	RESPONSE #20
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
@@ -651,19 +627,16 @@ IF
 	TriggerOverride(LastSeenBy(Myself),Global("LZAINotMageCEff","LOCALS",0))
 THEN
 	RESPONSE #15
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
 		ReallyForceSpellRES("LZAISP01",LastSeenBy(Myself))  // 天圣怒火+3
 	RESPONSE #15
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
 		ReallyForceSpellRES("LZAISP02",LastSeenBy(Myself))  // 岁月连枷+3
 	RESPONSE #20
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
@@ -680,19 +653,16 @@ IF
 	TriggerOverride(LastSeenBy(Myself),Global("LZAINotMageCEff","LOCALS",0))
 THEN
 	RESPONSE #15
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
 		ReallyForceSpellRES("LZAISP01",LastSeenBy(Myself))  // 天圣怒火+3
 	RESPONSE #15
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
 		ReallyForceSpellRES("LZAISP02",LastSeenBy(Myself))  // 岁月连枷+3
 	RESPONSE #20
-		ActionOverride(LastSeenBy(Myself),SetGlobal("LZAINotMageCEff","LOCALS",1))
 		CreateVisualEffectObject("SPSNRAYI",LastSeenBy(Myself))
 		ReallyForceSpellRES("LZAISP15",LastSeenBy(Myself))  // 快速治疗
 		ReallyForceSpellRES("LZAISP07",LastSeenBy(Myself))  // 火牙+4
