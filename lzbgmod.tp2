@@ -2,7 +2,7 @@ BACKUP ~weidu_external/lzbgmod/backup~
 
 AUTHOR ~LZ~
 
-VERSION ~v6.7~
+VERSION ~v6.8~
 
 README ~lzbgmod/readme.txt~
 
@@ -119,18 +119,24 @@ ACTION_IF NOT FILE_EXISTS_IN_GAME ~M_LZPATH.lua~ THEN BEGIN
 	COPY ~lzbgmod/LZSHOP/lua/M_LZPATH.lua~   ~override~
 END
 
-BEGIN @25
+BEGIN @26 SUBCOMPONENT @25
 REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet~ @21
-
-ACTION_IF NOT FILE_EXISTS_IN_GAME ~LZBGAIJR.CRE~ THEN BEGIN
-  COPY ~lzbgmod/copya/LZBGAIJR.CRE~ ~override~
-END
 
 INCLUDE ~lzbgmod/tpa/WORLDSCRIPT.tpa~
 
   LAF A7_ADD_GLOBAL_SCRIPT
     INT_VAR extend_top = 0
     STR_VAR script_file = ~lzbgmod/comp/BALDUR26.baf~
+  END
+
+BEGIN @27 SUBCOMPONENT @25
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet~ @21
+
+INCLUDE ~lzbgmod/tpa/WORLDSCRIPT.tpa~
+
+  LAF A7_ADD_GLOBAL_SCRIPT
+    INT_VAR extend_top = 0
+    STR_VAR script_file = ~lzbgmod/comp/BALDUR27.baf~
   END
 
 BEGIN @30

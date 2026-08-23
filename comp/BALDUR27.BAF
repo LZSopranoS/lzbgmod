@@ -1,5 +1,5 @@
 IF
-	TriggerOverride(Player1,Range([GOODCUTOFF],0))
+	TriggerOverride(Player1,PersonalSpaceDistance([GOODCUTOFF],0))
 	RandomNum(6,1)
 THEN
 	RESPONSE #100
@@ -8,7 +8,7 @@ THEN
 END
 
 IF
-	TriggerOverride(Player2,Range([GOODCUTOFF],0))
+	TriggerOverride(Player2,PersonalSpaceDistance([GOODCUTOFF],0))
 	RandomNum(6,2)
 THEN
 	RESPONSE #100
@@ -17,7 +17,7 @@ THEN
 END
 
 IF
-	TriggerOverride(Player3,Range([GOODCUTOFF],0))
+	TriggerOverride(Player3,PersonalSpaceDistance([GOODCUTOFF],0))
 	RandomNum(6,3)
 THEN
 	RESPONSE #100
@@ -26,7 +26,7 @@ THEN
 END
 
 IF
-	TriggerOverride(Player4,Range([GOODCUTOFF],0))
+	TriggerOverride(Player4,PersonalSpaceDistance([GOODCUTOFF],0))
 	RandomNum(6,4)
 THEN
 	RESPONSE #100
@@ -35,7 +35,7 @@ THEN
 END
 
 IF
-	TriggerOverride(Player5,Range([GOODCUTOFF],0))
+	TriggerOverride(Player5,PersonalSpaceDistance([GOODCUTOFF],0))
 	RandomNum(6,5)
 THEN
 	RESPONSE #100
@@ -44,7 +44,7 @@ THEN
 END
 
 IF
-	TriggerOverride(Player6,Range([GOODCUTOFF],0))
+	TriggerOverride(Player6,PersonalSpaceDistance([GOODCUTOFF],0))
 	RandomNum(6,6)
 THEN
 	RESPONSE #100
