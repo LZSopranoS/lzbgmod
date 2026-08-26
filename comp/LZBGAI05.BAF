@@ -43,6 +43,66 @@ THEN
 END
 
 IF
+	!Detect([PC])
+	TriggerOverride(Player1,Detect([ENEMY]))
+	RandomNum(6,1)
+THEN
+	RESPONSE #100
+		JumpToObject(Player1)
+		Continue()
+END
+
+IF
+	!Detect([PC])
+	TriggerOverride(Player2,Detect([ENEMY]))
+	RandomNum(6,2)
+THEN
+	RESPONSE #100
+		JumpToObject(Player2)
+		Continue()
+END
+
+IF
+	!Detect([PC])
+	TriggerOverride(Player3,Detect([ENEMY]))
+	RandomNum(6,3)
+THEN
+	RESPONSE #100
+		JumpToObject(Player3)
+		Continue()
+END
+
+IF
+	!Detect([PC])
+	TriggerOverride(Player4,Detect([ENEMY]))
+	RandomNum(6,4)
+THEN
+	RESPONSE #100
+		JumpToObject(Player4)
+		Continue()
+END
+
+IF
+	!Detect([PC])
+	TriggerOverride(Player5,Detect([ENEMY]))
+	RandomNum(6,5)
+THEN
+	RESPONSE #100
+		JumpToObject(Player5)
+		Continue()
+END
+
+IF
+	!Detect([PC])
+	TriggerOverride(Player6,Detect([ENEMY]))
+	RandomNum(6,6)
+THEN
+	RESPONSE #100
+		JumpToObject(Player6)
+		Continue()
+END
+
+IF
 	Detect([GOODCUTOFF])
 	Detect([EVILCUTOFF])
 	!Range([EVILCUTOFF],10)
