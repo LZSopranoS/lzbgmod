@@ -1,0 +1,12 @@
+LOAD_TRA ~lzbgmod/LZKADUNFIX/lang/schinese/install.tra~
+
+COPY ~lzbgmod/LZKADUNFIX/baf/LZKDFIX.BAF~ ~scripts/LZKDFIX.BS~
+	COMPILE_BAF_TO_BCS
+
+OUTER_SET Snamestrref = RESOLVE_STR_REF (@559)
+OUTER_SET Sdescstrref = RESOLVE_STR_REF (@560)
+
+APPEND ~SCRPDESC.2DA~ ~LZKDFIX %Snamestrref% %Sdescstrref%~ UNLESS ~LZKDFIX~
+
+COPY_EXISTING ~SCRPDESC.2DA~ ~override~
+	PRETTY_PRINT_2DA

@@ -2,7 +2,7 @@ BACKUP ~weidu_external/lzbgmod/backup~
 
 AUTHOR ~LZ~
 
-VERSION ~v6.9~
+VERSION ~v7.0~
 
 README ~lzbgmod/readme.txt~
 
@@ -155,6 +155,11 @@ INCLUDE ~lzbgmod/tpa/WORLDSCRIPT.tpa~
     INT_VAR extend_top = 0
     STR_VAR script_file = ~lzbgmod/comp/BALDUR_DVCAR.BAF~
   END
+
+BEGIN @35
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet~ @21
+
+INCLUDE ~lzbgmod/LZKADUNFIX/LZKADUNFIX.tpa~
 
 BEGIN @40
 REQUIRE_PREDICATE GAME_IS ~bg2ee eet~ @1
