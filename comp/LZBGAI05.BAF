@@ -18,6 +18,14 @@ THEN
 END
 
 IF
+	Global("LZBGAIActive","GLOBAL",1)
+THEN
+	RESPONSE #100
+		SetGlobal("LZBGAICombatCheck","GLOBAL",0)
+		DestroySelf()
+END
+
+IF
 	Global("LZBGAICombatCheck","GLOBAL",1)
 	Global("LZBGAIInCombat","LOCALS",0)
 THEN
@@ -32,13 +40,6 @@ IF
 THEN
 	RESPONSE #100
 		SetGlobal("LZBGAIInCombat","LOCALS",0)
-		DestroySelf()
-END
-
-IF
-	Global("LZBGAIActive","GLOBAL",1)
-THEN
-	RESPONSE #100
 		DestroySelf()
 END
 
