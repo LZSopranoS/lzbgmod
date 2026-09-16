@@ -90,7 +90,6 @@ THEN
 END
 
 IF
-	Global("LZBGAIActive","GLOBAL",0)
 	Global("LZBGAICombatCheck","GLOBAL",1)
 	NumInParty(6)
 	!TriggerOverride(Player1,Detect([ENEMY]))
@@ -107,7 +106,6 @@ THEN
 END
 
 IF
-	Global("LZBGAIActive","GLOBAL",0)
 	Global("LZBGAICombatCheck","GLOBAL",1)
 	NumInParty(5)
 	!TriggerOverride(Player1,Detect([ENEMY]))
@@ -123,7 +121,6 @@ THEN
 END
 
 IF
-	Global("LZBGAIActive","GLOBAL",0)
 	Global("LZBGAICombatCheck","GLOBAL",1)
 	NumInParty(4)
 	!TriggerOverride(Player1,Detect([ENEMY]))
@@ -138,7 +135,6 @@ THEN
 END
 
 IF
-	Global("LZBGAIActive","GLOBAL",0)
 	Global("LZBGAICombatCheck","GLOBAL",1)
 	NumInParty(3)
 	!TriggerOverride(Player1,Detect([ENEMY]))
@@ -152,7 +148,6 @@ THEN
 END
 
 IF
-	Global("LZBGAIActive","GLOBAL",0)
 	Global("LZBGAICombatCheck","GLOBAL",1)
 	NumInParty(2)
 	!TriggerOverride(Player1,Detect([ENEMY]))
@@ -165,7 +160,6 @@ THEN
 END
 
 IF
-	Global("LZBGAIActive","GLOBAL",0)
 	Global("LZBGAICombatCheck","GLOBAL",1)
 	NumInParty(1)
 	!TriggerOverride(Player1,Detect([ENEMY]))
