@@ -102,7 +102,7 @@ function LZ_GetActorImmunitySummaryX(actorID)
 				local the_parameter2 = LZ_EEex_ReadDword(eData + 0x20)
 				if the_parameter2 > 0 then result.min_stats = true end
 			end
-		end		
+		end
 	end)
 	
 	return result
@@ -337,7 +337,8 @@ function LZ_CREIdentify() --Creature Identify
 	end
 
 	if immunity.turnundead then
-		specialStr = (specialStr == "") and "Turn Undead" or (specialStr .. ", " .. turnundead)
+		--修复：将未定义的变量 turnundead 改为了正确的字符串 "Turn Undead"
+		specialStr = (specialStr == "") and "Turn Undead" or (specialStr .. ", " .. "Turn Undead")
 	end
 
 	if immunity.track then
