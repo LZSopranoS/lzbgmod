@@ -2,7 +2,7 @@ BACKUP ~weidu_external/lzbgmod/backup~
 
 AUTHOR ~LZ~
 
-VERSION ~v7.5~
+VERSION ~v7.6~
 
 README ~lzbgmod/readme.txt~
 
@@ -84,7 +84,7 @@ INCLUDE ~lzbgmod/SimMaster_AI/SimMaster_AI.tpa~
 INCLUDE ~lzbgmod/tpa/WORLDSCRIPT.tpa~
 
   LAF A7_ADD_GLOBAL_SCRIPT
-    INT_VAR extend_top = 0
+    INT_VAR extend_top = 1
     STR_VAR script_file = ~lzbgmod/SimMaster_AI/baf2/BALDUR25.BAF~
   END
 
@@ -105,7 +105,7 @@ INCLUDE ~lzbgmod/SimMaster_AI/SimMaster_AI.tpa~
 INCLUDE ~lzbgmod/tpa/WORLDSCRIPT.tpa~
 
   LAF A7_ADD_GLOBAL_SCRIPT
-    INT_VAR extend_top = 0
+    INT_VAR extend_top = 1
     STR_VAR script_file = ~lzbgmod/SimMaster_AI/baf2/BALDUR25.BAF~
   END
 
@@ -152,7 +152,7 @@ END
 INCLUDE ~lzbgmod/tpa/WORLDSCRIPT.tpa~
 
   LAF A7_ADD_GLOBAL_SCRIPT
-    INT_VAR extend_top = 0
+    INT_VAR extend_top = 1
     STR_VAR script_file = ~lzbgmod/comp/BALDUR_DVCAR.BAF~
   END
 

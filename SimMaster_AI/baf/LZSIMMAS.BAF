@@ -14,23 +14,17 @@ IF
 THEN
 	RESPONSE #100
 		SetGlobal("LZ_it_Prep","LOCALS",1)
-		StartDialogueNoSet(LastSeenBy(Myself))
+		StartDialogueNoSet([PC])
 END
 
 IF
 	Global("LZ_it_Prep","LOCALS",1)
-	OR(5)
-		See(Player6)
-		See(Player5)
-		See(Player4)
-		See(Player3)
-		See(Player2)
+	See(SecondNearest([PC]))
 THEN
 	RESPONSE #100
 		SetGlobal("LZ_it_Prep","LOCALS",2)
-		ReallyForceSpellRES("ohbbclt1",Myself)  // No such index
 		ReallyForceSpellRES("LZIPAUSE",Player1)  // No such index
-		ForceSpellRES("LZPAUSE",LastSeenBy(Myself))  // No such index
+		ReallyForceSpellRES("LZPAUSE",SecondNearest([PC]))  // No such index
 		Continue()
 END
 

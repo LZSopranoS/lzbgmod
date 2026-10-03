@@ -42,6 +42,34 @@ ACTION_BASH_FOR ~scripts~ ~^.+\.bs$~ BEGIN
     END
 END
 
+//方案二
+COPY_EXISTING ~SCRPDESC.2DA~ ~override~
+    COUNT_2DA_ROWS 3 scdes_rows
+    FOR (row = 1; row < scdes_rows; ++row) BEGIN
+        READ_2DA_ENTRY row 0 3 script_name
+		
+		PATCH_IF (~%script_name%~ STRING_COMPARE_CASE ~CUSTOM~ && 
+                  ~%script_name%~ STRING_COMPARE_CASE ~None~) BEGIN
+        
+			INNER_ACTION BEGIN
+				ACTION_IF (FILE_EXISTS_IN_GAME ~%script_name%.bcs~) BEGIN
+					EXTEND_TOP ~%script_name%.bcs~ ~lzbgmod/SimMaster_AI/baf2/LZSIMPC2.BAF~
+				END
+			END
+		END
+    END
+BUT_ONLY
+
+EXTEND_TOP ~BDDEFAI.BCS~ ~lzbgmod/SimMaster_AI/baf2/LZSIMPC2.BAF~
+
+EXTEND_TOP ~DEFAULT.BCS~      ~lzbgmod/SimMaster_AI/baf2/LZSIMPC2.BAF~
+//EET多AGEN.bcs、FIGHTER3.BCS、OHFIGHT1.BCS
+ACTION_IF FILE_EXISTS_IN_GAME ~OHFIGHT1.BCS~ THEN BEGIN
+	EXTEND_TOP ~OHFIGHT1.BCS~ ~lzbgmod/SimMaster_AI/baf2/LZSIMPC2.BAF~
+END
+
+
+/*方案一，改用方案二。
 EXTEND_TOP ~BDDEFAI.BCS~ ~lzbgmod/SimMaster_AI/baf2/LZSIMPC2.BAF~
 
 //EET多一个AGEN.bcs(在override下对应标准攻击)，EET标准攻击不再是AGEN.BS
@@ -71,6 +99,8 @@ EXTEND_TOP ~MAGE3.BCS~        ~lzbgmod/SimMaster_AI/baf2/LZSIMPC2.BAF~
 EXTEND_TOP ~MAGE4.BCS~        ~lzbgmod/SimMaster_AI/baf2/LZSIMPC2.BAF~
 EXTEND_TOP ~THIEF3.BCS~       ~lzbgmod/SimMaster_AI/baf2/LZSIMPC2.BAF~
 EXTEND_TOP ~THIEF4.BCS~       ~lzbgmod/SimMaster_AI/baf2/LZSIMPC2.BAF~
+*/
+
 
 // 第一步：扫描 scripts 文件夹，建立已存在的 .bs 脚本索引名单
 ACTION_BASH_FOR ~scripts~ ~^.+\.bs$~ BEGIN

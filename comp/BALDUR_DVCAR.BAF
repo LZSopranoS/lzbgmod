@@ -1,7 +1,5 @@
 IF
     PartyRested()
-    Delay(2)
-    CombatCounter(0)
 THEN
     RESPONSE #100
         EEex_LuaAction("LZ_DVCAR()")

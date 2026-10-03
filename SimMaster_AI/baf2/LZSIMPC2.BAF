@@ -2,13 +2,13 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(NearestEnemyOfType([0.0.0.MAGE_ALL]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(NearestEnemyOfType([0.0.0.MAGE_ALL]))
-	TriggerOverride(NearestEnemyOfType([0.0.0.MAGE_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(NearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(NearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]))
+	TriggerOverride(NearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(NearestEnemyOfType([0.0.0.MAGE_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(NearestEnemyOfType([0.0.0.MAGE_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(NearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(NearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -16,14 +16,14 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(NearestEnemyOfType([0.0.0.THIEF_ALL]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(NearestEnemyOfType([0.0.0.THIEF_ALL]))
-	TriggerOverride(NearestEnemyOfType([0.0.0.THIEF_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(NearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(NearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]))
+	TriggerOverride(NearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(NearestEnemyOfType([0.0.0.THIEF_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(NearestEnemyOfType([0.0.0.THIEF_ALL]),DisplayString(Myself,46153))  // 使用卷轴
-		ActionOverride(NearestEnemyOfType([0.0.0.THIEF_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(NearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(NearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),DisplayString(Myself,46153))  // 使用卷轴
+		ActionOverride(NearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -31,14 +31,14 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(NearestEnemyOfType([0.0.0.BARD]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(NearestEnemyOfType([0.0.0.BARD]))
-	TriggerOverride(NearestEnemyOfType([0.0.0.BARD]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(NearestEnemyOfType([EVILCUTOFF.0.0.BARD]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(NearestEnemyOfType([EVILCUTOFF.0.0.BARD]))
+	TriggerOverride(NearestEnemyOfType([EVILCUTOFF.0.0.BARD]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(NearestEnemyOfType([0.0.0.BARD]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(NearestEnemyOfType([0.0.0.BARD]),DisplayString(Myself,46153))  // 使用卷轴
-		ActionOverride(NearestEnemyOfType([0.0.0.BARD]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(NearestEnemyOfType([EVILCUTOFF.0.0.BARD]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(NearestEnemyOfType([EVILCUTOFF.0.0.BARD]),DisplayString(Myself,46153))  // 使用卷轴
+		ActionOverride(NearestEnemyOfType([EVILCUTOFF.0.0.BARD]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -46,13 +46,13 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(SecondNearestEnemyOfType([0.0.0.MAGE_ALL]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(SecondNearestEnemyOfType([0.0.0.MAGE_ALL]))
-	TriggerOverride(SecondNearestEnemyOfType([0.0.0.MAGE_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(SecondNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(SecondNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]))
+	TriggerOverride(SecondNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(SecondNearestEnemyOfType([0.0.0.MAGE_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(SecondNearestEnemyOfType([0.0.0.MAGE_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(SecondNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(SecondNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -60,14 +60,14 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(SecondNearestEnemyOfType([0.0.0.THIEF_ALL]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(SecondNearestEnemyOfType([0.0.0.THIEF_ALL]))
-	TriggerOverride(SecondNearestEnemyOfType([0.0.0.THIEF_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(SecondNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(SecondNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]))
+	TriggerOverride(SecondNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(SecondNearestEnemyOfType([0.0.0.THIEF_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(SecondNearestEnemyOfType([0.0.0.THIEF_ALL]),DisplayString(Myself,46153))  // 使用卷轴
-		ActionOverride(SecondNearestEnemyOfType([0.0.0.THIEF_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(SecondNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(SecondNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),DisplayString(Myself,46153))  // 使用卷轴
+		ActionOverride(SecondNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -75,14 +75,14 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(SecondNearestEnemyOfType([0.0.0.BARD]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(SecondNearestEnemyOfType([0.0.0.BARD]))
-	TriggerOverride(SecondNearestEnemyOfType([0.0.0.BARD]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(SecondNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(SecondNearestEnemyOfType([EVILCUTOFF.0.0.BARD]))
+	TriggerOverride(SecondNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(SecondNearestEnemyOfType([0.0.0.BARD]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(SecondNearestEnemyOfType([0.0.0.BARD]),DisplayString(Myself,46153))  // 使用卷轴
-		ActionOverride(SecondNearestEnemyOfType([0.0.0.BARD]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(SecondNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(SecondNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),DisplayString(Myself,46153))  // 使用卷轴
+		ActionOverride(SecondNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -90,13 +90,13 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(ThirdNearestEnemyOfType([0.0.0.MAGE_ALL]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(ThirdNearestEnemyOfType([0.0.0.MAGE_ALL]))
-	TriggerOverride(ThirdNearestEnemyOfType([0.0.0.MAGE_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]))
+	TriggerOverride(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(ThirdNearestEnemyOfType([0.0.0.MAGE_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(ThirdNearestEnemyOfType([0.0.0.MAGE_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -104,14 +104,14 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(ThirdNearestEnemyOfType([0.0.0.THIEF_ALL]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(ThirdNearestEnemyOfType([0.0.0.THIEF_ALL]))
-	TriggerOverride(ThirdNearestEnemyOfType([0.0.0.THIEF_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]))
+	TriggerOverride(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(ThirdNearestEnemyOfType([0.0.0.THIEF_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(ThirdNearestEnemyOfType([0.0.0.THIEF_ALL]),DisplayString(Myself,46153))  // 使用卷轴
-		ActionOverride(ThirdNearestEnemyOfType([0.0.0.THIEF_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),DisplayString(Myself,46153))  // 使用卷轴
+		ActionOverride(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -119,14 +119,14 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(ThirdNearestEnemyOfType([0.0.0.BARD]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(ThirdNearestEnemyOfType([0.0.0.BARD]))
-	TriggerOverride(ThirdNearestEnemyOfType([0.0.0.BARD]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.BARD]))
+	TriggerOverride(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(ThirdNearestEnemyOfType([0.0.0.BARD]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(ThirdNearestEnemyOfType([0.0.0.BARD]),DisplayString(Myself,46153))  // 使用卷轴
-		ActionOverride(ThirdNearestEnemyOfType([0.0.0.BARD]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),DisplayString(Myself,46153))  // 使用卷轴
+		ActionOverride(ThirdNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -134,13 +134,13 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(FourthNearestEnemyOfType([0.0.0.MAGE_ALL]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(FourthNearestEnemyOfType([0.0.0.MAGE_ALL]))
-	TriggerOverride(FourthNearestEnemyOfType([0.0.0.MAGE_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(FourthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(FourthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]))
+	TriggerOverride(FourthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(FourthNearestEnemyOfType([0.0.0.MAGE_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(FourthNearestEnemyOfType([0.0.0.MAGE_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(FourthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(FourthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -148,14 +148,14 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(FourthNearestEnemyOfType([0.0.0.THIEF_ALL]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(FourthNearestEnemyOfType([0.0.0.THIEF_ALL]))
-	TriggerOverride(FourthNearestEnemyOfType([0.0.0.THIEF_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(FourthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(FourthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]))
+	TriggerOverride(FourthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(FourthNearestEnemyOfType([0.0.0.THIEF_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(FourthNearestEnemyOfType([0.0.0.THIEF_ALL]),DisplayString(Myself,46153))  // 使用卷轴
-		ActionOverride(FourthNearestEnemyOfType([0.0.0.THIEF_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(FourthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(FourthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),DisplayString(Myself,46153))  // 使用卷轴
+		ActionOverride(FourthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -163,14 +163,14 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(FourthNearestEnemyOfType([0.0.0.BARD]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(FourthNearestEnemyOfType([0.0.0.BARD]))
-	TriggerOverride(FourthNearestEnemyOfType([0.0.0.BARD]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(FourthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(FourthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]))
+	TriggerOverride(FourthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(FourthNearestEnemyOfType([0.0.0.BARD]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(FourthNearestEnemyOfType([0.0.0.BARD]),DisplayString(Myself,46153))  // 使用卷轴
-		ActionOverride(FourthNearestEnemyOfType([0.0.0.BARD]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(FourthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(FourthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),DisplayString(Myself,46153))  // 使用卷轴
+		ActionOverride(FourthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -178,13 +178,13 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(FifthNearestEnemyOfType([0.0.0.MAGE_ALL]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(FifthNearestEnemyOfType([0.0.0.MAGE_ALL]))
-	TriggerOverride(FifthNearestEnemyOfType([0.0.0.MAGE_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(FifthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(FifthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]))
+	TriggerOverride(FifthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(FifthNearestEnemyOfType([0.0.0.MAGE_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(FifthNearestEnemyOfType([0.0.0.MAGE_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(FifthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(FifthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -192,14 +192,14 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(FifthNearestEnemyOfType([0.0.0.THIEF_ALL]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(FifthNearestEnemyOfType([0.0.0.THIEF_ALL]))
-	TriggerOverride(FifthNearestEnemyOfType([0.0.0.THIEF_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(FifthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(FifthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]))
+	TriggerOverride(FifthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(FifthNearestEnemyOfType([0.0.0.THIEF_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(FifthNearestEnemyOfType([0.0.0.THIEF_ALL]),DisplayString(Myself,46153))  // 使用卷轴
-		ActionOverride(FifthNearestEnemyOfType([0.0.0.THIEF_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(FifthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(FifthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),DisplayString(Myself,46153))  // 使用卷轴
+		ActionOverride(FifthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -207,14 +207,14 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(FifthNearestEnemyOfType([0.0.0.BARD]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(FifthNearestEnemyOfType([0.0.0.BARD]))
-	TriggerOverride(FifthNearestEnemyOfType([0.0.0.BARD]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(FifthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(FifthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]))
+	TriggerOverride(FifthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(FifthNearestEnemyOfType([0.0.0.BARD]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(FifthNearestEnemyOfType([0.0.0.BARD]),DisplayString(Myself,46153))  // 使用卷轴
-		ActionOverride(FifthNearestEnemyOfType([0.0.0.BARD]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(FifthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(FifthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),DisplayString(Myself,46153))  // 使用卷轴
+		ActionOverride(FifthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -222,13 +222,13 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(SixthNearestEnemyOfType([0.0.0.MAGE_ALL]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(SixthNearestEnemyOfType([0.0.0.MAGE_ALL]))
-	TriggerOverride(SixthNearestEnemyOfType([0.0.0.MAGE_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(SixthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(SixthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]))
+	TriggerOverride(SixthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(SixthNearestEnemyOfType([0.0.0.MAGE_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(SixthNearestEnemyOfType([0.0.0.MAGE_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(SixthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(SixthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -236,14 +236,14 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(SixthNearestEnemyOfType([0.0.0.THIEF_ALL]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(SixthNearestEnemyOfType([0.0.0.THIEF_ALL]))
-	TriggerOverride(SixthNearestEnemyOfType([0.0.0.THIEF_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(SixthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(SixthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]))
+	TriggerOverride(SixthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(SixthNearestEnemyOfType([0.0.0.THIEF_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(SixthNearestEnemyOfType([0.0.0.THIEF_ALL]),DisplayString(Myself,46153))  // 使用卷轴
-		ActionOverride(SixthNearestEnemyOfType([0.0.0.THIEF_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(SixthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(SixthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),DisplayString(Myself,46153))  // 使用卷轴
+		ActionOverride(SixthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -251,14 +251,14 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(SixthNearestEnemyOfType([0.0.0.BARD]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(SixthNearestEnemyOfType([0.0.0.BARD]))
-	TriggerOverride(SixthNearestEnemyOfType([0.0.0.BARD]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(SixthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(SixthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]))
+	TriggerOverride(SixthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(SixthNearestEnemyOfType([0.0.0.BARD]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(SixthNearestEnemyOfType([0.0.0.BARD]),DisplayString(Myself,46153))  // 使用卷轴
-		ActionOverride(SixthNearestEnemyOfType([0.0.0.BARD]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(SixthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(SixthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),DisplayString(Myself,46153))  // 使用卷轴
+		ActionOverride(SixthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -266,13 +266,13 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(SeventhNearestEnemyOfType([0.0.0.MAGE_ALL]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(SeventhNearestEnemyOfType([0.0.0.MAGE_ALL]))
-	TriggerOverride(SeventhNearestEnemyOfType([0.0.0.MAGE_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(SeventhNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(SeventhNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]))
+	TriggerOverride(SeventhNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(SeventhNearestEnemyOfType([0.0.0.MAGE_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(SeventhNearestEnemyOfType([0.0.0.MAGE_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(SeventhNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(SeventhNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -280,14 +280,14 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(SeventhNearestEnemyOfType([0.0.0.THIEF_ALL]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(SeventhNearestEnemyOfType([0.0.0.THIEF_ALL]))
-	TriggerOverride(SeventhNearestEnemyOfType([0.0.0.THIEF_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(SeventhNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(SeventhNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]))
+	TriggerOverride(SeventhNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(SeventhNearestEnemyOfType([0.0.0.THIEF_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(SeventhNearestEnemyOfType([0.0.0.THIEF_ALL]),DisplayString(Myself,46153))  // 使用卷轴
-		ActionOverride(SeventhNearestEnemyOfType([0.0.0.THIEF_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(SeventhNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(SeventhNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),DisplayString(Myself,46153))  // 使用卷轴
+		ActionOverride(SeventhNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -295,14 +295,14 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(SeventhNearestEnemyOfType([0.0.0.BARD]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(SeventhNearestEnemyOfType([0.0.0.BARD]))
-	TriggerOverride(SeventhNearestEnemyOfType([0.0.0.BARD]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(SeventhNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(SeventhNearestEnemyOfType([EVILCUTOFF.0.0.BARD]))
+	TriggerOverride(SeventhNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(SeventhNearestEnemyOfType([0.0.0.BARD]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(SeventhNearestEnemyOfType([0.0.0.BARD]),DisplayString(Myself,46153))  // 使用卷轴
-		ActionOverride(SeventhNearestEnemyOfType([0.0.0.BARD]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(SeventhNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(SeventhNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),DisplayString(Myself,46153))  // 使用卷轴
+		ActionOverride(SeventhNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -310,13 +310,13 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(EighthNearestEnemyOfType([0.0.0.MAGE_ALL]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(EighthNearestEnemyOfType([0.0.0.MAGE_ALL]))
-	TriggerOverride(EighthNearestEnemyOfType([0.0.0.MAGE_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(EighthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(EighthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]))
+	TriggerOverride(EighthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(EighthNearestEnemyOfType([0.0.0.MAGE_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(EighthNearestEnemyOfType([0.0.0.MAGE_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(EighthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(EighthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -324,14 +324,14 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(EighthNearestEnemyOfType([0.0.0.THIEF_ALL]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(EighthNearestEnemyOfType([0.0.0.THIEF_ALL]))
-	TriggerOverride(EighthNearestEnemyOfType([0.0.0.THIEF_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(EighthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(EighthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]))
+	TriggerOverride(EighthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(EighthNearestEnemyOfType([0.0.0.THIEF_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(EighthNearestEnemyOfType([0.0.0.THIEF_ALL]),DisplayString(Myself,46153))  // 使用卷轴
-		ActionOverride(EighthNearestEnemyOfType([0.0.0.THIEF_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(EighthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(EighthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),DisplayString(Myself,46153))  // 使用卷轴
+		ActionOverride(EighthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -339,14 +339,14 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(EighthNearestEnemyOfType([0.0.0.BARD]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(EighthNearestEnemyOfType([0.0.0.BARD]))
-	TriggerOverride(EighthNearestEnemyOfType([0.0.0.BARD]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(EighthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(EighthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]))
+	TriggerOverride(EighthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(EighthNearestEnemyOfType([0.0.0.BARD]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(EighthNearestEnemyOfType([0.0.0.BARD]),DisplayString(Myself,46153))  // 使用卷轴
-		ActionOverride(EighthNearestEnemyOfType([0.0.0.BARD]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(EighthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(EighthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),DisplayString(Myself,46153))  // 使用卷轴
+		ActionOverride(EighthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -354,13 +354,13 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(NinthNearestEnemyOfType([0.0.0.MAGE_ALL]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(NinthNearestEnemyOfType([0.0.0.MAGE_ALL]))
-	TriggerOverride(NinthNearestEnemyOfType([0.0.0.MAGE_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(NinthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(NinthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]))
+	TriggerOverride(NinthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(NinthNearestEnemyOfType([0.0.0.MAGE_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(NinthNearestEnemyOfType([0.0.0.MAGE_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(NinthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(NinthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -368,14 +368,14 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(NinthNearestEnemyOfType([0.0.0.THIEF_ALL]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(NinthNearestEnemyOfType([0.0.0.THIEF_ALL]))
-	TriggerOverride(NinthNearestEnemyOfType([0.0.0.THIEF_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(NinthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(NinthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]))
+	TriggerOverride(NinthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(NinthNearestEnemyOfType([0.0.0.THIEF_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(NinthNearestEnemyOfType([0.0.0.THIEF_ALL]),DisplayString(Myself,46153))  // 使用卷轴
-		ActionOverride(NinthNearestEnemyOfType([0.0.0.THIEF_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(NinthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(NinthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),DisplayString(Myself,46153))  // 使用卷轴
+		ActionOverride(NinthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -383,14 +383,14 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(NinthNearestEnemyOfType([0.0.0.BARD]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(NinthNearestEnemyOfType([0.0.0.BARD]))
-	TriggerOverride(NinthNearestEnemyOfType([0.0.0.BARD]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(NinthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(NinthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]))
+	TriggerOverride(NinthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(NinthNearestEnemyOfType([0.0.0.BARD]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(NinthNearestEnemyOfType([0.0.0.BARD]),DisplayString(Myself,46153))  // 使用卷轴
-		ActionOverride(NinthNearestEnemyOfType([0.0.0.BARD]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(NinthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(NinthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),DisplayString(Myself,46153))  // 使用卷轴
+		ActionOverride(NinthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -398,13 +398,13 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(TenthNearestEnemyOfType([0.0.0.MAGE_ALL]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(TenthNearestEnemyOfType([0.0.0.MAGE_ALL]))
-	TriggerOverride(TenthNearestEnemyOfType([0.0.0.MAGE_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(TenthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(TenthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]))
+	TriggerOverride(TenthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(TenthNearestEnemyOfType([0.0.0.MAGE_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(TenthNearestEnemyOfType([0.0.0.MAGE_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(TenthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(TenthNearestEnemyOfType([EVILCUTOFF.0.0.MAGE_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -412,14 +412,14 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(TenthNearestEnemyOfType([0.0.0.THIEF_ALL]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(TenthNearestEnemyOfType([0.0.0.THIEF_ALL]))
-	TriggerOverride(TenthNearestEnemyOfType([0.0.0.THIEF_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(TenthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(TenthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]))
+	TriggerOverride(TenthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(TenthNearestEnemyOfType([0.0.0.THIEF_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(TenthNearestEnemyOfType([0.0.0.THIEF_ALL]),DisplayString(Myself,46153))  // 使用卷轴
-		ActionOverride(TenthNearestEnemyOfType([0.0.0.THIEF_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(TenthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(TenthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),DisplayString(Myself,46153))  // 使用卷轴
+		ActionOverride(TenthNearestEnemyOfType([EVILCUTOFF.0.0.THIEF_ALL]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
@@ -427,14 +427,14 @@ IF
 	OR(2)
 		Global("LZIMAGAI","GLOBAL",1)
 		Global("LZIMAGAI","GLOBAL",3)
-	!CheckStat(TenthNearestEnemyOfType([0.0.0.BARD]),3,PUPPETMASTERTYPE)
-	ObjectActionListEmpty(TenthNearestEnemyOfType([0.0.0.BARD]))
-	TriggerOverride(TenthNearestEnemyOfType([0.0.0.BARD]),Global("ENEMY_SIMULA","LOCALS",0))
+	!CheckStat(TenthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),3,PUPPETMASTERTYPE)
+	ObjectActionListEmpty(TenthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]))
+	TriggerOverride(TenthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),Global("ENEMY_SIMULA","LOCALS",0))
 THEN
 	RESPONSE #100
-		ActionOverride(TenthNearestEnemyOfType([0.0.0.BARD]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
-		ActionOverride(TenthNearestEnemyOfType([0.0.0.BARD]),DisplayString(Myself,46153))  // 使用卷轴
-		ActionOverride(TenthNearestEnemyOfType([0.0.0.BARD]),ForceSpellRES("LZWI804",Myself))  // 拟象术
+		ActionOverride(TenthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),SetGlobal("ENEMY_SIMULA","LOCALS",1))
+		ActionOverride(TenthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),DisplayString(Myself,46153))  // 使用卷轴
+		ActionOverride(TenthNearestEnemyOfType([EVILCUTOFF.0.0.BARD]),ForceSpellRES("LZWI804",Myself))  // 拟象术
 		Continue()
 END
 
