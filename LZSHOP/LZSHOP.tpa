@@ -763,8 +763,8 @@ LPF ALTER_EFFECT INT_VAR match_opcode = 326 parameter1 = 0 probability2 = 0 END
 COPY_EXISTING ~splprot.2da~ ~override~
     COUNT_2DA_ROWS 4 numrows
     
-    // 1. 初始化变量，默认 -1 表示在表中还没找到该条件
-    SET splprot_slot = "-1"
+    // 1. 第一项：28 TRAP，初始化变量，默认 -1 表示在表中还没找到该条件
+    SET splprot_slot_tr = "-1"
     
     // 2. 循环遍历当前 2DA 表的所有现有行，检查后三列的数据
     FOR (row = 0; row < numrows; row += 1) BEGIN
@@ -777,19 +777,44 @@ COPY_EXISTING ~splprot.2da~ ~override~
                  (~%current_value%~ STRING_EQUAL ~-1~) AND 
                  (~%current_relation%~ STRING_EQUAL ~4~) BEGIN
             // 如果找到了，读取第一列中包含的“真实物理行号”
-            READ_2DA_ENTRY row 0 4 splprot_slot
+            READ_2DA_ENTRY row 0 4 splprot_slot_tr
             
             // 终止循环（将循环控制变量设为最大值，效率最高）
             row = numrows
         END
     END
     
-    // 3. 判断：如果 splprot_slot 还是 "-1"，说明表里没有，执行插入
-    PATCH_IF (splprot_slot = "-1") BEGIN
-        // 按照你强迫症最爱的带文字标签格式插入新行
+    // 3. 判断：如果 splprot_slot_tr 还是 "-1"，说明表里没有，执行插入
+    PATCH_IF (splprot_slot_tr = "-1") BEGIN
+        // 带文字标签格式插入新行
         INSERT_2DA_ROW numrows 4 ~%numrows%_STAT(TRAP)>=n        28         -1        4~
         // 新插入行的物理行号就是当前的总行数
-        SET splprot_slot = numrows
+        SET splprot_slot_tr = numrows
+		// 插入新行后，更新当前总行数
+		SET numrows += 1
+    END
+
+    // 第二项：136 DETECTILLUSIONS
+    SET splprot_slot_di = "-1"
+    FOR (row = 0; row < numrows; row += 1) BEGIN
+        READ_2DA_ENTRY row 1 4 current_stat
+        READ_2DA_ENTRY row 2 4 current_value
+        READ_2DA_ENTRY row 3 4 current_relation
+        
+        // 精确比对是否等于 "136" "-1" "4"
+        PATCH_IF (~%current_stat%~ STRING_EQUAL ~136~) AND 
+                 (~%current_value%~ STRING_EQUAL ~-1~) AND 
+                 (~%current_relation%~ STRING_EQUAL ~4~) BEGIN
+            READ_2DA_ENTRY row 0 4 splprot_slot_di
+            row = numrows
+        END
+    END
+    
+    PATCH_IF (splprot_slot_di = "-1") BEGIN
+        // 带文字标签格式插入新行
+        INSERT_2DA_ROW numrows 4 ~%numrows%_STAT(DETECTILLUSIONS)>=n        136        -1        4~
+        SET splprot_slot_di = numrows
+        SET numrows += 1
     END
 	PRETTY_PRINT_2DA
 
@@ -800,13 +825,33 @@ COPY_EXISTING ~LZPASDET.SPL~ ~override~
         opcode = 326
         target = 1        // Self
 		parameter1 = 100
-        parameter2 = splprot_slot
+        parameter2 = splprot_slot_tr
         //timing = 0
         //duration = 0
     STR_VAR
         resource = ~LZPASSFT~
     END
 BUT_ONLY
+
+COPY_EXISTING ~LZPASDT2.SPL~ ~override~
+    LPF ADD_SPELL_EFFECT
+    INT_VAR
+        insert_point = 0  // add on top
+        opcode = 326
+        target = 1        // Self
+		parameter1 = 100
+        parameter2 = splprot_slot_di
+        //timing = 0
+        //duration = 0
+    STR_VAR
+        resource = ~LZPASSDI~
+    END
+BUT_ONLY
+
+ADD_PROJECTILE ~lzbgmod/LZSHOP/pro/LZPASSFT.PRO~
+
+COPY_EXISTING ~LZPASSFT.SPL~ ~OVERRIDE~
+LPF ALTER_SPELL_HEADER INT_VAR projectile = LZPASSFT END
 
 //COPY_EXISTING ~LZSHOP.STO~ ~override~
 	//ADD_STORE_ITEM ~LZPASIVH.ITM~ #3 #0 #0 ~IDENTIFIED~ #1
