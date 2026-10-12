@@ -857,25 +857,9 @@ IF
 	OR(2)
 		See(NearestEnemyOf(Myself))
 		CombatCounterGT(0)
-	HasItemEquiped("BDHELM11",Myself)  // 诗人之帽
 THEN
 	RESPONSE #100
 		BattleSong()
-END
-
-IF
-	ActionListEmpty()
-	Class(Myself,BARD_ALL)
-	ModalState(BATTLESONG)
-	OR(2)
-		See(NearestEnemyOf(Myself))
-		CombatCounterGT(0)
-	HasItemEquiped("BDHELM11",Myself)  // 诗人之帽
-	!GlobalTimerNotExpired("AttackDuringSong","LOCALS")
-THEN
-	RESPONSE #100
-		SetGlobalTimer("AttackDuringSong","LOCALS",TWO_ROUNDS)
-		DisplayStringHead(Myself,11798)  // 吟唱歌曲
 END
 
 IF
