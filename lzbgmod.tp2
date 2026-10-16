@@ -2,7 +2,7 @@ BACKUP ~weidu_external/lzbgmod/backup~
 
 AUTHOR ~LZ~
 
-VERSION ~v7.9~
+VERSION ~v8.0~
 
 README ~lzbgmod/readme.txt~
 
@@ -125,7 +125,7 @@ REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet~ @21
 INCLUDE ~lzbgmod/tpa/WORLDSCRIPT.tpa~
 
   LAF A7_ADD_GLOBAL_SCRIPT
-    INT_VAR extend_top = 0
+    INT_VAR extend_top = 1
     STR_VAR script_file = ~lzbgmod/comp/BALDUR26.baf~
   END
 
@@ -135,7 +135,7 @@ REQUIRE_PREDICATE GAME_IS ~bgee bg2ee eet~ @21
 INCLUDE ~lzbgmod/tpa/WORLDSCRIPT.tpa~
 
   LAF A7_ADD_GLOBAL_SCRIPT
-    INT_VAR extend_top = 0
+    INT_VAR extend_top = 1
     STR_VAR script_file = ~lzbgmod/comp/BALDUR27.baf~
   END
 
