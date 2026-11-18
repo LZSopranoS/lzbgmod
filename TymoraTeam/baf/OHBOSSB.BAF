@@ -4176,7 +4176,7 @@ IF
 	!HasItemEquiped("leat20",LastSeenBy(Myself))  // 艾格之皮+3
 	!HasItemEquiped("sw2h14",LastSeenBy(Myself))  // 利拉寇尔
 	!HasItemEquiped("S!leat03",LastSeenBy(Myself))  // 强化寇萨拉家传之甲
-	!HasItemEquiped("S!sw22",LastSeenBy(Myself))  // 吉斯瑟雷之刃 +5
+	!HasItemEquiped("S!sw22",LastSeenBy(Myself))  // 吉斯泽莱之刃 +5
 	!HasItemEquiped("S!sw21",LastSeenBy(Myself))  // 庄严使命 +3
 	!HasItemEquiped("S!shld01",LastSeenBy(Myself))  // 德尔林家族遗产+4
 	!HasItemEquiped("S!sw04",LastSeenBy(Myself))  // 审判日+5
@@ -4212,7 +4212,7 @@ IF
 	!HasItemEquiped("leat20",LastSeenBy(Myself))  // 艾格之皮+3
 	!HasItemEquiped("sw2h14",LastSeenBy(Myself))  // 利拉寇尔
 	!HasItemEquiped("S!leat03",LastSeenBy(Myself))  // 强化寇萨拉家传之甲
-	!HasItemEquiped("S!sw22",LastSeenBy(Myself))  // 吉斯瑟雷之刃 +5
+	!HasItemEquiped("S!sw22",LastSeenBy(Myself))  // 吉斯泽莱之刃 +5
 	!HasItemEquiped("S!sw21",LastSeenBy(Myself))  // 庄严使命 +3
 	!HasItemEquiped("S!shld01",LastSeenBy(Myself))  // 德尔林家族遗产+4
 	!HasItemEquiped("S!sw04",LastSeenBy(Myself))  // 审判日+5
@@ -4248,7 +4248,7 @@ IF
 	!HasItemEquiped("leat20",LastSeenBy(Myself))  // 艾格之皮+3
 	!HasItemEquiped("sw2h14",LastSeenBy(Myself))  // 利拉寇尔
 	!HasItemEquiped("S!leat03",LastSeenBy(Myself))  // 强化寇萨拉家传之甲
-	!HasItemEquiped("S!sw22",LastSeenBy(Myself))  // 吉斯瑟雷之刃 +5
+	!HasItemEquiped("S!sw22",LastSeenBy(Myself))  // 吉斯泽莱之刃 +5
 	!HasItemEquiped("S!sw21",LastSeenBy(Myself))  // 庄严使命 +3
 	!HasItemEquiped("S!shld01",LastSeenBy(Myself))  // 德尔林家族遗产+4
 	!HasItemEquiped("S!sw04",LastSeenBy(Myself))  // 审判日+5
@@ -4400,7 +4400,7 @@ IF
 	!HasItemEquiped("leat20",LastSeenBy(Myself))  // 艾格之皮+3
 	!HasItemEquiped("sw2h14",LastSeenBy(Myself))  // 利拉寇尔
 	!HasItemEquiped("S!leat03",LastSeenBy(Myself))  // 强化寇萨拉家传之甲
-	!HasItemEquiped("S!sw22",LastSeenBy(Myself))  // 吉斯瑟雷之刃 +5
+	!HasItemEquiped("S!sw22",LastSeenBy(Myself))  // 吉斯泽莱之刃 +5
 	!HasItemEquiped("S!sw21",LastSeenBy(Myself))  // 庄严使命 +3
 	!HasItemEquiped("S!shld01",LastSeenBy(Myself))  // 德尔林家族遗产+4
 	!HasItemEquiped("S!sw04",LastSeenBy(Myself))  // 审判日+5
@@ -4442,7 +4442,7 @@ IF
 	!HasItemEquiped("leat20",LastSeenBy(Myself))  // 艾格之皮+3
 	!HasItemEquiped("sw2h14",LastSeenBy(Myself))  // 利拉寇尔
 	!HasItemEquiped("S!leat03",LastSeenBy(Myself))  // 强化寇萨拉家传之甲
-	!HasItemEquiped("S!sw22",LastSeenBy(Myself))  // 吉斯瑟雷之刃 +5
+	!HasItemEquiped("S!sw22",LastSeenBy(Myself))  // 吉斯泽莱之刃 +5
 	!HasItemEquiped("S!sw21",LastSeenBy(Myself))  // 庄严使命 +3
 	!HasItemEquiped("S!shld01",LastSeenBy(Myself))  // 德尔林家族遗产+4
 	!HasItemEquiped("S!sw04",LastSeenBy(Myself))  // 审判日+5
@@ -4484,7 +4484,7 @@ IF
 	!HasItemEquiped("leat20",LastSeenBy(Myself))  // 艾格之皮+3
 	!HasItemEquiped("sw2h14",LastSeenBy(Myself))  // 利拉寇尔
 	!HasItemEquiped("S!leat03",LastSeenBy(Myself))  // 强化寇萨拉家传之甲
-	!HasItemEquiped("S!sw22",LastSeenBy(Myself))  // 吉斯瑟雷之刃 +5
+	!HasItemEquiped("S!sw22",LastSeenBy(Myself))  // 吉斯泽莱之刃 +5
 	!HasItemEquiped("S!sw21",LastSeenBy(Myself))  // 庄严使命 +3
 	!HasItemEquiped("S!shld01",LastSeenBy(Myself))  // 德尔林家族遗产+4
 	!HasItemEquiped("S!sw04",LastSeenBy(Myself))  // 审判日+5

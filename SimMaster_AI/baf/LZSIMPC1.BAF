@@ -122,14 +122,14 @@ END
 
 IF
 	ActionListEmpty()
-	HaveSpellRES("SPWI923")  // 召唤神界侍者
+	HaveSpellRES("SPWI923")  // 召唤异界神侍
 	See(NearestEnemyOf(Myself))
 	NumCreatureLT([GOODCUTOFF.0.0.0.0.SUMMONED],5)
 	!StateCheck(Myself,STATE_DISABLED_CASTING)
 	CheckStatLT(Myself,50,SPELLFAILUREMAGE)
 THEN
 	RESPONSE #100
-		SpellRES("SPWI923",Myself)  // 召唤神界侍者
+		SpellRES("SPWI923",Myself)  // 召唤异界神侍
 END
 
 IF
