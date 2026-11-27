@@ -39,6 +39,106 @@ THEN
 END
 
 IF
+	CheckStat(NearestAllyOf(Myself),3,PUPPETMASTERTYPE)
+	TriggerOverride(NearestAllyOf(Myself),Global("NWMGRSIM","LOCALS",0))
+THEN
+	RESPONSE #100
+		ActionOverride(NearestAllyOf(Myself),SetGlobal("NWMGRSIM","LOCALS",1))
+		ActionOverride(NearestAllyOf(Myself),ChangeAIScript("NWEASY",OVERRIDE))
+		Continue()
+END
+
+IF
+	CheckStat(SecondNearestAllyOf(Myself),3,PUPPETMASTERTYPE)
+	TriggerOverride(SecondNearestAllyOf(Myself),Global("NWMGRSIM","LOCALS",0))
+THEN
+	RESPONSE #100
+		ActionOverride(SecondNearestAllyOf(Myself),SetGlobal("NWMGRSIM","LOCALS",1))
+		ActionOverride(SecondNearestAllyOf(Myself),ChangeAIScript("NWEASY",OVERRIDE))
+		Continue()
+END
+
+IF
+	CheckStat(ThirdNearestAllyOf(Myself),3,PUPPETMASTERTYPE)
+	TriggerOverride(ThirdNearestAllyOf(Myself),Global("NWMGRSIM","LOCALS",0))
+THEN
+	RESPONSE #100
+		ActionOverride(ThirdNearestAllyOf(Myself),SetGlobal("NWMGRSIM","LOCALS",1))
+		ActionOverride(ThirdNearestAllyOf(Myself),ChangeAIScript("NWEASY",OVERRIDE))
+		Continue()
+END
+
+IF
+	CheckStat(FourthNearestAllyOf(Myself),3,PUPPETMASTERTYPE)
+	TriggerOverride(FourthNearestAllyOf(Myself),Global("NWMGRSIM","LOCALS",0))
+THEN
+	RESPONSE #100
+		ActionOverride(FourthNearestAllyOf(Myself),SetGlobal("NWMGRSIM","LOCALS",1))
+		ActionOverride(FourthNearestAllyOf(Myself),ChangeAIScript("NWEASY",OVERRIDE))
+		Continue()
+END
+
+IF
+	CheckStat(FifthNearestAllyOf(Myself),3,PUPPETMASTERTYPE)
+	TriggerOverride(FifthNearestAllyOf(Myself),Global("NWMGRSIM","LOCALS",0))
+THEN
+	RESPONSE #100
+		ActionOverride(FifthNearestAllyOf(Myself),SetGlobal("NWMGRSIM","LOCALS",1))
+		ActionOverride(FifthNearestAllyOf(Myself),ChangeAIScript("NWEASY",OVERRIDE))
+		Continue()
+END
+
+IF
+	CheckStat(SixthNearestAllyOf(Myself),3,PUPPETMASTERTYPE)
+	TriggerOverride(SixthNearestAllyOf(Myself),Global("NWMGRSIM","LOCALS",0))
+THEN
+	RESPONSE #100
+		ActionOverride(SixthNearestAllyOf(Myself),SetGlobal("NWMGRSIM","LOCALS",1))
+		ActionOverride(SixthNearestAllyOf(Myself),ChangeAIScript("NWEASY",OVERRIDE))
+		Continue()
+END
+
+IF
+	CheckStat(SeventhNearestAllyOf(Myself),3,PUPPETMASTERTYPE)
+	TriggerOverride(SeventhNearestAllyOf(Myself),Global("NWMGRSIM","LOCALS",0))
+THEN
+	RESPONSE #100
+		ActionOverride(SeventhNearestAllyOf(Myself),SetGlobal("NWMGRSIM","LOCALS",1))
+		ActionOverride(SeventhNearestAllyOf(Myself),ChangeAIScript("NWEASY",OVERRIDE))
+		Continue()
+END
+
+IF
+	CheckStat(EighthNearestAllyOf(Myself),3,PUPPETMASTERTYPE)
+	TriggerOverride(EighthNearestAllyOf(Myself),Global("NWMGRSIM","LOCALS",0))
+THEN
+	RESPONSE #100
+		ActionOverride(EighthNearestAllyOf(Myself),SetGlobal("NWMGRSIM","LOCALS",1))
+		ActionOverride(EighthNearestAllyOf(Myself),ChangeAIScript("NWEASY",OVERRIDE))
+		Continue()
+END
+
+IF
+	CheckStat(NinthNearestAllyOf(Myself),3,PUPPETMASTERTYPE)
+	TriggerOverride(NinthNearestAllyOf(Myself),Global("NWMGRSIM","LOCALS",0))
+THEN
+	RESPONSE #100
+		ActionOverride(NinthNearestAllyOf(Myself),SetGlobal("NWMGRSIM","LOCALS",1))
+		ActionOverride(NinthNearestAllyOf(Myself),ChangeAIScript("NWEASY",OVERRIDE))
+		Continue()
+END
+
+IF
+	CheckStat(TenthNearestAllyOf(Myself),3,PUPPETMASTERTYPE)
+	TriggerOverride(TenthNearestAllyOf(Myself),Global("NWMGRSIM","LOCALS",0))
+THEN
+	RESPONSE #100
+		ActionOverride(TenthNearestAllyOf(Myself),SetGlobal("NWMGRSIM","LOCALS",1))
+		ActionOverride(TenthNearestAllyOf(Myself),ChangeAIScript("NWEASY",OVERRIDE))
+		Continue()
+END
+
+IF
 	TookDamage()
 	Global("psMelInitialContToggle","LOCALS",0)
 THEN

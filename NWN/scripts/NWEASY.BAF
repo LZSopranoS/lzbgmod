@@ -1,4 +1,5 @@
 IF
+	!CheckStat(Myself,3,PUPPETMASTERTYPE)
 	See([PC])
 	NumberOfTimesTalkedTo(0)
 THEN
